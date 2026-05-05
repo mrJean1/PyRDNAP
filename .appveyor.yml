@@ -1,0 +1,50 @@
+
+# 26.05.05
+# <http://Tomassetti.me/continous-integration-on-linux-and-windows-travis-and-appveyor/>
+# <http://GitHub.com/pypa/setuptools/blob/master/appveyor.yml>
+# <http://www.AppVeyor.com/docs/windows-images-software/#python>
+# <https://www.appveyor.com/docs/appveyor-yml/>
+
+image: Visual Studio 2022
+
+environment:
+
+  APPVEYOR: True
+# CODECOV_ENV: APPVEYOR_JOB_NAME
+
+  matrix:
+    - PYTHON: "C:\\Python314-x64"
+      PYTHON_ARCH: "64"
+      APPVEYOR_JOB_NAME: "Python314-64bit"
+
+install:
+  # symlink python from a directory with a space
+  - "mklink /d \"C:\\Program Files\\Python\" %PYTHON%"
+  - "SET PYTHON=\"C:\\Program Files\\Python\""
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  # UTF-8 for unicode test results
+  - "SET PYTHONIOENCODING=utf-8"
+  - "python --version"
+  - "python -m pip install --upgrade pip"
+  - "python -m pip install pygeodesy"
+  # "python -m pip install win_unicode_console"
+
+build: off
+
+clone_depth: 1
+skip_commits:
+  files:
+    - 'dist/*.*'
+    - 'docs/*.html'
+    - 'testresults/*.txt'
+
+#cache:
+#  - '%LOCALAPPDATA%\pip\Cache'
+
+test_script:
+  - "cd C:\\projects\\pyrdnap"
+  - "python test\\run.py -failedonly"
+  # "python test\\run.py -results"
+  # "type testresults\\testresults*Windows*.txt"
+
+# version: '{build}'

@@ -1,0 +1,28 @@
+
+# python -m coverage html --rcfile=testcoverage.rc --title="..."
+# __version__ = '26.04.28'
+
+[run]
+branch = True
+
+[report]
+exclude_lines =
+    pragma: no cover
+    no cover
+    PYCHOK no cover
+    except \S.*
+    \sraise\s
+    if False:
+    if __name__ == .__main__.:
+    if __name__ == _DMAIN_:
+    if _FOR_DOCS:
+
+include =
+    pyrdnap/*.py
+    pyrdnap/v1grid/*.py
+    pyrdnap/v2grid/*.py
+
+# omit = test/*.py
+
+[html]
+directory = testcoverage

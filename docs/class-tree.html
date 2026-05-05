@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyrdnap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://GitHub.com/mrJean1/PyGeodesy">pyrdnap</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="class-tree.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.BaseException</strong>:
+      <em class="summary">Common base class for all exceptions</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.Exception</strong>:
+      <em class="summary">Common base class for all non-exit exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.StandardError</strong>:
+      <em class="summary">Base class for all standard Python exceptions that do not represent
+        interpreter exiting.</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.ValueError</strong>:
+      <em class="summary">Inappropriate argument value (of correct type).</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDNAPError-class.html">pyrdnap.rdnap2018.RDNAPError</a></strong>:
+      <em class="summary">Error raised for <code>RD</code> and <code>NAP</code> issues.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">pygeodesy.named._Named</strong>:
+      <em class="summary">(INTERNAL) Root class for named objects.</em>
+    <ul>
+    <li> <strong class="uidlink">pygeodesy.named._NamedBase</strong>:
+      <em class="summary">(INTERNAL) Base class with name.</em>
+    <ul>
+    <li> <strong class="uidlink">pygeodesy.named._NamedEnumItem</strong>:
+      <em class="summary">(INTERNAL) Base class for items in a <code>_NamedEnum</code> 
+        registry.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.datums.Datum-class.html">pygeodesy.datums.Datum</a></strong>:
+      <em class="summary">Ellipsoid and transform parameters for an earth model.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.ellipsoids.Ellipsoid-class.html">pygeodesy.ellipsoids.Ellipsoid</a></strong>:
+      <em class="summary">Ellipsoid with <i>equatorial</i> and <i>polar</i> radii, 
+        <i>flattening</i>, <i>inverse flattening</i> and other, often used,
+        <i>cached</i> attributes, supporting <i>oblate</i> and 
+        <i>prolate</i> ellipsoidal and <i>spherical</i> earth models.</em>
+    </li>
+    <li> <strong class="uidlink">pygeodesy.datums.Transform</strong>:
+      <em class="summary">Helmert <i>datum</i> transformation.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.datums.Similarity-class.html">pygeodesy.datums.Similarity</a></strong>:
+      <em class="summary">Similarity transformation.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">pyrdnap.rdnap2018._RDNAPbase</strong>:
+      <em class="summary"><code>RDNAP</code> base class for <a 
+        href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
+        class="link">RDNAP2018v1</a> and {-v2}.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html">pyrdnap.rdnap2018.RDNAP2018v1</a></strong>:
+      <em class="summary">Transformer implementing RDNAP 2018 <code>variant 1</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html">pyrdnap.rdnap2018.RDNAP2018v2</a></strong>:
+      <em class="summary">Transformer implementing RDNAP 2018 <code>variant 2</code>.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">pygeodesy.named._NamedTuple</strong>:
+      <em class="summary">(INTERNAL) Base for named <code>tuple</code>s with both index 
+        <i>and</i> attribute name access to the items.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon2Tuple-class.html">pygeodesy.namedTuples.LatLon2Tuple</a></strong>:
+      <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
+        <code>degrees180</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDNAP7Tuple-class.html">pyrdnap.rdnap2018.RDNAP7Tuple</a></strong>:
+      <em class="summary">7-Tuple <code>(RDx, RDy, NAPh, lat, lon, height, datum)</code> with
+        <i>local</i> <code>RDx</code>, <code>RDy</code> and 
+        <code>NAPh</code> quasi-geoid_height, <i>geodetic</i> 
+        <code>lat</code>, <code>lon</code>, <code>height</code> and 
+        <code>datum</code> with <code>lat</code> and <code>lon</code> in 
+        <code>degrees</code> and <code>RDx</code>, <code>RDy</code>, 
+        <code>NAPh</code> and <code>height</code> in <code>meter</code>, 
+        conventionally.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDregion4Tuple-class.html">pyrdnap.rdnap2018.RDregion4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(S, W, N, E)</code> with <code>RD</code> region in 
+        <code>ETRS89 degrees</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector2Tuple-class.html">pygeodesy.namedTuples.Vector2Tuple</a></strong>:
+      <em class="summary">2-Tuple <code>(x, y)</code> of (geocentric) components, each in 
+        <code>meter</code> or the same <code>units</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector3Tuple-class.html">pygeodesy.namedTuples.Vector3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(x, y, z)</code> of (geocentric) components, all in 
+        <code>meter</code> or the same <code>units</code>.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">tuple</strong>:
+      <em class="summary">tuple() -&gt; empty tuple tuple(iterable) -&gt; tuple initialized 
+        from iterable's items</em>
+    <ul>
+    <li> <strong class="uidlink">pygeodesy.named._NamedTuple</strong>:
+      <em class="summary">(INTERNAL) Base for named <code>tuple</code>s with both index 
+        <i>and</i> attribute name access to the items.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon2Tuple-class.html">pygeodesy.namedTuples.LatLon2Tuple</a></strong>:
+      <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
+        <code>degrees180</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDNAP7Tuple-class.html">pyrdnap.rdnap2018.RDNAP7Tuple</a></strong>:
+      <em class="summary">7-Tuple <code>(RDx, RDy, NAPh, lat, lon, height, datum)</code> with
+        <i>local</i> <code>RDx</code>, <code>RDy</code> and 
+        <code>NAPh</code> quasi-geoid_height, <i>geodetic</i> 
+        <code>lat</code>, <code>lon</code>, <code>height</code> and 
+        <code>datum</code> with <code>lat</code> and <code>lon</code> in 
+        <code>degrees</code> and <code>RDx</code>, <code>RDy</code>, 
+        <code>NAPh</code> and <code>height</code> in <code>meter</code>, 
+        conventionally.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDregion4Tuple-class.html">pyrdnap.rdnap2018.RDregion4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(S, W, N, E)</code> with <code>RD</code> region in 
+        <code>ETRS89 degrees</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector2Tuple-class.html">pygeodesy.namedTuples.Vector2Tuple</a></strong>:
+      <em class="summary">2-Tuple <code>(x, y)</code> of (geocentric) components, each in 
+        <code>meter</code> or the same <code>units</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector3Tuple-class.html">pygeodesy.namedTuples.Vector3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(x, y, z)</code> of (geocentric) components, all in 
+        <code>meter</code> or the same <code>units</code>.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyrdnap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://GitHub.com/mrJean1/PyGeodesy">pyrdnap</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue May  5 12:04:08 2026
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
