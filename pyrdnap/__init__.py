@@ -3,7 +3,7 @@
 
 u'''C{RD NAP 2018} conversions between geodetic GRS80 (ETRS89) lat-/longitudes
 and heights and Netherlands' local C{RijksDriehoeksmeeting (RD)} coordinates
-and C{Normaal Amsterdam Peil (NAP)} quasi-geoid-heights.
+and C{Normaal Amsterdams Peil (NAP)} quasi-geoid-heights.
 
 @note: C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are
        B{not certified} to carry the trademark name C{RDNAPTRANS(tm)}.

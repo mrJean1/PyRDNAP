@@ -4,7 +4,7 @@
 u'''A pure Python implementation of the Netherlands' U{RD NAP<https://www.NSGI.NL/
 coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
 specifications to convert between geodetic GRS80 (ETRS89) lat-/longitudes in degrees
-and local C{RijksDriehoeksmeeting (RD)} coordinates and C{Normaal Amsterdam Peil (NAP)
+and local C{RijksDriehoeksmeeting (RD)} coordinates and C{Normaal Amsterdams Peil (NAP)
 quasi-geoid-height} in C{meter}.
 
 Classes L{RDNAP2018v1} and L{RDNAP2018v2} follow C{variant 1} respectively C{variant 2}

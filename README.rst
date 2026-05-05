@@ -4,7 +4,7 @@ PyRDNAP
 =======
 
 A pure Python implementation of the 2018 version of the Netherlands\' RD_ (**R**\ ijks\ **D**\ riehoeksmeting)
-and NAP_ (**N**\ ormaal **A**\ msterdam **P**\ eil) systems to convert geodetic GRS80 (ETRS89)
+and NAP_ (**N**\ ormaal **A**\ msterdams **P**\ eil) systems to convert geodetic GRS80 (ETRS89)
 lat-/longitudes and heights to local *RD* coordinates and *NAP quasi-geoid-height* and vice-versa.
 
 ``PyRDNAP`` includes two transformer classes ``RDNAP2018v1`` and ``RDNAP2018v2`` implementing
@@ -55,7 +55,8 @@ or Intel *emulation* (\"``arm64_x86_64``\", see function `pygeodesy.machine`_).
 Test coverage has been measured with coverage_ 7.10.7 using Python 3.14.4.  The complete coverage
 report in HTML and a PDF summary are included in the distribution files.
 
-The tests also ran with Python 3.14.4 on `Debian 12`_ and on `Windows 2019Server`_, both in 64-bit only.
+The tests also ran with Python 3.14.4 on `Debian 12`_ and on `Windows 2019Server`_ and with Python
+3.13.3 on Windows 11, all in 64-bit only.
 
 Notes
 =====
@@ -129,5 +130,4 @@ DEALINGS IN THE SOFTWARE.
 .. _RDNAPTRANS(tm): https://formulieren.kadaster.nl/aanvragen_rdnaptrans
 .. _Ruff: https://GitHub.com/astral-sh/ruff
 .. _trademark: https://GitHub.com/nsgi-community
-.. _Windows 10: https://CI.AppVeyor.com/project/mrJean1/pyrdnap
 .. _Windows 2019Server: https://CI.AppVeyor.com/project/mrJean1/pyrdnap
