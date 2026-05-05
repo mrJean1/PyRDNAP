@@ -122,6 +122,8 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
         if _print:
             s = time() - t0
             t = '-inside' if in_out else '-outside'
+            if _printest:
+                t += ' -all' if all_ else ' -failed'
             t = '%s of %s lines %s' % (nin_out, (ln - 1), t)
             t = '%s (%s) %s' % (t, _versions(), _secs2str(s))
             if nfail:

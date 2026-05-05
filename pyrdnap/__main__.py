@@ -16,7 +16,7 @@ from pygeodesy import print_
 import sys
 
 __all__ = ()
-__version__ = '26.05.04'
+__version__ = '26.05.05'
 
 _DASH_ = '-'
 _R     =  RDNAP2018v1(name='v1Test')
@@ -25,7 +25,7 @@ _v     = '-v1'
 
 def _run_validation(argv, R, in_out):
     a = argv[0]
-    f = bool('-fail'.startswith(a) and len(a) > 1)
+    f = bool('-failed'.startswith(a) and len(a) > 1)
     a = a == '-all'
     nf, _, _ = validation3(argv[-1], R, all_=a, in_out=in_out,
                           _print=print_,
@@ -38,8 +38,8 @@ def _usage(x):
     print_('usage: python3 -m', _pyrdnap_, ' [ -h | -help ]', ' [ -v | --version ]',)
     print_(_t, '-forward  <lat> <lon>  [ <height> ]')
     print_(_t, '-reverse  <x> <y> <z>')
-    print_(_t, '-inside  [ -all | -fail ] ', '<.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt>')
-    print_(_t, '-outside [ -all | -fail ] ', '<.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt>')
+    print_(_t, '-inside  [ -all | -failed ] ', '<.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt>')
+    print_(_t, '-outside [ -all | -failed ] ', '<.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt>')
     print_(_t, '-unzip  [ -force ]')
     sys.exit(x)
 
