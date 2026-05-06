@@ -75,7 +75,7 @@
         information.
       </p>
       <p><strong>Version:</strong>
-        26.05.05
+        26.05.06
       </p>
 </div><!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -92,6 +92,8 @@
         2018</code> self-validation test suite in various ways.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.__pygeodesy-module.html" onclick="show_private();">pyrdnap.__pygeodesy</a></strong>: <em class="summary">(INTERNAL) <code>pyrdnap</code> access to some private 
         <code>pygeodesy</code> attributes.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.rd0-module.html" onclick="show_private();">pyrdnap.rd0</a></strong>: <em class="summary">(INTERNAL) <code>RD</code> and <code>RD0</code> constants and 
+        <code>RDNAP7Tuple</code> and <code>RDregion</code> classes.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.rdnap2018-module.html" onclick="show_private();">pyrdnap.rdnap2018</a></strong>: <em class="summary">A pure Python implementation of the Netherlands' <a 
         href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
         target="_top">RD NAP</a> specifications to convert between geodetic
@@ -99,21 +101,23 @@
         <code>RijksDriehoeksmeeting (RD)</code> coordinates and 
         <code>Normaal Amsterdams Peil (NAP) quasi-geoid-height</code> in 
         <code>meter</code>.</em>    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>
+    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary"><i>Variant 1</i> <code>_NAP_h</code>, <code>_lat_corr</code> and 
+        <code>_lon_corr</code> grids.</em>
     <ul>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.nlgeo2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v1grid.nlgeo2018_txt_NAP_h</a></strong>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lat_corr</a></strong>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lon_corr</a></strong>    </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>
+    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary"><i>Variant 2</i> <code>_NAP_h</code>, <code>_lat_corr</code> and 
+        <code>_lon_corr</code> grids.</em>
     <ul>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.naptrans2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v2grid.naptrans2018_txt_NAP_h</a></strong>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lat_corr</a></strong>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lon_corr</a></strong>    </li>
     </ul>
     </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_grids-module.html" onclick="show_private();">pyrdnap.v_grids</a></strong>: <em class="summary">(INTERNAL) RDNAP v#grid utilities.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_grids-module.html" onclick="show_private();">pyrdnap.v_grids</a></strong>: <em class="summary">(INTERNAL) <code>RD NAP 2018</code> v#grid utilities.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_self-module.html" onclick="show_private();">pyrdnap.v_self</a></strong>: <em class="summary">Function <a href="pyrdnap.v_self-module.html#validation3" 
         class="link">validation3</a> to run the <code>RD NAP 2018</code> 
         self-validation tests 
@@ -166,7 +170,7 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" class="summary-name">RDNAP2018v1</a><br />
-      Transformer implementing RDNAP 2018 <code>variant 1</code>.
+      Transformer implementing RD NAP 2018 <code>variant 1</code>.
     </td>
   </tr>
 <tr>
@@ -174,22 +178,21 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" class="summary-name">RDNAP2018v2</a><br />
-      Transformer implementing RDNAP 2018 <code>variant 2</code>.
+      Transformer implementing RD NAP 2018 <code>variant 2</code>.
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pyrdnap.rdnap2018.RDNAP7Tuple-class.html" class="summary-name">RDNAP7Tuple</a><br />
+        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" class="summary-name">RDNAP7Tuple</a><br />
       7-Tuple <code>(RDx, RDy, NAPh, lat, lon, height, datum)</code> with
         <i>local</i> <code>RDx</code>, <code>RDy</code> and 
-        <code>NAPh</code> quasi-geoid_height, <i>geodetic</i> 
-        <code>lat</code>, <code>lon</code>, <code>height</code> and 
-        <code>datum</code> with <code>lat</code> and <code>lon</code> in 
-        <code>degrees</code> and <code>RDx</code>, <code>RDy</code>, 
-        <code>NAPh</code> and <code>height</code> in <code>meter</code>, 
-        conventionally.
+        <code>NAPh</code> quasi-geoid_height, geodetic <code>lat</code>, 
+        <code>lon</code>, <code>height</code> and <code>datum</code> with 
+        <code>lat</code> and <code>lon</code> in <code>degrees</code> and 
+        <code>RDx</code>, <code>RDy</code>, <code>NAPh</code> and 
+        <code>height</code> in <code>meter</code>, conventionally.
     </td>
   </tr>
 <tr>
@@ -204,9 +207,9 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pyrdnap.rdnap2018.RDregion4Tuple-class.html" class="summary-name">RDregion4Tuple</a><br />
+        <a href="pyrdnap.rd0.RDregion4Tuple-class.html" class="summary-name">RDregion4Tuple</a><br />
       4-Tuple <code>(S, W, N, E)</code> with <code>RD</code> region in 
-        <code>ETRS89 degrees</code>.
+        <code>GRS80 (ETRS89) degrees</code>.
     </td>
   </tr>
 <tr>
@@ -401,7 +404,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Tue May  5 14:00:24 2026
+    Generated by Epydoc 3.0.1 on Wed May  6 16:47:30 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

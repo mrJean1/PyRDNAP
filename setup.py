@@ -7,7 +7,7 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.05.05'
+__version__ = '26.05.06'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
 
@@ -33,12 +33,12 @@ def _version():
                 return '.'.join(map(str, map(int, v.split('.')))) + c
 
 
-_KeyWords = ('NAP', 'Normal-Amsterdam-Peil',
+_KeyWords = ('NAP', 'Normal-Amsterdams-Peil',
              'RD', 'RijksDriehoeksmeting',)
 
 setup(name=_PACKAGE,
       packages=['pyrdnap', 'pyrdnap.v1grid', 'pyrdnap.v2grid'],
-      description='Pure Python RD-NAP conversions',
+      description='Pure Python RD NAP 2018 conversions',
       version=_version(),
 
       author='Jean M. Brouwers',

@@ -73,13 +73,13 @@ pygeodesy.named._NamedBase --+
 </pre>
 
 <hr />
-<p>Transformer implementing RDNAP 2018 <code>variant 2</code>.</p>
+<p>Transformer implementing RD NAP 2018 <code>variant 2</code>.</p>
 
 <hr />
 <div class="fields">      <p><strong>Note:</strong>
         Method <a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html#reverse" 
-        class="link">RDNAP2018v2.reverse</a> returns geodetic 
-        <b>RD-Bessel</b> and <i>not ETRS89</i> lat-/longitudes.
+        class="link">RDNAP2018v2.reverse</a> returns geodetic <b>Bessel1841
+        (RD-Bessel)</b> and <b>not GRS80 (ETRS89)</b> lat-/longitudes.
       </p>
 </div><!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -121,8 +121,8 @@ pygeodesy.named._NamedBase --+
         <span class="summary-sig-arg">lon</span>,
         <span class="summary-sig-arg">height</span>=<span class="summary-sig-default">0</span>,
         <span class="summary-sig-arg">raiser</span>=<span class="summary-sig-default">False</span>)</span><br />
-      Convert geodetic ETRS98 <code>(<b>lat</b>, <b>lon</b>)</code> and 
-      <b><code>height</code></b> to local <code>(RDx, RDy)</code> 
+      Convert geodetic GRS80 (ETRS98) <code>(<b>lat</b>, <b>lon</b>)</code>
+      and <b><code>height</code></b> to local <code>(RDx, RDy)</code> 
       coordinates and <code>NAPh</code> quasi-geoid-height.</td>
           <td align="right" valign="top">
             
@@ -145,8 +145,8 @@ pygeodesy.named._NamedBase --+
         <span class="summary-sig-arg">NAPh</span>=<span class="summary-sig-default">0</span>,
         <span class="summary-sig-arg">raiser</span>=<span class="summary-sig-default">False</span>)</span><br />
       Convert a local <code>(<b>RDx</b>, <b>RDy</b>)</code> point and 
-      <b><code>NAPh</code></b> height to <i>geodetic</i> <b>RD-Bessel</b> 
-      <code>(lat, lon, height)</code>.</td>
+      <b><code>NAPh</code></b> height to <i>geodetic</i> <b>Bessel1841 
+      (RD-Bessel)</b> <code>(lat, lon, height)</code>.</td>
           <td align="right" valign="top">
             
             
@@ -304,8 +304,8 @@ pygeodesy.named._NamedBase --+
     </ul></dd>
     <dt>Raises:</dt>
     <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'><a href="pyrdnap.rdnap2018.RDNAPError-class.html">RDNAPError</a></strong></code> - Ellipsoid (or datum) is spherical or prolate, i.e. not oblate or 
-        the datum's transform is not <code>unity</code>.</li>
+        <li><code><strong class='fraise'><a href="pyrdnap.rdnap2018.RDNAPError-class.html">RDNAPError</a></strong></code> - Ellipsoid (or datum) is not oblate (i.e. is spherical or prolate) 
+        or the datum's <code>transform</code> is not <code>unity</code>.</li>
     </ul></dd>
     <dt>Overrides:
         object.__init__
@@ -331,24 +331,24 @@ pygeodesy.named._NamedBase --+
     </td>
   </tr></table>
   
-  <p>Convert geodetic ETRS98 <code>(<b>lat</b>, <b>lon</b>)</code> and 
-  <b><code>height</code></b> to local <code>(RDx, RDy)</code> coordinates 
-  and <code>NAPh</code> quasi-geoid-height.</p>
+  <p>Convert geodetic GRS80 (ETRS98) <code>(<b>lat</b>, <b>lon</b>)</code> 
+  and <b><code>height</code></b> to local <code>(RDx, RDy)</code> 
+  coordinates and <code>NAPh</code> quasi-geoid-height.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>lat</code></strong> - Latitude (<code>degrees</code> ETRS89, geodetic).</li>
-        <li><strong class="pname"><code>lon</code></strong> - Longitude (<code>degrees</code> ETRS89, geodetic).</li>
+        <li><strong class="pname"><code>lat</code></strong> - Latitude (<code>degrees</code> geodetic).</li>
+        <li><strong class="pname"><code>lon</code></strong> - Longitude (<code>degrees</code> geodetic).</li>
         <li><strong class="pname"><code>height</code></strong> - Height, optional (<code>meter</code> above geoid) or 
           <code>NAN</code> to ignore <code>NAPh</code> interpolation.</li>
         <li><strong class="pname"><code>raiser</code></strong> - If <code>True</code> raise an <a 
           href="pyrdnap.rdnap2018.RDNAPError-class.html" 
-          class="link">RDNAPError</a> if <b><code>lat89</code></b> or 
-          <b><code>lon89</code></b> is outside the <code>RD</code> region 
+          class="link">RDNAPError</a> if <b><code>lat</code></b> or 
+          <b><code>lon</code></b> is outside the <code>RD</code> region 
           (<code>bool</code>).</li>
     </ul></dd>
     <dt>Returns:</dt>
-        <dd>An <a href="pyrdnap.rdnap2018.RDNAP7Tuple-class.html" 
+        <dd>An <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
           class="link">RDNAP7Tuple</a><code>(RDx, RDy, NAPh, lat, lon, 
           height, datum)</code> with local <code>RDx</code>, 
           <code>RDy</code> coordinates and <code>NAPh</code> height.</dd>
@@ -377,8 +377,8 @@ pygeodesy.named._NamedBase --+
   </tr></table>
   
   <p>Convert a local <code>(<b>RDx</b>, <b>RDy</b>)</code> point and 
-  <b><code>NAPh</code></b> height to <i>geodetic</i> <b>RD-Bessel</b> 
-  <code>(lat, lon, height)</code>.</p>
+  <b><code>NAPh</code></b> height to <i>geodetic</i> <b>Bessel1841 
+  (RD-Bessel)</b> <code>(lat, lon, height)</code>.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
@@ -394,11 +394,11 @@ pygeodesy.named._NamedBase --+
           (<code>bool</code>).</li>
     </ul></dd>
     <dt>Returns:</dt>
-        <dd>An <a href="pyrdnap.rdnap2018.RDNAP7Tuple-class.html" 
+        <dd>An <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
           class="link">RDNAP7Tuple</a><code>(RDx, RDy, NAPh, lat, lon, 
           height, datum)</code> with <code>lat</code> and <code>lon</code> 
           coordinates, <code>height</code> and <code>datum</code> 
-          <i>Bessel1841 (RD-Bessel)</i>.</dd>
+          <b>Bessel1841 (RD-Bessel)</b>.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -468,7 +468,7 @@ pygeodesy.named._NamedBase --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Tue May  5 14:00:24 2026
+    Generated by Epydoc 3.0.1 on Wed May  6 16:47:30 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

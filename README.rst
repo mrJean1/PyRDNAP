@@ -112,7 +112,7 @@ DEALINGS IN THE SOFTWARE.
 .. _Epydoc: https://PyPI.org/project/epydoc
 .. _GitHub: https://GitHub.com/mrJean1/PyRDNAP
 .. _GitHub/dist: https://GitHub.com/mrJean1/PyRDNAP/tree/master/dist
-.. _main: https://GitHub.com/mrJean1/PyRDNAP/docs/pyrdnap.__main__-module.html
+.. _main: https://GitHub.com/mrJean1/PyRDNAP/blob/main/docs/pyrdnap.__main__-module.html
 .. _McCabe: https://PyPI.org/project/mccabe
 .. _MIT License: https://OpenSource.org/licenses/MIT
 .. _NAP: https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans
@@ -126,7 +126,7 @@ DEALINGS IN THE SOFTWARE.
 .. _PyPy: https://formulae.brew.sh/formula/pypy3.10
 .. _pyrdnap: https://PyPI.org/project/pyrdnap
 .. _RD: https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans
-.. _rdnap2018: https://GitHub.com/mrJean1/PyRDNAP/docs/pyrdnap.rdnap2018-module.html
+.. _rdnap2018: https://GitHub.com/mrJean1/PyRDNAP/blob/main/docs/pyrdnap.rdnap2018-module.html
 .. _RDNAPTRANS(tm): https://formulieren.kadaster.nl/aanvragen_rdnaptrans
 .. _Ruff: https://GitHub.com/astral-sh/ruff
 .. _trademark: https://GitHub.com/nsgi-community

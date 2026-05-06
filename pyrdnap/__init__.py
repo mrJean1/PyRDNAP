@@ -32,13 +32,15 @@ try:  # PYCHOK once
 except (AttributeError, ImportError) as x:
     raise AssertionError(str(x))
 
+from pyrdnap.rd0 import *  # PYCHOK *
+from pyrdnap.rd0 import __all__ as _rd0  # PYCHOK ?
 from pyrdnap.rdnap2018 import *  # PYCHOK *
 from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import *  # PYCHOK *
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
-__all__ = ('pyrdnap_abspath',) + _rdnap + _v_self
-__version__ = '26.05.05'
+__all__ = ('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self
+__version__ = '26.05.06'
 
 
 def _versions():  # in .__main__, .test/bases
@@ -48,7 +50,7 @@ def _versions():  # in .__main__, .test/bases
     return _SPACE_.join(l_)
 
 
-del _rdnap, _v_self  # os_path, sys
+del _rd0, _rdnap, _v_self  # os_path, sys
 
 # **) MIT License
 #

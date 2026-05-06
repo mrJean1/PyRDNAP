@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
-u'''(INTERNAL) RDNAP v#grid utilities.
+u'''(INTERNAL) C{RD NAP 2018} v#grid utilities.
 '''
 from pyrdnap import pyrdnap_abspath  # pyrdnap 1st
 from pyrdnap.__pygeodesy import _0_0s, _1_0, import_module
@@ -12,7 +12,7 @@ import os.path as os_path
 import sys
 
 __all__ = ()
-__version__ = '26.05.05'
+__version__ = '26.05.06'
 
 _R_C = 481, 301  # shape: rows, cols
 _RxC = 144781    # total
@@ -67,38 +67,37 @@ def _f(floats):  # _NAP_h, _ZEROW
 _ZEROW = _f(_0_0s(301))  # PYCHOK singleton
 
 
+def _r(s, e, *floats):  # run of non-zeros
+    return (s, e, _d(floats))
+
+
 def _v_assert(value, valid=_R_C):
     if value != valid:
         raise AssertionError('%r not %r' % (value, valid))
     return True
 
 
-def _v1corr_grid(s_e_tuples, ndigits, cmin, cmax, c0s=0, flen=_RxC, scale=1e-5):
-    '''(INTERNAL) Build a variant 1 C{lat_/lon_corr} _V_grid from C{s_e_tuples},
+def _v1corr_grid(s_e_runs, ndigits, cmin, cmax, c0s=0, flen=_RxC, scale=1e-5):
+    '''(INTERNAL) Build a variant 1 C{lat_/lon_corr} _V_grid from C{s_e_runs},
        each a run of non-zero floats preceeded by a start and end index.
     '''
-    v = _V_grid(_v1corr_rows(s_e_tuples, *_R_C))
+    v = _V_grid(_v1corr_rows(s_e_runs, *_R_C))
     return v._assert(scale, ndigits, flen, cmin, c0s, cmax)
 
 
-def _v1corr_rows(s_e_tuples, R, C):
-    '''(INTERNAL) Yield R d-/f-arrays, each of C floats.
+def _v1corr_rows(s_e_runs, R, C):
+    '''(INTERNAL) Yield R d-/f-arrays, each of C floats, see C{v1grid.__init__.py}.
     '''
-    # Of 144,781 floats, only 55,139 resp. 55,348 are non-zero between C{lat_corr}
-    # indices [8598:93827] resp. C{lon_corr} [8598:93830].  As a result, the 1st
-    # 28 and the last 169 rows (in total 197 rows, 41% of 481) are all the same,
-    # single C{f-array} of 301 zeros, _ZEROW.  There are other stretches of zeros,
-    # but none are 301 or longer.
     z = _ZEROW  # f-array of C zeros
-    i =  s_e_tuples[0][0]  # index of 1st non-zero
+    i =  s_e_runs[0][0]  # index of 1st non-zero
     y, s = divmod(i, C)
     for _ in range(y):  # 28 leading ZEROWs
         yield z
     r = list(_0_0s(s))  # remainder, 170 zeros
-    for t in s_e_tuples:
+    for t in s_e_runs:
         s, e = t[:2]
         r.extend(_0_0s(s - i))
-        r.extend(t[2:])  # len(r) < 600
+        r.extend(t[2])  # len(r) < 600
         while len(r) >= C:
             d = _d(r[:C])  # d-array
             r[:] = r[C:]

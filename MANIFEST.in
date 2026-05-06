@@ -8,4 +8,4 @@ graft testcoverage
 include testcoverage.pdf
 include testcoverage.rc
 graft testresults
-include testresults/RDNAP2018v1-self-validation-results.txt
+include testresults/Z001_ETRSandRDNAP-self-validation-results.txt

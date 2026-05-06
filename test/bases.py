@@ -20,7 +20,7 @@ if PyRDNAP_dir not in sys.path:  # Python 3+ ModuleNotFoundError
 from pyrdnap import _versions  # pyrdnap 1st
 from pygeodesy import DeprecationWarnings, internals, interns, NAN, \
                       NN, normDMS, pairs, printf, property_RO, typename
-from pygeodesy import clips, str2ub, ub2str  # noqa: F401 shared
+from pygeodesy import clips, Datums, str2ub, ub2str  # noqa: F401 shared
 
 _DOT_     = interns._DOT_
 _getenv   = internals._getenv
@@ -31,14 +31,14 @@ _HOME_dir = dirname(PyRDNAP_dir or _TILDE_) or _TILDE_  # _PYGeodesy_dir
 secs2str  = internals._secs2str
 # _xcopy    = basics._xcopy
 
-__all__ = ('coverage', 'NAN', 'NN',
+__all__ = ('coverage', 'Datums', 'NAN', 'NN',
            'isAppleSi', 'isiOS', 'ismacOS', 'isNix',  # 'isIntelPython'
            'isPyPy', 'isPython2', 'isPython3', 'isWindows',
            'property_RO', 'PythonX', 'test_dir',
            'TestsBase',  # classes
            'clips', 'normDMS', 'pairs', 'printf', 'secs2str',  # functions
            'str2ub', 'tilde', 'typename', 'ub2str', 'versions')
-__version__ = '26.05.05'
+__version__ = '26.05.06'
 
 try:  # from pygeodesy.basics ...
     # _Ints = int, long
@@ -61,7 +61,7 @@ _W_opts = sys.warnoptions or NN
 if _W_opts:
     _W_opts = _SPACE_(*(_SPACE_('-W', _) for _ in _W_opts))
 
-v2          = sys.version_info[:2]  # (.major, .minor)
+v2         = sys.version_info[:2]  # (.major, .minor)
 # bits_mach2 = internals._MODS.bits_machine2  # property_RO
 isAppleSi  = internals._isAppleSi()
 # isiOS is used by some tests known to fail on iOS only

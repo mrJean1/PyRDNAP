@@ -3,16 +3,16 @@
 
 # Test L{PyRDNAP} with round-trips of random lat-/longitudes inside.
 
-from bases import TestsBase, NAN
+from bases import TestsBase, Datums, NAN
 
 from pyrdnap import RDNAP2018v1, RDNAP2018v2
-# from pyrdnap.rdnap2018 import _RD0 as A0
+# from pyrdnap.rd0 import _RD0 as A0
 
 from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.05.02'
+__version__ = '26.05.06'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -63,6 +63,10 @@ class Tests(TestsBase):
         self.test('forward', s, s)
         if RDx_RDy:
             self.test('RDx_RDy', _str(t.xy), RDx_RDy, known=True)
+            s = t.toStr()
+            self.test('b4Datum', s, s)
+            s = t.toDatum(Datums.NAD83).toStr()
+            self.test('toWGS84', s, s)
 
         r =  R.reverse(*t.xyz)
         s = _str(r)
