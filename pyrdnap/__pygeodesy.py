@@ -34,7 +34,7 @@ def _PyGeodesy_dir():
     def _t(v):
         return tuple(map(int, v.split('.')))  # _DOT_
 
-    _r = '26.4.28'
+    _r = '26.5.7'
     if _v == 'missing' or _t(_v) < _t(_r):
         _v = ' %s, need %s or newer' % (_v, _r)
         raise ValueError('pygeodesy' + _v)
@@ -55,7 +55,7 @@ from pygeodesy.lazily import _ALL_DOCS, _ALL_OTHER, _FOR_DOCS, import_module  # 
 from pygeodesy.named import _NamedBase, _NamedTuple, notOverloaded, _Pass  # noqa: F401
 
 __all__ = ()
-__version__ = '26.05.06'
+__version__ = '26.05.07'
 
 # **) MIT License
 #

@@ -58,10 +58,12 @@
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
 <h1 class="epydoc">Package pyrdnap</h1><p class="nomargin-top"></p>
-<p><code>RD NAP 2018</code> conversions between geodetic GRS80 (ETRS89) 
-  lat-/longitudes and heights and Netherlands' local 
-  <code>RijksDriehoeksmeeting (RD)</code> coordinates and <code>Normaal 
-  Amsterdams Peil (NAP)</code> quasi-geoid-heights.</p>
+<p>A pure Python implementation of the Netherlands' <a 
+  href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
+  target="_top">RD NAP</a> specifications to convert between geodetic GRS80
+  (ETRS89) lat-/longitudes in degrees and local <code>RijksDriehoeksmeeting
+  (RD)</code> coordinates and <code>Normaal Amsterdams Peil (NAP) 
+  quasi-geoid-height</code> in <code>meter</code>.</p>
 
 <hr />
 <div class="fields">      <p><strong>Note:</strong>
@@ -72,10 +74,10 @@
       <p><strong>See Also:</strong>
         Module <a href="pyrdnap.rdnap2018-module.html" class="link" 
         onclick="show_private();">pyrdnap.rdnap2018</a> for further 
-        information.
+        information and implementation details.
       </p>
       <p><strong>Version:</strong>
-        26.05.06
+        26.05.07
       </p>
 </div><!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -94,15 +96,15 @@
         <code>pygeodesy</code> attributes.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.rd0-module.html" onclick="show_private();">pyrdnap.rd0</a></strong>: <em class="summary">(INTERNAL) <code>RD</code> and <code>RD0</code> constants and 
         <code>RDNAP7Tuple</code> and <code>RDregion</code> classes.</em>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.rdnap2018-module.html" onclick="show_private();">pyrdnap.rdnap2018</a></strong>: <em class="summary">A pure Python implementation of the Netherlands' <a 
-        href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
-        target="_top">RD NAP</a> specifications to convert between geodetic
-        GRS80 (ETRS89) lat-/longitudes in degrees and local 
-        <code>RijksDriehoeksmeeting (RD)</code> coordinates and 
-        <code>Normaal Amsterdams Peil (NAP) quasi-geoid-height</code> in 
-        <code>meter</code>.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.rdnap2018-module.html" onclick="show_private();">pyrdnap.rdnap2018</a></strong>: <em class="summary">Main classes <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
+        class="link">RDNAP2018v1</a> and <a 
+        href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" 
+        class="link">RDNAP2018v2</a> follow <code>variant 1</code> 
+        respectively <code>variant 2</code> of the specification <a 
+        href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
+        target="_top">RDNAPTRANS(tm)2018</a>.</em>    </li>
     <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary"><i>Variant 1</i> <code>_NAP_h</code>, <code>_lat_corr</code> and 
-        <code>_lon_corr</code> grids.</em>
+        <code>_lon_corr</code> grid columns.</em>
     <ul>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.nlgeo2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v1grid.nlgeo2018_txt_NAP_h</a></strong>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lat_corr</a></strong>    </li>
@@ -110,7 +112,7 @@
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary"><i>Variant 2</i> <code>_NAP_h</code>, <code>_lat_corr</code> and 
-        <code>_lon_corr</code> grids.</em>
+        <code>_lon_corr</code> grid columns.</em>
     <ul>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.naptrans2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v2grid.naptrans2018_txt_NAP_h</a></strong>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lat_corr</a></strong>    </li>
@@ -163,6 +165,16 @@
         <a href="pygeodesy.namedTuples.LatLon2Tuple-class.html" class="summary-name">LatLon2Tuple</a><br />
       2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
         <code>degrees180</code>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pygeodesy.namedTuples.PhiLam2Tuple-class.html" class="summary-name">PhiLam2Tuple</a><br />
+      2-Tuple <code>(phi, lam)</code> with latitude <code>phi</code> in 
+        <code>radians[PI_2]</code> and longitude <code>lam</code> in 
+        <code>radians[PI]</code>.
     </td>
   </tr>
 <tr>
@@ -404,7 +416,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed May  6 16:47:30 2026
+    Generated by Epydoc 3.0.1 on Thu May  7 14:26:40 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

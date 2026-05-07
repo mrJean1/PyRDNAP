@@ -1,13 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
-u'''A pure Python implementation of the Netherlands' U{RD NAP<https://www.NSGI.NL/
-coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
-specifications to convert between geodetic GRS80 (ETRS89) lat-/longitudes in degrees
-and local C{RijksDriehoeksmeeting (RD)} coordinates and C{Normaal Amsterdams Peil (NAP)
-quasi-geoid-height} in C{meter}.
-
-Classes L{RDNAP2018v1} and L{RDNAP2018v2} follow C{variant 1} respectively C{variant 2}
+u'''Main classes L{RDNAP2018v1} and L{RDNAP2018v2} follow C{variant 1} respectively C{variant 2}
 of the specification U{RDNAPTRANS(tm)2018<https://formulieren.kadaster.nl/aanvragen_rdnaptrans>}.
 Each provide a C{forward} method to convert geodetic lat-/longitudes and heights to C{RD}
 coodinates and C{NAP} heights and a C{reverse} method for converting the other way.
@@ -16,21 +10,21 @@ The C{forward} and C{reverse} results of L{RDNAP2018v1} meet the C{RDNAPTRANS(tm
 self-validation requirements of C{0.000000010 degrees} and C{0.0010 meter} for tests inside
 the C{RD} region, see B{C{Note below}}.  Class L{RDNAP2018v2} does not and is not required to.
 
-Also, the original C{RDNAPTRANS(tm)2018_v220627} grid files for both variants are I{not included}
-in C{PyPRDNAP} and C{pyrdnap} due to the total size of those files.  Instead, the grid files for
-each C{variant} I{include only} the C{lat_corr}, C{lon_corr} and C{NAP_quasi_geoid_height_...}
-columns, extracted from the original grid files with leading and trailing zeros removed and
-re-formatted as row-order matrices.
+The original C{RDNAPTRANS(tm)2018_v220627} grid files for both variants are I{not included}
+in C{PyPRDNAP} and C{pyrdnap} due to the size of those files.  Instead, the grid files for each
+variant I{include only} the C{_lat_corr}, C{_lon_corr} and C{_NAP_quasi_geoid_height_...} columns,
+extracted from the original grid files with leading and trailing zeros removed and formatted as
+row-order matrices.
 
-@note: C{PyRDNAP}, C{pyrdnap} and L{RDNAP2018v1} have B{not been formally validated} and are
+@note: L{RDNAP2018v1}, C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are
        B{not certified} to carry the trademark name C{RDNAPTRANS(tm)}.
 '''
 # make sure int/int division yields float quotient, see .basics
 from __future__ import division as _; del _  # noqa: E702 ;
 
-from pyrdnap.rd0 import _RD, _RD0, RDNAP7Tuple
+from pyrdnap.rd0 import _RD, _RD0 as A0, RDNAP7Tuple
 from pyrdnap.v_grids import _V_grid, _v_gridz_import
-from pyrdnap.__pygeodesy import (_0_0 as _ZERO, _0_5, _1_0, _2_0,
+from pyrdnap.__pygeodesy import (_0_0, _0_5, _1_0, _2_0,
                                  _isNAN, _earth_datum,
                                  _ALL_DOCS, _ALL_OTHER, _FOR_DOCS,
                                  _NamedBase, notOverloaded)
@@ -44,7 +38,7 @@ from math import asin, atan, copysign, degrees, exp, \
                  fabs, floor, hypot, radians, sin, sqrt
 
 __all__ = ()
-__version__ = '26.05.06'
+__version__ = '26.05.07'
 
 _TOL_D = 1e-9  # degrees 2.3.3f+
 _TOL_M = 1e-6  # meter
@@ -90,7 +84,7 @@ class _RDNAPbase(_NamedBase):
         if name:
             self.name = name
 
-    def forward(self, lat, lon, height=0, raiser=False):  # GRS80 (ETRS89) to RDNAP
+    def forward(self, lat, lon, height=0, raiser=None, name='forward'):
         '''Convert geodetic GRS80 (ETRS98) C{(B{lat}, B{lon})} and B{C{height}}
            to local C{(RDx, RDy)} coordinates and C{NAPh} quasi-geoid-height.
 
@@ -99,27 +93,27 @@ class _RDNAPbase(_NamedBase):
            @kwarg height: Height, optional (C{meter} above geoid) or C{NAN}
                           to ignore C{NAPh} interpolation.
            @kwarg raiser: If C{True} raise an L{RDNAPError} if B{C{lat}} or
-                          B{C{lon}} is outside the C{RD} region (C{bool}).
+                          B{C{lon}} is outside the C{RD} region (C{bool}),
+                          if C{False} don't, overriding property C{raiser}.
+           @kwarg name: Optional C{B{name}='forward'} (C{str}).
 
            @return: An L{RDNAP7Tuple}C{(RDx, RDy, NAPh, lat, lon, height, datum)}
                     with local C{RDx}, C{RDy} coordinates and C{NAPh} height.
         '''
-        lat8, lon8 = lat, lon
         lat0, lon0 = \
         lat_, lon_ = self._forwardXform(lat, lon, raiser)
         for _ in range(_TRIPS):  # 2.3.3a-f, 1..2
-            lat, lon = self._rdlatlon2(lat_, lon_, lat0, lon0)
-            if fabs(lat - lat_) < _TOL_D and \
-               fabs(lon - lon_) < _TOL_D:
+            latc, lonc = self._rdlatlon2(lat_, lon_, lat0, lon0)
+            if fabs(latc - lat_) < _TOL_D and \
+               fabs(lonc - lon_) < _TOL_D:
                 break
-            lat_, lon_ = lat, lon
+            lat_, lon_ = latc, lonc
 
-        phiC, lamC = _ellipsoidal2spherical(lat, lon)
-        RDx,  RDy  = _spherical2oblique(phiC, lamC)
-        NAPh       =  NAN if _isNAN(height) else (height -
-                      self.rdNAPh(lat8, lon8))  # 2.5.2
-        return RDNAP7Tuple(RDx, RDy, NAPh, lat8, lon8, height, self.forwardDatum,
-                                           name=self.name or 'forward')
+        philamC  = _ellipsoidal2spherical(latc, lonc)
+        RDx, RDy = _spherical2oblique(*philamC)
+        NAPh     =  NAN if _isNAN(height) else (height - self.rdNAPh(lat, lon))  # 2.5.2
+        return RDNAP7Tuple(RDx, RDy, NAPh, lat, lon, height,
+                                           self.forwardDatum, name=name)
 
     @property_RO
     def forwardDatum(self):
@@ -127,11 +121,14 @@ class _RDNAPbase(_NamedBase):
         '''
         return self._datum
 
-    def _forwardXform(self, lat, lon, raiser):
-        # default and variant 2: no datum transform
-        if (raiser or self._raiser) and not _RD.isinside(lat, lon):
+    def _inside2(self, lat, lon, raiser):
+        # default and variant 2: no datum Xform
+        if (raiser or (raiser is None and self._raiser)) and \
+                   not _RD.isinside(lat, lon):
             raise self._outsidError(lat, lon)
         return lat, lon
+
+    _forwardXform = _inside2  # no datum Xform
 
     def isinside(self, lat, lon, eps=0):
         '''Is C{(B{lat}, B{lon})} inside the C{RD} region (C{bool})?
@@ -141,7 +138,7 @@ class _RDNAPbase(_NamedBase):
         return _RD.isinside(lat, lon, eps)
 
     def _outsidError(self, *lat_lon):
-        # format an "outside C{RD} region Error"
+        # format an RDNAPError for C{lat_lon} outside C{RD} region
         return RDNAPError('%r outside %s' % (lat_lon, self.region))
 
     @property_RO
@@ -161,16 +158,17 @@ class _RDNAPbase(_NamedBase):
             else:  # forward
                 lat  = lat0 - lat_corr
                 lon  = lon0 - lon_corr
-#       elif raiser or self._raiser:
-#           raise self._outsidError(lat, lon)
         return lat, lon  # NAN, NAN?
 
-    def rdNAPh(self, lat, lon):  # 2.5.1 and 3.5
+    def rdNAPh(self, lat, lon, raiser=False):  # 2.5.1 and 3.5
         '''Interpolate the C{NAP_h} quasi-geoid-height
            I{within} the C{RD} region.
 
            @arg lat: Latitude (C{degrees} GRS80 (ETRS89), geodetic).
            @arg lon: Longitude (C{degrees} GRS80 (ETRS89), geodetic).
+           @kwarg raiser: If C{True} raise an L{RDNAPError} if B{C{lat}} or
+                          B{C{lon}} is outside the C{RD} region (C{bool}),
+                          otherwise don't abd return C{NAN}.
 
            @return: C{NAPh} (C{meter}) or C{NAN} if B{C{lat}}
                     or B{C{lon}} is outside the C{RD} region.
@@ -179,39 +177,38 @@ class _RDNAPbase(_NamedBase):
             c_f_N_f6 = _RD.c_f_N_f6(lat, lon)
             NAP_h    = _bilinear(self._rdgrid._NAP_h, *c_f_N_f6)
             return NAP_h
-#       elif raiser or self._raiser:
-#           raise self._outsidError(lat, lon)
+        elif raiser:
+            raise self._outsidError(lat, lon)
         return NAN  # c0 2.5.1e+
 
     @property_RO
     def region(self):
-        '''Get the C{RD} region as L{RDregion4Tuple}C{(S, W, N, E)}, all C{degrees}.
+        '''Get the C{RD} region as L{RDregion4Tuple}C{(S, W, N, E)}, all C{GRS80 (ETRS89) degrees}.
         '''
         return _RD.region
 
-    def _reverse(self, RDx, RDy, NAPh, raiser=False):
+    def _reverse(self, RDx, RDy, NAPh, raiser, name='reverse'):
         '''(INTERNAL) Convert local C{(B{RDx}, B{RDy})} coordinates and
            B{C{NAPh}} quasi-geoid-height to geodetic GRS80 (ETRS89) or
            Bessel1841 (RD-Bessel) C{lat}, C{lon} and C{height}.
         '''
-        phiC, lamC = _oblique2spherical(RDx, RDy)
-        lat,  lon  = _spherical2ellipsoidal(phiC, lamC)
+        philamC  = _oblique2spherical(RDx, RDy)
+        lat, lon = _spherical2ellipsoidal(*philamC)
 
         lat, lon = self._rdlatlon2(lat, lon)
         lat, lon = self._reverseXform(lat, lon, raiser)
-        h        = NAN if _isNAN(NAPh) else (NAPh +
-                   self.rdNAPh(lat, lon))
-        return RDNAP7Tuple(RDx, RDy, NAPh, lat, lon, h, self.reverseDatum,
-                                           name=self.name or 'reverse')
+        h        = NAN if _isNAN(NAPh) else (NAPh + self.rdNAPh(lat, lon))
+        return RDNAP7Tuple(RDx, RDy, NAPh, lat, lon, h,
+                                           self.reverseDatum, name=name)
 
     @property_RO
     def reverseDatum(self):
         '''Get the geodetic C{reverse} datum (L{Datum}), GRS80 or Bessel1841.
         '''
-        return {1:  self._datum,
-                2: _RD0.D0}.get(self.variant)
+        return {1: self._datum,
+                2: A0.D0}.get(self.variant)
 
-    _reverseXform = _forwardXform
+    _reverseXform = _inside2  # no datum Xform
 
     def toStr(self, prec=9, **unused):  # PYCHOK signature
         '''Return this C{RDNAP2018#v} instance as a string.
@@ -236,12 +233,10 @@ class RDNAP2018v1(_RDNAPbase):
 
     def _forwardXform(self, lat, lon, raiser):
         # transform C{(lat, lon)} from ETRS (GRS80) to RD-Bessel datum
-        x, y, z  = _geodetic2cartesian(lat, lon, self._EETRS, _RD0.H0_ETRS)
+        x, y, z  = _geodetic2cartesian(lat, lon, self._EETRS, A0.H0_ETRS)
         x, y, z  = _RD._xETRS2RD.transform(x, y, z)
-        lat, lon = _cartesian2geodetic(x, y, z, _RD0.E0)
-        if (raiser or self._raiser) and not _RD.isinside(lat, lon):
-            raise self._outsidError(lat, lon)
-        return lat, lon
+        lat, lon = _cartesian2geodetic(x, y, z, A0.E0)
+        return self._inside2(lat, lon, raiser)
 
     @property_ROnce
     def _rdgrid(self):
@@ -251,7 +246,7 @@ class RDNAP2018v1(_RDNAPbase):
             v1grid = _v_gridz_import(self.variant)
         return v1grid
 
-    def reverse(self, RDx, RDy, NAPh=0, raiser=False):  # RDNAP to GRS80 (ETRS89)
+    def reverse(self, RDx, RDy, NAPh=0, raiser=None, **name):  # RDNAP to GRS80 (ETRS89)
         '''Convert a local C{(B{RDx}, B{RDy})} point and B{C{NAPh}} height
            to geodetic B{GRS80 (ETRS89)} C{(lat, lon, height)}.
 
@@ -260,22 +255,22 @@ class RDNAP2018v1(_RDNAPbase):
            @kwarg NAPh: C{NAP} quasi-geoid-height (C{meter}, conventionally)
                         or C{NAN} to ignore C{NAPh} interpolation.
            @kwarg raiser: If C{True} raise an L{RDNAPError} if C{lat} or
-                          C{lon} is outside the C{RD} region (C{bool}).
+                          C{lon} is outside the C{RD} region (C{bool}), if
+                          C{False} don't, overriding property C{raiser}.
+           @kwarg name: Optional C{B{name}='reverse'} (C{str}).
 
            @return: An L{RDNAP7Tuple}C{(RDx, RDy, NAPh, lat, lon, height,
-                    datum)} with C{lat} and C{lon} coordinates, C{height}
+                    datum)} with geodetic C{lat} and C{lon}, C{height}
                     and C{datum} B{GRS80 (ETRS89)}.
         '''
-        return self._reverse(RDx, RDy, NAPh, raiser)
+        return self._reverse(RDx, RDy, NAPh, raiser, **name)
 
     def _reverseXform(self, lat, lon, raiser):
         # transform C{(lat, lon)} from RD-Bessel to ETRS (GRS80) datum
-        x, y, z  = _geodetic2cartesian(lat, lon, _RD0.E0, _RD0.H0)
+        x, y, z  = _geodetic2cartesian(lat, lon, A0.E0, A0.H0)
         x, y, z  = _RD._xRD2ETRS.transform(x, y, z)
         lat, lon = _cartesian2geodetic(x, y, z, self._EETRS)
-        if (raiser or self._raiser) and not _RD.isinside(lat, lon):
-            raise self._outsidError(lat, lon)
-        return lat, lon
+        return self._inside2(lat, lon, raiser)
 
     def similarity(self, inverse=False):
         '''Get the forward or reverse datum transform (C{Similarity}).
@@ -307,22 +302,24 @@ class RDNAP2018v2(_RDNAPbase):
             v2grid = _v_gridz_import(self.variant)
         return v2grid
 
-    def reverse(self, RDx, RDy, NAPh=0, raiser=False):  # RDNAP to RD-Bessel
+    def reverse(self, RDx, RDy, NAPh=0, raiser=None, **name):  # RDNAP to RD-Bessel
         '''Convert a local C{(B{RDx}, B{RDy})} point and B{C{NAPh}} height
-           to I{geodetic} B{Bessel1841 (RD-Bessel)} C{(lat, lon, height)}.
+           to geodetic B{Bessel1841 (RD-Bessel)} C{(lat, lon, height)}.
 
            @arg RDx: Local C{RD} X (C{meter}, conventionally).
            @arg RDy: Local C{RD} Y (C{meter}, conventionally).
            @kwarg NAPh: C{NAP} quasi-geoid-height (C{meter}, conventionally)
                         or C{NAN} to ignore C{NAPh} interpolation.
            @kwarg raiser: If C{True} raise an L{RDNAPError} if C{lat} or
-                          C{lon} is outside the C{RD} region (C{bool}).
+                          C{lon} is outside the C{RD} region (C{bool}), if
+                          C{False} don't, overriding property C{raiser}.
+           @kwarg name: Optional C{B{name}='reverse'} (C{str}).
 
            @return: An L{RDNAP7Tuple}C{(RDx, RDy, NAPh, lat, lon, height,
-                    datum)} with C{lat} and C{lon} coordinates, C{height}
+                    datum)} with geodetic C{lat} and C{lon}, C{height}
                     and C{datum} B{Bessel1841 (RD-Bessel)}.
         '''
-        return self._reverse(RDx, RDy, NAPh, raiser)
+        return self._reverse(RDx, RDy, NAPh, raiser, **name)
 
     def similarity(self, **unused):  # PYCHOK signature
         '''Get the forward or reverse datum transform, always C{None}.
@@ -349,7 +346,7 @@ def _atan3(y, x, x0):  # 2.2.3e and 3.1.1i
     elif x < 0:
         r = atan(y / x) + copysign(PI, x0)
     else:
-        r = copysign(PI_2, x0) if x0 else _ZERO
+        r = copysign(PI_2, x0) if x0 else _0_0
     return r
 
 
@@ -391,8 +388,7 @@ def _cartesian2geodetic(x, y, z, E):  # 2.2.3 == EcefUPC.reverse?
 
 def _ellipsoidal2spherical(lat, lon):  # 2.4.1
     # convert geodetic C{(lat, lon)} to spherical C{(𝛷, 𝛬)}
-    A0   = _RD0
-    phiC =  phi = Phid(lat)
+    phiC = phi = Phid(lat)
     if PI_2 > phi > -PI_2:  # 2.4.1c
         q = A0.ln_tan(phi) - A0.ln_e_2(phi)
         w = A0.N0 * q + A0.M0  # 2.4.1b
@@ -401,11 +397,11 @@ def _ellipsoidal2spherical(lat, lon):  # 2.4.1
     return phiC, lamC  # -Capital
 
 
-def _eq0(r, r0=_ZERO):
+def _eq0(r, r0=_0_0):
     return fabs(r - r0) < _TOL_R
 
 
-# def _eq0d(d, d0=_ZERO):
+# def _eq0d(d, d0=_0_0):
 #     return fabs(d - d0) < _TOL_D
 
 
@@ -421,21 +417,20 @@ def _geodetic2cartesian(lat, lon, E, h0=0):  # 2.2.1
     return x, y, z
 
 
-def _ne0(r, r0=_ZERO):
+def _ne0(r, r0=_0_0):
     return fabs(r - r0) > _TOL_R
 
 
-# def _ne0d(d, d0=_ZERO):
+# def _ne0d(d, d0=_0_0):
 #     return fabs(d - d0) > _TOL_D
 
 
 def _oblique2spherical(x, y):  # 3.1.1
     # inverse oblique stereographic conformal projection
     # from 2-D C{(x, y)} to spherical C{(𝛷, 𝛬)}
-    A0 = _RD0
-    x -=  A0.X0
-    y -=  A0.Y0
-    r  =  hypot(x, y)
+    x -= A0.X0
+    y -= A0.Y0
+    r  = hypot(x, y)
     if r > _TOL_M:  # x and y
         s0, c0 = A0.sincos2PHI0C
         sp, cp = sincos2(atan(r / A0.RK2) * _2_0)  # psi
@@ -446,7 +441,7 @@ def _oblique2spherical(x, y):  # 3.1.1
         phiC = asin(zN)
     else:
         _, xN =  A0.sincos2PHI0C
-        yN    = _ZERO
+        yN    = _0_0
         phiC  =  A0.PHI0C  # asin(sin(PHI0C))
     lamC = _atan3(yN, xN, x) + A0.LAM0C
     return phiC, lamC  # -Capital
@@ -455,8 +450,7 @@ def _oblique2spherical(x, y):  # 3.1.1
 def _spherical2ellipsoidal(phiC, lamC):  # 3.1.2
     # inverse Gauss conformal projection from
     # spherical C{(𝛷, 𝛬)} to geodetic C{(phi, lam)}
-    A0  = _RD0
-    phi =  phiC
+    phi = phiC
     if PI_2 > phi > -PI_2:
         q = (A0.ln_tan(phi) - A0.M0) / A0.N0
 #       w =  A0.ln_tan(phi)
@@ -473,9 +467,8 @@ def _spherical2ellipsoidal(phiC, lamC):  # 3.1.2
 def _spherical2oblique(phiC, lamC):  # 2.4.2
     # oblique stereographic conformal projection
     # from spherical C{(𝛷, 𝛬)} to 2-D C{(x, y)}
-    A0 = _RD0
-    a  =  phiC - A0.PHI0C  # 𝛷 - 𝛷0
-    b  =  lamC - A0.LAM0C  # 𝛬 - 𝛬0
+    a = phiC - A0.PHI0C  # 𝛷 - 𝛷0
+    b = lamC - A0.LAM0C  # 𝛬 - 𝛬0
     if (_ne0(a) or _ne0(b)) and (_ne0(phiC, -A0.PHI0C) or
                                  _ne0(lamC, -A0.LAM0C + PI)):
         s0, c0 = A0.sincos2PHI0C  # sin(𝛷0), cos(𝛷0)
@@ -494,7 +487,7 @@ def _spherical2oblique(phiC, lamC):  # 2.4.2
             x = q * (c * sin(b))
             y = q * (s - s0 + s0 * t) / c0
         else:
-            x = y = _ZERO  # NAN?
+            x = y = _0_0  # NAN?
         x += A0.X0
         y += A0.Y0
     elif _eq0(phiC, A0.PHI0C) and _eq0(lamC, A0.LAM0C):

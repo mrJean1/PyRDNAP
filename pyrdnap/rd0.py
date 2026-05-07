@@ -15,7 +15,7 @@ from pyrdnap.__pygeodesy import (_0_0, _0_5, _1_0, _2_0,  # PYCHOK used!
                                  _ALL_OTHER, _Pass, _NamedTuple)
 from pygeodesy import (NN, PI_2,  # "consterns"
                        Datum, Datums, Similarity,  # datums
-                       LatLon2Tuple, Vector2Tuple, Vector3Tuple,  # namedTuples
+                       LatLon2Tuple, PhiLam2Tuple, Vector2Tuple, Vector3Tuple,  # namedTuples
                        Property_RO, property_ROnce,  # props
                        pairs,  # streprs
                        Height, Lamd, Lat, Lon, Meter, Phi, Phid,  # units
@@ -24,7 +24,7 @@ from pygeodesy import (NN, PI_2,  # "consterns"
 from math import atan, ceil, floor, log, sin, sqrt, tan
 
 __all__ = ()
-__version__ = '26.05.06'
+__version__ = '26.05.07'
 
 
 class _RDbase(object):
@@ -47,11 +47,11 @@ class _RDbase(object):
 class _RD(_RDbase):
     '''(INTERNAL) Limits, constants for RDNAP2018 (ASCII.txt).
     '''
-    LAT_INC   = Lat(LAT_INC=0.0125)
-    LAT_MAX   = Lat(LAT_MAX=56.0)  # degrees
+    LAT_INC   = Lat(LAT_INC= 0.0125)  # degrees, all
+    LAT_MAX   = Lat(LAT_MAX=56.0)
     LAT_MIN   = Lat(LAT_MIN=50.0)
-    LON_INC   = Lon(LON_INC=0.02)
-    LON_MAX   = Lon(LON_MAX= 8.0)   # degrees
+    LON_INC   = Lon(LON_INC= 0.02)
+    LON_MAX   = Lon(LON_MAX= 8.0)
     LON_MIN   = Lon(LON_MIN=_2_0)
     N_LAT_LON = ((LAT_MAX - LAT_MIN) / LAT_INC + _1_0,  # 2.3.2g n-phi
                  (LON_MAX - LON_MIN) / LON_INC + _1_0)  # 2.3.2g n-lambda
@@ -60,8 +60,8 @@ class _RD(_RDbase):
         _v_assert(tuple(map(int, self.N_LAT_LON)))
 
     def c_f_N_f6(self, lat, lon):
-        # return (int(ceil), int(floor), C{lat}-Normalized less floor) + \
-        #        (int(ceil), int(floor), C{lon}-Normalized less floor)
+        # return (int(ceil), int(floor), Normalized less floor) of C{lat} + \
+        #        (int(ceil), int(floor), Normalized less floor) of C{lon}
         return _c_f_N_f3(lat, self.LAT_MIN, self.LAT_INC) + \
                _c_f_N_f3(lon, self.LON_MIN, self.LON_INC)
 
@@ -115,7 +115,7 @@ class _RD0(_RDbase):
              <https://PROJ.org/en/stable/operations/projections/sterea.html>} and
              <http://geotiff.maptools.org/proj_list/oblique_stereographic.html>
     '''
-    H0      = Meter(H0=_0_0)  # E0 height in meter
+    H0      = Meter(H0=_0_0)  # E0 height
     H0_ETRS = Meter(H0_ETRS=43.0)
     K0      = 0.9999079  # scale factor
     LAT0    = Lat(LAT0='52  9 22.178N')  # 52.15616055+°
@@ -244,6 +244,12 @@ class RDNAP7Tuple(_NamedTuple):
     _Units_ = ( Meter, Meter, Meter,  Lat,   Lon,   Height,  _Pass)
 
     @Property_RO
+    def lam(self):
+        '''Get the longitude (B{C{radians}}).
+        '''
+        return Lamd(self.lon)  # PYCHOK lon
+
+    @Property_RO
     def latlon(self):
         '''Get the lat-, longitude in C{degrees} (L{LatLon2Tuple}C{(lat, lon)}).
         '''
@@ -260,6 +266,30 @@ class RDNAP7Tuple(_NamedTuple):
         '''Get the lat-, longitude in C{degrees} with height and datum (L{LatLon4Tuple}C{(lat, lon, height, datum)}).
         '''
         return self.latlonheight.to4Tuple(self.datum)
+
+    @Property_RO
+    def phi(self):
+        '''Get the latitude (B{C{radians}}).
+        '''
+        return Phid(self.lat)  # PYCHOK lat
+
+    @Property_RO
+    def philam(self):
+        '''Get the lat- and longitude in C{radians} (L{PhiLam2Tuple}C{(phi, lam)}).
+        '''
+        return PhiLam2Tuple(self.phi, self.lam, name=self.name)  # PYCHOK lam, phi
+
+    @Property_RO
+    def philamheight(self):
+        '''Get the lat-, longitude in C{radians} and height (L{PhiLam3Tuple}C{(phi, lam, height)}).
+        '''
+        return self.philam.to3Tuple(self.height)  # PYCHOK height
+
+    @Property_RO
+    def philamheightdatum(self):
+        '''Get the lat-, longitude in C{radians} with height and datum (L{PhiLamn4Tuple}C{(phi, lam, height, datum)}).
+        '''
+        return self.philamheight.to4Tuple(self.datum)
 
     def toDatum(self, datum2, **name):
         '''Convert this C{lat}, C{lon} and C{height} to B{C{datum2}}.
@@ -321,16 +351,17 @@ class RDregion4Tuple(_NamedTuple):
         return LatLon2Tuple(self.N, self.E, name=self.name)
 
 
-def _c_f_N_f3(d, d_MIN, d_INC):
-    # return int(ceil), int(floor) and (Normalized less floor) of C{d} degrees
-    N = (d - d_MIN) / d_INC
+def _c_f_N_f3(deg, deg_MIN, deg_INC):
+    # return int(ceil) and int(floor) of Normalized
+    # and (Normalized less floor) of C{deg} degrees
+    N = (deg - deg_MIN) / deg_INC
     f = floor(N)
     return int(ceil(N)), int(f), (N - f)
 
 
 __all__ += _ALL_OTHER(RDNAP7Tuple, RDregion4Tuple,
                       # passed along from PyGeodesy
-                      LatLon2Tuple, Similarity, Vector2Tuple, Vector3Tuple)
+                      LatLon2Tuple, PhiLam2Tuple, Similarity, Vector2Tuple, Vector3Tuple)
 
 # **) MIT License
 #
