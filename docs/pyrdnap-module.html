@@ -58,12 +58,30 @@
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
 <h1 class="epydoc">Package pyrdnap</h1><p class="nomargin-top"></p>
-<p>A pure Python implementation of the Netherlands' <a 
+<p>A pure Python implementation of 2018 version of the Netherlands' <a 
   href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
-  target="_top">RD NAP</a> specifications to convert between geodetic GRS80
-  (ETRS89) lat-/longitudes in degrees and local <code>RijksDriehoeksmeeting
-  (RD)</code> coordinates and <code>Normaal Amsterdams Peil (NAP) 
-  quasi-geoid-height</code> in <code>meter</code>.</p>
+  target="_top">RD NAP</a> specification to convert between geodetic GRS80 
+  (ETRS89) lat-/longitudes in degrees and local 
+  <i><b>R</b>ijks<b>D</b>riehoeksmeeting (<b>RD</b>)</i> coordinates and 
+  <i><b>N</b>ormaal <b>A</b>msterdams <b>P</b>eil (<b>NAP</b>) 
+  quasi-geoid-height</i> in <code>meter</code>.</p>
+  <p>See module <a href="pyrdnap.rdnap2018-module.html" class="link" 
+  onclick="show_private();">pyrdnap.rdnap2018</a> for further information 
+  and usage, implementation details.</p>
+  <p>See modules <a href="pyrdnap.v1grid-module.html" 
+  class="link">pyrdnap.v1grid</a> and <a href="pyrdnap.v2grid-module.html" 
+  class="link">pyrdnap.v2grid</a> for the <i>pythonic</i> grid files for 
+  variant 1 respectively 2 included in <a href="pyrdnap-module.html" 
+  class="link">pyrdnap</a>.</p>
+  <p>See function <a href="pyrdnap.v_self-module.html#validation3" 
+  class="link">pyrdnap.validation3</a> for self-validation testing 
+  details.</p>
+  <p>See file 
+  <code>testresults/Z001_ETRSandRDNAP-self-validation-v1-results.txt</code>
+  for the self-validation results of the <a 
+  href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
+  class="link">RDNAP2018v1</a> transformer, especially the summary in the 
+  final 3 lines.</p>
 
 <hr />
 <div class="fields">      <p><strong>Note:</strong>
@@ -71,13 +89,8 @@
         formally validated</b> and are <b>not certified</b> to carry the 
         trademark name <code>RDNAPTRANS(tm)</code>.
       </p>
-      <p><strong>See Also:</strong>
-        Module <a href="pyrdnap.rdnap2018-module.html" class="link" 
-        onclick="show_private();">pyrdnap.rdnap2018</a> for further 
-        information and implementation details.
-      </p>
       <p><strong>Version:</strong>
-        26.05.07
+        26.05.08
       </p>
 </div><!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -103,20 +116,49 @@
         respectively <code>variant 2</code> of the specification <a 
         href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
         target="_top">RDNAPTRANS(tm)2018</a>.</em>    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary"><i>Variant 1</i> <code>_NAP_h</code>, <code>_lat_corr</code> and 
-        <code>_lon_corr</code> grid columns.</em>
+    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary">Variant 1 grid files, but <b>only</b> columns 
+        <code>NAP_h_...</code>, <code>lat_corr_</code> and 
+        <code>lon_corr_</code> of the original 
+        <code>RDNAPTRANS2018_v220627/...1/nlgeo2018.txt</code> and 
+        <code>...1/rdcorr2018.txt</code> grid files and encoded into Python
+        as 3 row-order matrices, each a 481-tuple of 301-arrays of floats.</em>
     <ul>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.nlgeo2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v1grid.nlgeo2018_txt_NAP_h</a></strong>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lat_corr</a></strong>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lon_corr</a></strong>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.nlgeo2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v1grid.nlgeo2018_txt_NAP_h</a></strong>: <em class="summary">Variant 1 grid file <code>...1/nlgeo2018.txt</code>, <b>only</b> 
+        the 3rd column <code>NAP_quasi_geoid_height_...(m)</code> and 
+        encoded in Python as a 481-tuple of 301-arrays of floats.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lat_corr</a></strong>: <em class="summary">Variant 1 grid file <code>...1/rdcorr2018.txt</code>, <b>only</b> 
+        the 3rd column <code>lat_corr_(deg)</code> with 
+        <code>+0.00000*</code> shrunk to <code>0.*</code>, 
+        <code>-0.00000*</code> to <code>-.*</code> and encoded in Python as
+        an n-tuple of runs of non-zeros.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lon_corr</a></strong>: <em class="summary">Variant 1 grid file <code>...1/rdcorr2018.txt</code>, <b>only</b> 
+        the 4th column <code>lon_corr_(deg)</code> with 
+        <code>+0.00000*</code> shrunk to <code>0.*</code>, 
+        <code>-0.00000*</code> to <code>-.*</code> and encoded in Python as
+        an n-tuple of runs of non-zeros.</em>    </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary"><i>Variant 2</i> <code>_NAP_h</code>, <code>_lat_corr</code> and 
-        <code>_lon_corr</code> grid columns.</em>
+    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary">Variant 2 grid files, but <b>only</b> columns 
+        <code>NAP_h_...</code>, <code>lat_corr_</code> and 
+        <code>lon_corr_</code> of the original 
+        <code>RDNAPTRANS2018_v220627/...2/naptrans2018.txt</code> and 
+        <code>...2/rdtrans2018.txt</code> grid files and encoded into 
+        Python as 3 row-order matrices, each a 481-tuple of 301-arrays of 
+        floats.</em>
     <ul>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.naptrans2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v2grid.naptrans2018_txt_NAP_h</a></strong>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lat_corr</a></strong>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lon_corr</a></strong>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.naptrans2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v2grid.naptrans2018_txt_NAP_h</a></strong>: <em class="summary">Variant 2 grid file <code>...2/naptrans2018.txt</code>, <b>only</b>
+        the 3rd column <code>NAP_quasi_geoid_height_...(m)</code> and 
+        encoded in Python as a 481-tuple of 301-arrays of floats.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lat_corr</a></strong>: <em class="summary">Variant 2 grid file <code>...2/rdtrans2018.txt</code>, <b>only</b> 
+        the 3rd column <code>lon_corr_(deg)</code> only with 
+        <code>0.00*</code> shrunk to <code>0.*</code>, <code>-0.00*</code> 
+        to <code>-.*</code> and encoded in Python as a 481-tuple of 
+        301-arrays of floats.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lon_corr</a></strong>: <em class="summary">Variant 2 grid file <code>...2/rdtrans2018.txt</code>, <b>only</b> 
+        the 4th column <code>lon_corr_(deg)</code> only with 
+        <code>0.000*</code> shrunk to <code>0.*</code>, 
+        <code>-0.000*</code> to <code>-.*</code> and encoded in Python as a
+        481-tuple of 301-arrays of floats.</em>    </li>
     </ul>
     </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_grids-module.html" onclick="show_private();">pyrdnap.v_grids</a></strong>: <em class="summary">(INTERNAL) <code>RD NAP 2018</code> v#grid utilities.</em>    </li>
@@ -271,7 +313,7 @@
         <span class="summary-sig-arg">in_out</span>=<span class="summary-sig-default">True</span>,
         <span class="summary-sig-arg">_print</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">_printest</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Run the official <code>RDNAP 2018</code> self-validation tests.</td>
+      Run the official <code>RD NAP 2018</code> self-validation tests.</td>
           <td align="right" valign="top">
             
             
@@ -326,7 +368,7 @@
     </td>
   </tr></table>
   
-  <p>Run the official <code>RDNAP 2018</code> self-validation tests.</p>
+  <p>Run the official <code>RD NAP 2018</code> self-validation tests.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
@@ -344,15 +386,16 @@
           <code>RD</code> region, if <code>False</code> only points 
           <code>outside</code> (<code>bool</code>).</li>
         <li><strong class="pname"><code>_print</code></strong> - A Python 3+ <code>print</code>-like callable or <code>None</code>
-          to not print the header and final, summary lines.</li>
+          to not print the header and the final, summary lines.</li>
         <li><strong class="pname"><code>_printest</code></strong> - A Python 3+ <code>print</code>-like callable or <code>None</code>
-          to not print any lines for any test or failing test.</li>
+          to not print <b><code>all_</code></b> <b><code>in_out</code></b> 
+          tests or only the failing ones.</li>
     </ul></dd>
     <dt>Returns:</dt>
         <dd>3-Tuple <code>(failed, total, in_outside)</code> with the number 
           of <code>FAILED</code> tests, the <code>total</code> number of 
-          tests and the number of test lines <code>in-</code> or 
-          <code>outside</code> the <code>RD</code> region.</dd>
+          tests and the number of test lines <b><code>in_out</code></b> the
+          <code>RD</code> region.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -416,7 +459,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu May  7 14:26:40 2026
+    Generated by Epydoc 3.0.1 on Fri May  8 18:10:40 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

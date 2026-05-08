@@ -24,7 +24,7 @@ from pygeodesy import (NN, PI_2,  # "consterns"
 from math import atan, ceil, floor, log, sin, sqrt, tan
 
 __all__ = ()
-__version__ = '26.05.07'
+__version__ = '26.05.08'
 
 
 class _RDbase(object):
@@ -67,7 +67,7 @@ class _RD(_RDbase):
 
     def isinside(self, lat, lon, eps=0):  # eps=_TOL_D, 0 or -_TOLD_D
         # is C{(lat, lon)} inside the this C{RD} region, optionally
-        # over-/undersized by positive resp. negative C{eps}?
+        # over-/undersized by positive respectively negative C{eps}?
         S, W, N, E = self.region
         return ((S - lat) <= eps and (lat - N) <= eps and
                 (W - lon) <= eps and (lon - E) <= eps) if eps else \
@@ -230,7 +230,7 @@ class _RD0(_RDbase):
 _RD0 = _RD0()  # PYCHOK singleton, in .test
 
 
-class RDNAP7Tuple(_NamedTuple):
+class RDNAP7Tuple(_NamedTuple):  # in .v_self
     '''7-Tuple C{(RDx, RDy, NAPh, lat, lon, height, datum)} with I{local} C{RDx},
        C{RDy} and C{NAPh} quasi-geoid_height, geodetic C{lat}, C{lon}, C{height}
        and C{datum} with C{lat} and C{lon} in C{degrees} and C{RDx}, C{RDy}, C{NAPh}

@@ -85,7 +85,7 @@ setup(name=_PACKAGE,
 #     download_url='https://GitHub.com/mrJean1/PyRDNAP',
 #     entry_points={},
 #     include_package_data=False,
-      install_requires=['pygeodesy>=26.5.2'],
+      install_requires=['pygeodesy>=26.5.7'],
 #     namespace_packages=[],
 #     py_modules=[],
 )  # PYCHOK indent

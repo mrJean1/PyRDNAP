@@ -12,12 +12,13 @@ lat-/longitudes and heights to local *RD* coordinates and *NAP quasi-geoid-heigh
 ``forward`` method to convert from ``geodetic`` lat-, longitude and height to RDx, RDy and NAPh and
 a ``reverse`` method to convert RDx, RDy and NAPh to ``geodetic`` lat-, longitude and height.
 
+For further details see the documentation_.
+
 **Note**, ``PyRDNAP``, ``pyrdnap`` and ``RDNAP2018v1`` have **not been formally validated** and are
 **not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.  Class ``RDNAP2018v1`` does meet
 the ``RDNAPTRANS(tm)2018_v220627`` self-validation requirements for all tests within the ``RD``
 region.  ``RDNAP2018v2`` does not and is not required to.
 
-For further details see the documentation_, espcially the `main`_ and rdnap2018_ modules.
 
 Installation
 ============
@@ -65,7 +66,7 @@ All Python source code has been statically checked_ with Ruff_ using Python 3.13
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
 64-bit on macOS 26.4.1 Tahoe only.
 
-*Last updated: May 06, 2026.*
+*Last updated: May 08, 2026.*
 
 License
 =======

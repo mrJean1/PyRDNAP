@@ -1,2 +1,2 @@
 
-pygeodesy>=26.5.2
+pygeodesy>=26.5.7

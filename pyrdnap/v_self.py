@@ -28,6 +28,7 @@ or C{0.0010 meter} for each result.
 
 @see: Module L{pyrdnap<pyrdnap.__main__>} for examples to invoke L{validation3}.
 '''
+from pyrdnap.rd0 import RDNAP7Tuple
 from pyrdnap.__pygeodesy import _ALL_OTHER, _COMMASPACE_, _NL_, _secs2str, _xinstanceof
 from pygeodesy import NN, NAN
 
@@ -36,13 +37,12 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.05.05'
+__version__ = '26.05.08'
 
-#        RDNAP8Tuple._Names_[3:6] + RDNAP8Tuple._Names_[:3]
-_NAMES = 'lat   lon   height RDx   RDy   NAPh'.split()
+_NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[:3]
+#        (lat   lon   height RDx   RDy   NAPh)
 _REQ_D = (1e-8, 1e-8, 1e-3,  1e-3, 1e-3, 1e-3)  # 0 == ignore
 _NDECS = (11,   11,   6,     8,    8,    8)  # fmt precision
-_NAMES = tuple(_NAMES)
 
 
 def _line(ln):
@@ -50,23 +50,23 @@ def _line(ln):
 
 
 def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=None):  # MCCABE 13
-    '''Run the official C{RDNAP 2018} self-validation tests.
+    '''Run the official C{RD NAP 2018} self-validation tests.
 
        @arg self_txt: Name of the file containing the C{RDNAP 2018} self-validation tests
                       (C{str}), C{.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt}.
        @arg R: An RDNAP2018v# transformer (L{RDNAP2018v1} or L{RDNAP2018v2} instance).
-       @kwarg all_: If C{True} print all tests and test results, otherwise only
-                    failing tests (C{bool}).
-       @kwarg in_out: If C{True} test only points C{inside} the C{RD} region, if
-                      C{False} only points C{outside} (C{bool}).
-       @kwarg _print: A Python 3+ C{print}-like callable or C{None} to not print the
-                      header and final, summary lines.
-       @kwarg _printest: A Python 3+ C{print}-like callable or C{None} to not print
-                         any lines for any test or failing test.
+       @kwarg all_: If C{True} print all tests and test results, otherwise only failing
+                    tests (C{bool}).
+       @kwarg in_out: If C{True} test only points C{inside} the C{RD} region, if C{False}
+                      only points C{outside} (C{bool}).
+       @kwarg _print: A Python 3+ C{print}-like callable or C{None} to not print the header
+                      and the final, summary lines.
+       @kwarg _printest: A Python 3+ C{print}-like callable or C{None} to not print B{C{all_}}
+                         B{C{in_out}} tests or only the failing ones.
 
-       @return: 3-Tuple C{(failed, total, in_outside)} with the number of C{FAILED}
-                tests, the C{total} number of tests and the number of test lines
-                C{in-} or C{outside} the C{RD} region.
+       @return: 3-Tuple C{(failed, total, in_outside)} with the number of C{FAILED} tests,
+                the C{total} number of tests and the number of test lines B{C{in_out}} the
+                C{RD} region.
     '''
     from pyrdnap import RDNAP2018v1, RDNAP2018v2, RDNAPError, _versions
 
@@ -84,7 +84,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
             hd = f.readline().strip().decode('utf-8')
             ln = 1
             if _print:
-                _print(' header', repr(hd), _line(ln))
+                _print(' header', repr(hd), _line(ln), _NL_)
             ds = list(diffs)  # |diff| per line
             t0 = time()
             while True:

@@ -4,10 +4,10 @@
 u'''Run a C{RD NAP 2018 forward} or C{reverse} conversion round-trip examples or
 run the entire C{RD NAP 2018} self-validation test suite in various ways.
 
+Use C{"python -m pyrdnap -h | --help"} for further information.
+
 @note: C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are B{not
        certified} to carry the trademark name C{RDNAPTRANS(tm)}.
-
-@see: Use C{"python -m pyrdnap -h | --help"} for further information.
 '''
 from pyrdnap import _pyrdnap_, RDNAP2018v1, RDNAP2018v2, _versions  # pyrdnap 1st
 from pyrdnap.v_self import validation3
@@ -16,7 +16,7 @@ from pygeodesy import print_
 import sys
 
 __all__ = ()
-__version__ = '26.05.05'
+__version__ = '26.05.08'
 
 _DASH_ = '-'
 _R     =  RDNAP2018v1(name='v1Test')

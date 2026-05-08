@@ -12,7 +12,7 @@ the C{RD} region, see B{C{Note below}}.  Class L{RDNAP2018v2} does not and is no
 
 The original C{RDNAPTRANS(tm)2018_v220627} grid files for both variants are I{not included}
 in C{PyPRDNAP} and C{pyrdnap} due to the size of those files.  Instead, the grid files for each
-variant I{include only} the C{_lat_corr}, C{_lon_corr} and C{_NAP_quasi_geoid_height_...} columns,
+variant I{include only} the C{lat_corr_}, C{lon_corr_} and C{_NAP_quasi_geoid_height_...} columns,
 extracted from the original grid files with leading and trailing zeros removed and formatted as
 row-order matrices.
 
@@ -38,7 +38,7 @@ from math import asin, atan, copysign, degrees, exp, \
                  fabs, floor, hypot, radians, sin, sqrt
 
 __all__ = ()
-__version__ = '26.05.07'
+__version__ = '26.05.08'
 
 _TOL_D = 1e-9  # degrees 2.3.3f+
 _TOL_M = 1e-6  # meter
@@ -356,7 +356,7 @@ def _atan_exp(w):  # 2.4.1c
 
 def _bilinear(v_grid, c_latI, f_latI, latN_f,  # 2.3.1f and g
                       c_lonI, f_lonI, lonN_f):
-    # interpolate a _lat_corr, _lon_corr or _NAP_h
+    # interpolate a lat_corr_, lon_corr_ or NAP_h_...
     assert isinstance(v_grid, _V_grid)
     nw = v_grid(c_latI, f_lonI)
     ne = v_grid(c_latI, c_lonI)
