@@ -22,14 +22,15 @@ from pygeodesy import DeprecationWarnings, internals, interns, NAN, \
                       NN, normDMS, pairs, printf, property_RO, typename
 from pygeodesy import clips, Datums, str2ub, ub2str  # noqa: F401 shared
 
-_DOT_     = interns._DOT_
-_getenv   = internals._getenv
-_skipped_ = 'skipped'  # in .run
-_SPACE_   = interns._SPACE_
-_TILDE_   = interns._TILDE_
-_HOME_dir = dirname(PyRDNAP_dir or _TILDE_) or _TILDE_  # _PYGeodesy_dir
-secs2str  = internals._secs2str
-# _xcopy    = basics._xcopy
+_DOT_      = interns._DOT_
+_ELLIPSIS_ = interns._ELLIPSIS_  # PYCHOK shared
+_getenv    = internals._getenv
+_skipped_  = 'skipped'  # in .run
+_SPACE_    = interns._SPACE_
+_TILDE_    = interns._TILDE_
+_HOME_dir  = dirname(PyRDNAP_dir or _TILDE_) or _TILDE_  # _PYGeodesy_dir
+secs2str   = internals._secs2str
+# _xcopy     = basics._xcopy
 
 __all__ = ('coverage', 'Datums', 'NAN', 'NN',
            'isAppleSi', 'isiOS', 'ismacOS', 'isNix',  # 'isIntelPython'
@@ -38,7 +39,7 @@ __all__ = ('coverage', 'Datums', 'NAN', 'NN',
            'TestsBase',  # classes
            'clips', 'normDMS', 'pairs', 'printf', 'secs2str',  # functions
            'str2ub', 'tilde', 'typename', 'ub2str', 'versions')
-__version__ = '26.05.06'
+__version__ = '26.05.09'
 
 try:  # from pygeodesy.basics ...
     # _Ints = int, long

@@ -11,7 +11,7 @@ from os.path import abspath, dirname, join
 import unittest
 
 __all__ = ('TestSuite',)
-__version__ = '26.04.26'
+__version__ = '26.05.09'
 
 _test_dir = dirname(abspath(__file__))
 
@@ -27,11 +27,11 @@ class TestSuite(unittest.TestCase):
         x, _ = run2(join(test_dir, test + '.py'), *argv)
         self.assertEqual(x, 0)
 
-    def test_Validation(self):
-        self._run('testValidation')
-
     def test_RndTrips(self):
         self._run('testRndTrips')
+
+    def test_Validation(self):
+        self._run('testValidation')
 
     def test_Ztotal(self):
         # final test to make sure all tests were run

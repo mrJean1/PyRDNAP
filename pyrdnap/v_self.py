@@ -30,19 +30,20 @@ or C{0.0010 meter} for each result.
 '''
 from pyrdnap.rd0 import RDNAP7Tuple
 from pyrdnap.__pygeodesy import _ALL_OTHER, _COMMASPACE_, _NL_, _secs2str, _xinstanceof
-from pygeodesy import NN, NAN
+from pygeodesy import NN, NAN, typename
 
 from math import fabs
 import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.05.08'
+__version__ = '26.05.09'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[:3]
 #        (lat   lon   height RDx   RDy   NAPh)
 _REQ_D = (1e-8, 1e-8, 1e-3,  1e-3, 1e-3, 1e-3)  # 0 == ignore
 _NDECS = (11,   11,   6,     8,    8,    8)  # fmt precision
+_NDecs = tuple((_ - 4) for _ in _NDECS)  # fe4 precision
 
 
 def _line(ln):
@@ -72,9 +73,9 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
 
     _xinstanceof(str, bytes, self_txt=self_txt)
     _xinstanceof(RDNAP2018v1, RDNAP2018v2, R=R)
-    R_ = R.__class__.__name__
+    R_ = typename(R)
 
-    nfail = ntotal = nin_out = 0
+    nfailed = ntotal = nin_out = 0
     if _print:
         _print('testing', repr(R))
         _print('  using', repr(self_txt))
@@ -109,7 +110,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                             if d > m:  # new max |diff|
                                 diffs[i] = d
                             if d > q:
-                                nfail += 1
+                                nfailed += 1
                                 F = 'FAILED'
                             ntotal += 1
                         else:
@@ -118,7 +119,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                         b = b'  '.join(bs).decode('utf-8')
                         _printest('id', b, _line(ln))
                         _printest(R_, _zfmt(res), F)
-                        _printest('     |diff|', _zfmt(ds), F, _NL_)
+                        _printest('     |diff|', _zfe4(ds), F, _NL_)
         if _print:
             s = time() - t0
             t = '-inside' if in_out else '-outside'
@@ -126,20 +127,26 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                 t += ' -all' if all_ else ' -failed'
             t = '%s of %s lines %s' % (nin_out, (ln - 1), t)
             t = '%s (%s) %s' % (t, _versions(), _secs2str(s))
-            if nfail:
-                _print(R_, nfail, 'of', ntotal, 'tests', 'FAILED,', t)
+            if nfailed:
+                _print(R_, nfailed, 'of', ntotal, 'tests', 'FAILED,', t)
             else:
                 _print(R_, 'all', ntotal, 'tests', 'PASSED,', t)
-            for n, fs in (('req', _REQ_D), ('max', diffs)):
-                _print(R_, n, '|diff|', _zfmt(fs))
+            for n, _z, fs in (('req', _zfmt, _REQ_D), ('max', _zfe4, diffs),
+                                                      ('max', _zfmt, diffs)):
+                _print(R_, n, '|diff|', _z(fs))
     else:
         t = "file %r doesn't exist" % (self_txt,)
         if _print:
             _print(t)
         else:
             raise RDNAPError(t)
-        nfail = 1
-    return nfail, ntotal, nin_out
+        nfailed = 1
+    return nfailed, ntotal, nin_out
+
+
+def _zfe4(floats):
+    t = ('%s %.*e' % t for t in zip(_NAMES, _NDecs, floats))
+    return _COMMASPACE_.join(t)
 
 
 def _zfmt(floats):

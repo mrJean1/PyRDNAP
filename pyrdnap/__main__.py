@@ -16,7 +16,7 @@ from pygeodesy import print_
 import sys
 
 __all__ = ()
-__version__ = '26.05.08'
+__version__ = '26.05.09'
 
 _DASH_ = '-'
 _R     =  RDNAP2018v1(name='v1Test')
@@ -81,6 +81,10 @@ while argv and argv[0].startswith(_DASH_):
         _usage(1)
 
 
+# % python3 -m pyrdnap -v
+# pyrdnap 26.5.9 pygeodesy 26.5.9 Python 3.14.4 64bit arm64 macOS 26.4.1
+
+
 # % python3 -m pyrdnap -v1 -forward 52.15616 5.3876389
 # forward: (155029.784672, 463109.826226, -43.275509, 52.15616, 5.387639, 0, Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 # reverse: (155029.784672, 463109.826226, -43.275509, 52.15616, 5.387639, -0.0, Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
@@ -91,21 +95,25 @@ while argv and argv[0].startswith(_DASH_):
 # forward: (155000.0, 463000.0, 0.0, 52.155173, 5.387204, 43.277164, Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 
 
-# % python3 -m pyrdnap -v1 -inside .../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt
+# % python3 -m pyrdnap -v1 -inside .../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt
 # testing RDNAP2018v1(name='v1Test', variant=1, forwardDatum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-#   using '.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt'
+#   using '.../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
-# RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 lines -inside (pyrdnap 26.5.5 pygeodesy 26.5.2 Python 3.13.12 64bit arm64 macOS 26.4.1) 382.024 ms
+#
+# RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 lines -inside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 3.14.4 64bit arm64 macOS 26.4.1) 402.320 ms
 # RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
+# RDNAP2018v1 max |diff| lat 2.4685889e-09, lon 1.8726842e-09, height 5.00e-05, RDx 8.7847e-05, RDy 2.2281e-04, NAPh 4.9993e-05
 # RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999
 
 
-# % python3 -m pyrdnap -v1 -outside .../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt
+# % python3 -m pyrdnap -v1 -outside .../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt
 # testing RDNAP2018v1(name='v1Test', variant=1, forwardDatum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-#   using '.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt'
+#   using '.../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
-# RDNAP2018v1 372 of 10205 tests FAILED, 2041 of 10000 lines -outside (pyrdnap 26.5.5 pygeodesy 26.4.28 Python 3.14.4 64bit arm64 macOS 26.4.1) 330.483 ms
+#
+# RDNAP2018v1 372 of 10205 tests FAILED, 2041 of 10000 lines -outside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 3.14.4 64bit arm64 macOS 26.4.1) 388.509 ms
 # RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
+# RDNAP2018v1 max |diff| lat 3.5461468e-08, lon 4.2693719e-08, height 0.00e+00, RDx 3.5235e-04, RDy 7.7548e-04, NAPh 0.0000e+00
 # RDNAP2018v1 max |diff| lat 0.00000003546, lon 0.00000004269, height 0.000000, RDx 0.00035235, RDy 0.00077548, NAPh 0.00000000
 
 
