@@ -1,7 +1,7 @@
 test/run.py typical test results (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1 -W default)
 running /Library/Framewo....ython -W default ~/PyRDNAP/test/testRndTrips.py
 
-    testing testRndTrips.py 26.05.06
+    testing testRndTrips.py 26.05.09
     test 1 v1: random
     test 2 forward: (241563.4868822466, 615281.963926678, nan, 53.51658661, 6.69217422, nan)
     test 3 reverse: (241563.4868822466, 615281.963926678, nan, 53.5165866099, 6.6921742205, nan)
@@ -544,7 +544,6 @@ running /Library/Framewo....ython -W default ~/PyRDNAP/test/testRndTrips.py
     test 405 reverse: (155029.7839450174, 463109.8884635002, 99.9779226593, 52.15616056, 5.38763889, 143.2551)
     test 406 v2: (52.15616056, 5.38763889, 143.2551)
 
-
     test 407 v1: EPSG:9809
     test 408 forward: (196139.4316111235, 557179.0260841309, nan, 53.0, 6.0, nan)
     test 409 RDx_RDy: (196139.4316111235, 557179.0260841309)  FAILED, KNOWN, expected (196105.283, 557057.739)
@@ -553,18 +552,33 @@ running /Library/Framewo....ython -W default ~/PyRDNAP/test/testRndTrips.py
     test 412 reverse: (196139.4316111235, 557179.0260841309, nan, 53.0000000001, 6.0000000006, nan)
     test 413 v1: (53.0, 6.0)
 
+    test 414 v1: EPSGv12.054
+    test 415 forward: (275000.0000166142, 575000.0000327197, nan, 53.148288321, 7.180899528, nan)
+    test 416 RDx_RDy: (275000.0000166142, 575000.0000327197)  FAILED, KNOWN, expected (275000.000, 575000.000)
+    test 417 b4Datum: (275000.000017, 575000.000033, NAN, 53.148288, 7.1809, NAN, Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+    test 418 toWGS84: (275000.000017, 575000.000033, NAN, 53.148281, 7.180863, NAN, Datum(name='NAD83', ellipsoid=Ellipsoids.GRS80, transform=Transforms.NAD83))
+    test 419 reverse: (275000.0000166142, 575000.0000327197, nan, 53.148288321, 7.1808995285, nan)
+    test 420 v1: (53.14828832, 7.18089953)  FAILED, KNOWN, expected (53.148288321, 7.180899528)
 
-    test 414 v1: SAS
-    test 415 forward: (199920.0425385464, 579403.4227489063, nan, 53.19939233, 6.05939747, nan)
-    test 416 RDx_RDy: (199920.0425385464, 579403.4227489063)  FAILED, KNOWN, expected (199920.042533, 579403.423305)
-    test 417 b4Datum: (199920.042539, 579403.422749, NAN, 53.199392, 6.059397, NAN, Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-    test 418 toWGS84: (199920.042539, 579403.422749, NAN, 53.199385, 6.059361, NAN, Datum(name='NAD83', ellipsoid=Ellipsoids.GRS80, transform=Transforms.NAD83))
-    test 419 reverse: (199920.0425385464, 579403.4227489063, nan, 53.19939233, 6.0593974706, nan)
-    test 420 v1: (53.19939233, 6.05939747)
+    test 421 v1: id 30010000
+    test 422 forward: (108360.8790218852, 415757.2745752624, 258.0056662938, 51.728601274, 4.712120126, 301.7981)
+    test 423 RDx_RDy: (108360.8790218852, 415757.2745752624)  FAILED, KNOWN, expected (108360.8790, 415757.2745)
+    test 424 b4Datum: (108360.879022, 415757.274575, 258.005666, 51.728601, 4.71212, 301.7981, Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+    test 425 toWGS84: (108360.879022, 415757.274575, 258.005666, 51.728593, 4.712085, 0.0, Datum(name='NAD83', ellipsoid=Ellipsoids.GRS80, transform=Transforms.NAD83))
+    test 426 reverse: (108360.8790218852, 415757.2745752624, 258.0056662938, 51.7286012744, 4.7121201266, 301.7980999993)
+    test 427 v1: (51.72860127, 4.71212013, 301.7981)  FAILED, KNOWN, expected (51.728601274, 4.712120126, 301.7981)
 
-    test 421 ndigits: 8
+    test 428 v1: SAS
+    test 429 forward: (199920.0425385464, 579403.4227489063, nan, 53.19939233, 6.05939747, nan)
+    test 430 RDx_RDy: (199920.0425385464, 579403.4227489063)  FAILED, KNOWN, expected (199920.042533, 579403.423305)
+    test 431 b4Datum: (199920.042539, 579403.422749, NAN, 53.199392, 6.059397, NAN, Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+    test 432 toWGS84: (199920.042539, 579403.422749, NAN, 53.199385, 6.059361, NAN, Datum(name='NAD83', ellipsoid=Ellipsoids.GRS80, transform=Transforms.NAD83))
+    test 433 reverse: (199920.0425385464, 579403.4227489063, nan, 53.19939233, 6.0593974706, nan)
+    test 434 v1: (53.19939233, 6.05939747)
 
-    2 of 421 testRndTrips.py tests (0.5%) FAILED, ALL KNOWN (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1 -W  default) 884.328 ms
+    test 435 ndigits: 8
+
+    6 of 435 testRndTrips.py tests (1.4%) FAILED, ALL KNOWN (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1 -W  default) 830.829 ms
 running /Library/Framewo....ython -W default ~/PyRDNAP/test/testValidation.py
 
     testing testValidation.py 26.05.09
@@ -573,7 +587,7 @@ running /Library/Framewo....ython -W default ~/PyRDNAP/test/testValidation.py
     test 3 v2Validation:   using '.../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt'
     test 4 v2Validation:  header u'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1) 
 
-    test 5 v2Validation: RDNAP2018v2 11233 of 47754 tests FAILED, 7959 of 10000 lines -inside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1) 800.488 ms
+    test 5 v2Validation: RDNAP2018v2 11233 of 47754 tests FAILED, 7959 of 10000 lines -inside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1) 764.730 ms
     test 6 v2Validation: RDNAP2018v2 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
     test 7 v2Validation: RDNAP2018v2 max |diff| lat 1.1996334e-03, lon 8.2945486e-04, height 6.16e-03, RDx 8.2988e-03, RDy 1.5743e-02, NAPh 6.1636e-03
     test 8 v2Validation: RDNAP2018v2 max |diff| lat 0.00119963344, lon 0.00082945486, height 0.006164, RDx 0.00829877, RDy 0.01574313, NAPh 0.00616356
@@ -584,12 +598,12 @@ running /Library/Framewo....ython -W default ~/PyRDNAP/test/testValidation.py
     test 12 v1Validation:   using '.../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt'
     test 13 v1Validation:  header u'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1) 
 
-    test 14 v1Validation: RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 lines -inside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1) 6.800 sec
+    test 14 v1Validation: RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 lines -inside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1) 6.458 sec
     test 15 v1Validation: RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
     test 16 v1Validation: RDNAP2018v1 max |diff| lat 2.4685960e-09, lon 1.8726842e-09, height 5.00e-05, RDx 8.7847e-05, RDy 2.2281e-04, NAPh 4.9993e-05
     test 17 v1Validation: RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999
     test 18 v1Validation: 0 failed, 47754 total, 7959 inside
 
-    all 18 testValidation.py tests passed (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1 -W  default) 7.601 sec
+    all 18 testValidation.py tests passed (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1 -W  default) 7.224 sec
 
-test/run.py /Library/Framewo....ython -W default: all 439 tests OK (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1 -W default) 8.845 sec (49.634 tps)
+test/run.py /Library/Framewo....ython -W default: all 453 tests OK (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 2.7.18 64bit arm64_x86_64 macOS 26.4.1 -W default) 8.362 sec (54.173 tps)

@@ -19,6 +19,7 @@ __all__ = ()
 __version__ = '26.05.09'
 
 _DASH_ = '-'
+_prec  =  6
 _R     =  RDNAP2018v1(name='v1Test')
 _v     = '-v1'
 
@@ -36,6 +37,7 @@ def _run_validation(argv, R, in_out):
 def _usage(x):
     _t = '\t[ -v1 | -v2 ]'
     print_('usage: python3 -m', _pyrdnap_, ' [ -h | -help ]', ' [ -v | --version ]',)
+    print_(_t, '-precision <int>')
     print_(_t, '-forward  <lat> <lon>  [ <height> ]')
     print_(_t, '-reverse  <x> <y> <z>')
     print_(_t, '-inside  [ -all | -failed ] ', '<.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt>')
@@ -45,7 +47,7 @@ def _usage(x):
 
 
 argv = sys.argv[1:]
-while argv and argv[0].startswith(_DASH_):
+while argv and argv[0].startswith(_DASH_):  # MCCABE 13
     arg  = argv.pop(0)
     larg = len(arg)
     narg = len(argv)
@@ -62,16 +64,21 @@ while argv and argv[0].startswith(_DASH_):
         _run_validation(argv, _R, True)
     elif '-outside'.startswith(arg) and larg >= 2 and narg > 0:
         _run_validation(argv, _R, False)
+    elif '-precision'.startswith(arg) and larg > 1 and narg > 0:
+        try:
+            _prec = int(argv.pop(0))
+        except ValueError:
+            pass
     elif '-forward'.startswith(arg) and larg > 1 and narg > 1:
         r = _R.forward(*map(float, argv[:3]))
-        print_('forward:', r)
+        print_('forward:', r.toStr(prec=_prec))
         r = _R.reverse(r.RDx, r.RDy, r.NAPh)
-        print_('reverse:', r)
+        print_('reverse:', r.toStr(prec=_prec))
     elif '-reverse'.startswith(arg) and larg > 1 and narg > 1:
         r = _R.reverse(*map(float, argv[:3]))
-        print_('reverse:', r)
+        print_('reverse:', r.toStr(prec=_prec))
         r = _R.forward(r.lat, r.lon, r.height)
-        print_('forward:', r)
+        print_('forward:', r.toStr(prec=_prec))
     elif '-unzip'.startswith(arg) and larg > 3:
         from pyrdnap.v_grids import _v_gridz_unzip
         _f = bool(argv and argv[0] == '-force')

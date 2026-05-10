@@ -8,6 +8,7 @@ pyrdnap._SPACE_	pyrdnap-module.html#_SPACE_
 pyrdnap.__main__	pyrdnap.__main__-module.html
 pyrdnap.__main__._usage	pyrdnap.__main__-module.html#_usage
 pyrdnap.__main__._run_validation	pyrdnap.__main__-module.html#_run_validation
+pyrdnap.__main__._prec	pyrdnap.__main__-module.html#_prec
 pyrdnap.__main__._v	pyrdnap.__main__-module.html#_v
 pyrdnap.__main__.validation3	pyrdnap.v_self-module.html#validation3
 pyrdnap.__main__._R	pyrdnap.__main__-module.html#_R

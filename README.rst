@@ -14,10 +14,14 @@ a ``reverse`` method to convert RDx, RDy and NAPh to ``geodetic`` lat-, longitud
 
 For further details see the documentation_.
 
-**Note**, ``PyRDNAP``, ``pyrdnap`` and ``RDNAP2018v1`` have **not been formally validated** and are
-**not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.  Class ``RDNAP2018v1`` does meet
-the ``RDNAPTRANS(tm)2018_v220627`` self-validation requirements for all tests within the ``RD``
-region.  ``RDNAP2018v2`` does not and is not required to.
+
+Note
+====
+``PyRDNAP``, ``pyrdnap`` and ``RDNAP2018v1`` have **not been formally validated** and are
+**not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.
+
+However, transformer class ``RDNAP2018v1`` does meet the ``RDNAPTRANS(tm)2018_v220627`` self-validation
+requirements for all tests within the ``RD`` region.  ``RDNAP2018v2`` does not and is not required to.
 
 
 Installation
@@ -48,7 +52,7 @@ Tests
 =====
 
 The tests ran with Python 3.14.4, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_
-26.5.7 and on macOS 26.4.1 Tahoe in 64-bit.  The results of those tests are included in the
+26.5.9 and on macOS 26.4.1 Tahoe in 64-bit.  The results of those tests are included in the
 distribution files.
 
 Python 3.14.4 runs on Apple M4 Si (``arm64``), *natively*.  Python 2.7.18 runs on Intel (``x86_64``)

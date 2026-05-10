@@ -12,7 +12,7 @@ from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.05.06'
+__version__ = '26.05.09'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -42,9 +42,17 @@ class Tests(TestsBase):
 
     def testEPSG(self, R):
         # <https://EPSG.io/9809-method> Example
-        self.test(R.name, 'EPSG:9809', 'EPSG:9809', nl=1)
+        self.test(R.name, 'EPSG:9809', 'EPSG:9809')
         self.testRndTrip(R, 53.0, 6.0,
                             RDx_RDy='(196105.283, 557057.739)')
+        # <https://geoforum.nl/t/nieuwe-epsg-codes-voor-nederland/11443>
+        self.test(R.name, 'EPSGv12.054', 'EPSGv12.054')
+        self.testRndTrip(R, 53.148288321,7.180899528,
+                            RDx_RDy='(275000.000, 575000.000)')
+        # Z001_ETRS89andRDNAP.txt first point
+        self.test(R.name, 'id 30010000', 'id 30010000')
+        self.testRndTrip(R, 51.728601274, 4.712120126, 301.7981,
+                            RDx_RDy='(108360.8790, 415757.2745)')  # 258.0057
 
     def testRandom(self, R, **nl):
         S, W, N, E = R.region
@@ -80,7 +88,7 @@ class Tests(TestsBase):
 
     def testSAS(self, R):
         # <https://GitHub.com/FVellinga/gm_rdnaptrans2018/blob/main/gm_rdnaptrans2018.sas>
-        self.test(R.name, 'SAS', 'SAS', nl=1)
+        self.test(R.name, 'SAS', 'SAS')
         self.testRndTrip(R, 53.19939233, 6.05939747,
                             RDx_RDy='(199920.042533, 579403.423305)')
 
