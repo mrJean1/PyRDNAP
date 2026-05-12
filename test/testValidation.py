@@ -12,7 +12,7 @@ from bases import _ELLIPSIS_, _getenv, NN, PyRDNAP_dir, TestsBase
 from pyrdnap import RDNAP2018v1, RDNAP2018v2, validation3
 
 __all__ = ()
-__version__ = '26.05.09'
+__version__ = '26.05.11'
 
 _RDNAP_dir   =  PyRDNAP_dir.replace('Py', NN)  # or _ELLIPSIS_
 _v1_max_diff = 'RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999'
@@ -74,7 +74,7 @@ if __name__ == '__main__':
 # testing testValidation.py 26.05.09
 # test 1 v2Validation: validation3
 # test 2 v2Validation: testing RDNAP2018v2(name='v2Validation', variant=2, forwardDatum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-# test 3 v2Validation:   using '.../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt'
+# test 3 v2Validation:   using '.../RDNAPTRANS2018_v220627/Test_set_for_self_validation/Z001_ETRS89andRDNAP.txt'
 # test 4 v2Validation:  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
 # test 5 v2Validation: RDNAP2018v2 11233 of 47754 tests FAILED, 7959 of 10000 lines -inside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 3.14.4 64bit arm64 macOS 26.4.1) 290.485 ms
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 #
 # test 10 v1Validation: validation3
 # test 11 v1Validation: testing RDNAP2018v1(name='v1Validation', variant=1, forwardDatum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-# test 12 v1Validation:   using '.../RDNAPTRANS2018_v220627/Test-set-for-self-validation/Z001_ETRS89andRDNAP.txt'
+# test 12 v1Validation:   using '.../RDNAPTRANS2018_v220627/Test_set_for_self_validation/Z001_ETRS89andRDNAP.txt'
 # test 13 v1Validation:  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
 # test 14 v1Validation: RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 lines -inside (pyrdnap 26.5.9 pygeodesy 26.5.9 Python 3.14.4 64bit arm64 macOS 26.4.1) 403.964 ms

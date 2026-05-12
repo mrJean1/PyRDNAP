@@ -4,15 +4,19 @@
 u'''(INTERNAL) C{RD NAP 2018} v#grid utilities.
 '''
 from pyrdnap import pyrdnap_abspath  # pyrdnap 1st
-from pyrdnap.__pygeodesy import _0_0s, _1_0, import_module
+from pyrdnap.__pygeodesy import _0_0s, import_module
 from pygeodesy import print_
 
 from array import array
 import os.path as os_path
 import sys
+try:
+    from zipfile import BadZipFile, ZipFile
+except ImportError:  # Py3.3-
+    from zipfile import BadZipfile as BadZipFile, ZipFile  # PYCHOK re-impors
 
 __all__ = ()
-__version__ = '26.05.08'
+__version__ = '26.05.11'
 
 _R_C = 481, 301  # shape: rows, cols
 _RxC = 144781    # total
@@ -21,35 +25,35 @@ _RxC = 144781    # total
 class _V_grid(tuple):
     '''(INTERNAL) V_grid, an R-tuple of C-arrays of C{floats}.
     '''
-    _scale =  None
 
     def __call__(self, i, j):
         # R, C = _R_C
         # assert isinstance(i, int) and 0 <= i < R
         # assert isinstance(j, int) and 0 <= j < C
-        return self[i][j] * self._scale
+        return self[i][j]
 
-    def _assert(self, scale, ndigits, *len_min_0s_max):
-        self._scale = scale
-        z = self._assert0s(*_R_C)
-        n = sum(map(len, self))  # _RxC
-        t = (n, self._round(min, ndigits),
-             z, self._round(max, ndigits))
-        _v_assert(t, len_min_0s_max)
+    def _assert(self, _0s=0, _len=_RxC):
+        z, Z = self._assert0s(*_R_C)
+        _v_assert(z, _0s)
+        _v_assert(Z,  197 if _0s else 0)
+        _v_assert(sum(map(len, self)), _len)
         return self
 
     def _assert0s(self, R, C):
         _v_assert(len(self), R)
-        z = 0  # count zeros
+        z = Z = 0  # count zeros and _ZEROSWs
         try:
             for i, r in enumerate(self):
                 _v_assert(type(r), array)
                 _v_assert(len(r), C)
-                z += C if r is _ZEROW else \
-                     sum((0 if f else 1) for f in r)
+                if r is _ZEROW:
+                    z += C
+                    Z += 1
+                else:
+                    z += sum((0 if f else 1) for f in r)
         except AssertionError as x:
             raise AssertionError('row %s: %s' % (i, x))
-        return z
+        return z, Z
 
     def _round(self, _op, ndigits):
         # round(_op(f for a in self
@@ -67,63 +71,18 @@ def _f_array(floats):  # _NAP_h, _ZEROW
 _ZEROW = _f_array(_0_0s(301))  # PYCHOK singleton
 
 
-def _run(s, e, floats):  # run of non-zeros
-    _v_assert(len(floats), e - s)
-    return s, e, floats
-
-
 def _v_assert(value, valid=_R_C):
     if value != valid:
         raise AssertionError('%r not %r' % (value, valid))
     return True
 
 
-def _v1corr_grid(runs, ndigits, cmin, cmax, c0s=0, flen=_RxC, scale=1e-5):
-    '''(INTERNAL) Build a variant 1 C{lat_/lon_corr} _V_grid from C{s_e_runs},
-       each a run of non-zero floats preceeded by a start and end index.
-    '''
-    v = _V_grid(_v1corr_rows(runs, *_R_C))
-    return v._assert(scale, ndigits, flen, cmin, c0s, cmax)
-
-
-def _v1corr_rows(runs, R, C):
-    '''(INTERNAL) Yield R d-/f-arrays, each of C floats, see C{v1grid.__init__.py}.
-    '''
-    z = _ZEROW  # f-array of C zeros
-    i =  runs[0][0]  # index of 1st non-zero
-    y, s = divmod(i, C)
-    for _ in range(y):  # 28 leading ZEROWs
-        yield z
-    r = list(_0_0s(s))  # remainder, 170 zeros
-    for (s, e, t) in runs:
-        r.extend(_0_0s(s - i))
-        r.extend(t)  # len(r) < 600
-        while len(r) >= C:
-            d = _d_array(r[:C])
-            r[:] = r[C:]
-            yield d if any(d) else z  # just in case
-            y += 1
-        i = e
-    if r:  # remaining, 216/219 non-zeros
-        # assert 0 < len(r) < C
-        r.extend(_0_0s(C - len(r)))
-        yield _d_array(r)
-        # r[:] = ()
-        y += 1
-    for _ in range(y, R):  # 169 trailing ZEROWs
-        yield z
-
-
-def _v2corr_grid(d_arrays, ndigits, cmin, cmax, c0s=0, flen=_RxC, scale=0):
-    '''(INTERNAL) A variant 2 C{lat_/lon_corr} _V_grid.
-    '''
-    return _V_grid(d_arrays)._assert(scale, ndigits, flen, cmin, c0s, cmax)
-
-
-def _v_h_grid(f_arrays, hmin, hmax, flen=_RxC, scale=_1_0):
-    '''(INTERNAL) An C{NAP_h} _V_grid.
-    '''
-    return _V_grid(f_arrays)._assert(scale, 4, flen, hmin, 0, hmax)
+def _v_grid_txt(v, name, col, _array, *_0s_ZEROWs):
+    '''(INTERNAL) Return a C{_V_grid} for column C{col} of
+       compressed, variant C{v} grid file C{<name>2018.txt.zip}.
+       '''
+    v = _V_grid(_v_txt_unzip(v, name, col, _array))
+    return v._assert(*_0s_ZEROWs)
 
 
 def _v_gridz3(v):  # PHYCOK no cover
@@ -168,10 +127,6 @@ def _v_gridz_import(v):  # PHYCOK no cover
 def _v_gridz_unzip(v, force=False, verbose=False):  # PHYCOK no cover
     '''(INTERNAL) Unzip a C{v#gridz.zip} file into the "pyrdnap" directory
     '''
-    try:
-        from zipfile import BadZipFile, ZipFile
-    except ImportError:  # Py3.3-
-        from zipfile import BadZipfile as BadZipFile, ZipFile
 
     p, d, m = _v_gridz3(v)
     t = os_path.join(d, m)
@@ -186,6 +141,41 @@ def _v_gridz_unzip(v, force=False, verbose=False):  # PHYCOK no cover
     if verbose:
         print_('unzipped', repr(p))
         print_('    into', repr(t))
+
+
+def _v_txt_unzip(v, name, col, _array):
+    '''(INTERNAL) Unzip an original, zipped C{.txt} grid file,
+       extract column C{col} only and yield all as C-arrays.
+    '''
+    def _a(r):
+        a = _array(map(float, r[:C]))
+        r[:] = ()
+        return a if any(a) else _ZEROW
+
+    m = 'v%sgrid' % (v,)
+    n =  name + '2018.txt'
+    d =  pyrdnap_abspath
+    p =  os_path.join(d, m, n)
+    try:
+        R, C = _R_C
+        with ZipFile(p + '.zip') as z:
+            with z.open(n) as u:
+                r, t = [], u.readline()  # ignore
+                _r = r.append
+                while t:
+                    t = u.readline().strip().split()
+                    if t:
+                        _r(t[col])
+                        if len(r) == C:
+                            yield _a(r)
+                            R -= 1
+                if r:
+                    yield _a(r)
+                    R -= 1
+
+        _v_assert(R, 0)
+    except BadZipFile as x:
+        raise ValueError(str(x), cause=x)
 
 # **) MIT License
 #

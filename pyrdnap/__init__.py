@@ -9,8 +9,8 @@ quasi-geoid-height}.
 
 See module L{pyrdnap.rdnap2018} for further information and usage, implementation details.
 
-See modules L{pyrdnap.v1grid} and L{pyrdnap.v2grid} for the I{pythonic} grid files for variant 1
-respectively 2 included in L{pyrdnap}.
+See modules L{pyrdnap.v1grid} and L{pyrdnap.v2grid} for the original C{RDNAPTRANS2018_v220627},
+unmodified C{.txt} grid files for each variant, but compressed as C{.txt.zip}.
 
 See function L{pyrdnap.validation3} for self-validation testing details.
 
@@ -51,7 +51,7 @@ from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
 __all__ = ('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self
-__version__ = '26.05.09'
+__version__ = '26.05.11'
 
 
 def _versions():  # in .__main__, .test/bases

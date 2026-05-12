@@ -6,7 +6,7 @@ C{.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt} obtainable from U{NSGI
 <https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
 after registration.
 
-For each test line, 3 lines are produced: the 1st showing the point C{id}, the original
+For each test point, 3 lines are produced: the 1st showing the point C{id}, the original
 (ETRS89) C{lat}, C{lon} and C{height} and the expected C{RDx}, C{RDy} and C{NAPh} values.
 
 The 2nd line shows the C{lat}, C{lon} and C{height} and C{RDx}, C{RDy} and {NAPh} results
@@ -16,15 +16,15 @@ respectively L{forward<pyrdnap.RDNAP2018v1.forward>} method.
 The 3rd line contains the (absolute value) of the differences between the results on
 the 2nd line and the corresponding, original value on the 1st line.
 
-The final 2 lines of the output are the C{maximum} of all (absolute value) differences
-followed by a line with the formal C{RDNAP 2018} requirements, C{0.000000010 degrees}
-or C{0.0010 meter} for each result.
+The final lines of the output are the C{maximum} of all (absolute value) differences in
+2 formats and a line with the C{RDNAP 2018} requirements, C{0.000000010 degrees} or
+C{0.0010 meter} for each result.
 
-@note: A test C{FAILED} if any C{reverse} or C{forward} result I{exceeds} the C{RD NAP
-       2018} requirement for that result.
+A test C{FAILED} if any C{reverse} or C{forward} result I{exceeds} the C{RD NAP 2018}
+requirement for that result.
 
-@note: For tests with C{NAPh} marked C{"*"}, only the C{reverse} C{lat} and C{lon}
-       and C{forward} C{RDx} and C{RDy} results are taken into account.
+For points with C{NAPh} marked C{"*"}, only the C{reverse} C{lat} and C{lon} and
+C{forward} C{RDx} and C{RDy} results are taken into account.
 
 @see: Module L{pyrdnap<pyrdnap.__main__>} for examples to invoke L{validation3}.
 '''
@@ -37,7 +37,7 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.05.09'
+__version__ = '26.05.11'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[:3]
 #        (lat   lon   height RDx   RDy   NAPh)
@@ -66,8 +66,8 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                          B{C{in_out}} tests or only the failing ones.
 
        @return: 3-Tuple C{(failed, total, in_outside)} with the number of C{FAILED} tests,
-                the C{total} number of tests and the number of test lines B{C{in_out}} the
-                C{RD} region.
+                the C{total} number of tests and the number of points B{C{in_out}} the C{RD}
+                region.
     '''
     from pyrdnap import RDNAP2018v1, RDNAP2018v2, RDNAPError, _versions
 
@@ -125,7 +125,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
             t = '-inside' if in_out else '-outside'
             if _printest:
                 t += ' -all' if all_ else ' -failed'
-            t = '%s of %s lines %s' % (nin_out, (ln - 1), t)
+            t = '%s of %s points %s' % (nin_out, (ln - 1), t)
             t = '%s (%s) %s' % (t, _versions(), _secs2str(s))
             if nfailed:
                 _print(R_, nfailed, 'of', ntotal, 'tests', 'FAILED,', t)

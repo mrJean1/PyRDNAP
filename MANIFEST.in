@@ -2,7 +2,9 @@ graft docs
 include docs.html
 graft pyrdnap/v1grid
 graft pyrdnap/v2grid
-include requiremnts.txt
+include pyrdnap/v1grid/*.txt.zip
+include pyrdnap/v2grid/*.txt.zip
+include requirements.txt
 graft test
 graft testcoverage
 include testcoverage.pdf

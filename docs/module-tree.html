@@ -81,51 +81,18 @@
         respectively <code>variant 2</code> of the specification <a 
         href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
         target="_top">RDNAPTRANS(tm)2018</a>.</em>    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary">Variant 1 grid files, but <b>only</b> columns 
-        <code>NAP_h_...</code>, <code>lat_corr_</code> and 
-        <code>lon_corr_</code> of the original 
-        <code>RDNAPTRANS2018_v220627/...1/nlgeo2018.txt</code> and 
-        <code>...1/rdcorr2018.txt</code> grid files and encoded into Python
-        as 3 row-order matrices, each a 481-tuple of 301-arrays of floats.</em>
-    <ul>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.nlgeo2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v1grid.nlgeo2018_txt_NAP_h</a></strong>: <em class="summary">Variant 1 grid file <code>...1/nlgeo2018.txt</code>, <b>only</b> 
-        the 3rd column <code>NAP_quasi_geoid_height_...(m)</code> and 
-        encoded in Python as a 481-tuple of 301-arrays of floats.</em>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lat_corr</a></strong>: <em class="summary">Variant 1 grid file <code>...1/rdcorr2018.txt</code>, <b>only</b> 
-        the 3rd column <code>lat_corr_(deg)</code> with 
-        <code>+0.00000*</code> shrunk to <code>0.*</code>, 
-        <code>-0.00000*</code> to <code>-.*</code> and encoded in Python as
-        an n-tuple of runs of non-zeros.</em>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v1grid.rdcorr2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v1grid.rdcorr2018_txt_lon_corr</a></strong>: <em class="summary">Variant 1 grid file <code>...1/rdcorr2018.txt</code>, <b>only</b> 
-        the 4th column <code>lon_corr_(deg)</code> with 
-        <code>+0.00000*</code> shrunk to <code>0.*</code>, 
-        <code>-0.00000*</code> to <code>-.*</code> and encoded in Python as
-        an n-tuple of runs of non-zeros.</em>    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary">Variant 2 grid files, but <b>only</b> columns 
-        <code>NAP_h_...</code>, <code>lat_corr_</code> and 
-        <code>lon_corr_</code> of the original 
-        <code>RDNAPTRANS2018_v220627/...2/naptrans2018.txt</code> and 
-        <code>...2/rdtrans2018.txt</code> grid files and encoded into 
-        Python as 3 row-order matrices, each a 481-tuple of 301-arrays of 
-        floats.</em>
-    <ul>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.naptrans2018_txt_NAP_h-module.html" onclick="show_private();">pyrdnap.v2grid.naptrans2018_txt_NAP_h</a></strong>: <em class="summary">Variant 2 grid file <code>...2/naptrans2018.txt</code>, <b>only</b>
-        the 3rd column <code>NAP_quasi_geoid_height_...(m)</code> and 
-        encoded in Python as a 481-tuple of 301-arrays of floats.</em>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lat_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lat_corr</a></strong>: <em class="summary">Variant 2 grid file <code>...2/rdtrans2018.txt</code>, <b>only</b> 
-        the 3rd column <code>lon_corr_(deg)</code> only with 
-        <code>0.00*</code> shrunk to <code>0.*</code>, <code>-0.00*</code> 
-        to <code>-.*</code> and encoded in Python as a 481-tuple of 
-        301-arrays of floats.</em>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v2grid.rdtrans2018_txt_lon_corr-module.html" onclick="show_private();">pyrdnap.v2grid.rdtrans2018_txt_lon_corr</a></strong>: <em class="summary">Variant 2 grid file <code>...2/rdtrans2018.txt</code>, <b>only</b> 
-        the 4th column <code>lon_corr_(deg)</code> only with 
-        <code>0.000*</code> shrunk to <code>0.*</code>, 
-        <code>-0.000*</code> to <code>-.*</code> and encoded in Python as a
-        481-tuple of 301-arrays of floats.</em>    </li>
-    </ul>
-    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary">Extract from the original, compressed, variant 1 grid files 
+        <code>nlgeo2018.txt.zip</code> and <code>rdcorr2018.txt.zip</code> 
+        the <code>NAP_...</code>, <code>lat_corr_</code> and 
+        <code>lon_corr_</code> columns <b>only</b> and encode each in 
+        Python as a row-order matrix, a 481-tuple of 301-arrays of single- 
+        or double precision floats.</em>    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary">Extract from the original, compressed, variant 2 grid files 
+        <code>naptrans2018.txt.zip</code> and 
+        <code>rdtrans2018.txt.zip</code> the <code>NAP_...</code>, 
+        <code>lat_corr_</code> and <code>lon_corr_</code> columns 
+        <b>only</b> and encode each in Python as a row-order matrix, a 
+        481-tuple of 301-arrays of single- or double precision floats.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_grids-module.html" onclick="show_private();">pyrdnap.v_grids</a></strong>: <em class="summary">(INTERNAL) <code>RD NAP 2018</code> v#grid utilities.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_self-module.html" onclick="show_private();">pyrdnap.v_self</a></strong>: <em class="summary">Function <a href="pyrdnap.v_self-module.html#validation3" 
         class="link">validation3</a> to run the <code>RD NAP 2018</code> 
@@ -168,7 +135,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat May  9 18:19:21 2026
+    Generated by Epydoc 3.0.1 on Mon May 11 17:33:33 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -7,7 +7,7 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.05.06'
+__version__ = '26.05.11'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
 
@@ -52,7 +52,7 @@ setup(name=_PACKAGE,
 
       long_description=_long_description(),
 
-      package_data={_PACKAGE: ['LICENSE']},
+      package_data={_PACKAGE: ['v1grid/*.txt.zip', 'v2grid/*.txt.zip', 'LICENSE']},
 
 #     test_suite='test.TestSuite',
 
