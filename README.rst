@@ -98,8 +98,6 @@ DEALINGS IN THE SOFTWARE.
   :target: https://PyPI.org/project/pyrdnap
 .. image:: https://Img.Shields.io/appveyor/ci/mrJean1/PyRDNAP.svg?branch=master&label=AppVeyor
   :target: https://CI.AppVeyor.com/project/mrJean1/PyRDNAP/branch/master
-.. image:: https://Img.Shields.io/cirrus/github/mrJean1/PyRDNAP?branch=master&label=Cirrus
-  :target: https://Cirrus-CI.com/github/mrJean1/pyrdnap
 .. image:: https://Img.Shields.io/badge/coverage-91%25-brightgreen
   :target: https://GitHub.com/mrJean1/PyRDNAP/blob/master/testcoverage.pdf
 .. image:: https://Img.Shields.io/pypi/wheel/pyrdnap.svg
