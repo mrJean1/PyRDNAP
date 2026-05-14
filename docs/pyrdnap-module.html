@@ -60,8 +60,8 @@
 <h1 class="epydoc">Package pyrdnap</h1><p class="nomargin-top"></p>
 <p>A pure Python implementation of 2018 version of the Netherlands' <a 
   href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
-  target="_top">RD NAP</a> specification to convert between geodetic GRS80 
-  (ETRS89) lat-, longitudes and height and local 
+  target="_top">RD NAP</a> specification to convert between GRS80 (ETRS89) 
+  geodetic lat-, longitudes and height and local 
   <i><b>R</b>ijks<b>D</b>riehoeksmeeting (<b>RD</b>)</i> coordinates and 
   <i><b>N</b>ormaal <b>A</b>msterdams <b>P</b>eil (<b>NAP</b>) 
   quasi-geoid-height</i>.</p>
@@ -76,12 +76,11 @@
   <p>See function <a href="pyrdnap.v_self-module.html#validation3" 
   class="link">pyrdnap.validation3</a> for self-validation testing 
   details.</p>
-  <p>See file 
-  <code>testresults/Z001_ETRSandRDNAP-self-validation-v1-results.txt</code>
-  for the self-validation results of the <a 
+  <p>See file <code>testresults/Z001_ETRSandRDNAP_v1_results.txt</code> for
+  the self-validation results of the <a 
   href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
   class="link">RDNAP2018v1</a> transformer, especially the summary in the 
-  final 4 lines.</p>
+  last 4 lines.</p>
 
 <hr />
 <div class="fields">      <p><strong>Note:</strong>
@@ -90,7 +89,7 @@
         trademark name <code>RDNAPTRANS(tm)</code>.
       </p>
       <p><strong>Version:</strong>
-        26.05.11
+        26.05.14
       </p>
 </div><!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -103,8 +102,8 @@
   <tr><td class="summary">
   <ul class="nomargin">
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.__main__-module.html">pyrdnap.__main__</a></strong>: <em class="summary">Run a <code>RD NAP 2018 forward</code> or <code>reverse</code> 
-        conversion round-trip examples or run the entire <code>RD NAP 
-        2018</code> self-validation test suite in various ways.</em>    </li>
+        conversion examples or run the <code>NSGI</code> or <code>RD NAP 
+        2018</code> validation test set in &quot;round-trip&quot; fashion.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.__pygeodesy-module.html" onclick="show_private();">pyrdnap.__pygeodesy</a></strong>: <em class="summary">(INTERNAL) <code>pyrdnap</code> access to some private 
         <code>pygeodesy</code> attributes.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.rd0-module.html" onclick="show_private();">pyrdnap.rd0</a></strong>: <em class="summary">(INTERNAL) <code>RD</code> and <code>RD0</code> constants and 
@@ -220,8 +219,9 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pyrdnap.rdnap2018.RDNAPError-class.html" class="summary-name">RDNAPError</a><br />
-      Error raised for <code>RD</code> and <code>NAP</code> issues.
+        <a href="pyrdnap.v_grids.RDNAPError-class.html" class="summary-name">RDNAPError</a><br />
+      Error raised for <code>RD</code>, <code>NAP</code> and unzip 
+        issues.
     </td>
   </tr>
 <tr>
@@ -304,6 +304,21 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap-module.html#pyrdnap_abspath" class="summary-name">pyrdnap_abspath</a> = <code title="'..../PyRDNAP/pyrdnap'"><code class="variable-quote">'</code><code class="variable-string">..../PyRDNA</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap-module.html#Datums" class="summary-name">Datums</a> = <code title="Datums.Sphere: Datum(name='Sphere', ellipsoid=Ellipsoids.Sphere, trans\
+form=Transforms.WGS84),
+Datums.NAD83: Datum(name='NAD83', ellipsoid=Ellipsoids.GRS80, transfor\
+m=Transforms.NAD83),
+Datums.OSGB36: Datum(name='OSGB36', ellipsoid=Ellipsoids.Airy1830, tra\
+nsform=Transforms.OSGB36),
+Datums.WGS84: Datum(name='WGS84', ellipsoid=Ellipsoids.WGS84, transfor\
+m=Transforms.WGS84),
+...">Datums.Sphere: Datum(name='Sphere', ellipsoid=Ellipso<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 </table>
@@ -394,6 +409,32 @@
   </dl>
 </td></tr></table>
 </div>
+<a name="Datums"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">Datums</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+Datums.Sphere: Datum(name='Sphere', ellipsoid=Ellipsoids.Sphere, trans<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+form=Transforms.WGS84),
+Datums.NAD83: Datum(name='NAD83', ellipsoid=Ellipsoids.GRS80, transfor<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+m=Transforms.NAD83),
+Datums.OSGB36: Datum(name='OSGB36', ellipsoid=Ellipsoids.Airy1830, tra<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+nsform=Transforms.OSGB36),
+Datums.WGS84: Datum(name='WGS84', ellipsoid=Ellipsoids.WGS84, transfor<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+m=Transforms.WGS84),
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
@@ -426,7 +467,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon May 11 17:33:33 2026
+    Generated by Epydoc 3.0.1 on Thu May 14 16:01:35 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

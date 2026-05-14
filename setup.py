@@ -7,7 +7,7 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.05.11'
+__version__ = '26.05.13'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
 
@@ -33,7 +33,7 @@ def _version():
                 return '.'.join(map(str, map(int, v.split('.')))) + c
 
 
-_KeyWords = ('NAP', 'Normal-Amsterdams-Peil',
+_KeyWords = ('NAP', 'Normaal-Amsterdams-Peil',
              'RD', 'RijksDriehoeksmeting',)
 
 setup(name=_PACKAGE,

@@ -4,22 +4,25 @@
 u'''(INTERNAL) C{RD NAP 2018} v#grid utilities.
 '''
 from pyrdnap import pyrdnap_abspath  # pyrdnap 1st
-from pyrdnap.__pygeodesy import _0_0s, import_module
+from pyrdnap.__pygeodesy import _0_0s, import_module, _ValueError
 from pygeodesy import print_
 
 from array import array
 import os.path as os_path
 import sys
-try:
-    from zipfile import BadZipFile, ZipFile
-except ImportError:  # Py3.3-
-    from zipfile import BadZipfile as BadZipFile, ZipFile  # PYCHOK re-impors
+from zipfile import ZipFile
 
 __all__ = ()
-__version__ = '26.05.11'
+__version__ = '26.05.13'
 
 _R_C = 481, 301  # shape: rows, cols
 _RxC = 144781    # total
+
+
+class RDNAPError(_ValueError):  # exported by rdnap2018
+    '''Error raised for C{RD}, C{NAP} and unzip issues.
+    '''
+    pass
 
 
 class _V_grid(tuple):
@@ -32,23 +35,24 @@ class _V_grid(tuple):
         # assert isinstance(j, int) and 0 <= j < C
         return self[i][j]
 
-    def _assert(self, _0s=0, _len=_RxC):
-        z, Z = self._assert0s(*_R_C)
+    def _assert(self, _0s=0):
+        z, Z = self._assert2(*_R_C)
         _v_assert(z, _0s)
         _v_assert(Z,  197 if _0s else 0)
-        _v_assert(sum(map(len, self)), _len)
+        _v_assert(sum(map(len, self)), _RxC)
         return self
 
-    def _assert0s(self, R, C):
+    def _assert2(self, R, C):
         _v_assert(len(self), R)
+        _v_assert(len(_ZEROW), C)
         z = Z = 0  # count zeros and _ZEROSWs
         try:
             for i, r in enumerate(self):
                 _v_assert(type(r), array)
                 _v_assert(len(r), C)
                 if r is _ZEROW:
-                    z += C
                     Z += 1
+                    z += C
                 else:
                     z += sum((0 if f else 1) for f in r)
         except AssertionError as x:
@@ -71,27 +75,30 @@ def _f_array(floats):  # _NAP_h, _ZEROW
 _ZEROW = _f_array(_0_0s(301))  # PYCHOK singleton
 
 
-def _v_assert(value, valid=_R_C):
+def _v_grid(v):
+    return 'v%sgrid' % (v,)
+
+
+def _v_assert(value, valid=_R_C):  # in .rd0
     if value != valid:
         raise AssertionError('%r not %r' % (value, valid))
     return True
 
 
-def _v_grid_txt(v, name, col, _array, *_0s_ZEROWs):
-    '''(INTERNAL) Return a C{_V_grid} for column C{col} of
+def _v_grid_txt(v, name, col2or3, _array, **_0s):
+    '''(INTERNAL) Return a C{_V_grid} for column C{col2or3} of
        compressed, variant C{v} grid file C{<name>2018.txt.zip}.
        '''
-    v = _V_grid(_v_txt_unzip(v, name, col, _array))
-    return v._assert(*_0s_ZEROWs)
+    v = _V_grid(_v_txt_unzip(v, name, col2or3, _array))
+    return v._assert(**_0s)
 
 
 def _v_gridz3(v):  # PHYCOK no cover
     '''(INTERNAL) Return the fully-qualified path, directory and module.
     '''
-    m = 'v%sgrid' % (v,)
-    z =  m + 'z.zip'
+    m = _v_grid(v)
     d =  pyrdnap_abspath
-    p =  os_path.join(d, z)
+    p =  os_path.join(d, m + 'z.zip')
     return p, d, m
 
 
@@ -127,55 +134,54 @@ def _v_gridz_import(v):  # PHYCOK no cover
 def _v_gridz_unzip(v, force=False, verbose=False):  # PHYCOK no cover
     '''(INTERNAL) Unzip a C{v#gridz.zip} file into the "pyrdnap" directory
     '''
-
     p, d, m = _v_gridz3(v)
     t = os_path.join(d, m)
     if (not force) and os_path.exists(t):
-        t = 'dir %r exists: %r' % (m, t)
-        raise OSError(t)
+        t = '%r exists: %r' % (m, t)
+        raise RDNAPError(t)
     try:
-        with ZipFile(p, 'r') as z:
+        with ZipFile(p) as z:
             z.extractall(d)
-    except BadZipFile as x:
-        raise ValueError(str(x), cause=x)
+    except Exception as x:
+        raise RDNAPError(m, cause=x)
     if verbose:
         print_('unzipped', repr(p))
         print_('    into', repr(t))
 
 
-def _v_txt_unzip(v, name, col, _array):
-    '''(INTERNAL) Unzip an original, zipped C{.txt} grid file,
-       extract column C{col} only and yield all as C-arrays.
+def _v_txt_unzip(v, name, col2or3, _array):
+    '''(INTERNAL) Open grid file C{<name>2018.txt} or unzip
+       C{<name>2018.txt.zip} of variant C{v}, extract column
+       C{col2or3} and yield 481 rows, each a 301-C{_array}
+       of floats or _ZEROW if all zeros.
     '''
-    def _a(r):
-        a = _array(map(float, r[:C]))
-        r[:] = ()
-        return a if any(a) else _ZEROW
-
-    m = 'v%sgrid' % (v,)
-    n =  name + '2018.txt'
-    d =  pyrdnap_abspath
-    p =  os_path.join(d, m, n)
+    r = []
     try:
-        R, C = _R_C
-        with ZipFile(p + '.zip') as z:
-            with z.open(n) as u:
-                r, t = [], u.readline()  # ignore
-                _r = r.append
-                while t:
-                    t = u.readline().strip().split()
+        n = name + '2018.txt'
+        p = pyrdnap_abspath
+        p = os_path.join(p, _v_grid(v), n)
+        with (open(p, 'rb') if os_path.exists(p) else
+              ZipFile(p + '.zip').open(n)) as f:
+            _, C = _R_C
+            _r = r.append
+            t  = f.readline()  # ignore 1st line
+            while t:
+                for _ in range(C * 2):
+                    t = f.readline()
                     if t:
-                        _r(t[col])
-                        if len(r) == C:
-                            yield _a(r)
-                            R -= 1
-                if r:
-                    yield _a(r)
-                    R -= 1
+                        _r(t.strip().split()[col2or3])
+                    else:
+                        break
+                while len(r) >= C:
+                    y = _array(map(float, r[:C]))
+                    yield y if any(y) else _ZEROW
+                    r[:] = r[C:]
+    except Exception as x:
+        raise RDNAPError(n, cause=x)
+    _v_assert(len(r), 0)
 
-        _v_assert(R, 0)
-    except BadZipFile as x:
-        raise ValueError(str(x), cause=x)
+
+# __all__ += _ALL_OTHER(RDNAPError)  # in .rdnap2018
 
 # **) MIT License
 #

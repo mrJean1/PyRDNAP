@@ -3,7 +3,7 @@
 
 u'''A pure Python implementation of 2018 version of the Netherlands' U{RD NAP<https://www.NSGI.NL/
 coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
-specification to convert between geodetic GRS80 (ETRS89) lat-, longitudes and height and local
+specification to convert between GRS80 (ETRS89) geodetic lat-, longitudes and height and local
 I{B{R}ijksB{D}riehoeksmeeting (B{RD})} coordinates and I{B{N}ormaal B{A}msterdams B{P}eil (B{NAP})
 quasi-geoid-height}.
 
@@ -14,8 +14,8 @@ unmodified C{.txt} grid files for each variant, but compressed as C{.txt.zip}.
 
 See function L{pyrdnap.validation3} for self-validation testing details.
 
-See file C{testresults/Z001_ETRSandRDNAP-self-validation-v1-results.txt} for the self-validation
-results of the L{RDNAP2018v1} transformer, especially the summary in the final 4 lines.
+See file C{testresults/Z001_ETRSandRDNAP_v1_results.txt} for the self-validation results of the
+L{RDNAP2018v1} transformer, especially the summary in the last 4 lines.
 
 @note: C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are B{not certified}
        to carry the trademark name C{RDNAPTRANS(tm)}.
@@ -30,7 +30,7 @@ _pyrdnap_       = __package__ or  os_path.basename(pyrdnap_abspath)
 # setting __path__ should ...
 __path__ = [pyrdnap_abspath]
 try:  # ... make this import work, ...
-    import pyrdnap.__pygeodesy as _  # PYCHOK unused
+    import pyrdnap.__pygeodesy as _  # noqa: F401
 except ImportError:  # ... if it doesn't, extend sys.path to include
     # this very directory such that all public and private sub-modules
     # can be imported (by epydoc, checked by PyChecker, etc.)
@@ -42,16 +42,16 @@ try:  # PYCHOK once
 except (AttributeError, ImportError) as x:
     raise AssertionError(str(x))
 
-from pyrdnap.rd0 import *  # PYCHOK *
-from pyrdnap.rdnap2018 import *  # PYCHOK *
-from pyrdnap.v_self import *  # PYCHOK *
+from pyrdnap.rd0 import *  # noqa: F403
+from pyrdnap.rdnap2018 import *  # noqa: F403
+from pyrdnap.v_self import *  # noqa: F403
 
 from pyrdnap.rd0 import __all__ as _rd0  # PYCHOK ?
 from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
-__all__ = ('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self
-__version__ = '26.05.11'
+__all__ = tuple(sorted(('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self))
+__version__ = '26.05.14'
 
 
 def _versions():  # in .__main__, .test/bases

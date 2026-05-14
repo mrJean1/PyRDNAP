@@ -37,7 +37,7 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.05.11'
+__version__ = '26.05.13'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[:3]
 #        (lat   lon   height RDx   RDy   NAPh)
@@ -46,7 +46,7 @@ _NDECS = (11,   11,   6,     8,    8,    8)  # fmt precision
 _NDecs = tuple((_ - 4) for _ in _NDECS)  # fe4 precision
 
 
-def _line(ln):
+def _line(ln):  # in .__main__
     return ' (line %s)' % (ln,)
 
 
@@ -135,7 +135,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                                                       ('max', _zfmt, diffs)):
                 _print(R_, n, '|diff|', _z(fs))
     else:
-        t = "file %r doesn't exist" % (self_txt,)
+        t = "doesn't exist: %r" % (self_txt,)
         if _print:
             _print(t)
         else:

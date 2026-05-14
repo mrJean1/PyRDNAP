@@ -14,15 +14,10 @@ a ``reverse`` method to convert RDx, RDy and NAPh to ``geodetic`` lat-, longitud
 
 For further details see the documentation_.
 
-
 Note
 ====
-``PyRDNAP``, ``pyrdnap`` and ``RDNAP2018v1`` have **not been formally validated** and are
-**not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.
-
-However, transformer class ``RDNAP2018v1`` does meet the ``RDNAPTRANS(tm)2018_v220627`` self-validation
-requirements for all points within the ``RD`` region.
-
+``PyRDNAP``, ``pyrdnap`` and ``RDNAP2018v1`` have **not been formally validated** and are **not certified**
+to carry the trademark_ name `RDNAPTRANS(tm)`_.
 
 Installation
 ============
@@ -71,7 +66,7 @@ All Python source code has been statically checked_ with Ruff_ using Python 3.13
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
 64-bit on macOS 26.4.1 Tahoe only.
 
-*Last updated: May 11, 2026.*
+*Last updated: May 14, 2026.*
 
 License
 =======
@@ -98,7 +93,7 @@ DEALINGS IN THE SOFTWARE.
   :target: https://PyPI.org/project/pyrdnap
 .. image:: https://Img.Shields.io/appveyor/ci/mrJean1/PyRDNAP.svg?branch=master&label=AppVeyor
   :target: https://CI.AppVeyor.com/project/mrJean1/PyRDNAP/branch/master
-.. image:: https://Img.Shields.io/badge/coverage-91%25-brightgreen
+.. image:: https://Img.Shields.io/badge/coverage-90%25-brightgreen
   :target: https://GitHub.com/mrJean1/PyRDNAP/blob/master/testcoverage.pdf
 .. image:: https://Img.Shields.io/pypi/wheel/pyrdnap.svg
   :target: https://PyPI.org/project/pyrdnap/#files

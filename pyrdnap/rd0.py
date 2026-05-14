@@ -13,7 +13,7 @@ from pyrdnap.__pygeodesy import (_0_0, _0_5, _1_0, _2_0,  # PYCHOK used!
                                  _COMMASPACE_, _datum_, _E_, _lat_, _lon_,
                                  _height_, _N_, _S_, _UNDER_, _W_,
                                  _ALL_OTHER, _Pass, _NamedTuple)
-from pygeodesy import (NN, PI_2,  # "consterns"
+from pygeodesy import (NN, PI_2, map2,  # basics, "consterns"
                        Datum, Datums, Similarity,  # datums
                        LatLon2Tuple, PhiLam2Tuple, Vector2Tuple, Vector3Tuple,  # namedTuples
                        Property_RO, property_ROnce,  # props
@@ -21,10 +21,10 @@ from pygeodesy import (NN, PI_2,  # "consterns"
                        Height, Lamd, Lat, Lon, Meter, Phi, Phid,  # units
                        sincos2)  # utily
 
-from math import atan, ceil, floor, log, sin, sqrt, tan
+from math import atan, ceil, fabs, floor, log, sin, sqrt, tan
 
 __all__ = ()
-__version__ = '26.05.08'
+__version__ = '26.05.14'
 
 
 class _RDbase(object):
@@ -57,7 +57,7 @@ class _RD(_RDbase):
                  (LON_MAX - LON_MIN) / LON_INC + _1_0)  # 2.3.2g n-lambda
 
     def __init__(self):
-        _v_assert(tuple(map(int, self.N_LAT_LON)))
+        _v_assert(map2(int, self.N_LAT_LON))
 
     def c_f_N_f6(self, lat, lon):
         # return (int(ceil), int(floor), Normalized less floor) of C{lat} + \
@@ -236,12 +236,33 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
        and C{datum} with C{lat} and C{lon} in C{degrees} and C{RDx}, C{RDy}, C{NAPh}
        and C{height} in C{meter}, conventionally.
 
-       @note: The C{lat} and {lon} are geodetic B{GRS80 (ETRS89)} coordinates from
+       @note: The C{lat} and {lon} are B{GRS80 (ETRS89)} geodetic coordinates from
               L{RDNAP2018v1.reverse} but B{Bessel1841 (RD-Bessel)} when returned from
               L{RDNAP2018v2.reverse}.
     '''
     _Names_ = ('RDx', 'RDy', 'NAPh', _lat_, _lon_, _height_, _datum_)
     _Units_ = ( Meter, Meter, Meter,  Lat,   Lon,   Height,  _Pass)
+
+    @property_ROnce
+    def _datum_index(self):
+        return self._Names_.index(_datum_)
+
+    def diff(self, other, datum=None, **name):
+        '''Return the difference between this and an C{other} C{RDNAP7Tuple}.
+
+           @kwarg datum: Optional difference C{B{datum}=None} (C{Latum}).
+           @kwarg name: Optional name (C{str}).
+
+           @return: An L{RDNAP7Tuple} with the C{_diff} for each item, but
+                    C{datum=B{datum}}.
+        '''
+        def _diff(a, b):
+            return fabs(a - b)
+
+        _xinstanceof(RDNAP7Tuple, other=other)
+        d = self._datum_index
+        t = map2(_diff, self[:d], other[:d])
+        return RDNAP7Tuple(t + (datum,), **name)
 
     @Property_RO
     def lam(self):
