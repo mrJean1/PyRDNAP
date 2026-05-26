@@ -3,16 +3,16 @@
 
 # Test L{PyRDNAP} with round-trips of random lat-/longitudes inside.
 
-from bases import TestsBase, Datums, NAN
+from bases import TestsBase, Datums, NAN, startswith
 
-from pyrdnap import RDNAP2018v1, RDNAP2018v2
-# from pyrdnap.rd0 import _RD0 as A0
+from pyrdnap import LqRD, RDNAP2018v1, RDNAP2018v2
+from pyrdnap.rd0 import _RD, _RD0 as A0
 
 from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.05.09'
+__version__ = '26.05.24'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -35,10 +35,10 @@ class Tests(TestsBase):
 
     def testAmersfoort(self, R):
         self.test(R.name, 'A0', 'A0', nl=1)
-        lat0, lon0 = 52.15616056, 5.38763889
-        self.testRndTrip(R, lat0, lon0,   0.0)     # (A0.X0, A0.Y0, 0.0)
-        self.testRndTrip(R, lat0, lon0,  43.2551)  # (A0.X0, A0.Y0, 0.0)
-        self.testRndTrip(R, lat0, lon0, 143.2551)  # (A0.X0, A0.Y0, 100.0)
+        # A0.LAT0, A0.LON0 = 52.15616056, 5.38763889
+        self.testRndTrip(R, A0.LAT0, A0.LON0,   0.0)     # (A0.X0, A0.Y0, 0.0)
+        self.testRndTrip(R, A0.LAT0, A0.LON0,  43.2551)  # (A0.X0, A0.Y0, 0.0)
+        self.testRndTrip(R, A0.LAT0, A0.LON0, 143.2551)  # (A0.X0, A0.Y0, 100.0)
 
     def testEPSG(self, R):
         # <https://EPSG.io/9809-method> Example
@@ -54,6 +54,21 @@ class Tests(TestsBase):
         self.testRndTrip(R, 51.728601274, 4.712120126, 301.7981,
                             RDx_RDy='(108360.8790, 415757.2745)')  # 258.0057
 
+    def testLqRD(self):
+        R = RDNAP2018v1(name='vsLqRD')
+        self.test('v1', R, "name='vsLqRD'", known=startswith)
+        S, W, N, E = r = R.region
+        self.test('region', r, r)
+        for llh in ((A0.LAT0, A0.LON0, A0.H0),
+                    (r.latC, r.lonC, 0),
+                    (N, E, 0), (N, W, 0), (S, E, 0), (S, W, 0)):
+            t = R.forward(*llh)
+            self.test('rdnap', t, t, nl=1)
+            r = LqRD().forward(*t.latlonheight)
+            self.test(' lqrd', r, r)
+            z = r.diff(t)
+            self.test(' diff', z, z)
+
     def testRandom(self, R, **nl):
         S, W, N, E = R.region
         E_W = E - W
@@ -63,6 +78,24 @@ class Tests(TestsBase):
         for _ in range(_nrandom):
             self.testRndTrip(R, _rnd(random() * N_S + S),
                                 _rnd(random() * E_W + W))
+
+    def testRDs(self):
+        self.test('_RD', _RD.toStr(), '_xETRS2RD=Similarity(name=', known=startswith, nl=1)
+        self.test('_RD0', A0.toStr(), "D0=Datum(name='Bessel1841', ", known=startswith, nl=1)
+
+        R = RDNAP2018v1(name='Cover')
+        self.test('v1', R, "name='Cover'", known=startswith,nl=1)
+        t = R.forward(A0.LAT0, A0.LON0)
+        self.test('lat', t.lat, A0.LAT0, prec=8)
+        self.test('lon', t.lon, A0.LON0, prec=8)
+        self.test('latlon', t.latlon, '(52.156161, 5.387639)')
+        self.test('latlonheight', t.latlonheight, '(52.156161, 5.387639, 0)')
+        self.test('latlonheightdatum', t.latlonheightdatum, '(52.156161, 5.387639, 0, Datum', known=startswith)
+        self.test('lam', t.lam, A0.LAM0, prec=8)
+        self.test('phi', t.phi, A0.PHI0, prec=8)
+        self.test('philam', t.philam, '(0.910297, 0.094032)')
+        self.test('philamheight', t.philamheight, '(0.910297, 0.094032, 0)')
+        self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith)
 
     def testRndTrip(self, R, lat, lon, h=NAN, RDx_RDy=None):
         llh = lat, lon, h
@@ -108,6 +141,9 @@ if __name__ == '__main__':
     t.testEPSG(R1)
     t.testSAS(R1)
 
+    t.testLqRD()
+
+    t.testRDs()  # coverage
     t.test('ndigits', _ndigits, _ndigits)
     t.results()
     t.exit()

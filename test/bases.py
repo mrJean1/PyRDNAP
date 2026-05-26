@@ -39,7 +39,7 @@ __all__ = ('coverage', 'Datums', 'NAN', 'NN',
            'TestsBase',  # classes
            'clips', 'normDMS', 'pairs', 'printf', 'secs2str',  # functions
            'str2ub', 'tilde', 'typename', 'ub2str', 'versions')
-__version__ = '26.05.09'
+__version__ = '26.05.16'
 
 try:  # from pygeodesy.basics ...
     # _Ints = int, long
@@ -49,7 +49,7 @@ except NameError:  # Python 3+
     _Strs = str,
 
 # endswith   = str.endswith
-# startswith = str.startswith
+startswith = str.startswith
 try:
     if float(_getenv('PYRDNAP_COVERAGE', '0')) > 0:
         import coverage

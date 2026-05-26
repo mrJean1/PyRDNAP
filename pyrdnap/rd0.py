@@ -1,30 +1,47 @@
 
 # -*- coding: utf-8 -*-
 
-u'''(INTERNAL) C{RD} and C{RD0} constants and C{RDNAP7Tuple} and C{RDregion} classes.
+u'''(INTERNAL) RijksDriehoeksmeting C{_RD} and reference C{_RD0}
+constants and classes C{RDNAP7Tuple} and C{LqRD}.
 '''
 # make sure int/int division yields float quotient, see .basics
 from __future__ import division as _; del _  # noqa: E702 ;
 
 from pyrdnap.v_grids import _v_assert
 from pyrdnap.__pygeodesy import (_0_0, _0_5, _1_0, _2_0,  # PYCHOK used!
-                                 _isNAN, _xinstanceof, _xsubclassof,
+                                 _isNAN, _isNAN0, _xinstanceof, _xsubclassof,
                                  _LLEB, _xkwds,
-                                 _COMMASPACE_, _datum_, _E_, _lat_, _lon_,
-                                 _height_, _N_, _S_, _UNDER_, _W_,
-                                 _ALL_OTHER, _Pass, _NamedTuple)
-from pygeodesy import (NN, PI_2, map2,  # basics, "consterns"
+                                 _COMMASPACE_, _datum_, _lat_, _lon_, _height_,
+                                 _ALL_OTHER, _FOR_DOCS, _Pass, _NamedTuple)
+from pygeodesy import (NAN, NN, map1, map2,  # basics, "consterns"
                        Datum, Datums, Similarity,  # datums
-                       LatLon2Tuple, PhiLam2Tuple, Vector2Tuple, Vector3Tuple,  # namedTuples
+                       Bounds4Tuple, LatLon2Tuple, PhiLam2Tuple,  # namedTuples
+                       Vector2Tuple, Vector3Tuple, LqRD as _LqRD,  # ltp
                        Property_RO, property_ROnce,  # props
                        pairs,  # streprs
                        Height, Lamd, Lat, Lon, Meter, Phi, Phid,  # units
-                       sincos2)  # utily
+                       sincos2, tanPI_2_2)  # utily
 
-from math import atan, ceil, fabs, floor, log, sin, sqrt, tan
+from math import atan2, ceil, fabs, floor, log, sin, sqrt
 
 __all__ = ()
-__version__ = '26.05.14'
+__version__ = '26.05.24'
+
+_LQRD = _LqRD()  # get Amersfoort, bounds, etc. (deleted below)
+
+
+def _c_f_N_f3(*deg_SW_D):
+    # return int(ceil) and int(floor) of Normalized
+    # and (Normalized less floor) of C{deg} degrees
+    N = _degN(*deg_SW_D)
+    # assert N >= 0, N
+    f = floor(N)
+    return int(ceil(N)), int(f), (N - f)
+
+
+def _degN(deg, degSW, degD):
+    # return C{deg} Normalized
+    return (deg - degSW) / degD
 
 
 class _RDbase(object):
@@ -45,25 +62,22 @@ class _RDbase(object):
 
 
 class _RD(_RDbase):
-    '''(INTERNAL) Limits, constants for RDNAP2018 (ASCII.txt).
+    '''(INTERNAL) Bounds, constants for RDNAP2018 (ASCII.txt).
     '''
-    LAT_INC   = Lat(LAT_INC= 0.0125)  # degrees, all
-    LAT_MAX   = Lat(LAT_MAX=56.0)
-    LAT_MIN   = Lat(LAT_MIN=50.0)
-    LON_INC   = Lon(LON_INC= 0.02)
-    LON_MAX   = Lon(LON_MAX= 8.0)
-    LON_MIN   = Lon(LON_MIN=_2_0)
-    N_LAT_LON = ((LAT_MAX - LAT_MIN) / LAT_INC + _1_0,  # 2.3.2g n-phi
-                 (LON_MAX - LON_MIN) / LON_INC + _1_0)  # 2.3.2g n-lambda
+    latD = Lat(latD=0.0125)  # degrees, all
+    lonD = Lon(lonD=0.02)
 
     def __init__(self):
-        _v_assert(map2(int, self.N_LAT_LON))
+        S, W, N, E = self.region
+        nlat = _degN(N, S, self.latD) + _1_0  # 2.3.2g n-phi
+        nlon = _degN(E, W, self.lonD) + _1_0  # 2.3.2g n-lambda
+        _v_assert(map1(int, nlat, nlon))
 
-    def c_f_N_f6(self, lat, lon):
-        # return (int(ceil), int(floor), Normalized less floor) of C{lat} + \
-        #        (int(ceil), int(floor), Normalized less floor) of C{lon}
-        return _c_f_N_f3(lat, self.LAT_MIN, self.LAT_INC) + \
-               _c_f_N_f3(lon, self.LON_MIN, self.LON_INC)
+    def _c_f_N_f6(self, lat, lon):
+        # return (int(ceil), int(floor), Normalized less floor) of C{lat}) + \
+        #        (int(ceil), int(floor), Normalized less floor) of C{lon})
+        return _c_f_N_f3(lat, self.region.latS, self.latD) + \
+               _c_f_N_f3(lon, self.region.lonW, self.lonD)
 
     def isinside(self, lat, lon, eps=0):  # eps=_TOL_D, 0 or -_TOLD_D
         # is C{(lat, lon)} inside the this C{RD} region, optionally
@@ -73,19 +87,13 @@ class _RD(_RDbase):
                 (W - lon) <= eps and (lon - E) <= eps) if eps else \
                 (S <= lat <= N   and  W <= lon <= E)
 
-    @property_ROnce
-    def region(self):
-        t = RDregion4Tuple(self.LAT_MIN, self.LON_MIN,
-                           self.LAT_MAX, self.LON_MAX, name='RD region ')
-        assert t.S < t.N and t.W < t.E, t.name
-        return t
+    region = _LQRD.region  # as L{Bounds4Tuple}
 
     def _toDict(self):
         def _p(n):  # lambda
-            return n.replace(_UNDER_, NN).isupper()
+            return n.endswith('D') or n.endswith('S')
 
-        return self._preDict(_p, _xETRS2RD=self._xETRS2RD,
-                                 _xRD2ETRS=self._xRD2ETRS)
+        return self._preDict(_p, region=self.region)
 
     @property_ROnce
     def _xETRS2RD(self):  # transform ETRS (GRS80) to RD-Bessel
@@ -102,27 +110,26 @@ class _RD(_RDbase):
     #                                        rx=-1.9151, ry=1.6037, rz=-9.0955),
     # _xRD2ETRS=Similarity(name='_xRD2ETRS', tx=565.74, ty=50.402, tz=465.29, s=4.0724,
     #                                        rx=1.9151, ry=-1.6036, rz=9.0955),
-    # LAT_INC=0.0125, LAT_MAX=56.0, LAT_MIN=50.0, LON_INC=0.02, LON_MAX=8.0, LON_MIN=2.0,
-    # N_LAT_LON=(481.0, 301.0)
+    # latD=0.0125, lonD=0.02, region=RD region (latS=50.0, lonW=2.0, latN=56.0, lonE=8.0)
 
-_RD = _RD()  # PYCHOK singleton
+_RD = _RD()  # PYCHOK singleton, in .test/testRndTrips
 
 
 class _RD0(_RDbase):
-    '''(INTERNAL) C{RD} Amersfoort, NL references.
+    '''(INTERNAL) C{RD} Amersfoort, NL constancts for RDNAP2018 (ASCII.txt).
 
        @see: U{EPSG:9809<https://EPSG.io/9809-method>}, U{"Oblique Stereographic"
              <https://PROJ.org/en/stable/operations/projections/sterea.html>} and
              <http://geotiff.maptools.org/proj_list/oblique_stereographic.html>
     '''
-    H0      = Meter(H0=_0_0)  # E0 height
-    H0_ETRS = Meter(H0_ETRS=43.0)
-    K0      = 0.9999079  # scale factor
-    LAT0    = Lat(LAT0='52  9 22.178N')  # 52.15616055+°
-    LON0    = Lon(LON0=' 5 23 15.5E')    # 5.387638888+°
+    H0      = Meter(H0     =_LQRD.height0)  # Amersfoort.height0 0.0 m
+    H0_ETRS = Meter(H0_ETRS=_LQRD.height0_ETRS)  # 43.0 m
+    K0      = 0.9999079  # 2.4.1 scale factor
+    LAT0    = Lat(LAT0=_LQRD.Amersfoort.lat)  # '52  9 22.178N' == 52.15616055+°
+    LON0    = Lon(LON0=_LQRD.Amersfoort.lon)  # ' 5 23 15.5E'   ==  5.387638888+°
     LAM0C   = \
     LAM0    = Lamd(LAM0=LON0)  # 𝜆0, 𝛬0 = 𝜆0 on sphere 0.094032038
-    PHI0    = Phid(PHI0=LAT0)  # 𝜑0 0.910296727, 𝛷0 below
+    PHI0    = Phid(PHI0=LAT0)  # 𝜑0 0.910296727, PHI0C 𝛷0 set below
     X0      = Meter(X0=155000.0)  # false Easting  155029.784?
     Y0      = Meter(Y0=463000.0)  # false Norting  463109.889?
 
@@ -150,65 +157,75 @@ class _RD0(_RDbase):
     def E0(self):  # lazily
         return self.D0.ellipsoid
 
-    def ln_e_2(self, phi):
+    def log_e_2(self, phi):
         e = self.E0.e
         p = e * sin(phi)
         return log((_1_0 + p) / (_1_0 - p)) * (e * _0_5)
 
-    def ln_tan(self, phi):
-        return log(tan((phi + PI_2) * _0_5))
+    def log_tan(self, phi):
+        return log(tanPI_2_2(phi))  # tan((phi + PI/2) / 2)
 
     @property_ROnce
-    def M0(self):  # 2.4.1+ m
-        q0 = self.ln_tan(self.PHI0) - self.ln_e_2(self.PHI0)
-        w0 = self.ln_tan(self.PHI0C)
-        return w0 - self.N0 * q0
+    def M0(self):  # 2.4.1 p 15 m
+        return self.W0 - self.N0 * self.Q0
 
     @property_ROnce
-    def N0(self):  # 2.4.1+ n, sphere
+    def N0(self):  # 2.4.1 p 15 n, sphere
         E = self.E0
         _, c = self.sincos2PHI0
-        return sqrt(_1_0 + c**4 * E.e2 / E.e21)
+        return sqrt(c**4 * E.e2 / E.e21 + _1_0)
 
     @property_ROnce
-    def PHI0C(self):  # 2.4.1+
+    def PHI0C(self):  # 2.4.1 p 15 𝛷0
         # get 𝛷0, Amersfoort latitude on sphere
-        rM, rN = self._rMN2
-        return Phi(PHI0C=atan((sqrt(rM) / sqrt(rN)) * tan(self.PHI0)))
+        m, n = self.Rmn2
+        s, c = self.sincos2PHI0
+        return Phi(PHI0C=atan2(m * s, n * c))  # atan((m / n) * tan(PHI0))
 
     @property_ROnce
-    def R(self):  # radius conformal sphere
-        rM, rN = self._rMN2
-        return sqrt(rM * rN)
+    def Q0(self):  # 2.4.1 p 15 q0
+        return self.log_tan(self.PHI0) - self.log_e_2(self.PHI0)
 
     @property_ROnce
-    def RK2(self):  # 2.4.1+
+    def R(self):  # 2.4.1 p 15 R, radius conformal sphere
+        m, n = self.Rmn2
+        return m * n
+
+    @property_ROnce
+    def RK2(self):  # 2.4.2
         return self.R * self.K0 * _2_0
 
     @property_ROnce
-    def _rMN2(self):  # 2.4.1+
+    def Rmn2(self):  # 2.4.1 p 15 sqrt(RsubM), sqrt(RsubN)
         # get 2-tuple (RHO0, NU0) EPSG:9809
-        E  =  self.E0
-        s, _  = self.sincos2PHI0
-        s  = _1_0 - s**2 * E.e2
-        rN =  E.a / sqrt(s)
-        rM =  E.e21 * rN / s
-        return rM, rN
+        E =  self.E0
+        s, _ = self.sincos2PHI0
+        s = _1_0 - s**2 * E.e2
+        # assert s > 0
+        N =  E.a / sqrt(s)
+        # assert N > 0
+        M =  E.e21 * N / s
+        # assert M > 0
+        return map1(sqrt, M, N)  # sqrt!
 
     @property_ROnce
-    def sincos2PHI0(self):
+    def sincos2PHI0(self):  # 𝜑0
         return sincos2(self.PHI0)
 
     @property_ROnce
-    def sincos2PHI0C(self):
+    def sincos2PHI0C(self):  # 𝛷0
         return sincos2(self.PHI0C)
 
     def _toDict(self):
         def _p(n):  # lambda
-            return n.endswith('0') or n.endswith('0C')  # _0_
+            return n.endswith('0') or n.startswith('R') or \
+                   n.endswith('0C')  # _0_
 
-        return self._preDict(_p, H0_ETRS=self.H0_ETRS, R=self.R,
-                                 RK2=self.RK2, _rMN2=self._rMN2)
+        return self._preDict(_p, H0_ETRS=self.H0_ETRS)
+
+    @property_ROnce
+    def W0(self):  # 2.4.1 p 15 w0
+        return self.log_tan(self.PHI0C)  # 𝛷0
 
 #   def _w1(self, sphi):  # EPSG:9809
 #       w1 = NAN
@@ -222,12 +239,14 @@ class _RD0(_RDbase):
     # % python -c "import pyrdnap; print(pyrdnap.rd0._RD0.toStr())"
     # D0=Datum(name='Bessel1841', ellipsoid=Ellipsoids.Bessel1841, transform=Transforms.Bessel1841),
     # E0=Ellipsoid(name='Bessel1841', a=6377397.155, f=0.00334277, f_=299.1528128, b=6356078.962818),
-    # H0=0.0, H0_ETRS=43.0, K0=0.9999079, LAM0=0.094032038, LAM0C=0.094032038, LAT0=52.156160556, LON0=5.387638889,
-    # M0=0.003773954, N0=1.000475857, PHI0=0.910296727, PHI0C=0.909684757, R=6382644.571035412, RK2=12764113.458940839,
-    # sincos2PHI0=(0.7896858198001045, 0.6135114554811807), sincos2PHI0C=(0.7893102212553742, 0.6139946047171687),
-    # X0=155000.0, Y0=463000.0, _rMN2=(6374588.709792872, 6390710.612840701)
+    # H0=0.0, H0_ETRS=43.0, K0=0.9999079, LAM0=0.094032038, LAM0C=0.094032038,
+    # LAT0=52.156160556, LON0=5.387638889, M0=0.003773954, N0=1.000475857,
+    # PHI0=0.910296727, PHI0C=0.909684757, Q0=1.06531844,
+    # R=6382644.571035411, RK2=12764113.458940838, Rmn2=(2524.794785679199, 2527.9854850929623),
+    # sincos2PHI0=(0.7896858198001045, 0.6135114554811807), sincos2PHI0C=(0.7893102212553742, 0.6139946047171686),
+    # W0=1.069599332, X0=155000.0, Y0=463000.0
 
-_RD0 = _RD0()  # PYCHOK singleton, in .test
+_RD0 = _RD0()  # PYCHOK singleton, in .test/testRndTrips
 
 
 class RDNAP7Tuple(_NamedTuple):  # in .v_self
@@ -320,10 +339,10 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
            @return: An L{RDNAP7Tuple} with converted C{lat}, C{lon} and C{height}.
         '''
         _xinstanceof(Datum, datum2=datum2)
-        h = self.height  # PYCHOK preserve height NAN, because Ecef._forward ...
-        g = self.toLatLon(_LLEB).toDatum(datum2)  # ... treats height NAN as 0
-        return self.dup(lat=g.lat, lon=g.lon, datum=g.datum,
-                        height=h if _isNAN(h) else g.height, **name)
+        g = self.toLatLon(_LLEB).toDatum(datum2)
+        h = NAN if _isNAN(self.height) else g.height  # PYCHOK preserve height NAN
+        return self.dup(lat=g.lat, lon=g.lon, datum=g.datum, height=h,
+                                              **_xkwds(name, name=self.name))
 
     def toLatLon(self, LatLon, **LatLon_kwds):
         '''Return this C{lat}, C{lon}, C{datum} and C{height} as B{C{LatLon}}.
@@ -336,8 +355,8 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
            @raise TypeError: B{C{LatLon}} not ellipsoidal or an other issue.
         '''
         _xsubclassof(_LLEB, LatLon=LatLon)
-        h = self.height  # PYCHOK treat height NAN as 0, like Ecef._forward
-        kwds = _xkwds(LatLon_kwds, name=self.name, height=_0_0 if _isNAN(h) else h)
+        h    = _isNAN0(self.height)  # PYCHOK height
+        kwds = _xkwds(LatLon_kwds, name=self.name, height=h)
         return LatLon(self.lat, self.lon, datum=self.datum, **kwds)  # PYCHOK datum
 
     @Property_RO
@@ -353,36 +372,67 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
         return Vector3Tuple(self.RDx, self.RDy, self.NAPh, name=self.name)
 
 
-class RDregion4Tuple(_NamedTuple):
-    '''4-Tuple C{(S, W, N, E)} with C{RD} region in C{GRS80 (ETRS89) degrees}.
+class LqRD(_LqRD):
+    '''Like U{pygeodesy.LqRD<https://mrJean1.GitHub.io/PyGeodesy/docs/pygeodesy.ltp.LqRD-class.html>}
+       but with methods C{forward} and C{reverse} returning an L{RDNAP7Tuple} with C{NAPh} replaced
+       by I{local} C{z}, the perpendicular distance to the local tangent plane (LTP).
+
+       This C{quasi-RD} transformer B{does not} implement any U{RD NAP<https://www.NSGI.NL/
+       coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
+       specification and B{does not} provide I{Netherlands}' C{B{N}ormaal B{A}msterdams B{P}eil
+       (NAP)} quasi-geodetic-height.
     '''
-    _Names_ = (_S_, _W_, _N_, _E_)
-    _Units_ = ( Lat, Lon, Lat, Lon)
+    if _FOR_DOCS:
+        __init__ = _LqRD.__init__
 
-    @Property_RO
-    def SW(self):
-        '''Get the C{SW} corner as (L{LatLon2Tuple}C{(lat, lon)}).
+    def forward(self, lat_latlonh, lon=None, height=0, **name):  # PYCHOK signature
+        '''Convert I{geodetic} C{(lat, lon, height)} to I{local} C{quasi-RD (x, y, z)}.
+
+           @arg lat_latlonh: C{Scalar} (geodetic) latitude (C{degrees}) or a I{local}
+                             C{quasi-RD} L{RDNAP7Tuple}.
+           @kwarg lon: C{Scalar} (geodetic) longitude (C{degrees}) iff B{C{lat_latlonh}}
+                       is C{scalar}, ignored otherwise.
+           @kwarg height: Optional height (C{meter}, conventionally) perpendicular to and
+                          above (or below) the ellipsoid's surface, iff B{C{lat_latlonh}}
+                          is C{scalar}, ignored otherwise.
+           @kwarg name: Optional C{B{name}=NN} (C{str}).
+
+           @return: An L{RDNAP7Tuple}C{(RDx, RDy, NAPh, lat, lon, height, datum)} with
+                    C{NAPh} set to I{local} C{z}.
+
+           @see: B{pygeodesy.LqRD.forward} for more information.
         '''
-        return LatLon2Tuple(self.S, self.W, name=self.name)
+        t = _LqRD.forward(self, lat_latlonh, lon=lon, height=height)
+        return LqRD._l9t2r7t(t, **name)
 
-    @Property_RO
-    def NE(self):
-        '''Get the C{NE} corner as (L{LatLon2Tuple}C{(lat, lon)}).
+    def reverse(self, x_xyz, y=None, z=None, **name):  # PYCHOK signature
+        '''Convert I{local} C{quasi-RD (x, y, z)} to I{geodetic} C{(lat, lon, height)}.
+
+           @arg x_xyz: Local C{quasi-RD x} coordinate (C{scalar}) or a I{local}
+                       C{quasi-RD} L{RDNAP7Tuple}.
+           @kwarg y: Local C{quasi-RD y} coordinate (C{meter}) iff B{C{x_xyz}} is
+                     C{scalar}, ignored otherwise.
+           @kwarg z: Local C{z} coordinate (C{meter}) iff B{C{x_xyz}} is C{scalar},
+                     ignored otherwise.
+           @kwarg name: Optional C{B{name}=NN} (C{str}).
+
+           @return: An L{RDNAP7Tuple}C{(RDx, RDy, NAPh, lat, lon, height, datum)}
+                    with C{NAPh} set to I{local} B{C{z}}.
+
+           @see: B{pygeodesy.LqRD.reverse} for more information.
         '''
-        return LatLon2Tuple(self.N, self.E, name=self.name)
+        t = _LqRD.reverse(self, x_xyz, y=y, z=z)
+        return LqRD._l9t2r7t(t, **name)
+
+    @staticmethod
+    def _l9t2r7t(t, name=NN, **unused):  # M=False
+        return RDNAP7Tuple(t.x,   t.y,   t.z,  # NAPh = t.z
+                           t.lat, t.lon, t.height, t.ecef.datum, name=name or t.name)
 
 
-def _c_f_N_f3(deg, deg_MIN, deg_INC):
-    # return int(ceil) and int(floor) of Normalized
-    # and (Normalized less floor) of C{deg} degrees
-    N = (deg - deg_MIN) / deg_INC
-    f = floor(N)
-    return int(ceil(N)), int(f), (N - f)
-
-
-__all__ += _ALL_OTHER(RDNAP7Tuple, RDregion4Tuple,
-                      # passed along from PyGeodesy
+__all__ += _ALL_OTHER(LqRD, RDNAP7Tuple, Bounds4Tuple,  # passed along from PyGeodesy
                       LatLon2Tuple, PhiLam2Tuple, Similarity, Vector2Tuple, Vector3Tuple)
+del _LQRD
 
 # **) MIT License
 #

@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pyrdnap.rd0.LqRD</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyrdnap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://GitHub.com/mrJean1/PyGeodesy">pyrdnap</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pyrdnap-module.html">Package&nbsp;pyrdnap</a> ::
+        <a href="pyrdnap.rd0-module.html" onclick="show_private();">Module&nbsp;rd0</a> ::
+        Class&nbsp;LqRD
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pyrdnap.rd0.LqRD-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class LqRD</h1><p class="nomargin-top"></p>
+<pre class="base-tree">
+            object --+                    
+                     |                    
+pygeodesy.named._Named --+                
+                         |                
+pygeodesy.named._NamedBase --+            
+                             |            
+  pygeodesy.ltp.LocalCartesian --+        
+                                 |        
+                 pygeodesy.ltp.Ltp --+    
+                                     |    
+                    pygeodesy.ltp.LqRD --+
+                                         |
+                                        <strong class="uidshort">LqRD</strong>
+</pre>
+
+<hr />
+<p>Like <a 
+  href="https://mrJean1.GitHub.io/PyGeodesy/docs/pygeodesy.ltp.LqRD-class.html"
+  target="_top">pygeodesy.LqRD</a> but with methods <code>forward</code> 
+  and <code>reverse</code> returning an <a 
+  href="pyrdnap.rd0.RDNAP7Tuple-class.html" class="link">RDNAP7Tuple</a> 
+  with <code>NAPh</code> replaced by <i>local</i> <code>z</code>, the 
+  perpendicular distance to the local tangent plane (LTP).</p>
+  <p>This <code>quasi-RD</code> transformer <b>does not</b> implement any 
+  <a 
+  href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
+  target="_top">RD NAP</a> specification and <b>does not</b> provide 
+  <i>Netherlands</i>' <code><b>N</b>ormaal <b>A</b>msterdams <b>P</b>eil 
+  (NAP)</code> quasi-geodetic-height.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyrdnap.rd0.LqRD-class.html#forward" class="summary-sig-name">forward</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">lat_latlonh</span>,
+        <span class="summary-sig-arg">lon</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">height</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">**name</span>)</span><br />
+      Convert <i>geodetic</i> <code>(lat, lon, height)</code> to 
+      <i>local</i> <code>quasi-RD (x, y, z)</code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyrdnap.rd0.LqRD-class.html#reverse" class="summary-sig-name">reverse</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x_xyz</span>,
+        <span class="summary-sig-arg">y</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">z</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**name</span>)</span><br />
+      Convert <i>local</i> <code>quasi-RD (x, y, z)</code> to 
+      <i>geodetic</i> <code>(lat, lon, height)</code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.ltp.LocalCartesian</code></b>:
+      <code>__eq__</code>,
+      <code>reset</code>,
+      <code>toStr</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.named._NamedBase</code></b>:
+      <code>__repr__</code>,
+      <code>__str__</code>,
+      <code>others</code>,
+      <code>toRepr</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.named._Named</code></b>:
+      <code>__format__</code>,
+      <code>__imatmul__</code>,
+      <code>__matmul__</code>,
+      <code>__rmatmul__</code>,
+      <code>attrs</code>,
+      <code>classof</code>,
+      <code>copy</code>,
+      <code>dup</code>,
+      <code>methodname</code>,
+      <code>rename</code>,
+      <code>renamed</code>,
+      <code>toStr2</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__init__"></a><span class="summary-name">__init__</span> = <code title="_LqRD.__init__">_LqRD.__init__</code><br />
+      New ECEF-based <i>GRS80 (ETRS89)</i> <a 
+      href="pyrdnap.rd0.LqRD-class.html" class="link">LqRD</a> converter, 
+      centered at <i>Amersfoort, NL</i>.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.ltp.LqRD</code></b>:
+      <code>Amersfoort</code>,
+      <code>height0_ETRS</code>,
+      <code>region</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.ltp.LqRD</code></b>:
+      <code>x0</code>,
+      <code>y0</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.ltp.Ltp</code></b>:
+      <code>ecef</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.ltp.LocalCartesian</code></b>:
+      <code>M</code>,
+      <code>datum</code>,
+      <code>ellipsoid</code>,
+      <code>height0</code>,
+      <code>lat0</code>,
+      <code>latlonheight0</code>,
+      <code>lon0</code>,
+      <code>lon00</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.named._Named</code></b>:
+      <code>classname</code>,
+      <code>classnaming</code>,
+      <code>iteration</code>,
+      <code>name</code>,
+      <code>named</code>,
+      <code>named2</code>,
+      <code>named3</code>,
+      <code>named4</code>,
+      <code>sizeof</code>,
+      <code>typename</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="forward"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">forward</span>&nbsp;(<span class="sig-arg">self</span>,
+        <span class="sig-arg">lat_latlonh</span>,
+        <span class="sig-arg">lon</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">height</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">**name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convert <i>geodetic</i> <code>(lat, lon, height)</code> to 
+  <i>local</i> <code>quasi-RD (x, y, z)</code>.</p>
+  <dl class="fields">
+    <dt>Arguments:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>lat_latlonh</code></strong> - <code>Scalar</code> (geodetic) latitude (<code>degrees</code>) or
+          a <i>local</i> <code>quasi-RD</code> <a 
+          href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+          class="link">RDNAP7Tuple</a>.</li>
+        <li><strong class="pname"><code>lon</code></strong> - <code>Scalar</code> (geodetic) longitude (<code>degrees</code>) 
+          iff <b><code>lat_latlonh</code></b> is <code>scalar</code>, 
+          ignored otherwise.</li>
+        <li><strong class="pname"><code>height</code></strong> - Optional height (<code>meter</code>, conventionally) 
+          perpendicular to and above (or below) the ellipsoid's surface, 
+          iff <b><code>lat_latlonh</code></b> is <code>scalar</code>, 
+          ignored otherwise.</li>
+        <li><strong class="pname"><code>name</code></strong> - Optional <code><b>name</b>=NN</code> (<code>str</code>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>An <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+          class="link">RDNAP7Tuple</a><code>(RDx, RDy, NAPh, lat, lon, 
+          height, datum)</code> with <code>NAPh</code> set to <i>local</i> 
+          <code>z</code>.</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'>LocalError</strong></code> - If <b><code>latlonh</code></b> not <code>scalar</code>, 
+        <code>LatLon</code>, <code class="link">Ltp</code>, <code 
+        class="link">Ecef9Tuple</code> or invalid or if 
+        <b><code>lon</code></b> not <code>scalar</code> for 
+        <code>scalar</code> <b><code>latlonh</code></b> or invalid or if 
+        <b><code>height</code></b> invalid.</li>
+    </ul></dd>
+    <dt>Overrides:
+        pygeodesy.ltp.LocalCartesian.forward
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <b>pygeodesy.LqRD.forward</b> for more information.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="reverse"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">reverse</span>&nbsp;(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x_xyz</span>,
+        <span class="sig-arg">y</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">z</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convert <i>local</i> <code>quasi-RD (x, y, z)</code> to 
+  <i>geodetic</i> <code>(lat, lon, height)</code>.</p>
+  <dl class="fields">
+    <dt>Arguments:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x_xyz</code></strong> - Local <code>quasi-RD x</code> coordinate (<code>scalar</code>) or
+          a <i>local</i> <code>quasi-RD</code> <a 
+          href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+          class="link">RDNAP7Tuple</a>.</li>
+        <li><strong class="pname"><code>y</code></strong> - Local <code>quasi-RD y</code> coordinate (<code>meter</code>) iff
+          <b><code>x_xyz</code></b> is <code>scalar</code>, ignored 
+          otherwise.</li>
+        <li><strong class="pname"><code>z</code></strong> - Local <code>z</code> coordinate (<code>meter</code>) iff 
+          <b><code>x_xyz</code></b> is <code>scalar</code>, ignored 
+          otherwise.</li>
+        <li><strong class="pname"><code>name</code></strong> - Optional <code><b>name</b>=NN</code> (<code>str</code>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>An <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+          class="link">RDNAP7Tuple</a><code>(RDx, RDy, NAPh, lat, lon, 
+          height, datum)</code> with <code>NAPh</code> set to <i>local</i> 
+          <b><code>z</code></b>.</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'>LocalError</strong></code> - Invalid <b><code>xyz</code></b> or <code>scalar</code> 
+        <code>x</code> or <b><code>y</code></b> and/or 
+        <b><code>z</code></b> not <code>scalar</code> for 
+        <code>scalar</code> <b><code>xyz</code></b>.</li>
+    </ul></dd>
+    <dt>Overrides:
+        pygeodesy.ltp.LocalCartesian.reverse
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <b>pygeodesy.LqRD.reverse</b> for more information.
+      </p>
+</div></td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pyrdnap-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://GitHub.com/mrJean1/PyGeodesy">pyrdnap</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue May 26 15:17:56 2026
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

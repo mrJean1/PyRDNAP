@@ -98,6 +98,40 @@
     <li> <strong class="uidlink">pygeodesy.named._NamedBase</strong>:
       <em class="summary">(INTERNAL) Base class with name.</em>
     <ul>
+    <li> <strong class="uidlink">pygeodesy.ltp.LocalCartesian</strong>:
+      <em class="summary">Conversion between geodetic <code>(lat, lon, height)</code> and 
+        <i>local cartesian</i> <code>(x, y, z)</code> coordinates with 
+        <i>geodetic</i> origin <code>(lat0, lon0, height0)</code>, 
+        transcoded from <i>Karney</i>'s C++ class <a 
+        href="https://GeographicLib.SourceForge.io/C++/doc/classGeographicLib_1_1LocalCartesian.html"
+        target="_top">LocalCartesian</a>.</em>
+    <ul>
+    <li> <strong class="uidlink">pygeodesy.ltp.Ltp</strong>:
+      <em class="summary">A <i>local tangent plan</i> (LTP), a sub-class of 
+        <code>LocalCartesian</code> with (re-)configurable ECEF converter.</em>
+    <ul>
+    <li> <strong class="uidlink">pygeodesy.ltp.LqRD</strong>:
+      <em class="summary">A <i>local tangent plan</i> (LTP) for conversion between <i>GRS80 
+        (ETRS89) geodetic</i> and <i>local Netherlands</i>' 
+        <code>quasi-<b>R</b>ijks<b>D</b>riehoeksmeting (RD)</code> 
+        coordinates.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pyrdnap.rd0.LqRD-class.html">pyrdnap.rd0.LqRD</a></strong>:
+      <em class="summary">Like <a 
+        href="https://mrJean1.GitHub.io/PyGeodesy/docs/pygeodesy.ltp.LqRD-class.html"
+        target="_top">pygeodesy.LqRD</a> but with methods 
+        <code>forward</code> and <code>reverse</code> returning an <a 
+        href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+        class="link">RDNAP7Tuple</a> with <code>NAPh</code> replaced by 
+        <i>local</i> <code>z</code>, the perpendicular distance to the 
+        local tangent plane (LTP).</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
     <li> <strong class="uidlink">pygeodesy.named._NamedEnumItem</strong>:
       <em class="summary">(INTERNAL) Base class for items in a <code>_NamedEnum</code> 
         registry.</em>
@@ -126,10 +160,14 @@
         class="link">RDNAP2018v1</a><code>/-v2</code> base class.</em>
     <ul>
     <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html">pyrdnap.rdnap2018.RDNAP2018v1</a></strong>:
-      <em class="summary">Transformer implementing RD NAP 2018 <code>variant 1</code>.</em>
+      <em class="summary">Transformer implementing <code>variant 1</code> of <a 
+        href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
+        target="_top">RD NAP 2018 v220627</a>.</em>
     </li>
     <li> <strong class="uidlink"><a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html">pyrdnap.rdnap2018.RDNAP2018v2</a></strong>:
-      <em class="summary">Transformer implementing RD NAP 2018 <code>variant 2</code>.</em>
+      <em class="summary">Transformer implementing <code>variant 2</code> of <a 
+        href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
+        target="_top">RD NAP 2018 v220627</a>.</em>
     </li>
     </ul>
     </li>
@@ -139,6 +177,11 @@
       <em class="summary">(INTERNAL) Base for named <code>tuple</code>s with both index 
         <i>and</i> attribute name access to the items.</em>
     <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Bounds4Tuple-class.html">pygeodesy.namedTuples.Bounds4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(latS, lonW, latN, lonE)</code> with the bounds' 
+        lower-left <code>(LatS, LowW)</code> and upper-right <code>(latN, 
+        lonE)</code> corner lat- and longitudes.</em>
+    </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon2Tuple-class.html">pygeodesy.namedTuples.LatLon2Tuple</a></strong>:
       <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
         <code>degrees180</code>.</em>
@@ -156,10 +199,6 @@
         <code>lat</code> and <code>lon</code> in <code>degrees</code> and 
         <code>RDx</code>, <code>RDy</code>, <code>NAPh</code> and 
         <code>height</code> in <code>meter</code>, conventionally.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDregion4Tuple-class.html">pyrdnap.rd0.RDregion4Tuple</a></strong>:
-      <em class="summary">4-Tuple <code>(S, W, N, E)</code> with <code>RD</code> region in 
-        <code>GRS80 (ETRS89) degrees</code>.</em>
     </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector2Tuple-class.html">pygeodesy.namedTuples.Vector2Tuple</a></strong>:
       <em class="summary">2-Tuple <code>(x, y)</code> of (geocentric) components, each in 
@@ -181,6 +220,11 @@
       <em class="summary">(INTERNAL) Base for named <code>tuple</code>s with both index 
         <i>and</i> attribute name access to the items.</em>
     <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Bounds4Tuple-class.html">pygeodesy.namedTuples.Bounds4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(latS, lonW, latN, lonE)</code> with the bounds' 
+        lower-left <code>(LatS, LowW)</code> and upper-right <code>(latN, 
+        lonE)</code> corner lat- and longitudes.</em>
+    </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon2Tuple-class.html">pygeodesy.namedTuples.LatLon2Tuple</a></strong>:
       <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
         <code>degrees180</code>.</em>
@@ -198,10 +242,6 @@
         <code>lat</code> and <code>lon</code> in <code>degrees</code> and 
         <code>RDx</code>, <code>RDy</code>, <code>NAPh</code> and 
         <code>height</code> in <code>meter</code>, conventionally.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDregion4Tuple-class.html">pyrdnap.rd0.RDregion4Tuple</a></strong>:
-      <em class="summary">4-Tuple <code>(S, W, N, E)</code> with <code>RD</code> region in 
-        <code>GRS80 (ETRS89) degrees</code>.</em>
     </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector2Tuple-class.html">pygeodesy.namedTuples.Vector2Tuple</a></strong>:
       <em class="summary">2-Tuple <code>(x, y)</code> of (geocentric) components, each in 
@@ -249,7 +289,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu May 14 16:01:35 2026
+    Generated by Epydoc 3.0.1 on Tue May 26 15:17:56 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

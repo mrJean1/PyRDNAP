@@ -17,7 +17,7 @@ The 3rd line contains the (absolute value) of the differences between the result
 the 2nd line and the corresponding, original value on the 1st line.
 
 The final lines of the output are the C{maximum} of all (absolute value) differences in
-2 formats and a line with the C{RDNAP 2018} requirements, C{0.000000010 degrees} or
+2 formats and a line with the C{RD NAP 2018} requirements, C{0.000000010 degrees} or
 C{0.0010 meter} for each result.
 
 A test C{FAILED} if any C{reverse} or C{forward} result I{exceeds} the C{RD NAP 2018}
@@ -29,15 +29,16 @@ C{forward} C{RDx} and C{RDy} results are taken into account.
 @see: Module L{pyrdnap<pyrdnap.__main__>} for examples to invoke L{validation3}.
 '''
 from pyrdnap.rd0 import RDNAP7Tuple
-from pyrdnap.__pygeodesy import _ALL_OTHER, _COMMASPACE_, _NL_, _secs2str, _xinstanceof
-from pygeodesy import NN, NAN, typename
+from pyrdnap.__pygeodesy import _ALL_OTHER, _COMMASPACE_, _NL_, _SPACE_, _STAR_, \
+                                _secs2str, _xinstanceof
+from pygeodesy import NN, NAN, map2, typename
 
 from math import fabs
 import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.05.13'
+__version__ = '26.05.26'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[:3]
 #        (lat   lon   height RDx   RDy   NAPh)
@@ -50,10 +51,20 @@ def _line(ln):  # in .__main__
     return ' (line %s)' % (ln,)
 
 
+def _readlines(filename):  # in .__main__
+    # yield each line as str, not bytes
+    with open(filename, 'rb') as f:
+        while True:
+            t = f.readline()
+            if not t:
+                break
+            yield t.strip().decode('utf-8')
+
+
 def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=None):  # MCCABE 13
     '''Run the official C{RD NAP 2018} self-validation tests.
 
-       @arg self_txt: Name of the file containing the C{RDNAP 2018} self-validation tests
+       @arg self_txt: Name of the file containing the C{RD NAP 2018} self-validation tests
                       (C{str}), C{.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt}.
        @arg R: An RDNAP2018v# transformer (L{RDNAP2018v1} or L{RDNAP2018v2} instance).
        @kwarg all_: If C{True} print all tests and test results, otherwise only failing
@@ -81,24 +92,18 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
         _print('  using', repr(self_txt))
     if self_txt and os_path.exists(self_txt):
         diffs = [0] * len(_REQ_D)  # max |diff| of all
-        with open(self_txt, 'rb') as f:
-            hd = f.readline().strip().decode('utf-8')
-            ln = 1
-            if _print:
-                _print(' header', repr(hd), _line(ln), _NL_)
-            ds = list(diffs)  # |diff| per line
-            t0 = time()
-            while True:
-                bs = f.readline().strip().split()
-                if not bs:
-                    break
-                ln += 1
-                if bs[6] == b'*':  # xpec_d and res, each a 5-tuple of floats
-                    lat, lon, h, RDx, RDy = xpec_d = tuple(map(float, bs[1:-1]))
-                    res = R.reverse(RDx, RDy).latlon + (NAN,) + R.forward(lat, lon, h).xy
+        ds = list(diffs)  # |diff| per line
+        ln = t0 = 0
+        for t in _readlines(self_txt):
+            ln += 1
+            if t0:
+                ts = t.split()
+                if ts[6] == _STAR_:  # xpec_d and res, each a 5-tuple of floats
+                    lat, lon, h, RDx, RDy = xpec_d = map2(float, ts[1:-1])
+                    res = R.reverse(RDx, RDy, NAN).latlonheight + R.forward(lat, lon, h).xy
                     ds[5] = NAN
-                else:  # xpec and res, each a 6-tuple of floats
-                    lat, lon, h, RDx, RDy, NAPh = xpec_d = tuple(map(float, bs[1:]))
+                else:  # xpec_d and res, each a 6-tuple of floats
+                    lat, lon, h, RDx, RDy, NAPh = xpec_d = map2(float, ts[1:])
                     res = R.reverse(RDx, RDy, NAPh).latlonheight + R.forward(lat, lon, h).xyz
                 # assert len(res) == len(xpec)
                 if in_out == bool(R.isinside(lat, lon)):
@@ -116,10 +121,14 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                         else:
                             ds[i] = NAN
                     if _printest and (F or all_):
-                        b = b'  '.join(bs).decode('utf-8')
-                        _printest('id', b, _line(ln))
+                        _printest('id', _SPACE_(*ts), _line(ln))
                         _printest(R_, _zfmt(res), F)
                         _printest('     |diff|', _zfe4(ds), F, _NL_)
+            else:  # 1st line
+                if _print:
+                    _print(' header', repr(t), _line(ln), _NL_)
+                t0 = time()
+
         if _print:
             s = time() - t0
             t = '-inside' if in_out else '-outside'

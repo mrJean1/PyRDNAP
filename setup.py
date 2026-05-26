@@ -7,9 +7,18 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.05.13'
+__version__ = '26.05.25'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
+from pyrdnap.__pygeodesy import _requires
+
+_requires = 'pygeodesy>=' + _requires
+
+with open('requirements.txt', 'rb') as f:
+    if _requires not in f.read().decode('utf-8'):
+        import sys
+        t = '*** ' + _requires + ' not in requirements.txt ***'
+        sys.exit(t)
 
 
 def _c(*names):
@@ -59,23 +68,14 @@ setup(name=_PACKAGE,
       zip_safe=False,
 
       # <https://PyPI.org/pypi?%3Aaction=list_classifiers>
-      classifiers=[_c('Development Status', '3 - Alpha'),
+      classifiers=[_c('Development Status', '4 - Beta'),
                    _c('Environment', 'Console'),
                    _c('Intended Audience', 'Developers'),
                    _c('License', 'OSI Approved', 'MIT License'),
                    _c('Operating System', 'OS Independent'),
                    _c('Programming Language', 'Python'),
-#                  _c('Programming Language', 'Python', '2.6'),
                    _c('Programming Language', 'Python', '2.7'),
-#                  _c('Programming Language', 'Python', '3.5'),
-#                  _c('Programming Language', 'Python', '3.6'),
-#                  _c('Programming Language', 'Python', '3.7'),
-#                  _c('Programming Language', 'Python', '3.8'),
-#                  _c('Programming Language', 'Python', '3.9'),
-#                  _c('Programming Language', 'Python', '3.10'),
-#                  _c('Programming Language', 'Python', '3.11'),
-#                  _c('Programming Language', 'Python', '3.12'),
-#                  _c('Programming Language', 'Python', '3.13'),
+                   _c('Programming Language', 'Python', '3.13'),
                    _c('Programming Language', 'Python', '3.14'),
                    _c('Programming Language', 'Python', '3.15'),
                    _c('Topic', 'Software Development'),
@@ -85,7 +85,7 @@ setup(name=_PACKAGE,
 #     download_url='https://GitHub.com/mrJean1/PyRDNAP',
 #     entry_points={},
 #     include_package_data=False,
-      install_requires=['pygeodesy>=26.5.9'],
+      install_requires=[_requires],
 #     namespace_packages=[],
 #     py_modules=[],
 )  # PYCHOK indent

@@ -1,23 +1,17 @@
 
 # -*- coding: utf-8 -*-
 
-u'''Main classes L{RDNAP2018v1} and L{RDNAP2018v2} follow C{variant 1} respectively C{variant 2}
-of the specification U{RDNAPTRANS(tm)2018<https://formulieren.kadaster.nl/aanvragen_rdnaptrans>}.
-Each provide a C{forward} method to convert geodetic lat-/longitudes and heights to C{RD}
-coodinates and C{NAP} heights and a C{reverse} method for converting the other way.
+u'''Main classes L{RDNAP2018v1} and L{RDNAP2018v2} follow C{variant 1} respectively C{variant 2} of
+the U{RDNAPTRANS(tm)2018_v220627<https://formulieren.kadaster.nl/aanvragen_rdnaptrans>} specification.
+Each provide a C{forward} method to convert geodetic lat-/longitudes and heights to C{RD} coodinates
+and C{NAP} heights and a C{reverse} method for converting the other way.
 
-The C{forward} and C{reverse} results of L{RDNAP2018v1} meet the C{RDNAPTRANS(tm)2018_v220627}
-self-validation requirements of C{0.000000010 degrees} and C{0.0010 meter} for tests inside
-the C{RD} region, see B{C{Note below}}.  Class L{RDNAP2018v2} does not and is not required to.
-
-The original C{RDNAPTRANS(tm)2018_v220627} grid files for both variants are I{not included}
-in C{PyPRDNAP} and C{pyrdnap} due to the size of those files.  Instead, the grid files for each
-variant I{include only} the C{lat_corr_}, C{lon_corr_} and C{_NAP_quasi_geoid_height_...} columns,
-extracted from the original grid files with leading and trailing zeros removed and formatted as
-row-order matrices.
+The L{RDNAP2018v1.forward} and C{.reverse} results are within the C{RDNAPTRANS(tm)2018_v220627}
+self-validation requirements of C{0.000000010 degrees} respectively C{0.0010 meter} for points inside
+the C{RD} region, see B{C{Note below}}.  Class L{RDNAP2018v2} does not.
 
 @note: L{RDNAP2018v1}, C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are
-       B{not certified} to carry the trademark name C{RDNAPTRANS(tm)}.
+       B{not certified} to carry the trademark C{RDNAPTRANS(tm)}.
 '''
 # make sure int/int division yields float quotient, see .basics
 from __future__ import division as _; del _  # noqa: E702 ;
@@ -25,10 +19,10 @@ from __future__ import division as _; del _  # noqa: E702 ;
 from pyrdnap.rd0 import _RD, _RD0 as A0, RDNAP7Tuple
 from pyrdnap.v_grids import RDNAPError, _V_grid, _v_gridz_import
 from pyrdnap.__pygeodesy import (_0_0, _0_5, _1_0, _2_0,
-                                 _isNAN, _earth_datum,
+                                 _isNAN, _isNAN0, _earth_datum,
                                  _ALL_DOCS, _ALL_OTHER, _FOR_DOCS,
                                  _NamedBase, notOverloaded)
-from pygeodesy import (EPS0, EPS1, NAN, PI_2, PI, PI2,  # "consterns"
+from pygeodesy import (map1, EPS0, EPS1, NAN, PI_2, PI, PI2,  # "consterns"
                        Datum, Datums, Ellipsoid,  # datums, ellipsoids
                        property_RO, property_ROnce,  # props
                        Lamd, Phid,  # units
@@ -38,7 +32,7 @@ from math import asin, atan, copysign, degrees, exp, \
                  fabs, floor, hypot, radians, sin, sqrt
 
 __all__ = ()
-__version__ = '26.05.14'
+__version__ = '26.05.23'
 
 _TOL_D = 1e-9  # degrees 2.3.3f+
 _TOL_M = 1e-6  # meter
@@ -49,7 +43,7 @@ _TRIPS = 16    # 5..6 sufficient
 class _RDNAPbase(_NamedBase):
     '''(INTERNAL) L{RDNAP2018v1}C{/-v2} base class.
     '''
-    _datum  = None  # forward, v1 reverse Datum, lazily
+    _datum  = None  # forward, v1 reverse Datum, lazily ("_DETRS")
     _EETRS  = None  # forward, v1 reverse Ellipsoid, lazily
     _raiser = False
 
@@ -76,7 +70,7 @@ class _RDNAPbase(_NamedBase):
         if not E.isOblate:
             raise RDNAPError('not oblate: %r' % (E,))
         self._EETRS = E
-        if raiser:
+        if raiser:  # PYCHOK no cover
             T = self._datum.transform
             if not T.isunity:
                 raise RDNAPError('not unity: %r' % (T,))
@@ -112,7 +106,8 @@ class _RDNAPbase(_NamedBase):
         phiClamC = _ellipsoidal2spherical(latc, lonc)
         RDx, RDy = _spherical2oblique(*phiClamC)
         NAPh     =  NAN if _isNAN(height) else (height - self.rdNAPh(lat, lon))  # 2.5.2
-        return RDNAP7Tuple(RDx, RDy, NAPh, lat, lon, height, self.forwardDatum, name=name)
+        return RDNAP7Tuple(RDx, RDy, NAPh,
+                           lat, lon, height, self.forwardDatum, name=name)
 
     @property_RO
     def forwardDatum(self):
@@ -147,7 +142,7 @@ class _RDNAPbase(_NamedBase):
     def _rdlatlon2(self, lat, lon, lat0=None, lon0=None):  # 2.3.2
         # return the RD-corrected C{(lat, lon)}
         if _RD.isinside(lat, lon):
-            c_f_N_f6 = _RD.c_f_N_f6(lat, lon)
+            c_f_N_f6 = _RD._c_f_N_f6(lat, lon)
             lat_corr = _bilinear(self._rdgrid._lat_corr, *c_f_N_f6)
             lon_corr = _bilinear(self._rdgrid._lon_corr, *c_f_N_f6)
 
@@ -160,8 +155,7 @@ class _RDNAPbase(_NamedBase):
         return lat, lon  # NAN, NAN?
 
     def rdNAPh(self, lat, lon, raiser=False):  # 2.5.1 and 3.5
-        '''Interpolate the C{NAPh} quasi-geoid-height I{within}
-           the C{RD} region.
+        '''Interpolate the C{NAPh} quasi-geoid-height I{within} the C{RD} region.
 
            @arg lat: Latitude (C{degrees} GRS80 (ETRS89), geodetic).
            @arg lon: Longitude (C{degrees} GRS80 (ETRS89), geodetic).
@@ -169,11 +163,11 @@ class _RDNAPbase(_NamedBase):
                           B{C{lon}} is outside the C{RD} region (C{bool}),
                           otherwise don't and return C{NAN}.
 
-           @return: C{NAPh} (C{meter}) or C{NAN} if C{B{raiser} is False}
-                    and B{C{lat}} or B{C{lon}} is outside the C{RD} region.
+           @return: C{NAPh} (C{meter}) or C{NAN} if C{B{raiser} is False} and
+                    B{C{lat}} or B{C{lon}} is outside the C{RD} region.
         '''
         if _RD.isinside(lat, lon):
-            c_f_N_f6 = _RD.c_f_N_f6(lat, lon)
+            c_f_N_f6 = _RD._c_f_N_f6(lat, lon)
             return _bilinear(self._rdgrid._NAP_h, *c_f_N_f6)
         elif raiser:
             raise self._outsidError(lat, lon)
@@ -181,7 +175,7 @@ class _RDNAPbase(_NamedBase):
 
     @property_RO
     def region(self):
-        '''Get the C{RD} region as L{RDregion4Tuple}C{(S, W, N, E)}, all C{GRS80 (ETRS89) degrees}.
+        '''Get the C{RD} region as L{Bounds4Tuple}C{(latS, lonW, latN, lonE)}, all C{GRS80 (ETRS89) degrees}.
         '''
         return _RD.region
 
@@ -196,8 +190,8 @@ class _RDNAPbase(_NamedBase):
         lat, lon = self._rdlatlon2(lat, lon)
         lat, lon = self._reverseXform(lat, lon, raiser)
         h        = NAN if _isNAN(NAPh) else (NAPh + self.rdNAPh(lat, lon))
-        return RDNAP7Tuple(RDx, RDy, NAPh, lat, lon, h,
-                                           self.reverseDatum, name=name)
+        return RDNAP7Tuple(RDx, RDy, NAPh,
+                           lat, lon,    h, self.reverseDatum, name=name)
 
     @property_RO
     def reverseDatum(self):
@@ -209,11 +203,11 @@ class _RDNAPbase(_NamedBase):
     _reverseXform = _inside2  # no datum Xform
 
     def toStr(self, prec=9, **unused):  # PYCHOK signature
-        '''Return this C{RDNAP2018#v} instance as a string.
+        '''Return this C{RDNAP20181v1} or C{-v2} instance as a string.
 
            @kwarg prec: Precision, number of decimal digits (0..9).
 
-           @return: This C{RDNAP2018#v} (C{str}).
+           @return: This C{RDNAP2018v1} or C{-v2} (C{str}).
         '''
         return self.attrs('name', 'variant', 'forwardDatum', prec=prec)  # _ellipsoid_, _name__
 
@@ -223,10 +217,14 @@ class _RDNAPbase(_NamedBase):
 
 
 class RDNAP2018v1(_RDNAPbase):
-    '''Transformer implementing RD NAP 2018 C{variant 1}.
+    '''Transformer implementing C{variant 1} of U{RD NAP 2018 v220627
+       <https://formulieren.kadaster.nl/aanvragen_rdnaptrans>}.
 
-       @note: Method L{RDNAP2018v1.reverse} returns B{not GRS80 (ETRS89)}
+       @note: Method L{RDNAP2018v1.reverse} returns B{GRS80 (ETRS89)}
               geodetic lat- and longitudes.
+
+       @note: L{RDNAP2018v1} has B{not been formally validated} and is
+              B{not certified} to carry the trademark C{RDNAPTRANS(tm)}.
     '''
     if _FOR_DOCS:
         __init__ = _RDNAPbase.__init__
@@ -287,7 +285,8 @@ class RDNAP2018v1(_RDNAPbase):
 
 
 class RDNAP2018v2(_RDNAPbase):
-    '''Transformer implementing RD NAP 2018 C{variant 2}.
+    '''Transformer implementing C{variant 2} of U{RD NAP 2018 v220627
+       <https://formulieren.kadaster.nl/aanvragen_rdnaptrans>}.
 
        @note: Method L{RDNAP2018v2.reverse} returns B{Bessel1841 (RD-Bessel)}
               and B{not GRS80 (ETRS89)} geodetic lat- and longitudes.
@@ -351,14 +350,14 @@ def _atan_exp(w):  # 2.4.1c
 def _bilinear(v_grid, c_latI, f_latI, latN_f,  # 2.3.1f and g
                       c_lonI, f_lonI, lonN_f):
     # interpolate a lat_corr_, lon_corr_ or NAP_...
-    assert isinstance(v_grid, _V_grid)
-    nw = v_grid(c_latI, f_lonI)
+    assert isinstance(v_grid, _V_grid), v_grid
     ne = v_grid(c_latI, c_lonI)
-    sw = v_grid(f_latI, f_lonI)
+    nw = v_grid(c_latI, f_lonI)
     se = v_grid(f_latI, c_lonI)
+    sw = v_grid(f_latI, f_lonI)
     lonN_f1 = _1_0 - lonN_f  # == 1 - (lonN - f_lonN)
-    return (nw * lonN_f1 + ne * lonN_f) * latN_f + \
-           (sw * lonN_f1 + se * lonN_f) * (_1_0 - latN_f)
+    return (ne * lonN_f + nw * lonN_f1) * latN_f + \
+           (se * lonN_f + sw * lonN_f1) * (_1_0 - latN_f)
 
 
 def _cartesian2geodetic(x, y, z, E):  # 2.2.3 == EcefUPC.reverse?
@@ -384,7 +383,7 @@ def _ellipsoidal2spherical(lat, lon):  # 2.4.1
     # convert geodetic C{(lat, lon)} to spherical C{(𝛷, 𝛬)}
     phiC = phi = Phid(lat)
     if PI_2 > phi > -PI_2:  # 2.4.1c
-        q = A0.ln_tan(phi) - A0.ln_e_2(phi)
+        q = A0.log_tan(phi) - A0.log_e_2(phi)
         w = A0.N0 * q + A0.M0  # 2.4.1b
         phiC = _atan_exp(w)
     lamC = (Lamd(lon) - A0.LAM0) * A0.N0 + A0.LAM0C  # 2.4.1d
@@ -403,11 +402,12 @@ def _geodetic2cartesian(lat, lon, E, h0=0):  # 2.2.1
     # convert C{E}-geodetic C{(lat, lon)} to cartesian C{(x, y, z)}
     y, x = sincos2d(lon)
     z, c = sincos2d(lat)
-    n  = E.a / sqrt(_1_0 - z**2 * E.e2)
-    c *= n + h0
+    n  =  E.a / sqrt(_1_0 - z**2 * E.e2)
+    H  = _isNAN0(h0)
+    c *= n + H
     x *= c
     y *= c
-    z *= n * (_1_0 - E.e2) + h0
+    z *= n * (_1_0 - E.e2) + H
     return x, y, z
 
 
@@ -421,7 +421,7 @@ def _ne0(r, r0=_0_0):
 
 def _oblique2spherical(x, y):  # 3.1.1
     # inverse oblique stereographic conformal projection
-    # from 2-D C{(x, y)} to spherical C{(𝛷, 𝛬)}
+    # from C{RD (x, y)} to spherical C{(𝛷, 𝛬)}
     x -= A0.X0
     y -= A0.Y0
     r  = hypot(x, y)
@@ -431,7 +431,7 @@ def _oblique2spherical(x, y):  # 3.1.1
         ca = sp * y / r
         xN = cp * c0 - ca * s0
         yN = sp * x / r
-        zN = ca * c0 + cp * s0
+        zN = cp * s0 + ca * c0
         phiC = asin(zN)
     else:
         _, xN =  A0.sincos2PHI0C
@@ -446,21 +446,23 @@ def _spherical2ellipsoidal(phiC, lamC):  # 3.1.2
     # spherical C{(𝛷, 𝛬)} to geodetic C{(lat, lon)}
     phi = phiC
     if PI_2 > phi > -PI_2:
-        q = (A0.ln_tan(phi) - A0.M0) / A0.N0
-#       w =  A0.ln_tan(phi)
+        q = (A0.log_tan(phi) - A0.M0) / A0.N0
+#       w =  A0.log_tan(phi)
         for _ in range(_TRIPS):  # 3..6
             phi_ =  phi
-            phi  = _atan_exp(A0.ln_e_2(phi) + q)
+            phi  = _atan_exp(A0.log_e_2(phi) + q)
             if fabs(phi - phi_) < _TOL_R:
                 break
     lam = (lamC - A0.LAM0C) / A0.N0 + A0.LAM0
     lam = floor((PI - lam) / PI2) * PI2 + lam
-    return degrees(phi), degrees(lam)
+    return map1(degrees, phi, lam)
 
 
 def _spherical2oblique(phiC, lamC):  # 2.4.2
     # oblique stereographic conformal projection
-    # from spherical C{(𝛷, 𝛬)} to 2-D C{(x, y)}
+    # from spherical C{(𝛷, 𝛬)} to C{RD (x, y)}
+    x = A0.X0  # 2.4.2g
+    y = A0.Y0  # 2.4.2h
     a = phiC - A0.PHI0C  # 𝛷 - 𝛷0
     b = lamC - A0.LAM0C  # 𝛬 - 𝛬0
     if (_ne0(a) or _ne0(b)) and (_ne0(phiC, -A0.PHI0C) or
@@ -476,17 +478,12 @@ def _spherical2oblique(phiC, lamC):  # 2.4.2
             #   = 2kR / (cos(𝜓/2)**2 * 2)
             #   = 2kR / ((1 - sin(𝜓/2)**2) * 2)
             #   = 2kR / (2 - sin(𝜓/2)**2 * 2)
-            t = sp_22 * _2_0  # 0 < t < 2
-            q = A0.RK2 / (_2_0 - t)
-            x = q * (c * sin(b))
-            y = q * (s - s0 + s0 * t) / c0
-        else:
-            x = y = _0_0  # NAN?
-        x += A0.X0
-        y += A0.Y0
-    elif _eq0(phiC, A0.PHI0C) and _eq0(lamC, A0.LAM0C):
-        x  = A0.X0  # x0 2.4.2g
-        y  = A0.Y0  # y0 2.4.2h
+            t  = sp_22 * _2_0  # 0 < t < 2
+            q  = A0.RK2 / (_2_0 - t)
+            x += q * (c * sin(b))
+            y += q * (s - s0 + s0 * t) / c0
+    elif _eq0(a) and _eq0(b):
+        pass
     else:  # if _eq0(phiC, -A0.PHI0C) and _eq0(lamC, A0.LAM0C - PI):
         x = y = NAN
 #   else:

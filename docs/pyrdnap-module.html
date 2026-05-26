@@ -58,7 +58,7 @@
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
 <h1 class="epydoc">Package pyrdnap</h1><p class="nomargin-top"></p>
-<p>A pure Python implementation of 2018 version of the Netherlands' <a 
+<p>A pure Python implementation of the 2018 version of Netherlands' <a 
   href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
   target="_top">RD NAP</a> specification to convert between GRS80 (ETRS89) 
   geodetic lat-, longitudes and height and local 
@@ -77,19 +77,19 @@
   class="link">pyrdnap.validation3</a> for self-validation testing 
   details.</p>
   <p>See file <code>testresults/Z001_ETRSandRDNAP_v1_results.txt</code> for
-  the self-validation results of the <a 
+  the self-validation test results of the <a 
   href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
-  class="link">RDNAP2018v1</a> transformer, especially the summary in the 
-  last 4 lines.</p>
+  class="link">RDNAP2018v1</a> transformer, especially the final, summary 
+  lines.</p>
 
 <hr />
 <div class="fields">      <p><strong>Note:</strong>
         <code>PyRDNAP</code> and <code>pyrdnap</code> have <b>not been 
         formally validated</b> and are <b>not certified</b> to carry the 
-        trademark name <code>RDNAPTRANS(tm)</code>.
+        trademark <code>RDNAPTRANS(tm)</code>.
       </p>
       <p><strong>Version:</strong>
-        26.05.14
+        26.05.26
       </p>
 </div><!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -102,19 +102,20 @@
   <tr><td class="summary">
   <ul class="nomargin">
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.__main__-module.html">pyrdnap.__main__</a></strong>: <em class="summary">Run a <code>RD NAP 2018 forward</code> or <code>reverse</code> 
-        conversion examples or run the <code>NSGI</code> or <code>RD NAP 
+        conversion example or run the <code>NSGI</code> or <code>RD NAP 
         2018</code> validation test set in &quot;round-trip&quot; fashion.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.__pygeodesy-module.html" onclick="show_private();">pyrdnap.__pygeodesy</a></strong>: <em class="summary">(INTERNAL) <code>pyrdnap</code> access to some private 
         <code>pygeodesy</code> attributes.</em>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.rd0-module.html" onclick="show_private();">pyrdnap.rd0</a></strong>: <em class="summary">(INTERNAL) <code>RD</code> and <code>RD0</code> constants and 
-        <code>RDNAP7Tuple</code> and <code>RDregion</code> classes.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.rd0-module.html" onclick="show_private();">pyrdnap.rd0</a></strong>: <em class="summary">(INTERNAL) RijksDriehoeksmeting <code>_RD</code> and reference 
+        <code>_RD0</code> constants and classes <code>RDNAP7Tuple</code> 
+        and <code>LqRD</code>.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.rdnap2018-module.html" onclick="show_private();">pyrdnap.rdnap2018</a></strong>: <em class="summary">Main classes <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
         class="link">RDNAP2018v1</a> and <a 
         href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" 
         class="link">RDNAP2018v2</a> follow <code>variant 1</code> 
-        respectively <code>variant 2</code> of the specification <a 
+        respectively <code>variant 2</code> of the <a 
         href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
-        target="_top">RDNAPTRANS(tm)2018</a>.</em>    </li>
+        target="_top">RDNAPTRANS(tm)2018_v220627</a> specification.</em>    </li>
     <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary">Extract from the original, compressed, variant 1 grid files 
         <code>nlgeo2018.txt.zip</code> and <code>rdcorr2018.txt.zip</code> 
         the <code>NAP_...</code>, <code>lat_corr_</code> and 
@@ -151,6 +152,16 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
+        <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html" class="summary-name">Bounds4Tuple</a><br />
+      4-Tuple <code>(latS, lonW, latN, lonE)</code> with the bounds' 
+        lower-left <code>(LatS, LowW)</code> and upper-right <code>(latN, 
+        lonE)</code> corner lat- and longitudes.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
         <a href="pygeodesy.datums.Datum-class.html" class="summary-name">Datum</a><br />
       Ellipsoid and transform parameters for an earth model.
     </td>
@@ -179,6 +190,21 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
+        <a href="pyrdnap.rd0.LqRD-class.html" class="summary-name">LqRD</a><br />
+      Like <a 
+        href="https://mrJean1.GitHub.io/PyGeodesy/docs/pygeodesy.ltp.LqRD-class.html"
+        target="_top">pygeodesy.LqRD</a> but with methods 
+        <code>forward</code> and <code>reverse</code> returning an <a 
+        href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+        class="link">RDNAP7Tuple</a> with <code>NAPh</code> replaced by 
+        <i>local</i> <code>z</code>, the perpendicular distance to the 
+        local tangent plane (LTP).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
         <a href="pygeodesy.namedTuples.PhiLam2Tuple-class.html" class="summary-name">PhiLam2Tuple</a><br />
       2-Tuple <code>(phi, lam)</code> with latitude <code>phi</code> in 
         <code>radians[PI_2]</code> and longitude <code>lam</code> in 
@@ -190,7 +216,9 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" class="summary-name">RDNAP2018v1</a><br />
-      Transformer implementing RD NAP 2018 <code>variant 1</code>.
+      Transformer implementing <code>variant 1</code> of <a 
+        href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
+        target="_top">RD NAP 2018 v220627</a>.
     </td>
   </tr>
 <tr>
@@ -198,7 +226,9 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" class="summary-name">RDNAP2018v2</a><br />
-      Transformer implementing RD NAP 2018 <code>variant 2</code>.
+      Transformer implementing <code>variant 2</code> of <a 
+        href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
+        target="_top">RD NAP 2018 v220627</a>.
     </td>
   </tr>
 <tr>
@@ -222,15 +252,6 @@
         <a href="pyrdnap.v_grids.RDNAPError-class.html" class="summary-name">RDNAPError</a><br />
       Error raised for <code>RD</code>, <code>NAP</code> and unzip 
         issues.
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDregion4Tuple-class.html" class="summary-name">RDregion4Tuple</a><br />
-      4-Tuple <code>(S, W, N, E)</code> with <code>RD</code> region in 
-        <code>GRS80 (ETRS89) degrees</code>.
     </td>
   </tr>
 <tr>
@@ -354,7 +375,7 @@ m=Transforms.WGS84),
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self_txt</code></strong> - Name of the file containing the <code>RDNAP 2018</code> 
+        <li><strong class="pname"><code>self_txt</code></strong> - Name of the file containing the <code>RD NAP 2018</code> 
           self-validation tests (<code>str</code>), 
           <code>.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt</code>.</li>
         <li><strong class="pname"><code>R</code></strong> - An RDNAP2018v# transformer (<a 
@@ -467,7 +488,7 @@ m=Transforms.WGS84),
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu May 14 16:01:35 2026
+    Generated by Epydoc 3.0.1 on Tue May 26 15:17:56 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

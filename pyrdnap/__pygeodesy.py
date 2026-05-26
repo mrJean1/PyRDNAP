@@ -3,9 +3,10 @@
 
 u'''(INTERNAL) C{pyrdnap} access to some private C{pygeodesy} attributes.
 '''
+_requires = '26.5.26'  # in requirements.txt, setup.py
 
 
-def _PyGeodesy_dir():
+def _PyGeodesy_dir(requires):
     # Adjust sys.path to enable import pygeodesy
     d = None
     try:
@@ -34,30 +35,30 @@ def _PyGeodesy_dir():
     def _t(v):
         return tuple(map(int, v.split('.')))  # _DOT_
 
-    _r = '26.5.9'
-    if _v == 'missing' or _t(_v) < _t(_r):
-        _v = ' %s, need %s or newer' % (_v, _r)
-        raise ValueError('pygeodesy' + _v)
+    if _v == 'missing' or _t(_v) < _t(requires):
+        _v = ' %s, need %s or newer' % (_v, requires)
+        raise ImportError('pygeodesy' + _v)
 
     return d  # or None
 
-_PyGeodesy_dir = _PyGeodesy_dir()  # PYCHOK path or None
+_PyGeodesy_dir = _PyGeodesy_dir(_requires)  # PYCHOK path or None
 
 from pygeodesy.basics import _xinstanceof, _xsubclassof  # noqa: F401
-from pygeodesy.constants import _0_0, _0_0s, _0_5, _1_0, _N_1_0, _2_0, _isNAN  # noqa: F401
+from pygeodesy.constants import (_0_0, _0_0s, _0_5, _1_0, _N_1_0, _2_0,  # noqa: F401
+                                 _isNAN, _isNAN0)  # noqa: F401
 from pygeodesy.datums import _earth_datum  # noqa: F401
 from pygeodesy.ellipsoidalBase import LatLonEllipsoidalBase as _LLEB  # noqa: F401
 from pygeodesy.errors import _ValueError, _xkwds, _xkwds_pop2  # noqa: F401
 from pygeodesy.internals import _secs2str, _versions  # noqa: F401
 from pygeodesy.interns import (_COLONSPACE_, _COMMASPACE_, _DASH_, _datum_, _E_,  # noqa: F401
                                _EQUAL_, _height_, _lat_, _lon_, _N_, _NAN_, _NL_,  # noqa: F401
-                               _S_, _SPACE_, _UNDER_, _W_)  # noqa: F401
+                               _S_, _SPACE_, _STAR_, _W_)  # noqa: F401
 from pygeodesy.lazily import _ALL_DOCS, _ALL_OTHER, _FOR_DOCS, import_module  # noqa: F401
 from pygeodesy.named import _NamedBase, _NamedTuple, notOverloaded, _Pass  # noqa: F401
 from pygeodesy.streprs import Fmt  # noqa: F401
 
 __all__ = ()
-__version__ = '26.05.14'
+__version__ = '26.05.26'
 
 # **) MIT License
 #

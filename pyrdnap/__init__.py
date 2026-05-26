@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
-u'''A pure Python implementation of 2018 version of the Netherlands' U{RD NAP<https://www.NSGI.NL/
+u'''A pure Python implementation of the 2018 version of Netherlands' U{RD NAP<https://www.NSGI.NL/
 coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
 specification to convert between GRS80 (ETRS89) geodetic lat-, longitudes and height and local
 I{B{R}ijksB{D}riehoeksmeeting (B{RD})} coordinates and I{B{N}ormaal B{A}msterdams B{P}eil (B{NAP})
@@ -14,11 +14,11 @@ unmodified C{.txt} grid files for each variant, but compressed as C{.txt.zip}.
 
 See function L{pyrdnap.validation3} for self-validation testing details.
 
-See file C{testresults/Z001_ETRSandRDNAP_v1_results.txt} for the self-validation results of the
-L{RDNAP2018v1} transformer, especially the summary in the last 4 lines.
+See file C{testresults/Z001_ETRSandRDNAP_v1_results.txt} for the self-validation test results
+of the L{RDNAP2018v1} transformer, especially the final, summary lines.
 
 @note: C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are B{not certified}
-       to carry the trademark name C{RDNAPTRANS(tm)}.
+       to carry the trademark C{RDNAPTRANS(tm)}.
 '''
 import os.path as os_path
 import sys
@@ -51,7 +51,7 @@ from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
 __all__ = tuple(sorted(('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self))
-__version__ = '26.05.14'
+__version__ = '26.05.26'
 
 
 def _versions():  # in .__main__, .test/bases
