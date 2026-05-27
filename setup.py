@@ -7,18 +7,23 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.05.25'
+__version__ = '26.05.27'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
 from pyrdnap.__pygeodesy import _requires
 
-_requires = 'pygeodesy>=' + _requires
 
-with open('requirements.txt', 'rb') as f:
-    if _requires not in f.read().decode('utf-8'):
-        import sys
-        t = '*** ' + _requires + ' not in requirements.txt ***'
-        sys.exit(t)
+def _assert(name, streq):
+    with open(name, 'rb') as f:
+        if streq not in f.read().decode('utf-8'):
+            import sys
+            t = '*** %r not in %s ***' % (streq, name)
+            sys.exit(t)
+
+_pygeodesy_requires = 'pygeodesy>=' + _requires  # PYCHOK below
+
+_assert('requirements.txt', _pygeodesy_requires)
+_assert('README.rst', 'version %s or newer' % (_requires,))
 
 
 def _c(*names):
@@ -85,7 +90,7 @@ setup(name=_PACKAGE,
 #     download_url='https://GitHub.com/mrJean1/PyRDNAP',
 #     entry_points={},
 #     include_package_data=False,
-      install_requires=[_requires],
+      install_requires=[_pygeodesy_requires],
 #     namespace_packages=[],
 #     py_modules=[],
 )  # PYCHOK indent

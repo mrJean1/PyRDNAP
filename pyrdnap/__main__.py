@@ -22,15 +22,16 @@ C{  [ -v1 | -v2 ] -testset  .../002_ETRS89.txt | .../002_RDNAP.txt | .../Z001_ET
        are B{not certified} to carry the trademark C{RDNAPTRANS(tm)}.
 '''
 from pyrdnap import _pyrdnap_, RDNAP2018v1, RDNAP2018v2, RDNAP7Tuple, _versions
-from pyrdnap.__pygeodesy import _datum_, _EQUAL_, Fmt, _NAN_, _secs2str, _SPACE_
-from pyrdnap.v_self import _line, _readlines, _STAR_, validation3
+from pyrdnap.__pygeodesy import (_datum_, _EQUAL_, Fmt, _NAN_, _SPACE_, _STAR_,
+                                 _secs2str)
+from pyrdnap.v_self import _line, _readlines, validation3
 from pygeodesy import map2, print_, typename
 
 import sys
 from time import time
 
 __all__ = ()
-__version__ = '26.05.26'
+__version__ = '26.05.27'
 
 _BOTH  = 'Z001_ETRS89andRDNAP.txt'  # RDNAPTRANS2018_v220627/...
 _DASH_ = '-'

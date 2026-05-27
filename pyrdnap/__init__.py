@@ -51,7 +51,7 @@ from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
 __all__ = tuple(sorted(('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self))
-__version__ = '26.05.26'
+__version__ = '26.05.28'
 
 
 def _versions():  # in .__main__, .test/bases

@@ -29,8 +29,8 @@ C{forward} C{RDx} and C{RDy} results are taken into account.
 @see: Module L{pyrdnap<pyrdnap.__main__>} for examples to invoke L{validation3}.
 '''
 from pyrdnap.rd0 import RDNAP7Tuple
-from pyrdnap.__pygeodesy import _ALL_OTHER, _COMMASPACE_, _NL_, _SPACE_, _STAR_, \
-                                _secs2str, _xinstanceof
+from pyrdnap.__pygeodesy import (_ALL_OTHER, _COMMASPACE_, _NL_, _SPACE_, _STAR_,
+                                 _secs2str, _xinstanceof)
 from pygeodesy import NN, NAN, map2, typename
 
 from math import fabs
@@ -38,7 +38,7 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.05.26'
+__version__ = '26.05.27'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[:3]
 #        (lat   lon   height RDx   RDy   NAPh)
@@ -51,7 +51,7 @@ def _line(ln):  # in .__main__
     return ' (line %s)' % (ln,)
 
 
-def _readlines(filename):  # in .__main__
+def _readlines(filename):  # PYCHOK in .__main__, .v_self, setup.py
     # yield each line as str, not bytes
     with open(filename, 'rb') as f:
         while True:
