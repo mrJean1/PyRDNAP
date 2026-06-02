@@ -12,10 +12,10 @@ See module L{pyrdnap.rdnap2018} for further information and usage, implementatio
 See modules L{pyrdnap.v1grid} and L{pyrdnap.v2grid} for the original C{RDNAPTRANS2018_v220627},
 unmodified C{.txt} grid files for each variant, but compressed as C{.txt.zip}.
 
-See function L{pyrdnap.validation3} for self-validation testing details.
+See files C{testresults/v1_..._round_trips.txt} for "round-trip" (forward plus reverse) test
+results of the L{RDNAP2018v1} transformer, especially the final, summary lines in each file.
 
-See file C{testresults/Z001_ETRSandRDNAP_v1_results.txt} for the self-validation test results
-of the L{RDNAP2018v1} transformer, especially the final, summary lines.
+See function L{pyrdnap.validation3} for C{.../Z001_ETRSandRDNAP.txt} "round-trip" test details.
 
 @note: C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are B{not certified}
        to carry the trademark C{RDNAPTRANS(tm)}.
@@ -51,7 +51,7 @@ from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
 __all__ = tuple(sorted(('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self))
-__version__ = '26.05.28'
+__version__ = '26.06.02'
 
 
 def _versions():  # in .__main__, .test/bases

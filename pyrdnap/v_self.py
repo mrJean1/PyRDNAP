@@ -1,7 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
-u'''Function L{validation3} to run the C{RD NAP 2018} self-validation tests
+u'''Function L{validation3} to run the C{RD NAP 2018} self-validation test set
 C{.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt} obtainable from U{NSGI.NL
 <https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
 after registration.
@@ -13,8 +13,8 @@ The 2nd line shows the C{lat}, C{lon} and C{height} and C{RDx}, C{RDy} and {NAPh
 from the L{RDNAP2018v1} or C{-v2} transformer's L{reverse<pyrdnap.RDNAP2018v1.reverse>}
 respectively L{forward<pyrdnap.RDNAP2018v1.forward>} method.
 
-The 3rd line contains the (absolute value) of the differences between the results on
-the 2nd line and the corresponding, original value on the 1st line.
+The 3rd line contains the (absolute value) of the differences for each result on the 2nd
+line and the corresponding, original test point value on the 1st line.
 
 The final lines of the output are the C{maximum} of all (absolute value) differences in
 2 formats and a line with the C{RD NAP 2018} requirements, C{0.000000010 degrees} or
@@ -23,14 +23,13 @@ C{0.0010 meter} for each result.
 A test C{FAILED} if any C{reverse} or C{forward} result I{exceeds} the C{RD NAP 2018}
 requirement for that result.
 
-For points with C{NAPh} marked C{"*"}, only the C{reverse} C{lat} and C{lon} and
-C{forward} C{RDx} and C{RDy} results are taken into account.
+For points with C{NAPh} marked C{"*"}, C{NAPh} is set to C{NAN}.
 
 @see: Module L{pyrdnap<pyrdnap.__main__>} for examples to invoke L{validation3}.
 '''
 from pyrdnap.rd0 import RDNAP7Tuple
-from pyrdnap.__pygeodesy import (_ALL_OTHER, _COMMASPACE_, _NL_, _SPACE_, _STAR_,
-                                 _secs2str, _xinstanceof)
+from pyrdnap.__pygeodesy import (_ALL_OTHER, _COMMASPACE_, _NAN_, _NL_,
+                                 _SPACE_, _STAR_, _secs2str, _xinstanceof)
 from pygeodesy import NN, NAN, map2, typename
 
 from math import fabs
@@ -38,9 +37,9 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.05.27'
+__version__ = '26.06.02'
 
-_NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[:3]
+_NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[0:3]
 #        (lat   lon   height RDx   RDy   NAPh)
 _REQ_D = (1e-8, 1e-8, 1e-3,  1e-3, 1e-3, 1e-3)  # 0 == ignore
 _NDECS = (11,   11,   6,     8,    8,    8)  # fmt precision
@@ -51,18 +50,17 @@ def _line(ln):  # in .__main__
     return ' (line %s)' % (ln,)
 
 
-def _readlines(filename):  # PYCHOK in .__main__, .v_self, setup.py
+def _readlines(filename):  # in .__main__
     # yield each line as str, not bytes
     with open(filename, 'rb') as f:
-        while True:
-            t = f.readline()
-            if not t:
-                break
+        t = f.readline()
+        while t:
             yield t.strip().decode('utf-8')
+            t = f.readline()
 
 
-def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=None):  # MCCABE 13
-    '''Run the official C{RD NAP 2018} self-validation tests.
+def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=None):  # MCCABE 18
+    '''Run the C{RD NAP 2018} self-validation test set.
 
        @arg self_txt: Name of the file containing the C{RD NAP 2018} self-validation tests
                       (C{str}), C{.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt}.
@@ -97,19 +95,17 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
         for t in _readlines(self_txt):
             ln += 1
             if t0:
-                ts = t.split()
-                if ts[6] == _STAR_:  # xpec_d and res, each a 5-tuple of floats
-                    lat, lon, h, RDx, RDy = xpec_d = map2(float, ts[1:-1])
-                    res = R.reverse(RDx, RDy, NAN).latlonheight + R.forward(lat, lon, h).xy
-                    ds[5] = NAN
-                else:  # xpec_d and res, each a 6-tuple of floats
-                    lat, lon, h, RDx, RDy, NAPh = xpec_d = map2(float, ts[1:])
-                    res = R.reverse(RDx, RDy, NAPh).latlonheight + R.forward(lat, lon, h).xyz
-                # assert len(res) == len(xpec)
+                ts = t.split()  # list
+                if ts[6] == _STAR_:
+                    ts[6] = _NAN_
+                lat, lon, h, RDx, RDy, NAPh = xs = map2(float, ts[1:])
                 if in_out == bool(R.isinside(lat, lon)):
+                    F  = NN  # PASSED
+                    rs = R.reverse(RDx, RDy, NAPh).latlonheight + \
+                         R.forward(lat, lon, h).xyz
+                    ntotal  += len(rs)
                     nin_out += 1
-                    F = NN  # PASSED
-                    for i, (m, q, r, x) in enumerate(zip(diffs, _REQ_D, res, xpec_d)):
+                    for i, (m, q, r, x) in enumerate(zip(diffs, _REQ_D, rs, xs)):
                         if q > 0:
                             ds[i] = d = fabs(r - x)
                             if d > m:  # new max |diff|
@@ -117,12 +113,12 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                             if d > q:
                                 nfailed += 1
                                 F = 'FAILED'
-                            ntotal += 1
-                        else:
+                        else:  # PYCHOK no cover
+                            ntotal -= 1
                             ds[i] = NAN
                     if _printest and (F or all_):
                         _printest('id', _SPACE_(*ts), _line(ln))
-                        _printest(R_, _zfmt(res), F)
+                        _printest(R_, _zfmt(rs), F)
                         _printest('     |diff|', _zfe4(ds), F, _NL_)
             else:  # 1st line
                 if _print:
@@ -143,7 +139,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
             for n, _z, fs in (('req', _zfmt, _REQ_D), ('max', _zfe4, diffs),
                                                       ('max', _zfmt, diffs)):
                 _print(R_, n, '|diff|', _z(fs))
-    else:
+    else:  # PYCHOK no cover
         t = "doesn't exist: %r" % (self_txt,)
         if _print:
             _print(t)

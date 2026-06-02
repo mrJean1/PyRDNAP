@@ -5,14 +5,15 @@
 
 from bases import TestsBase, Datums, NAN, startswith
 
-from pyrdnap import LqRD, RDNAP2018v1, RDNAP2018v2
+from pyrdnap import LqRD, RDNAP2018v1, RDNAP2018v2, RDNAP7Tuple
 from pyrdnap.rd0 import _RD, _RD0 as A0
 
+from math import fabs
 from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.05.24'
+__version__ = '26.06.02'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -97,6 +98,29 @@ class Tests(TestsBase):
         self.test('philamheight', t.philamheight, '(0.910297, 0.094032, 0)')
         self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith)
 
+    def testRD11(self, R):  # <https://NL.WikiPedia.org/wiki/Rijksdriehoekscoördinaten>
+        t = repr(R)
+        self.test('RD11', t, 'RDNAP2018', known=startswith, nl=1)
+        for x, y, lat, lon in (  # RDx     RDy         lat           lon        # near
+                               (141000, 629000, "53 38 48.2N", "5 10 31.9E"),   # 30 km N  Terschelling
+                               (100000, 600000, "53 23  0.6N", "4 33 38.4E"),   # 30 km  W Terschelling
+                               ( 80000, 500000, "52 28 57.3N", "4 16 59.2E"),   # 20 km  W IJmuiden
+                               ( -7000, 392000, "51 29 37.3N", "3  3 15.1E"),   # 20 km  W Westkapelle
+                               ( -7000, 336000, "50 59 26.4N", "3  4 46.8E"),   # 10 km NE Roeselare
+                               (101000, 336000, "51  0 39.9N", "4 37  3.9E"),   # 25 km NE Brussel
+                               (161000, 289000, "50 35 28.1N", "5 28 18.9E"),   # 10 km SW Luik
+                               (219000, 289000, "50 35 15.4N", "6 17 27.1E"),   # 25 km SE Aken
+                               (300000, 451000, "52  1 42.1N", "7 30  0.8E"),   # 10 km NW Münster
+                               (300000, 614000, "53 29 32.4N", "7 34 19.3E"),   # 05 km NE Aurich
+                               (259000, 629000, "53 38 12.0N", "6 57 34.1E")):  # 05 km Z  Juist
+            r = RDNAP7Tuple(x, y, NAN, lat, lon, NAN, None).toUnits()
+            t = R.forward(lat, lon, NAN)
+            self.test('forward', t, r, known=fabs(t.RDx - r.RDx) < 1.0 and
+                                             fabs(t.RDy - r.RDy) < 1.5)
+            t = R.reverse(x, y, NAN)
+            self.test('reverse', t, r, known=fabs(t.lat - r.lat) < 0.0005 and
+                                             fabs(t.lon - r.lon) < 0.0005)
+
     def testRndTrip(self, R, lat, lon, h=NAN, RDx_RDy=None):
         llh = lat, lon, h
         t =  R.forward(*llh)
@@ -142,6 +166,9 @@ if __name__ == '__main__':
     t.testSAS(R1)
 
     t.testLqRD()
+
+    t.testRD11(R1)
+    t.testRD11(R2)
 
     t.testRDs()  # coverage
     t.test('ndigits', _ndigits, _ndigits)

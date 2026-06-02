@@ -25,14 +25,14 @@ from pyrdnap.__pygeodesy import (_0_0, _0_5, _1_0, _2_0,
 from pygeodesy import (map1, EPS0, EPS1, NAN, PI_2, PI, PI2,  # "consterns"
                        Datum, Datums, Ellipsoid,  # datums, ellipsoids
                        property_RO, property_ROnce,  # props
-                       Lamd, Phid,  # units
+                       Lamd, Lat, Lon, Phid,  # units
                        sincos2, sincos2d)  # utily
 
 from math import asin, atan, copysign, degrees, exp, \
                  fabs, floor, hypot, radians, sin, sqrt
 
 __all__ = ()
-__version__ = '26.05.23'
+__version__ = '26.06.02'
 
 _TOL_D = 1e-9  # degrees 2.3.3f+
 _TOL_M = 1e-6  # meter
@@ -94,6 +94,7 @@ class _RDNAPbase(_NamedBase):
            @return: An L{RDNAP7Tuple}C{(RDx, RDy, NAPh, lat, lon, height, datum)}
                     with local C{RDx}, C{RDy} coordinates and C{NAPh} height.
         '''
+        lat,  lon  = Lat(lat), Lon(lon)
         lat0, lon0 = \
         lat_, lon_ = self._forwardXform(lat, lon, raiser)
         for _ in range(_TRIPS):  # 2.3.3a-f, 1..2
@@ -105,7 +106,8 @@ class _RDNAPbase(_NamedBase):
 
         phiClamC = _ellipsoidal2spherical(latc, lonc)
         RDx, RDy = _spherical2oblique(*phiClamC)
-        NAPh     =  NAN if _isNAN(height) else (height - self.rdNAPh(lat, lon))  # 2.5.2
+        NAPh     =  NAN if _isNAN(height) else (height -
+                    self._rdNAPh_v(lat, lon, latc, lonc))  # 2.5.2
         return RDNAP7Tuple(RDx, RDy, NAPh,
                            lat, lon, height, self.forwardDatum, name=name)
 
@@ -129,7 +131,7 @@ class _RDNAPbase(_NamedBase):
 
            @kwarg eps: Over-/undersize the C{RD} region (C{degrees}).
         '''
-        return _RD.isinside(lat, lon, eps)
+        return _RD.isinside(Lat(lat), Lon(lon), eps)
 
     def _outsidError(self, *lat_lon):
         # format an RDNAPError for C{lat_lon} outside C{RD} region
@@ -157,8 +159,8 @@ class _RDNAPbase(_NamedBase):
     def rdNAPh(self, lat, lon, raiser=False):  # 2.5.1 and 3.5
         '''Interpolate the C{NAPh} quasi-geoid-height I{within} the C{RD} region.
 
-           @arg lat: Latitude (C{degrees} GRS80 (ETRS89), geodetic).
-           @arg lon: Longitude (C{degrees} GRS80 (ETRS89), geodetic).
+           @arg lat: Latitude (C{degrees} geodetic).
+           @arg lon: Longitude (C{degrees} geodetic).
            @kwarg raiser: If C{True} raise an L{RDNAPError} if B{C{lat}} or
                           B{C{lon}} is outside the C{RD} region (C{bool}),
                           otherwise don't and return C{NAN}.
@@ -166,12 +168,25 @@ class _RDNAPbase(_NamedBase):
            @return: C{NAPh} (C{meter}) or C{NAN} if C{B{raiser} is False} and
                     B{C{lat}} or B{C{lon}} is outside the C{RD} region.
         '''
-        if _RD.isinside(lat, lon):
+        return self._rdNAPh(Lat(lat), Lon(lon), raiser)
+
+    def _rdNAPh(self, lat, lon, raiser):
+        '''(INTERNAL) Return C{NAPh} or C{NAN}.
+        '''
+        if _RD.isinside(lat, lon):  # eps=0
             c_f_N_f6 = _RD._c_f_N_f6(lat, lon)
             return _bilinear(self._rdgrid._NAP_h, *c_f_N_f6)
         elif raiser:
             raise self._outsidError(lat, lon)
         return NAN  # c0 2.5.1e+
+
+    def _rdNAPh_v(self, lat1, lon1, lat2, lon2):
+        '''(INTERNAL) Use geodetic C{lat1, lon1} for variant 1 or the
+           RD-corrected or inverse-projected C{lat2, lon2} for variant 2.
+        '''
+        if self.variant == 2:
+            lat1, lon1 = lat2, lon2
+        return self._rdNAPh(lat1, lon1, False)
 
     @property_RO
     def region(self):
@@ -184,12 +199,13 @@ class _RDNAPbase(_NamedBase):
            B{C{NAPh}} quasi-geoid-height to GRS80 (ETRS89) or Bessel1841
            (RD-Bessel) geodetic C{lat}, C{lon} and C{height}.
         '''
-        philCamC = _oblique2spherical(RDx, RDy)
-        lat, lon = _spherical2ellipsoidal(*philCamC)
+        phiClamC = _oblique2spherical(RDx, RDy)
+        latlon   = _spherical2ellipsoidal(*phiClamC)
 
-        lat, lon = self._rdlatlon2(lat, lon)
-        lat, lon = self._reverseXform(lat, lon, raiser)
-        h        = NAN if _isNAN(NAPh) else (NAPh + self.rdNAPh(lat, lon))
+        latc, lonc = self._rdlatlon2(*latlon)
+        lat,  lon  = self._reverseXform(latc, lonc, raiser)
+        h          = NAN if _isNAN(NAPh) else (NAPh +
+                     self._rdNAPh_v(lat, lon, *latlon))
         return RDNAP7Tuple(RDx, RDy, NAPh,
                            lat, lon,    h, self.reverseDatum, name=name)
 
@@ -376,7 +392,7 @@ def _cartesian2geodetic(x, y, z, E):  # 2.2.3 == EcefUPC.reverse?
     else:
         phi = copysign(PI_2, z)
     lam = _atan3(y, x, y)
-    return degrees(phi), degrees(lam)
+    return map1(degrees, phi, lam)
 
 
 def _ellipsoidal2spherical(lat, lon):  # 2.4.1
@@ -453,8 +469,8 @@ def _spherical2ellipsoidal(phiC, lamC):  # 3.1.2
             phi  = _atan_exp(A0.log_e_2(phi) + q)
             if fabs(phi - phi_) < _TOL_R:
                 break
-    lam = (lamC - A0.LAM0C) / A0.N0 + A0.LAM0
-    lam = floor((PI - lam) / PI2) * PI2 + lam
+    lam  = (lamC - A0.LAM0C) / A0.N0 + A0.LAM0
+    lam += floor((PI - lam) / PI2) * PI2
     return map1(degrees, phi, lam)
 
 

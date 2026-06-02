@@ -71,7 +71,7 @@ All Python source code has been statically checked_ with Ruff_ using Python 3.13
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
 64-bit on macOS 26.5 Tahoe only.
 
-*Last updated: May 28, 2026.*
+*Last updated: June 02, 2026.*
 
 License
 =======
@@ -98,7 +98,7 @@ DEALINGS IN THE SOFTWARE.
   :target: https://PyPI.org/project/pyrdnap
 .. image:: https://Img.Shields.io/appveyor/ci/mrJean1/PyRDNAP.svg?branch=master&label=AppVeyor
   :target: https://CI.AppVeyor.com/project/mrJean1/PyRDNAP/branch/master
-.. image:: https://Img.Shields.io/badge/coverage-95%25-brightgreen
+.. image:: https://Img.Shields.io/badge/coverage-96%25-brightgreen
   :target: https://GitHub.com/mrJean1/PyRDNAP/blob/master/testcoverage.pdf
 .. image:: https://Img.Shields.io/pypi/wheel/pyrdnap.svg
   :target: https://PyPI.org/project/pyrdnap/#files

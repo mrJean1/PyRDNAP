@@ -9,6 +9,7 @@ pyrdnap._pyrdnap_	pyrdnap-module.html#_pyrdnap_
 pyrdnap.__main__	pyrdnap.__main__-module.html
 pyrdnap.__main__.validation3	pyrdnap.v_self-module.html#validation3
 pyrdnap.__main__._R	pyrdnap.__main__-module.html#_R
+pyrdnap.__main__._llh	pyrdnap.__main__-module.html#_llh
 pyrdnap.__main__._FWD	pyrdnap.__main__-module.html#_FWD
 pyrdnap.__main__._DASH_	pyrdnap.__main__-module.html#_DASH_
 pyrdnap.__main__._versions	pyrdnap-module.html#_versions
@@ -338,13 +339,13 @@ pyrdnap.rd0.RDNAP7Tuple.lam	pyrdnap.rd0.RDNAP7Tuple-class.html#lam
 pyrdnap.rd0.RDNAP7Tuple.phi	pyrdnap.rd0.RDNAP7Tuple-class.html#phi
 pyrdnap.rdnap2018.RDNAP2018v1	pyrdnap.rdnap2018.RDNAP2018v1-class.html
 pyrdnap.rdnap2018.RDNAP2018v1.similarity	pyrdnap.rdnap2018.RDNAP2018v1-class.html#similarity
+pyrdnap.rdnap2018.RDNAP2018v1.__init__	pyrdnap.rdnap2018.RDNAP2018v1-class.html#__init__
 pyrdnap.rdnap2018.RDNAP2018v1._rdgrid	pyrdnap.rdnap2018.RDNAP2018v1-class.html#_rdgrid
 pyrdnap.rdnap2018.RDNAP2018v1._forwardXform	pyrdnap.rdnap2018.RDNAP2018v1-class.html#_forwardXform
 pyrdnap.rdnap2018.RDNAP2018v1.forward	pyrdnap.rdnap2018.RDNAP2018v1-class.html#forward
 pyrdnap.rdnap2018.RDNAP2018v1._reverseXform	pyrdnap.rdnap2018.RDNAP2018v1-class.html#_reverseXform
 pyrdnap.rdnap2018.RDNAP2018v1.variant	pyrdnap.rdnap2018.RDNAP2018v1-class.html#variant
 pyrdnap.rdnap2018.RDNAP2018v1.reverse	pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse
-pyrdnap.rdnap2018.RDNAP2018v1.__init__	pyrdnap.rdnap2018.RDNAP2018v1-class.html#__init__
 pyrdnap.rdnap2018.RDNAP2018v2	pyrdnap.rdnap2018.RDNAP2018v2-class.html
 pyrdnap.rdnap2018.RDNAP2018v2.similarity	pyrdnap.rdnap2018.RDNAP2018v2-class.html#similarity
 pyrdnap.rdnap2018.RDNAP2018v2._rdgrid	pyrdnap.rdnap2018.RDNAP2018v2-class.html#_rdgrid

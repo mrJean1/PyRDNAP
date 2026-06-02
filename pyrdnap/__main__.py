@@ -25,13 +25,13 @@ from pyrdnap import _pyrdnap_, RDNAP2018v1, RDNAP2018v2, RDNAP7Tuple, _versions
 from pyrdnap.__pygeodesy import (_datum_, _EQUAL_, Fmt, _NAN_, _SPACE_, _STAR_,
                                  _secs2str)
 from pyrdnap.v_self import _line, _readlines, validation3
-from pygeodesy import map2, print_, typename
+from pygeodesy import Lat, Lon, map2, print_, typename
 
 import sys
 from time import time
 
 __all__ = ()
-__version__ = '26.05.27'
+__version__ = '26.06.02'
 
 _BOTH  = 'Z001_ETRS89andRDNAP.txt'  # RDNAPTRANS2018_v220627/...
 _DASH_ = '-'
@@ -182,7 +182,7 @@ class Run(object):
                     ts = t.strip().split()
                     yield ts[0], map2(float, ts[1:])
                 else:  # 1st line
-                    print_(t)
+                    # print_(t, _line(1))
                     ts = True
 
     def validation3(self, in_out):
@@ -192,6 +192,10 @@ class Run(object):
                               _print=print_,
                               _printest=print_ if self._all or self._fail else None)
         sys.exit(min(nf, 99))
+
+
+def _llh(lat, lon, h=0):  # allow lat, lon as DMS str
+    return Lat(lat), Lon(lon), float(h)
 
 
 def _usage(x):
@@ -243,7 +247,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 
     elif '-forward'.startswith(arg) and larg > 1 and narg > 0:
         if narg > 1 and argv[0] != '-all':
-            f = _R.forward(*map(float, argv[:3]))
+            f = _R.forward(*_llh(*argv[:3]))
             print_(f.toRepr(prec=_prec))
             r = _R.reverse(f.RDx, f.RDy, f.NAPh)
             print_(r.toRepr(prec=_prec))
@@ -252,7 +256,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 
     elif '-reverse'.startswith(arg) and larg > 1 and narg > 0:
         if narg > 1 and argv[0] != '-all':
-            r = _R.reverse(*map(float, argv[:3]))
+            r = _R.reverse(*_llh(*argv[:3]))
             print_(r.toRepr(prec=_prec))
             f = _R.forward(r.lat, r.lon, r.height)
             print_(f.toRepr(prec=_prec))

@@ -13,7 +13,7 @@ import sys
 from zipfile import ZipFile
 
 __all__ = ()
-__version__ = '26.05.13'
+__version__ = '26.05.29'
 
 _R_C = 481, 301  # shape: rows, cols
 _RxC = 144781    # total
@@ -153,7 +153,7 @@ def _v_txt_unzip(v, name, col2or3, _array):
     '''(INTERNAL) Open grid file C{<name>2018.txt} or unzip
        C{<name>2018.txt.zip} of variant C{v}, extract column
        C{col2or3} and yield 481 rows, each a 301-C{_array}
-       of floats or _ZEROW if all zeros.
+       of floats or a _ZEROW if all zeros.
     '''
     r = []
     try:
