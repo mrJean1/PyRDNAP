@@ -52,7 +52,7 @@ Tests
 =====
 
 The tests ran with Python 3.14.5, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_
-26.5.9 and on macOS 26.5 Tahoe in 64-bit.  The results of those tests are included in the
+26.5.9 and on macOS 26.5.1 Tahoe in 64-bit.  The results of those tests are included in the
 distribution file.
 
 Python 3.14.5 runs on Apple M4 Si (``arm64``), *natively*.  Python 2.7.18 runs on Intel (``x86_64``)
@@ -69,9 +69,9 @@ Notes
 
 All Python source code has been statically checked_ with Ruff_ using Python 3.13.12 and with
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
-64-bit on macOS 26.5 Tahoe only.
+64-bit on macOS 26.5.1 Tahoe only.
 
-*Last updated: June 02, 2026.*
+*Last updated: June 06, 2026.*
 
 License
 =======

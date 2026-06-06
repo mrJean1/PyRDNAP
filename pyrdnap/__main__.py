@@ -31,7 +31,7 @@ import sys
 from time import time
 
 __all__ = ()
-__version__ = '26.06.02'
+__version__ = '26.06.04'
 
 _BOTH  = 'Z001_ETRS89andRDNAP.txt'  # RDNAPTRANS2018_v220627/...
 _DASH_ = '-'
@@ -83,7 +83,7 @@ class Run(object):
             f = R.forward(lat, lon, h)
             if _a:
                 print_(R_, self.toRepr6(f, R))
-            r = R.reverse(f.RDx, f.RDy, f.NAPh)
+            r = R.reverse(f.RDx, f.RDy, f.NAPh, toRD=False)  # XXX
             if _a:
                 print_(R_, self.toRepr6(r, R))
             d = r.diff(f, name='|diff| ')
@@ -99,7 +99,7 @@ class Run(object):
         R  = self._R
         R_ = self._R_
         for RDx, RDy, NAPh in self._run(self.reverse):
-            r = R.reverse(RDx, RDy, NAPh)
+            r = R.reverse(RDx, RDy, NAPh, toRD=False)  # XXX
             if _a:
                 print_(R_, self.toRepr6(r, R))
             f = R.forward(r.lat, r.lon, r.height)
@@ -249,14 +249,14 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
         if narg > 1 and argv[0] != '-all':
             f = _R.forward(*_llh(*argv[:3]))
             print_(f.toRepr(prec=_prec))
-            r = _R.reverse(f.RDx, f.RDy, f.NAPh)
+            r = _R.reverse(f.RDx, f.RDy, f.NAPh, toRD=False)
             print_(r.toRepr(prec=_prec))
         else:  # PYCHOK no cover
             Run(argv, _R).forward()
 
     elif '-reverse'.startswith(arg) and larg > 1 and narg > 0:
         if narg > 1 and argv[0] != '-all':
-            r = _R.reverse(*_llh(*argv[:3]))
+            r = _R.reverse(*map(float, argv[:3]), toRD=False)
             print_(r.toRepr(prec=_prec))
             f = _R.forward(r.lat, r.lon, r.height)
             print_(f.toRepr(prec=_prec))

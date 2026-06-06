@@ -805,7 +805,7 @@ RDNAP2018v1 |diff| (RDx 4.19127e-05, RDy 3.47368e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10020160   167551.2788   268975.9182 197.3296  (line 162)
 RDNAP2018v1 reverse(RDx 167551.0, RDy 268976.0, NAPh 197.33, lat 50.411, lon 5.56374, height 244.183, ...) inside
 RDNAP2018v1 forward(RDx 167551.0, RDy 268976.0, NAPh 197.33, lat 50.411, lon 5.56374, height 244.183, ...) inside
-RDNAP2018v1 |diff| (RDx 4.33461e-05, RDy 6.31615e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.33461e-05, RDy 6.31615e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020161    44136.5910   824093.3972 -53.2500  (line 163)
 RDNAP2018v1 reverse(RDx 44136.6, RDy 824093.0, NAPh -53.25, lat 55.3867, lon 3.63906, height -11.1965, ...) inside
@@ -995,7 +995,7 @@ RDNAP2018v1 |diff| (RDx 4.26177e-05, RDy 3.72165e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10020198   101390.3051   622430.7098 203.0148  (line 200)
 RDNAP2018v1 reverse(RDx 101390.0, RDy 622431.0, NAPh 203.015, lat 53.5852, lon 4.57775, height 244.38, ...) inside
 RDNAP2018v1 forward(RDx 101390.0, RDy 622431.0, NAPh 203.015, lat 53.5852, lon 4.57775, height 244.38, ...) inside
-RDNAP2018v1 |diff| (RDx 4.08257e-05, RDy 1.64687e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.08257e-05, RDy 1.64687e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020199   175340.2793   366476.0403 303.1776  (line 201)
 RDNAP2018v1 reverse(RDx 175340.0, RDy 366476.0, NAPh 303.178, lat 51.2872, lon 5.67877, height 347.502, ...) inside
@@ -1170,7 +1170,7 @@ RDNAP2018v1 |diff| (RDx 3.77098e-05, RDy 1.53814e-05, NAPh 7.10543e-15, lat 0.0,
 id 10020233   -12037.3360   383576.1162 105.6369  (line 235)
 RDNAP2018v1 reverse(RDx -12037.3, RDy 383576.0, NAPh 105.637, lat 51.4166, lon 2.9857, height 149.95, ...) inside
 RDNAP2018v1 forward(RDx -12037.3, RDy 383576.0, NAPh 105.637, lat 51.4166, lon 2.9857, height 149.95, ...) inside
-RDNAP2018v1 |diff| (RDx 3.70499e-05, RDy 4.50229e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.70499e-05, RDy 4.50229e-05, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020234   216158.6235   554097.7337 117.3279  (line 236)
 RDNAP2018v1 reverse(RDx 216159.0, RDy 554098.0, NAPh 117.328, lat 52.9704, lon 6.29759, height 158.891, ...) inside
@@ -1580,7 +1580,7 @@ RDNAP2018v1 |diff| (RDx 4.01095e-05, RDy 3.83576e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10020315   205783.4177   756381.7798  58.8866  (line 317)
 RDNAP2018v1 reverse(RDx 205783.0, RDy 756382.0, NAPh 58.8866, lat 54.7885, lon 6.1763, height 99.0422, ...) inside
 RDNAP2018v1 forward(RDx 205783.0, RDy 756382.0, NAPh 58.8866, lat 54.7885, lon 6.1763, height 99.0422, ...) inside
-RDNAP2018v1 |diff| (RDx 3.13615e-05, RDy 7.77778e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.13615e-05, RDy 7.77778e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020316    17493.5511   807988.7392 216.0005  (line 318)
 RDNAP2018v1 reverse(RDx 17493.6, RDy 807989.0, NAPh 216.0, lat 55.2356, lon 3.22692, height 258.405, ...) inside
@@ -2290,7 +2290,7 @@ RDNAP2018v1 |diff| (RDx 3.95312e-05, RDy 8.0931e-05, NAPh 0.0, lat 0.0, lon 0.0,
 id 10020457   -38450.9019   533609.8537 255.5774  (line 459)
 RDNAP2018v1 reverse(RDx -38450.9, RDy 533610.0, NAPh 255.577, lat 52.7553, lon 2.52125, height 299.252, ...) inside
 RDNAP2018v1 forward(RDx -38450.9, RDy 533610.0, NAPh 255.577, lat 52.7553, lon 2.52125, height 299.252, ...) inside
-RDNAP2018v1 |diff| (RDx 4.35369e-05, RDy 8.36456e-06, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.35369e-05, RDy 8.36456e-06, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020458   119432.2786   233263.2121 173.7478  (line 460)
 RDNAP2018v1 reverse(RDx 119432.0, RDy 233263.0, NAPh 173.748, lat 50.0891, lon 4.8903, height 220.147, ...) inside
@@ -2585,7 +2585,7 @@ RDNAP2018v1 |diff| (RDx 3.98997e-05, RDy 3.08086e-05, NAPh 3.55271e-15, lat 0.0,
 id 10020516   -54069.8565   416047.1119 334.2072  (line 518)
 RDNAP2018v1 reverse(RDx -54069.9, RDy 416047.0, NAPh 334.207, lat 51.6941, lon 2.36274, height 378.529, ...) inside
 RDNAP2018v1 forward(RDx -54069.9, RDy 416047.0, NAPh 334.207, lat 51.6941, lon 2.36274, height 378.529, ...) inside
-RDNAP2018v1 |diff| (RDx 3.79929e-05, RDy 3.68229e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.79929e-05, RDy 3.68229e-05, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020517   226337.4478   779995.3179 124.6657  (line 519)
 RDNAP2018v1 reverse(RDx 226337.0, RDy 779995.0, NAPh 124.666, lat 54.998, lon 6.50136, height 164.928, ...) inside
@@ -3650,7 +3650,7 @@ RDNAP2018v1 |diff| (RDx 4.01716e-05, RDy 2.57765e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10020729    33685.0589   294866.3195  52.5860  (line 731)
 RDNAP2018v1 reverse(RDx 33685.1, RDy 294866.0, NAPh 52.586, lat 50.6311, lon 3.67261, height 97.5616, ...) inside
 RDNAP2018v1 forward(RDx 33685.1, RDy 294866.0, NAPh 52.586, lat 50.6311, lon 3.67261, height 97.5616, ...) inside
-RDNAP2018v1 |diff| (RDx 3.62289e-05, RDy 5.89908e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.62289e-05, RDy 5.89908e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020730   -31784.2998   335800.1658  78.6309  (line 732)
 RDNAP2018v1 reverse(RDx -31784.3, RDy 335800.0, NAPh 78.6309, lat 50.9813, lon 2.72708, height 122.991, ...) inside
@@ -3780,7 +3780,7 @@ RDNAP2018v1 |diff| (RDx 4.17228e-05, RDy 1.63165e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10020755   164053.2966   392997.3590  41.2340  (line 757)
 RDNAP2018v1 reverse(RDx 164053.0, RDy 392997.0, NAPh 41.234, lat 51.5259, lon 5.51766, height 85.0198, ...) inside
 RDNAP2018v1 forward(RDx 164053.0, RDy 392997.0, NAPh 41.234, lat 51.5259, lon 5.51766, height 85.0198, ...) inside
-RDNAP2018v1 |diff| (RDx 4.14595e-05, RDy 4.69461e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.14595e-05, RDy 4.69461e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020756   172767.4820   344937.1541 -69.8282  (line 758)
 RDNAP2018v1 reverse(RDx 172767.0, RDy 344937.0, NAPh -69.8282, lat 51.0937, lon 5.64082, height -24.8565, ...) inside
@@ -3855,7 +3855,7 @@ RDNAP2018v1 |diff| (RDx 3.54021e-05, RDy 6.51425e-06, NAPh 0.0, lat 0.0, lon 0.0
 id 10020770   315580.7506   333399.2677  33.7175  (line 772)
 RDNAP2018v1 reverse(RDx 315581.0, RDy 333399.0, NAPh 33.7175, lat 50.9677, lon 7.67338, height 81.4264, ...) inside
 RDNAP2018v1 forward(RDx 315581.0, RDy 333399.0, NAPh 33.7175, lat 50.9677, lon 7.67338, height 81.4264, ...) inside
-RDNAP2018v1 |diff| (RDx 4.74886e-05, RDy 5.26959e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.74886e-05, RDy 5.26959e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10020771    80781.1300   372148.5470 453.2496  (line 773)
 RDNAP2018v1 reverse(RDx 80781.1, RDy 372149.0, NAPh 453.25, lat 51.3337, lon 4.32219, height 497.764, ...) inside
@@ -5125,7 +5125,7 @@ RDNAP2018v1 |diff| (RDx 6.36324e-05, RDy 0.000142369, NAPh 0.0, lat 0.0, lon 0.0
 id 10021024   266034.3246   593423.5137 102.1248  (line 1026)
 RDNAP2018v1 reverse(RDx 266034.0, RDy 593424.0, NAPh 102.125, lat 53.3157, lon 7.05331, height 142.678, ...) inside
 RDNAP2018v1 forward(RDx 266034.0, RDy 593424.0, NAPh 102.125, lat 53.3157, lon 7.05331, height 142.678, ...) inside
-RDNAP2018v1 |diff| (RDx 3.41914e-05, RDy 8.00472e-06, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.41914e-05, RDy 8.00472e-06, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021025   311158.7967   629549.4166 101.7427  (line 1027)
 RDNAP2018v1 reverse(RDx 311159.0, RDy 629549.0, NAPh 101.743, lat 53.6288, lon 7.74773, height 141.589, ...) inside
@@ -5210,7 +5210,7 @@ RDNAP2018v1 |diff| (RDx 6.60545e-05, RDy 0.000160979, NAPh 0.0, lat 0.0, lon 0.0
 id 10021041    87763.2276   696625.8166  70.3607  (line 1043)
 RDNAP2018v1 reverse(RDx 87763.2, RDy 696626.0, NAPh 70.3607, lat 54.25, lon 4.35592, height 111.647, ...) inside
 RDNAP2018v1 forward(RDx 87763.2, RDy 696626.0, NAPh 70.3607, lat 54.25, lon 4.35592, height 111.647, ...) inside
-RDNAP2018v1 |diff| (RDx 4.23032e-05, RDy 4.80148e-05, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.23032e-05, RDy 4.80148e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021042   -69575.5810   620634.8716 -27.9704  (line 1044)
 RDNAP2018v1 reverse(RDx -69575.6, RDy 620635.0, NAPh -27.9704, lat 53.5242, lon 2.00032, height 15.333, ...) inside
@@ -5805,7 +5805,7 @@ RDNAP2018v1 |diff| (RDx 3.80688e-05, RDy 4.29596e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10021160   110109.2942   470177.8940  26.5009  (line 1162)
 RDNAP2018v1 reverse(RDx 110109.0, RDy 470178.0, NAPh 26.5009, lat 52.2179, lon 4.73031, height 69.7492, ...) inside
 RDNAP2018v1 forward(RDx 110109.0, RDy 470178.0, NAPh 26.5009, lat 52.2179, lon 4.73031, height 69.7492, ...) inside
-RDNAP2018v1 |diff| (RDx 4.01208e-05, RDy 3.074e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.01208e-05, RDy 3.074e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021161   161989.0769   606612.9731  -0.9860  (line 1163)
 RDNAP2018v1 reverse(RDx 161989.0, RDy 606613.0, NAPh -0.986, lat 53.4457, lon 5.49239, height 40.0361, ...) inside
@@ -7070,7 +7070,7 @@ RDNAP2018v1 |diff| (RDx 3.52091e-05, RDy 5.0281e-05, NAPh 7.10543e-15, lat 0.0, 
 id 10021413   -53175.2131   478924.2967  41.9508  (line 1415)
 RDNAP2018v1 reverse(RDx -53175.2, RDy 478924.0, NAPh 41.9508, lat 52.2589, lon 2.33751, height 86.2188, ...) inside
 RDNAP2018v1 forward(RDx -53175.2, RDy 478924.0, NAPh 41.9508, lat 52.2589, lon 2.33751, height 86.2188, ...) inside
-RDNAP2018v1 |diff| (RDx 4.11102e-05, RDy 2.26194e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.11102e-05, RDy 2.26194e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021414   -51518.8610   812161.2047 453.2456  (line 1416)
 RDNAP2018v1 reverse(RDx -51518.9, RDy 812161.0, NAPh 453.246, lat 55.2494, lon 2.14113, height 496.132, ...) inside
@@ -8580,7 +8580,7 @@ RDNAP2018v1 |diff| (RDx 3.6464e-05, RDy 6.44813e-05, NAPh 0.0, lat 0.0, lon 0.0,
 id 10021715    13762.3208   465052.9343 120.9990  (line 1717)
 RDNAP2018v1 reverse(RDx 13762.3, RDy 465053.0, NAPh 120.999, lat 52.1556, lon 3.32314, height 164.64, ...) inside
 RDNAP2018v1 forward(RDx 13762.3, RDy 465053.0, NAPh 120.999, lat 52.1556, lon 3.32314, height 164.64, ...) inside
-RDNAP2018v1 |diff| (RDx 3.98882e-05, RDy 2.94534e-05, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.98882e-05, RDy 2.94534e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021716   224005.3375   831369.9569  19.6100  (line 1718)
 RDNAP2018v1 reverse(RDx 224005.0, RDy 831370.0, NAPh 19.61, lat 55.4595, lon 6.47725, height 60.8463, ...) inside
@@ -8600,7 +8600,7 @@ RDNAP2018v1 |diff| (RDx 3.53783e-05, RDy 1.37966e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10021719    50900.8794   597071.9620 101.9525  (line 1721)
 RDNAP2018v1 reverse(RDx 50900.9, RDy 597072.0, NAPh 101.953, lat 53.3499, lon 3.82394, height 143.785, ...) inside
 RDNAP2018v1 forward(RDx 50900.9, RDy 597072.0, NAPh 101.953, lat 53.3499, lon 3.82394, height 143.785, ...) inside
-RDNAP2018v1 |diff| (RDx 4.26782e-05, RDy 8.31136e-06, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.26782e-05, RDy 8.31136e-06, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021720   261243.5237   788693.7943  98.9916  (line 1722)
 RDNAP2018v1 reverse(RDx 261244.0, RDy 788694.0, NAPh 98.9916, lat 55.07, lon 7.04951, height 139.538, ...) inside
@@ -9010,7 +9010,7 @@ RDNAP2018v1 |diff| (RDx 2.99051e-05, RDy 8.02967e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10021801   139513.1361   311602.0262  60.2766  (line 1803)
 RDNAP2018v1 reverse(RDx 139513.0, RDy 311602.0, NAPh 60.2766, lat 50.7941, lon 5.16756, height 106.097, ...) inside
 RDNAP2018v1 forward(RDx 139513.0, RDy 311602.0, NAPh 60.2766, lat 50.7941, lon 5.16756, height 106.097, ...) inside
-RDNAP2018v1 |diff| (RDx 4.14207e-05, RDy 5.88243e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.14207e-05, RDy 5.88243e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021802   209930.4840   869394.3385 287.2386  (line 1804)
 RDNAP2018v1 reverse(RDx 209930.0, RDy 869394.0, NAPh 287.239, lat 55.8024, lon 6.26236, height 328.686, ...) inside
@@ -9475,7 +9475,7 @@ RDNAP2018v1 |diff| (RDx 4.07053e-05, RDy 3.8773e-05, NAPh 0.0, lat 0.0, lon 0.0,
 id 10021894   259587.3258   490301.2882  51.8597  (line 1896)
 RDNAP2018v1 reverse(RDx 259587.0, RDy 490301.0, NAPh 51.8597, lat 52.3906, lon 6.92369, height 94.9776, ...) inside
 RDNAP2018v1 forward(RDx 259587.0, RDy 490301.0, NAPh 51.8597, lat 52.3906, lon 6.92369, height 94.9776, ...) inside
-RDNAP2018v1 |diff| (RDx 3.93935e-05, RDy 2.39864e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.93935e-05, RDy 2.39864e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021895    68856.2647   828860.1924 -37.4916  (line 1897)
 RDNAP2018v1 reverse(RDx 68856.3, RDy 828860.0, NAPh -37.4916, lat 55.4343, lon 4.02729, height 4.41696, ...) inside
@@ -9695,7 +9695,7 @@ RDNAP2018v1 |diff| (RDx 4.13886e-05, RDy 6.31107e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10021938   303968.5605   749605.5605 296.0473  (line 1940)
 RDNAP2018v1 reverse(RDx 303969.0, RDy 749606.0, NAPh 296.047, lat 54.7085, lon 7.69769, height 335.959, ...) inside
 RDNAP2018v1 forward(RDx 303969.0, RDy 749606.0, NAPh 296.047, lat 54.7085, lon 7.69769, height 335.959, ...) inside
-RDNAP2018v1 |diff| (RDx 2.13215e-05, RDy 7.86929e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 2.13215e-05, RDy 7.86929e-05, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021939     9114.1286   869834.2282 270.4786  (line 1941)
 RDNAP2018v1 reverse(RDx 9114.13, RDy 869834.0, NAPh 270.479, lat 55.7879, lon 3.06356, height 313.45, ...) inside
@@ -9810,7 +9810,7 @@ RDNAP2018v1 |diff| (RDx 4.69741e-05, RDy 6.31736e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10021961    18380.8168   679940.8223  62.0457  (line 1963)
 RDNAP2018v1 reverse(RDx 18380.8, RDy 679941.0, NAPh 62.0457, lat 54.0866, lon 3.29969, height 103.45, ...) inside
 RDNAP2018v1 forward(RDx 18380.8, RDy 679941.0, NAPh 62.0457, lat 54.0866, lon 3.29969, height 103.45, ...) inside
-RDNAP2018v1 |diff| (RDx 4.70779e-05, RDy 4.28812e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.70779e-05, RDy 4.28812e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10021962    66128.3267   450714.1904 398.2848  (line 1964)
 RDNAP2018v1 reverse(RDx 66128.3, RDy 450714.0, NAPh 398.285, lat 52.0376, lon 4.09192, height 441.766, ...) inside
@@ -12290,7 +12290,7 @@ RDNAP2018v1 |diff| (RDx 4.06146e-05, RDy 4.43298e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10022457   247145.5025   634128.9603 155.9100  (line 2459)
 RDNAP2018v1 reverse(RDx 247146.0, RDy 634129.0, NAPh 155.91, lat 53.6849, lon 6.78182, height 195.981, ...) inside
 RDNAP2018v1 forward(RDx 247146.0, RDy 634129.0, NAPh 155.91, lat 53.6849, lon 6.78182, height 195.981, ...) inside
-RDNAP2018v1 |diff| (RDx 3.31631e-05, RDy 2.25968e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.31631e-05, RDy 2.25968e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10022458   106230.5621   875348.7611 305.2596  (line 2460)
 RDNAP2018v1 reverse(RDx 106231.0, RDy 875349.0, NAPh 305.26, lat 55.8565, lon 4.60918, height 347.317, ...) inside
@@ -13415,7 +13415,7 @@ RDNAP2018v1 |diff| (RDx 4.37589e-05, RDy 5.65958e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10022682   -12792.1242   534666.9911 268.4215  (line 2684)
 RDNAP2018v1 reverse(RDx -12792.1, RDy 534667.0, NAPh 268.421, lat 52.7733, lon 2.90047, height 311.738, ...) inside
 RDNAP2018v1 forward(RDx -12792.1, RDy 534667.0, NAPh 268.421, lat 52.7733, lon 2.90047, height 311.738, ...) inside
-RDNAP2018v1 |diff| (RDx 4.28088e-05, RDy 9.49926e-06, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.28088e-05, RDy 9.49926e-06, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10022683    21482.6135   651722.3180 -48.1524  (line 2685)
 RDNAP2018v1 reverse(RDx 21482.6, RDy 651722.0, NAPh -48.1524, lat 53.8341, lon 3.35925, height -6.61338, ...) inside
@@ -13640,7 +13640,7 @@ RDNAP2018v1 |diff| (RDx 3.10688e-05, RDy 6.0746e-05, NAPh 0.0, lat 0.0, lon 0.0,
 id 10022727    40851.3594   545267.0643 361.4925  (line 2729)
 RDNAP2018v1 reverse(RDx 40851.4, RDy 545267.0, NAPh 361.493, lat 52.8825, lon 3.69138, height 404.194, ...) inside
 RDNAP2018v1 forward(RDx 40851.4, RDy 545267.0, NAPh 361.493, lat 52.8825, lon 3.69138, height 404.194, ...) inside
-RDNAP2018v1 |diff| (RDx 4.17627e-05, RDy 8.61532e-06, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.17627e-05, RDy 8.61532e-06, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10022728     6365.0768   577048.1900 153.1255  (line 2730)
 RDNAP2018v1 reverse(RDx 6365.08, RDy 577048.0, NAPh 153.125, lat 53.1595, lon 3.16483, height 195.695, ...) inside
@@ -14580,7 +14580,7 @@ RDNAP2018v1 |diff| (RDx 3.43855e-05, RDy 5.52118e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10022915   269804.1799   246715.3709  43.3245  (line 2917)
 RDNAP2018v1 reverse(RDx 269804.0, RDy 246715.0, NAPh 43.3245, lat 50.1998, lon 6.9949, height 91.6419, ...) inside
 RDNAP2018v1 forward(RDx 269804.0, RDy 246715.0, NAPh 43.3245, lat 50.1998, lon 6.9949, height 91.6419, ...) inside
-RDNAP2018v1 |diff| (RDx 4.95894e-05, RDy 6.34824e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.95894e-05, RDy 6.34824e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10022916   161261.5343   310932.7695 379.1403  (line 2918)
 RDNAP2018v1 reverse(RDx 161262.0, RDy 310933.0, NAPh 379.14, lat 50.7883, lon 5.47599, height 425.075, ...) inside
@@ -15225,7 +15225,7 @@ RDNAP2018v1 |diff| (RDx 4.12448e-05, RDy 3.43234e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10023044    11327.5438   246054.9938 189.5816  (line 3046)
 RDNAP2018v1 reverse(RDx 11327.5, RDy 246055.0, NAPh 189.582, lat 50.1875, lon 3.37569, height 234.159, ...) inside
 RDNAP2018v1 forward(RDx 11327.5, RDy 246055.0, NAPh 189.582, lat 50.1875, lon 3.37569, height 234.159, ...) inside
-RDNAP2018v1 |diff| (RDx 3.41129e-05, RDy 6.27341e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.41129e-05, RDy 6.27341e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10023045   313115.7709   476273.7932 180.9557  (line 3047)
 RDNAP2018v1 reverse(RDx 313116.0, RDy 476274.0, NAPh 180.956, lat 52.2518, lon 7.70297, height 224.777, ...) inside
@@ -15685,7 +15685,7 @@ RDNAP2018v1 |diff| (RDx 6.25908e-05, RDy 0.000126591, NAPh 0.0, lat 0.0, lon 0.0
 id 10023136    41981.5842   641237.3731 122.1708  (line 3138)
 RDNAP2018v1 reverse(RDx 41981.6, RDy 641237.0, NAPh 122.171, lat 53.7447, lon 3.67425, height 163.712, ...) inside
 RDNAP2018v1 forward(RDx 41981.6, RDy 641237.0, NAPh 122.171, lat 53.7447, lon 3.67425, height 163.712, ...) inside
-RDNAP2018v1 |diff| (RDx 4.42412e-05, RDy 2.54434e-05, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.42412e-05, RDy 2.54434e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10023137    87761.0702   770053.5697 142.7611  (line 3139)
 RDNAP2018v1 reverse(RDx 87761.1, RDy 770054.0, NAPh 142.761, lat 54.9093, lon 4.33935, height 184.151, ...) inside
@@ -17360,7 +17360,7 @@ RDNAP2018v1 |diff| (RDx 3.57601e-05, RDy 6.23948e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10023471   -48298.6494   284343.1497  75.8531  (line 3473)
 RDNAP2018v1 reverse(RDx -48298.6, RDy 284343.0, NAPh 75.8531, lat 50.5136, lon 2.52081, height 120.129, ...) inside
 RDNAP2018v1 forward(RDx -48298.6, RDy 284343.0, NAPh 75.8531, lat 50.5136, lon 2.52081, height 120.129, ...) inside
-RDNAP2018v1 |diff| (RDx 3.24971e-05, RDy 5.69542e-05, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.24971e-05, RDy 5.69542e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10023472   -77180.1722   420847.6499 130.1139  (line 3474)
 RDNAP2018v1 reverse(RDx -77180.2, RDy 420848.0, NAPh 130.114, lat 51.7281, lon 2.02574, height 174.497, ...) inside
@@ -17800,7 +17800,7 @@ RDNAP2018v1 |diff| (RDx 4.55612e-05, RDy 0.00012804, NAPh 0.0, lat 0.0, lon 0.0,
 id 10023559   183677.3787   416853.9308 109.2983  (line 3561)
 RDNAP2018v1 reverse(RDx 183677.0, RDy 416854.0, NAPh 109.298, lat 51.7397, lon 5.80239, height 153.12, ...) inside
 RDNAP2018v1 forward(RDx 183677.0, RDy 416854.0, NAPh 109.298, lat 51.7397, lon 5.80239, height 153.12, ...) inside
-RDNAP2018v1 |diff| (RDx 4.148e-05, RDy 4.23706e-05, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.148e-05, RDy 4.23706e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10023560   312350.5958   369787.1808 452.7243  (line 3562)
 RDNAP2018v1 reverse(RDx 312351.0, RDy 369787.0, NAPh 452.724, lat 51.2955, lon 7.64342, height 499.771, ...) inside
@@ -19165,7 +19165,7 @@ RDNAP2018v1 |diff| (RDx 2.95446e-05, RDy 5.94105e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10023832    40104.7216   803606.7843  23.7577  (line 3834)
 RDNAP2018v1 reverse(RDx 40104.7, RDy 803607.0, NAPh 23.7577, lat 55.2019, lon 3.58371, height 65.8447, ...) inside
 RDNAP2018v1 forward(RDx 40104.7, RDy 803607.0, NAPh 23.7577, lat 55.2019, lon 3.58371, height 65.8447, ...) inside
-RDNAP2018v1 |diff| (RDx 4.9398e-05, RDy 0.000105487, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.9398e-05, RDy 0.000105487, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10023833   -63751.3984   542156.3468 395.2336  (line 3835)
 RDNAP2018v1 reverse(RDx -63751.4, RDy 542156.0, NAPh 395.234, lat 52.8224, lon 2.14128, height 439.24, ...) inside
@@ -19670,7 +19670,7 @@ RDNAP2018v1 |diff| (RDx 3.31528e-05, RDy 2.31023e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10023933    88228.6867   436257.3167 304.4084  (line 3935)
 RDNAP2018v1 reverse(RDx 88228.7, RDy 436257.0, NAPh 304.408, lat 51.9108, lon 4.41679, height 348.02, ...) inside
 RDNAP2018v1 forward(RDx 88228.7, RDy 436257.0, NAPh 304.408, lat 51.9108, lon 4.41679, height 348.02, ...) inside
-RDNAP2018v1 |diff| (RDx 3.97869e-05, RDy 3.80679e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.97869e-05, RDy 3.80679e-05, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10023934   104989.3018   616358.1562 -38.7233  (line 3936)
 RDNAP2018v1 reverse(RDx 104989.0, RDy 616358.0, NAPh -38.7233, lat 53.531, lon 4.63305, height 2.69737, ...) inside
@@ -20830,7 +20830,7 @@ RDNAP2018v1 |diff| (RDx 4.07461e-05, RDy 4.34789e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10024165   288291.0889   652821.1949 134.9159  (line 4167)
 RDNAP2018v1 reverse(RDx 288291.0, RDy 652821.0, NAPh 134.916, lat 53.844, lon 7.41221, height 174.573, ...) inside
 RDNAP2018v1 forward(RDx 288291.0, RDy 652821.0, NAPh 134.916, lat 53.844, lon 7.41221, height 174.573, ...) inside
-RDNAP2018v1 |diff| (RDx 2.94475e-05, RDy 3.20876e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 2.94475e-05, RDy 3.20876e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10024166   109675.6037   836546.7241 290.5536  (line 4168)
 RDNAP2018v1 reverse(RDx 109676.0, RDy 836547.0, NAPh 290.554, lat 55.5086, lon 4.67039, height 332.295, ...) inside
@@ -22310,7 +22310,7 @@ RDNAP2018v1 |diff| (RDx 4.24288e-05, RDy 3.83611e-05, NAPh 2.84217e-14, lat 0.0,
 id 10024461   177110.0969   581471.5064 126.2448  (line 4463)
 RDNAP2018v1 reverse(RDx 177110.0, RDy 581472.0, NAPh 126.245, lat 53.2194, lon 5.71822, height 167.46, ...) inside
 RDNAP2018v1 forward(RDx 177110.0, RDy 581472.0, NAPh 126.245, lat 53.2194, lon 5.71822, height 167.46, ...) inside
-RDNAP2018v1 |diff| (RDx 3.81359e-05, RDy 1.46602e-06, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.81359e-05, RDy 1.46602e-06, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10024462    32154.5664   761516.5853 189.2014  (line 4464)
 RDNAP2018v1 reverse(RDx 32154.6, RDy 761517.0, NAPh 189.201, lat 54.8223, lon 3.47671, height 231.291, ...) inside
@@ -23205,7 +23205,7 @@ RDNAP2018v1 |diff| (RDx 3.74973e-05, RDy 1.26747e-05, NAPh 7.10543e-15, lat 0.0,
 id 10024640    41349.4994   535115.8732  93.8648  (line 4642)
 RDNAP2018v1 reverse(RDx 41349.5, RDy 535116.0, NAPh 93.8648, lat 52.7914, lon 3.7023, height 136.64, ...) inside
 RDNAP2018v1 forward(RDx 41349.5, RDy 535116.0, NAPh 93.8648, lat 52.7914, lon 3.7023, height 136.64, ...) inside
-RDNAP2018v1 |diff| (RDx 4.15009e-05, RDy 1.1713e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.15009e-05, RDy 1.1713e-05, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10024641    87491.9048   688543.3744  14.9266  (line 4643)
 RDNAP2018v1 reverse(RDx 87491.9, RDy 688543.0, NAPh 14.9266, lat 54.1774, lon 4.35355, height 56.253, ...) inside
@@ -23785,7 +23785,7 @@ RDNAP2018v1 |diff| (RDx 5.14066e-05, RDy 4.68898e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10024756   -16118.1053   818502.0353 124.2546  (line 4758)
 RDNAP2018v1 reverse(RDx -16118.1, RDy 818502.0, NAPh 124.255, lat 55.3196, lon 2.69312, height 166.993, ...) inside
 RDNAP2018v1 forward(RDx -16118.1, RDy 818502.0, NAPh 124.255, lat 55.3196, lon 2.69312, height 166.993, ...) inside
-RDNAP2018v1 |diff| (RDx 5.7345e-05, RDy 0.000117523, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 5.7345e-05, RDy 0.000117523, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10024757   203504.2503   692942.8162 394.2564  (line 4759)
 RDNAP2018v1 reverse(RDx 203504.0, RDy 692943.0, NAPh 394.256, lat 54.219, lon 6.13062, height 433.941, ...) inside
@@ -24380,7 +24380,7 @@ RDNAP2018v1 |diff| (RDx 4.75249e-05, RDy 5.24782e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10024875   115335.9302   656847.4760 231.1215  (line 4877)
 RDNAP2018v1 reverse(RDx 115336.0, RDy 656847.0, NAPh 231.121, lat 53.8956, lon 4.78394, height 272.086, ...) inside
 RDNAP2018v1 forward(RDx 115336.0, RDy 656847.0, NAPh 231.121, lat 53.8956, lon 4.78394, height 272.086, ...) inside
-RDNAP2018v1 |diff| (RDx 4.01977e-05, RDy 3.00718e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.01977e-05, RDy 3.00718e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10024876   207554.7175   829828.1809 193.2250  (line 4878)
 RDNAP2018v1 reverse(RDx 207555.0, RDy 829828.0, NAPh 193.225, lat 55.4476, lon 6.21714, height 234.532, ...) inside
@@ -24745,7 +24745,7 @@ RDNAP2018v1 |diff| (RDx 3.96269e-05, RDy 0.000138859, NAPh 0.0, lat 0.0, lon 0.0
 id 10024948    98057.6822   606985.7421  56.1117  (line 4950)
 RDNAP2018v1 reverse(RDx 98057.7, RDy 606986.0, NAPh 56.1117, lat 53.4461, lon 4.53022, height 97.6679, ...) inside
 RDNAP2018v1 forward(RDx 98057.7, RDy 606986.0, NAPh 56.1117, lat 53.4461, lon 4.53022, height 97.6679, ...) inside
-RDNAP2018v1 |diff| (RDx 4.0878e-05, RDy 1.07301e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.0878e-05, RDy 1.07301e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10024949     5377.6604   266165.0737 116.1731  (line 4951)
 RDNAP2018v1 reverse(RDx 5377.66, RDy 266165.0, NAPh 116.173, lat 50.3667, lon 3.28438, height 160.623, ...) inside
@@ -25885,7 +25885,7 @@ RDNAP2018v1 |diff| (RDx 4.57671e-05, RDy 4.77844e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10025176   253785.6706   831228.9908 315.4743  (line 5178)
 RDNAP2018v1 reverse(RDx 253786.0, RDy 831229.0, NAPh 315.474, lat 55.4532, lon 6.94747, height 356.309, ...) inside
 RDNAP2018v1 forward(RDx 253786.0, RDy 831229.0, NAPh 315.474, lat 55.4532, lon 6.94747, height 356.309, ...) inside
-RDNAP2018v1 |diff| (RDx 2.21385e-05, RDy 0.000122582, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 2.21385e-05, RDy 0.000122582, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10025177    18254.1209   857146.4872 396.4554  (line 5179)
 RDNAP2018v1 reverse(RDx 18254.1, RDy 857146.0, NAPh 396.455, lat 55.6767, lon 3.21523, height 439.169, ...) inside
@@ -27320,7 +27320,7 @@ RDNAP2018v1 |diff| (RDx 3.56941e-05, RDy 6.91555e-05, NAPh 2.84217e-14, lat 0.0,
 id 10025463    53682.6169   402317.6562 379.5074  (line 5465)
 RDNAP2018v1 reverse(RDx 53682.6, RDy 402318.0, NAPh 379.507, lat 51.6006, lon 3.92476, height 423.71, ...) inside
 RDNAP2018v1 forward(RDx 53682.6, RDy 402318.0, NAPh 379.507, lat 51.6006, lon 3.92476, height 423.71, ...) inside
-RDNAP2018v1 |diff| (RDx 3.87945e-05, RDy 4.40175e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.87945e-05, RDy 4.40175e-05, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10025464   284449.0055   723467.2316 360.1496  (line 5466)
 RDNAP2018v1 reverse(RDx 284449.0, RDy 723467.0, NAPh 360.15, lat 54.4792, lon 7.3838, height 399.499, ...) inside
@@ -28269,8 +28269,8 @@ RDNAP2018v1 |diff| (RDx 4.61237e-05, RDy 2.16477e-05, NAPh 3.55271e-15, lat 0.0,
 
 id 10025653   267350.1918   709282.8283 302.6415  (line 5655)
 RDNAP2018v1 reverse(RDx 267350.0, RDy 709283.0, NAPh 302.642, lat 54.3559, lon 7.11491, height 341.944, ...) inside
-RDNAP2018v1 forward(RDx 267350.0, RDy 709283.0, NAPh 302.642, lat 54.3559, lon 7.11491, height 341.944, ...) inside
-RDNAP2018v1 |diff| (RDx 2.77084e-05, RDy 5.63436e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 forward(RDx 267350.0, RDy 709283.0, NAPh 302.641, lat 54.3559, lon 7.11491, height 341.944, ...) inside
+RDNAP2018v1 |diff| (RDx 2.77084e-05, RDy 5.63436e-05, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10025654    59965.4084   372757.9472 -71.2948  (line 5656)
 RDNAP2018v1 reverse(RDx 59965.4, RDy 372758.0, NAPh -71.2948, lat 51.3361, lon 4.0234, height -26.8192, ...) inside
@@ -28660,7 +28660,7 @@ RDNAP2018v1 |diff| (RDx 4.33883e-05, RDy 5.14177e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10025731   234398.3043   746487.9107 218.4489  (line 5733)
 RDNAP2018v1 reverse(RDx 234398.0, RDy 746488.0, NAPh 218.449, lat 54.696, lon 6.61818, height 258.159, ...) inside
 RDNAP2018v1 forward(RDx 234398.0, RDy 746488.0, NAPh 218.449, lat 54.696, lon 6.61818, height 258.159, ...) inside
-RDNAP2018v1 |diff| (RDx 2.88849e-05, RDy 7.34864e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 2.88849e-05, RDy 7.34864e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10025732   137482.6207   746269.8615 394.3134  (line 5734)
 RDNAP2018v1 reverse(RDx 137483.0, RDy 746270.0, NAPh 394.313, lat 54.6999, lon 5.11561, height 434.805, ...) inside
@@ -30100,7 +30100,7 @@ RDNAP2018v1 |diff| (RDx 4.39254e-05, RDy 4.29359e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10026019   257264.1321   866450.6604  78.4224  (line 6021)
 RDNAP2018v1 reverse(RDx 257264.0, RDy 866451.0, NAPh 78.4224, lat 55.7685, lon 7.01517, height 119.39, ...) inside
 RDNAP2018v1 forward(RDx 257264.0, RDy 866451.0, NAPh 78.4224, lat 55.7685, lon 7.01517, height 119.39, ...) inside
-RDNAP2018v1 |diff| (RDx 1.95242e-05, RDy 0.000145413, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 1.95242e-05, RDy 0.000145413, NAPh 1.42109e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10026020   303536.1838   483396.1421 -89.2374  (line 6022)
 RDNAP2018v1 reverse(RDx 303536.0, RDy 483396.0, NAPh -89.2374, lat 52.3184, lon 7.56591, height -45.5654, ...) inside
@@ -31300,7 +31300,7 @@ RDNAP2018v1 |diff| (RDx 4.70882e-05, RDy 2.88074e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10026259    85738.9998   557968.0758 164.3117  (line 6261)
 RDNAP2018v1 reverse(RDx 85739.0, RDy 557968.0, NAPh 164.312, lat 53.0042, lon 4.35541, height 206.487, ...) inside
 RDNAP2018v1 forward(RDx 85739.0, RDy 557968.0, NAPh 164.312, lat 53.0042, lon 4.35541, height 206.487, ...) inside
-RDNAP2018v1 |diff| (RDx 4.08738e-05, RDy 5.86407e-06, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.08738e-05, RDy 5.86407e-06, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10026260   301378.3959   818984.6522 451.6882  (line 6262)
 RDNAP2018v1 reverse(RDx 301378.0, RDy 818985.0, NAPh 451.688, lat 55.3317, lon 7.69239, height 492.697, ...) inside
@@ -31865,7 +31865,7 @@ RDNAP2018v1 |diff| (RDx 3.40843e-05, RDy 0.000145238, NAPh 0.0, lat 0.0, lon 0.0
 id 10026372   275466.2056   617414.1193  43.3491  (line 6374)
 RDNAP2018v1 reverse(RDx 275466.0, RDy 617414.0, NAPh 43.3491, lat 53.5291, lon 7.20386, height 83.5203, ...) inside
 RDNAP2018v1 forward(RDx 275466.0, RDy 617414.0, NAPh 43.3491, lat 53.5291, lon 7.20386, height 83.5203, ...) inside
-RDNAP2018v1 |diff| (RDx 3.23962e-05, RDy 1.72781e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.23962e-05, RDy 1.72781e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10026373    51543.9294   350471.4433 120.2980  (line 6375)
 RDNAP2018v1 reverse(RDx 51543.9, RDy 350471.0, NAPh 120.298, lat 51.1343, lon 3.90906, height 164.966, ...) inside
@@ -33650,7 +33650,7 @@ RDNAP2018v1 |diff| (RDx 4.10008e-05, RDy 2.25907e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10026729   174474.4015   298157.0432 252.3899  (line 6731)
 RDNAP2018v1 reverse(RDx 174474.0, RDy 298157.0, NAPh 252.39, lat 50.6731, lon 5.66267, height 298.7, ...) inside
 RDNAP2018v1 forward(RDx 174474.0, RDy 298157.0, NAPh 252.39, lat 50.6731, lon 5.66267, height 298.7, ...) inside
-RDNAP2018v1 |diff| (RDx 4.3287e-05, RDy 6.02882e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.3287e-05, RDy 6.02882e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10026730   145197.3465   791255.6847 439.6772  (line 6732)
 RDNAP2018v1 reverse(RDx 145197.0, RDy 791256.0, NAPh 439.677, lat 55.104, lon 5.23372, height 480.573, ...) inside
@@ -36150,7 +36150,7 @@ RDNAP2018v1 |diff| (RDx 3.39759e-05, RDy 5.49016e-05, NAPh 0.0, lat 0.0, lon 0.0
 id 10027229   195377.3651   795884.4409 450.1538  (line 7231)
 RDNAP2018v1 reverse(RDx 195377.0, RDy 795884.0, NAPh 450.154, lat 55.1441, lon 6.02007, height 491.112, ...) inside
 RDNAP2018v1 forward(RDx 195377.0, RDy 795884.0, NAPh 450.154, lat 55.1441, lon 6.02007, height 491.112, ...) inside
-RDNAP2018v1 |diff| (RDx 3.11641e-05, RDy 9.93592e-05, NAPh 5.68434e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 3.11641e-05, RDy 9.93592e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10027230    98980.4536   384716.8950  92.1483  (line 7232)
 RDNAP2018v1 reverse(RDx 98980.5, RDy 384717.0, NAPh 92.1483, lat 51.4488, lon 4.58132, height 136.484, ...) inside
@@ -36175,7 +36175,7 @@ RDNAP2018v1 |diff| (RDx 3.75528e-05, RDy 5.5021e-05, NAPh 5.68434e-14, lat 0.0, 
 id 10027234   -46825.2599   614960.0805  52.7530  (line 7236)
 RDNAP2018v1 reverse(RDx -46825.3, RDy 614960.0, NAPh 52.753, lat 53.4824, lon 2.34654, height 95.5309, ...) inside
 RDNAP2018v1 forward(RDx -46825.3, RDy 614960.0, NAPh 52.753, lat 53.4824, lon 2.34654, height 95.5309, ...) inside
-RDNAP2018v1 |diff| (RDx 4.83639e-05, RDy 1.98855e-05, NAPh 7.10543e-15, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.83639e-05, RDy 1.98855e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10027235   -23782.5861   653475.8971 107.0026  (line 7237)
 RDNAP2018v1 reverse(RDx -23782.6, RDy 653476.0, NAPh 107.003, lat 53.8364, lon 2.67137, height 148.794, ...) inside
@@ -37255,7 +37255,7 @@ RDNAP2018v1 |diff| (RDx 4.01115e-05, RDy 3.85928e-06, NAPh 0.0, lat 0.0, lon 0.0
 id 10027450   262579.0149   760280.4808 128.2479  (line 7452)
 RDNAP2018v1 reverse(RDx 262579.0, RDy 760280.0, NAPh 128.248, lat 54.8147, lon 7.05995, height 168.168, ...) inside
 RDNAP2018v1 forward(RDx 262579.0, RDy 760280.0, NAPh 128.248, lat 54.8147, lon 7.05995, height 168.168, ...) inside
-RDNAP2018v1 |diff| (RDx 2.52013e-05, RDy 8.19842e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 2.52013e-05, RDy 8.19842e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10027451   176631.7530   524539.6601 406.2410  (line 7453)
 RDNAP2018v1 reverse(RDx 176632.0, RDy 524540.0, NAPh 406.241, lat 52.7078, lon 5.70727, height 448.599, ...) inside
@@ -37480,7 +37480,7 @@ RDNAP2018v1 |diff| (RDx 2.6789e-05, RDy 3.63595e-05, NAPh 0.0, lat 0.0, lon 0.0,
 id 10027495   176752.3250   310861.3036 227.2839  (line 7497)
 RDNAP2018v1 reverse(RDx 176752.0, RDy 310861.0, NAPh 227.284, lat 50.7873, lon 5.69564, height 273.219, ...) inside
 RDNAP2018v1 forward(RDx 176752.0, RDy 310861.0, NAPh 227.284, lat 50.7873, lon 5.69564, height 273.219, ...) inside
-RDNAP2018v1 |diff| (RDx 4.31916e-05, RDy 5.88575e-05, NAPh 0.0, lat 0.0, lon 0.0, height 0.0, ...)
+RDNAP2018v1 |diff| (RDx 4.31916e-05, RDy 5.88575e-05, NAPh 2.84217e-14, lat 0.0, lon 0.0, height 0.0, ...)
 
 id 10027496   294571.8176   254007.4293  67.2855  (line 7498)
 RDNAP2018v1 reverse(RDx 294572.0, RDy 254007.0, NAPh 67.2855, lat 50.2599, lon 7.34429, height 115.391, ...) inside
@@ -50002,5 +50002,5 @@ RDNAP2018v1 reverse(RDx -336529, RDy -266349, NAPh 174.257, lat 45.4215, lon -0.
 RDNAP2018v1 forward(RDx -336529, RDy -266349, NAPh NAN, lat 45.4215, lon -0.876347, height NAN, ...) outside
 RDNAP2018v1 |diff| (RDx 2.00741e-06, RDy 3.54286e-05, NAPh NAN, lat 0.0, lon 0.0, height NAN, ...)
 
-RDNAP2018v1 60000 tests (pyrdnap 26.6.2 pygeodesy 26.5.26 Python 3.14.5 64bit arm64 macOS 26.5) 973.402 ms
+RDNAP2018v1 60000 tests (pyrdnap 26.6.6 pygeodesy 26.6.6 Python 3.14.5 64bit arm64 macOS 26.5.1) 1.163 sec
 reverse max |diff| (RDx 0.000223603, RDy 0.000799715, NAPh 5.68434e-14, lat 0, lon 0, height 0, ...)

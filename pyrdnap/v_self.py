@@ -30,14 +30,14 @@ For points with C{NAPh} marked C{"*"}, C{NAPh} is set to C{NAN}.
 from pyrdnap.rd0 import RDNAP7Tuple
 from pyrdnap.__pygeodesy import (_ALL_OTHER, _COMMASPACE_, _NAN_, _NL_,
                                  _SPACE_, _STAR_, _secs2str, _xinstanceof)
-from pygeodesy import NN, NAN, map2, typename
+from pygeodesy import NN, map2, typename  # NAN
 
 from math import fabs
 import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.06.02'
+__version__ = '26.06.04'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[0:3]
 #        (lat   lon   height RDx   RDy   NAPh)
@@ -89,8 +89,13 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
         _print('testing', repr(R))
         _print('  using', repr(self_txt))
     if self_txt and os_path.exists(self_txt):
-        diffs = [0] * len(_REQ_D)  # max |diff| of all
+        req_d = _REQ_D
+        diffs = [0] * len(req_d)  # max |diff| of all
         ds = list(diffs)  # |diff| per line
+#       if isinstance(R, RDNAP2018v2):
+#           # ignore RD-Bessel lat, lon
+#           req_d = (0, 0) + req_d[2:]
+#           ds[0] = ds[1] = NAN
         ln = t0 = 0
         for t in _readlines(self_txt):
             ln += 1
@@ -105,7 +110,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                          R.forward(lat, lon, h).xyz
                     ntotal  += len(rs)
                     nin_out += 1
-                    for i, (m, q, r, x) in enumerate(zip(diffs, _REQ_D, rs, xs)):
+                    for i, (m, q, r, x) in enumerate(zip(diffs, req_d, rs, xs)):
                         if q > 0:
                             ds[i] = d = fabs(r - x)
                             if d > m:  # new max |diff|
@@ -115,7 +120,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                                 F = 'FAILED'
                         else:  # PYCHOK no cover
                             ntotal -= 1
-                            ds[i] = NAN
+#                           ds[i] = NAN
                     if _printest and (F or all_):
                         _printest('id', _SPACE_(*ts), _line(ln))
                         _printest(R_, _zfmt(rs), F)
