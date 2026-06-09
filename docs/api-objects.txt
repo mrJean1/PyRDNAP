@@ -14,8 +14,8 @@ pyrdnap.__main__._FWD	pyrdnap.__main__-module.html#_FWD
 pyrdnap.__main__._DASH_	pyrdnap.__main__-module.html#_DASH_
 pyrdnap.__main__._versions	pyrdnap-module.html#_versions
 pyrdnap.__main__._usage	pyrdnap.__main__-module.html#_usage
+pyrdnap.__main__._runx	pyrdnap.__main__-module.html#_runx
 pyrdnap.__main__._line	pyrdnap.v_self-module.html#_line
-pyrdnap.__main__._readlines	pyrdnap.v_self-module.html#_readlines
 pyrdnap.__main__._HT	pyrdnap.__main__-module.html#_HT
 pyrdnap.__main__._v	pyrdnap.__main__-module.html#_v
 pyrdnap.__main__._REV	pyrdnap.__main__-module.html#_REV
@@ -23,6 +23,8 @@ pyrdnap.__main__._BOTH	pyrdnap.__main__-module.html#_BOTH
 pyrdnap.__main__.__package__	pyrdnap.__main__-module.html#__package__
 pyrdnap.__main__._prec	pyrdnap.__main__-module.html#_prec
 pyrdnap.__main__.argv	pyrdnap.__main__-module.html#argv
+pyrdnap.__main__._asRD	pyrdnap.__main__-module.html#_asRD
+pyrdnap.__main__._readlines	pyrdnap.v_self-module.html#_readlines
 pyrdnap.__pygeodesy	pyrdnap.__pygeodesy-module.html
 pyrdnap.__pygeodesy._PyGeodesy_dir	pyrdnap.__pygeodesy-module.html#_PyGeodesy_dir
 pyrdnap.__pygeodesy._requires	pyrdnap.__pygeodesy-module.html#_requires
@@ -352,6 +354,7 @@ pyrdnap.rdnap2018.RDNAP2018v1.variant	pyrdnap.rdnap2018.RDNAP2018v1-class.html#v
 pyrdnap.rdnap2018.RDNAP2018v1.reverse	pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse
 pyrdnap.rdnap2018.RDNAP2018v2	pyrdnap.rdnap2018.RDNAP2018v2-class.html
 pyrdnap.rdnap2018.RDNAP2018v2.similarity	pyrdnap.rdnap2018.RDNAP2018v2-class.html#similarity
+pyrdnap.rdnap2018.RDNAP2018v2._forwardXform2	pyrdnap.rdnap2018.RDNAP2018v2-class.html#_forwardXform2
 pyrdnap.rdnap2018.RDNAP2018v2.reverse3	pyrdnap.rdnap2018.RDNAP2018v2-class.html#reverse3
 pyrdnap.rdnap2018.RDNAP2018v2._rdgrid	pyrdnap.rdnap2018.RDNAP2018v2-class.html#_rdgrid
 pyrdnap.rdnap2018.RDNAP2018v2.__init__	pyrdnap.rdnap2018.RDNAP2018v2-class.html#__init__

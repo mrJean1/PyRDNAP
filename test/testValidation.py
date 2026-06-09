@@ -12,7 +12,7 @@ from bases import _ELLIPSIS_, _getenv, NN, PyRDNAP_dir, TestsBase
 from pyrdnap import RDNAP2018v1, RDNAP2018v2, validation3
 
 __all__ = ()
-__version__ = '26.06.01'
+__version__ = '26.06.09'
 
 _RDNAP_dir   =  PyRDNAP_dir.replace('Py', NN)  # or _ELLIPSIS_
 _v1_max_diff = 'RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999'
@@ -25,7 +25,7 @@ def _str(failed, total=47754, inside=7959):
 
 class Tests(TestsBase):
 
-    def testValidation(self, R, v_txt, max_diff, failed=0, **nl):
+    def testValidation(self, R, asRD, v_txt, max_diff, failed=0, **nl):
 
         self.last_line = None
 
@@ -40,7 +40,7 @@ class Tests(TestsBase):
         t = validation3.__name__
         self.test(R.name, t, t, **nl)
         # note, inside the C{RD} region only!
-        t = validation3(v_txt, R, in_out=True, _print=_p, _printest=None)
+        t = validation3(v_txt, R, asRD=asRD, in_out=True, _print=_p, _printest=None)
         self.test(R.name, self.last_line, max_diff)
         self.test(R.name, _str(*t), _str(failed))
 
@@ -56,8 +56,8 @@ if __name__ == '__main__':
     if v:
         p = os_path.abspath(os_path.join(*v.split('/')))
         if os_path.exists(p):
-            t.testValidation(RDNAP2018v2(name='v2Validation'), p, _v2_max_diff, 356)
-            t.testValidation(RDNAP2018v1(name='v1Validation'), p, _v1_max_diff, nl=1)
+            t.testValidation(RDNAP2018v2(name='v2Validation'), True,  p, _v2_max_diff, 356)
+            t.testValidation(RDNAP2018v1(name='v1Validation'), False, p, _v1_max_diff, nl=1)
             s = 0
         else:
             p = repr(p)

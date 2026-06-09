@@ -8,20 +8,20 @@ riehoeksmeting) and NAP_ (**N**\ ormaal **A**\ msterdams **P**\ eil) systems to 
 geodetic lat-, longitudes and heights to local *RD* coordinates and *NAP quasi-geoid-height* and vice-versa.
 
 ``PyRDNAP`` includes two transformer classes ``RDNAP2018v1`` and ``RDNAP2018v2`` implementing *variant 1*
-respectively *variant 2* of the ``RD NAP 2018`` specification.  Each class provides a ``forward`` method
-to convert from geodetic lat-, longitude and height to RDx, RDy and NAPh and a ``reverse`` method to convert
-RDx, RDy and NAPh to geodetic lat-, longitude and height.
+respectively *variant 2* of the ``RD NAP 2018 v22067`` specification.  Each class provides a ``forward``
+method to convert from geodetic lat-, longitude and height to RDx, RDy and NAPh and a ``reverse`` method
+to convert RDx, RDy and NAPh to geodetic lat-, longitude and height.
 
-NAPh is only interpolated for locations within the ``RD`` lat- and longitude bounds.  Outside that region
-``NAN`` is returned for NAPh or an ``RDNAPError`` is raised if specified.
+NAPh is only interpolated for locations within the bounds ``RD region``.  Outside that region ``NAN`` is
+returned for NAPh or an ``RDNAPError`` is raised if specified.
 
 For further details see the documentation_.
 
 Note
 ====
 
-``PyRDNAP``, ``pyrdnap`` and ``RDNAP2018v1`` have **not been formally validated** and are **not certified**
-to carry the trademark_ name `RDNAPTRANS(tm)`_.
+``RDNAP2018v1``, ``RDNAP2018v2``, ``PyRDNAP`` and ``pyrdnap`` have **not been formally validated** and
+are **not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.
 
 Installation
 ============
@@ -71,7 +71,7 @@ All Python source code has been statically checked_ with Ruff_ using Python 3.13
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
 64-bit on macOS 26.5.1 Tahoe only.
 
-*Last updated: June 06, 2026.*
+*Last updated: June 09, 2026.*
 
 License
 =======

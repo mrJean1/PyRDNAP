@@ -49,16 +49,16 @@ from pygeodesy.constants import (_0_0, _0_0s, _0_5, _1_0, _N_1_0, _2_0,  # noqa:
 from pygeodesy.datums import _earth_datum  # noqa: F401
 from pygeodesy.ellipsoidalBase import LatLonEllipsoidalBase as _LLEB  # noqa: F401
 from pygeodesy.errors import _ValueError, _xkwds, _xkwds_pop2  # noqa: F401
-from pygeodesy.internals import _secs2str, _versions  # noqa: F401
+from pygeodesy.internals import _getenv, _secs2str, _versions  # noqa: F401
 from pygeodesy.interns import (_COLONSPACE_, _COMMASPACE_, _DASH_, _datum_, _E_,  # noqa: F401
                                _EQUAL_, _height_, _lat_, _lon_, _N_, _NAN_, _NL_,  # noqa: F401
                                _S_, _SPACE_, _STAR_, _W_)  # noqa: F401
 from pygeodesy.lazily import _ALL_DOCS, _ALL_OTHER, _FOR_DOCS, import_module  # noqa: F401
-from pygeodesy.named import _NamedBase, _NamedTuple, notOverloaded, _Pass  # noqa: F401
+from pygeodesy.named import _NamedBase, _NamedTuple, _Pass  # noqa: F401
 from pygeodesy.streprs import Fmt  # noqa: F401
 
 __all__ = ()
-__version__ = '26.05.26'
+__version__ = '26.06.09'
 
 # **) MIT License
 #

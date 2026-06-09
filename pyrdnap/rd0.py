@@ -25,7 +25,7 @@ from pygeodesy import (NAN, NN, map1, map2,  # basics, "consterns"
 from math import atan2, ceil, fabs, floor, log, sin, sqrt
 
 __all__ = ()
-__version__ = '26.06.06'
+__version__ = '26.06.08'
 
 _LQRD = _LqRD()  # get Amersfoort, bounds, etc. (deleted below)
 
@@ -79,27 +79,29 @@ class _RD(_RDbase):
         return _c_f_N_f3(lat, self.region.latS, self.lat_D) + \
                _c_f_N_f3(lon, self.region.lonW, self.lon_D)
 
-    def isinside(self, lat, lon, eps=0, B=False):  # eps=_TOL_D, 0 or -_TOLD_D
-        # is C{(lat, lon)} inside the this C{RD} region[B], optionally
+    def isinside(self, lat, lon, as89=False, eps=0):  # eps=_TOL_D, 0 or -_TOLD_D
+        # is C{(lat, lon)} inside the this C{RD} region[89], optionally
         # over-/undersized by positive respectively negative C{eps}?
-        S, W, N, E = self.regionB if B else self.region
+        S, W, N, E = self.region89 if as89 else self.region
         # XXX use "< N" and "< E" instead of "<="?
         return ((S - lat) <= eps and (lat - N) <= eps and
                 (W - lon) <= eps and (lon - E) <= eps) if eps else \
                 (S <= lat <= N   and  W <= lon <= E)
 
-    region = _LQRD.region  # as GRS80 L{Bounds4Tuple}
+    region = _LQRD.region  # as RD-Bessel L{Bounds4Tuple}
 
     @property_ROnce
-    def regionB(self):  # as Bessel1841 L{Bounds4Tuple}
+    def region89(self):
+        '''Get the C{RD} region as ETRS89 (GRS80) (L{Bounds4Tuple}).
+        '''
         from pyrdnap.rdnap2018 import _RDNAPbase as _R
-        return _R().regionB
+        return _R().region89
 
     def _toDict(self):
         def _p(n):  # lambda
             return n.endswith('D') or n.endswith('S')
 
-        return self._preDict(_p, region=self.region, regionB=self.regionB)
+        return self._preDict(_p, region=self.region, region89=self.region89)
 
     @property_ROnce
     def _xETRS2RD(self):  # transform ETRS (GRS80) to RD-Bessel
@@ -118,7 +120,7 @@ class _RD(_RDbase):
     #                                        rx=1.9151, ry=-1.6036, rz=9.0955),
     # lat_D=80.0, lon_D=50.0,
     # region=RD region (latS=50.0, lonW=2.0, latN=56.0, lonE=8.0),
-    # regionB=RD regionB (latS=50.000724, lonW=1.999968, latN=56.001439, lonE=8.000842)
+    # region89=RD region89 (latS=49.999276, lonW=2.000032, latN=55.998561, lonE=7.999158)
 
 _RD = _RD()  # PYCHOK singleton, in .test/testRndTrips
 
@@ -188,8 +190,7 @@ class _RD0(_RDbase):
         return sqrt(c**4 * E.e2 / E.e21 + _1_0)
 
     @property_ROnce
-    def PHI0C(self):  # 2.4.1 p 15 𝛷0
-        # get 𝛷0, Amersfoort latitude on sphere
+    def PHI0C(self):  # 2.4.1 p 15 𝛷0, Amersfoort latitude on sphere
         m, n = self.Rmn2
         s, c = self.sincos2PHI0
         return Phi(PHI0C=atan2(m * s, n * c))  # atan((m / n) * tan(PHI0))
@@ -208,8 +209,8 @@ class _RD0(_RDbase):
         return self.R * self.K0 * _2_0
 
     @property_ROnce
-    def Rmn2(self):  # 2.4.1 p 15 sqrt(RsubM), sqrt(RsubN)
-        # get 2-tuple (RHO0, NU0) EPSG:9809
+    def Rmn2(self):  # 2.4.1 p 15 (sqrt(RsubM), sqrt(RsubN))
+        # RsubM, RsubN == RHO0, NU0 EPSG:9809
         E =  self.E0
         s, _ = self.sincos2PHI0
         s = _1_0 - s**2 * E.e2
