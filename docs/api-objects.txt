@@ -4,6 +4,7 @@ pyrdnap.Datums	pyrdnap-module.html#Datums
 pyrdnap._versions	pyrdnap-module.html#_versions
 pyrdnap.validation3	pyrdnap-module.html#validation3
 pyrdnap.__package__	pyrdnap-module.html#__package__
+pyrdnap.machine	pyrdnap-module.html#machine
 pyrdnap._SPACE_	pyrdnap-module.html#_SPACE_
 pyrdnap._pyrdnap_	pyrdnap-module.html#_pyrdnap_
 pyrdnap.__main__	pyrdnap.__main__-module.html

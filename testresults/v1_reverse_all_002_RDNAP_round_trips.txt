@@ -50002,5 +50002,5 @@ RDNAP2018v1 reverse(RDx -336529, RDy -266349, NAPh 174.257, lat 45.4215, lon -0.
 RDNAP2018v1 forward(RDx -336529, RDy -266349, NAPh NAN, lat 45.4215, lon -0.876347, height NAN, ...) outside
 RDNAP2018v1 |diff| (RDx 2.00741e-06, RDy 3.54286e-05, NAPh NAN, lat 0.0, lon 0.0, height NAN, ...)
 
-RDNAP2018v1 60000 tests (pyrdnap 26.6.9 pygeodesy 26.6.6 Python 3.14.5 64bit arm64 macOS 26.5.1) 1.091 sec 
+RDNAP2018v1 60000 tests (pyrdnap 26.6.9 pygeodesy 26.6.9 Python 3.14.5 64bit arm64 macOS 26.5.1) 1.045 sec 
 reverse max |diff| (RDx 0.000223603, RDy 0.000799715, NAPh 5.68434e-14, lat 0, lon 0, height 0, ...)

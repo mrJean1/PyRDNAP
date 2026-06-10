@@ -8,20 +8,20 @@ riehoeksmeting) and NAP_ (**N**\ ormaal **A**\ msterdams **P**\ eil) systems to 
 geodetic lat-, longitudes and heights to local *RD* coordinates and *NAP quasi-geoid-height* and vice-versa.
 
 ``PyRDNAP`` includes two transformer classes ``RDNAP2018v1`` and ``RDNAP2018v2`` implementing *variant 1*
-respectively *variant 2* of the ``RD NAP 2018 v22067`` specification.  Each class provides a ``forward``
+respectively *variant 2* of the ``RD NAP 2018 v220627`` specification.  Each class provides a ``forward``
 method to convert from geodetic lat-, longitude and height to RDx, RDy and NAPh and a ``reverse`` method
 to convert RDx, RDy and NAPh to geodetic lat-, longitude and height.
 
-NAPh is only interpolated for locations within the bounds ``RD region``.  Outside that region ``NAN`` is
-returned for NAPh or an ``RDNAPError`` is raised if specified.
+NAPh is only interpolated for locations within the bounds ``RD region``.  Outside that region ``NAN``
+is returned for NAPh or an ``RDNAPError`` is raised if so specified.
 
 For further details see the documentation_.
 
 Note
 ====
 
-``RDNAP2018v1``, ``RDNAP2018v2``, ``PyRDNAP`` and ``pyrdnap`` have **not been formally validated** and
-are **not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.
+``RDNAP2018v1``, ``RDNAP2018v2``, ``PyRDNAP`` and ``pyrdnap`` have **not been formally validated**
+and are **not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.
 
 Installation
 ============
@@ -38,8 +38,8 @@ before or after installation.
 Dependencies
 ============
 
-Installation of Python package pygeodesy_ is required, version 26.5.26 or newer.  Type ``python[3] -m pip
-install -r requirements.txt`` to install.
+Installation of Python package pygeodesy_ is required, version 26.5.26 or newer.  Type
+``python[3] -m pip install -r requirements.txt`` to install.
 
 Documentation
 =============
@@ -52,11 +52,11 @@ Tests
 =====
 
 The tests ran with Python 3.14.5, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_
-26.5.9 and on macOS 26.5.1 Tahoe in 64-bit.  The results of those tests are included in the
+26.5.26 and on macOS 26.5.1 Tahoe in 64-bit.  The results of those tests are included in the
 distribution file.
 
-Python 3.14.5 runs on Apple M4 Si (``arm64``), *natively*.  Python 2.7.18 runs on Intel (``x86_64``)
-or Intel *emulation* (\"``arm64_x86_64``\", see function `pygeodesy.machine`_).
+Python 3.14.5 and PyPy 7.3.17 run on Apple M4 (``arm64``), *natively*.  Python 2.7.18 runs on
+Intel (``x86_64``) or Intel *emulation* (\"``arm64_x86_64``\", see function `pyrdnap.machine`_).
 
 Test coverage has been measured with coverage_ 7.14.0 using Python 3.14.5.  The complete coverage
 report in HTML and a PDF summary are included in the distribution file.
@@ -79,7 +79,7 @@ License
 **Copyright (C) 2026-2026 -\- mrJean1 at Gmail -\- All Rights Reserved.**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -124,11 +124,11 @@ DEALINGS IN THE SOFTWARE.
 .. _PyCodeStyle: https://PyPI.org/project/pycodestyle
 .. _PyFlakes: https://PyPI.org/project/pyflakes
 .. _pygeodesy: https://PyPI.org/project/pygeodesy
-.. _pygeodesy.machine: https://mrJean1.GitHub.io/PyGeodesy/docs/pygeodesy.internals-module.html#machine
 .. _PyPI: https://PyPI.org/project/pyrdnap
 .. _PyPI Download files: https://PyPI.org/project/pyrdnap/#files
 .. _PyPy: https://formulae.brew.sh/formula/pypy3.10
 .. _pyrdnap: https://PyPI.org/project/pyrdnap
+.. _pyrdnap.machine: https://mrJean1.GitHub.io/PyGeodesy/docs/pygeodesy.internals-module.html#machine
 .. _RD: https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans
 .. _rdnap2018: https://GitHub.com/mrJean1/PyRDNAP/blob/main/docs/pyrdnap.rdnap2018-module.html
 .. _RDNAPTRANS(tm): https://formulieren.kadaster.nl/aanvragen_rdnaptrans

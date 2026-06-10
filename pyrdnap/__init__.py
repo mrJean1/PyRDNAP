@@ -38,7 +38,7 @@ except ImportError:  # ... if it doesn't, extend sys.path to include
         sys.path.insert(0, pyrdnap_abspath)  # XXX __path__[0]
 
 try:  # PYCHOK once
-    from pyrdnap.__pygeodesy import _SPACE_, _versions as _pygeodesy_versions  # PYCHOK ...
+    from pyrdnap.__pygeodesy import machine, _SPACE_, _versions as _pygeodesy_versions  # PYCHOK ...
 except (AttributeError, ImportError) as x:
     raise AssertionError(str(x))
 
@@ -50,7 +50,7 @@ from pyrdnap.rd0 import __all__ as _rd0  # PYCHOK ?
 from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
-__all__ = tuple(sorted(('pyrdnap_abspath',) + _rd0 + _rdnap + _v_self))
+__all__ = tuple(sorted(('pyrdnap_abspath', machine.__name__) + _rd0 + _rdnap + _v_self))
 __version__ = '26.06.09'
 
 
