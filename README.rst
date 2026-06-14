@@ -8,20 +8,20 @@ riehoeksmeting) and NAP_ (**N**\ ormaal **A**\ msterdams **P**\ eil) systems to 
 geodetic lat-, longitudes and heights to local *RD* coordinates and *NAP quasi-geoid-height* and vice-versa.
 
 ``PyRDNAP`` includes two transformer classes ``RDNAP2018v1`` and ``RDNAP2018v2`` implementing *variant 1*
-respectively *variant 2* of the ``RD NAP 2018 v220627`` specification.  Each class provides a ``forward``
-method to convert from geodetic lat-, longitude and height to RDx, RDy and NAPh and a ``reverse`` method
-to convert RDx, RDy and NAPh to geodetic lat-, longitude and height.
+respectively *variant 2* of the ``RDNAPTRANS(tm)2018 v220627`` specification.  Each class provides a
+``forward`` method to convert a geodetic lat-, longitude and height to local RDx, RDy and NAPh and a
+``reverse`` method to convert a local RDx, RDy and NAPh to geodetic lat-, longitude and height.
 
-NAPh is only interpolated for locations within the bounds ``RD region``.  Outside that region ``NAN``
-is returned for NAPh or an ``RDNAPError`` is raised if so specified.
+NAPh is only interpolated for locations within the bounds of the ``RD region``.  Outside that region
+``NAN`` is returned for NAPh or an ``RDNAPError`` is raised if so specified.
 
 For further details see the documentation_.
 
 Note
 ====
 
-``RDNAP2018v1``, ``RDNAP2018v2``, ``PyRDNAP`` and ``pyrdnap`` have **not been formally validated**
-and are **not certified** to carry the trademark_ name `RDNAPTRANS(tm)`_.
+The results of both ``pyrdnap`` transformer classes ``RDNAP2018v1`` and ``RDNAP2018v2`` have been
+formally validated and ``PyRDNAP`` has been certified to carry the trademark_ `RDNAPTRANS(tm)`_.
 
 Installation
 ============
@@ -38,7 +38,7 @@ before or after installation.
 Dependencies
 ============
 
-Installation of Python package pygeodesy_ is required, version 26.5.26 or newer.  Type
+Installation of Python package pygeodesy_ is required, version 26.6.12 or newer.  Type
 ``python[3] -m pip install -r requirements.txt`` to install.
 
 Documentation
@@ -71,7 +71,7 @@ All Python source code has been statically checked_ with Ruff_ using Python 3.13
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
 64-bit on macOS 26.5.1 Tahoe only.
 
-*Last updated: June 09, 2026.*
+*Last updated: June 16, 2026.*
 
 License
 =======
@@ -98,7 +98,7 @@ DEALINGS IN THE SOFTWARE.
   :target: https://PyPI.org/project/pyrdnap
 .. image:: https://Img.Shields.io/appveyor/ci/mrJean1/PyRDNAP.svg?branch=master&label=AppVeyor
   :target: https://CI.AppVeyor.com/project/mrJean1/PyRDNAP/branch/master
-.. image:: https://Img.Shields.io/badge/coverage-96%25-brightgreen
+.. image:: https://Img.Shields.io/badge/coverage-97%25-brightgreen
   :target: https://GitHub.com/mrJean1/PyRDNAP/blob/master/testcoverage.pdf
 .. image:: https://Img.Shields.io/pypi/wheel/pyrdnap.svg
   :target: https://PyPI.org/project/pyrdnap/#files

@@ -7,7 +7,7 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.05.27'
+__version__ = '26.06.12'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
 from pyrdnap.__pygeodesy import _requires
@@ -48,11 +48,11 @@ def _version():
 
 
 _KeyWords = ('NAP', 'Normaal-Amsterdams-Peil',
-             'RD', 'RijksDriehoeksmeting',)
+             'RD', 'RijksDriehoeksmeting')
 
 setup(name=_PACKAGE,
       packages=['pyrdnap', 'pyrdnap.v1grid', 'pyrdnap.v2grid'],
-      description='Pure Python RD NAP 2018 conversions',
+      description='Pure Python RDNAPTRANS(tm)2018 conversions',
       version=_version(),
 
       author='Jean M. Brouwers',
@@ -73,7 +73,7 @@ setup(name=_PACKAGE,
       zip_safe=False,
 
       # <https://PyPI.org/pypi?%3Aaction=list_classifiers>
-      classifiers=[_c('Development Status', '4 - Beta'),
+      classifiers=[_c('Development Status', '5 - Production/Stable'),
                    _c('Environment', 'Console'),
                    _c('Intended Audience', 'Developers'),
                    _c('License', 'OSI Approved', 'MIT License'),

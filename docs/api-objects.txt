@@ -17,6 +17,7 @@ pyrdnap.__main__._versions	pyrdnap-module.html#_versions
 pyrdnap.__main__._usage	pyrdnap.__main__-module.html#_usage
 pyrdnap.__main__._runx	pyrdnap.__main__-module.html#_runx
 pyrdnap.__main__._line	pyrdnap.v_self-module.html#_line
+pyrdnap.__main__._readlines	pyrdnap.v_self-module.html#_readlines
 pyrdnap.__main__._HT	pyrdnap.__main__-module.html#_HT
 pyrdnap.__main__._v	pyrdnap.__main__-module.html#_v
 pyrdnap.__main__._REV	pyrdnap.__main__-module.html#_REV
@@ -24,8 +25,6 @@ pyrdnap.__main__._BOTH	pyrdnap.__main__-module.html#_BOTH
 pyrdnap.__main__.__package__	pyrdnap.__main__-module.html#__package__
 pyrdnap.__main__._prec	pyrdnap.__main__-module.html#_prec
 pyrdnap.__main__.argv	pyrdnap.__main__-module.html#argv
-pyrdnap.__main__._asRD	pyrdnap.__main__-module.html#_asRD
-pyrdnap.__main__._readlines	pyrdnap.v_self-module.html#_readlines
 pyrdnap.__pygeodesy	pyrdnap.__pygeodesy-module.html
 pyrdnap.__pygeodesy._PyGeodesy_dir	pyrdnap.__pygeodesy-module.html#_PyGeodesy_dir
 pyrdnap.__pygeodesy._requires	pyrdnap.__pygeodesy-module.html#_requires
@@ -339,7 +338,10 @@ pyrdnap.rd0.RDNAP7Tuple.philam	pyrdnap.rd0.RDNAP7Tuple-class.html#philam
 pyrdnap.rd0.RDNAP7Tuple.xyz	pyrdnap.rd0.RDNAP7Tuple-class.html#xyz
 pyrdnap.rd0.RDNAP7Tuple.xy	pyrdnap.rd0.RDNAP7Tuple-class.html#xy
 pyrdnap.rd0.RDNAP7Tuple.diff	pyrdnap.rd0.RDNAP7Tuple-class.html#diff
+pyrdnap.rd0.RDNAP7Tuple._toX	pyrdnap.rd0.RDNAP7Tuple-class.html#_toX
+pyrdnap.rd0.RDNAP7Tuple.toETRS	pyrdnap.rd0.RDNAP7Tuple-class.html#toETRS
 pyrdnap.rd0.RDNAP7Tuple.latlonheight	pyrdnap.rd0.RDNAP7Tuple-class.html#latlonheight
+pyrdnap.rd0.RDNAP7Tuple.toRD	pyrdnap.rd0.RDNAP7Tuple-class.html#toRD
 pyrdnap.rd0.RDNAP7Tuple.philamheight	pyrdnap.rd0.RDNAP7Tuple-class.html#philamheight
 pyrdnap.rd0.RDNAP7Tuple.lam	pyrdnap.rd0.RDNAP7Tuple-class.html#lam
 pyrdnap.rd0.RDNAP7Tuple.phi	pyrdnap.rd0.RDNAP7Tuple-class.html#phi
@@ -352,7 +354,10 @@ pyrdnap.rdnap2018.RDNAP2018v1.__init__	pyrdnap.rdnap2018.RDNAP2018v1-class.html#
 pyrdnap.rdnap2018.RDNAP2018v1.forward	pyrdnap.rdnap2018.RDNAP2018v1-class.html#forward
 pyrdnap.rdnap2018.RDNAP2018v1.forward3	pyrdnap.rdnap2018.RDNAP2018v1-class.html#forward3
 pyrdnap.rdnap2018.RDNAP2018v1.variant	pyrdnap.rdnap2018.RDNAP2018v1-class.html#variant
+pyrdnap.rdnap2018.RDNAP2018v1.isinside	pyrdnap.rdnap2018.RDNAP2018v1-class.html#isinside
+pyrdnap.rdnap2018.RDNAP2018v1.rdNAPh	pyrdnap.rdnap2018.RDNAP2018v1-class.html#rdNAPh
 pyrdnap.rdnap2018.RDNAP2018v1.reverse	pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse
+pyrdnap.rdnap2018.RDNAP2018v1.region4	pyrdnap.rdnap2018.RDNAP2018v1-class.html#region4
 pyrdnap.rdnap2018.RDNAP2018v2	pyrdnap.rdnap2018.RDNAP2018v2-class.html
 pyrdnap.rdnap2018.RDNAP2018v2.similarity	pyrdnap.rdnap2018.RDNAP2018v2-class.html#similarity
 pyrdnap.rdnap2018.RDNAP2018v2._forwardXform2	pyrdnap.rdnap2018.RDNAP2018v2-class.html#_forwardXform2
@@ -362,5 +367,8 @@ pyrdnap.rdnap2018.RDNAP2018v2.__init__	pyrdnap.rdnap2018.RDNAP2018v2-class.html#
 pyrdnap.rdnap2018.RDNAP2018v2.forward	pyrdnap.rdnap2018.RDNAP2018v2-class.html#forward
 pyrdnap.rdnap2018.RDNAP2018v2.forward3	pyrdnap.rdnap2018.RDNAP2018v2-class.html#forward3
 pyrdnap.rdnap2018.RDNAP2018v2.variant	pyrdnap.rdnap2018.RDNAP2018v2-class.html#variant
+pyrdnap.rdnap2018.RDNAP2018v2.isinside	pyrdnap.rdnap2018.RDNAP2018v2-class.html#isinside
+pyrdnap.rdnap2018.RDNAP2018v2.rdNAPh	pyrdnap.rdnap2018.RDNAP2018v2-class.html#rdNAPh
 pyrdnap.rdnap2018.RDNAP2018v2.reverse	pyrdnap.rdnap2018.RDNAP2018v2-class.html#reverse
+pyrdnap.rdnap2018.RDNAP2018v2.region4	pyrdnap.rdnap2018.RDNAP2018v2-class.html#region4
 pyrdnap.v_grids.RDNAPError	pyrdnap.v_grids.RDNAPError-class.html

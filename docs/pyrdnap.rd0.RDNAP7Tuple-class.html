@@ -85,11 +85,11 @@ pygeodesy.named._NamedTuple --+
 
 <hr />
 <div class="fields">      <p><strong>Note:</strong>
-        The <code>lat</code> and {lon} are <i>by default</i>  <b>GRS80 
-        (ETRS89)</b> geodetic coordinates <a 
-        href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse" 
+        The <code>lat</code>, <code>lon</code> and <code>datum</code> are 
+        <i>by default</i> <b>GRS80 (ETRS89)</b> geodetic when returned from
+        <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse" 
         class="link">RDNAP2018v1.reverse</a> but <b>Bessel1841 
-        (RD-Bessel)</b> when returned from <a 
+        (RD-Bessel)</b> from <a 
         href="pyrdnap.rdnap2018.RDNAP2018v2-class.html#reverse" 
         class="link">RDNAP2018v2.reverse</a>.
       </p>
@@ -148,11 +148,53 @@ pygeodesy.named._NamedTuple --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="pyrdnap.rd0.RDNAP7Tuple-class.html#toETRS" class="summary-sig-name">toETRS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**name</span>)</span><br />
+      Copy this <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+      class="link">RDNAP7Tuple</a> with <code>lat</code> and 
+      <code>lon</code> <code>reverse3</code> transformed to ETRS89 (GRS80),
+      provided this <code>datum</code> is Bessel1841 (RD-Bessel).</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="pyrdnap.rd0.RDNAP7Tuple-class.html#toLatLon" class="summary-sig-name">toLatLon</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">LatLon</span>,
         <span class="summary-sig-arg">**LatLon_kwds</span>)</span><br />
       Return this <code>lat</code>, <code>lon</code>, <code>datum</code> 
       and <code>height</code> as <b><code>LatLon</code></b>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyrdnap.rd0.RDNAP7Tuple-class.html#toRD" class="summary-sig-name">toRD</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">**name</span>)</span><br />
+      Copy this <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+      class="link">RDNAP7Tuple</a> with <code>lat</code> and 
+      <code>lon</code> <code>forward3</code> transformed to RD-Bessel 
+      (Bessel1841), provided this <code>datum</code> is GRS80 (ETRS89).</td>
           <td align="right" valign="top">
             
             
@@ -403,16 +445,58 @@ pygeodesy.named._NamedTuple --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>datum2</code></strong> - Datum to convert <i>to</i> (<a 
           href="pygeodesy.datums.Datum-class.html" class="link">Datum</a>).</li>
+        <li><strong class="pname"><code>name</code></strong> - Optional name (<code>str</code>), overriding this name.</li>
     </ul></dd>
     <dt>Returns:</dt>
         <dd>An <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
-          class="link">RDNAP7Tuple</a> with converted <code>lat</code>, 
+          class="link">RDNAP7Tuple</a> with transformed <code>lat</code>, 
           <code>lon</code> and <code>height</code> or this <a 
           href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
           class="link">RDNAP7Tuple</a> if this.datum is 
           <b><code>datum2</code></b>.</dd>
   </dl>
-</td></tr></table>
+<div class="fields">      <p><strong>Note:</strong>
+        This datum conversion is based on <code>pygeodesy</code> which 
+        differs from <code>RDNAPTRANS(tm)2018_v220627</code>.
+      </p>
+      <p><strong>See Also:</strong>
+        Methods <code class="link">RDNAP7Tuple.asETRS</code> and <code 
+        class="link">RDNAP7Tuple.asRD</code>.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="toETRS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">toETRS</span>&nbsp;(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Copy this <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+  class="link">RDNAP7Tuple</a> with <code>lat</code> and <code>lon</code> 
+  <code>reverse3</code> transformed to ETRS89 (GRS80), provided this 
+  <code>datum</code> is Bessel1841 (RD-Bessel).</p>
+  <dl class="fields">
+    <dt>Arguments:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> - Optional name (<code>str</code>), overriding this name.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        Methods <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#toRD" 
+        class="link">RDNAP7Tuple.toRD</a> and <a 
+        href="pyrdnap.rd0.RDNAP7Tuple-class.html#toDatum" 
+        class="link">RDNAP7Tuple.toDatum</a>.
+      </p>
+</div></td></tr></table>
 </div>
 <a name="toLatLon"></a>
 <div>
@@ -448,6 +532,39 @@ pygeodesy.named._NamedTuple --+
     </ul></dd>
   </dl>
 </td></tr></table>
+</div>
+<a name="toRD"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">toRD</span>&nbsp;(<span class="sig-arg">self</span>,
+        <span class="sig-arg">**name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Copy this <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
+  class="link">RDNAP7Tuple</a> with <code>lat</code> and <code>lon</code> 
+  <code>forward3</code> transformed to RD-Bessel (Bessel1841), provided 
+  this <code>datum</code> is GRS80 (ETRS89).</p>
+  <dl class="fields">
+    <dt>Arguments:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> - Optional name (<code>str</code>), overriding this name.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        Methods <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#toETRS" 
+        class="link">RDNAP7Tuple.toETRS</a> and <a 
+        href="pyrdnap.rd0.RDNAP7Tuple-class.html#toDatum" 
+        class="link">RDNAP7Tuple.toDatum</a>.
+      </p>
+</div></td></tr></table>
 </div>
 <br />
 <!-- ==================== PROPERTY DETAILS ==================== -->
@@ -731,7 +848,7 @@ pygeodesy.named._NamedTuple --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jun 10 10:51:56 2026
+    Generated by Epydoc 3.0.1 on Sun Jun 14 13:03:34 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

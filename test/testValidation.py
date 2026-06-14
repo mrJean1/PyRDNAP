@@ -1,20 +1,22 @@
 
 # -*- coding: utf-8 -*-
 
-# Test L{PyRDNAP} with the offical self-validation tests.  Both RDNAP2018 variants are tested
-# the final RDNAP... lines show the max |diff| and the required |diff| for variant 1.  See
-# function L{pyrdnap.validation3<pyrdnap.v_self.validation3>} for more details.
+# Test L{PyRDNAP} with the offical self-validation tests.  Both RDNAP2018 variants are
+# tested the final RDNAP... lines show the max |diff| and the required |diff| for variant
+# 1.  See function L{pyrdnap.validation3<pyrdnap.v_self.validation3>} for more details.
 #
-# Note, variant 1 passes, but variant 2 fails, as expected (for tests intended for variant 1).
+# Note, variant 1 passes, but variant 2 fails partially as validated.
 
 from bases import _ELLIPSIS_, _getenv, NN, PyRDNAP_dir, TestsBase
 
 from pyrdnap import RDNAP2018v1, RDNAP2018v2, validation3
 
-__all__ = ()
-__version__ = '26.06.09'
+import os.path as os_path
 
-_RDNAP_dir   =  PyRDNAP_dir.replace('Py', NN)  # or _ELLIPSIS_
+__all__ = ()
+__version__ = '26.06.14'
+
+_PyRDNAP_up1 =  os_path.dirname(PyRDNAP_dir)  # or _ELLIPSIS_
 _v1_max_diff = 'RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999'
 _v2_max_diff = 'RDNAP2018v2 max |diff| lat 0.00119963344, lon 0.00082945486, height 0.000637, RDx 0.00829877, RDy 0.01574313, NAPh 0.00063739'
 
@@ -25,7 +27,7 @@ def _str(failed, total=47754, inside=7959):
 
 class Tests(TestsBase):
 
-    def testValidation(self, R, asRD, v_txt, max_diff, failed=0, **nl):
+    def testValidation(self, R, v_txt, max_diff, failed=0, **nl):
 
         self.last_line = None
 
@@ -35,19 +37,17 @@ class Tests(TestsBase):
                 self.test(R.name, p, p)
             # defer printing each line
             t = ' '.join(map(str, args))
-            self.last_line = t.replace(_RDNAP_dir, _ELLIPSIS_)
+            self.last_line = t.replace(_PyRDNAP_up1, _ELLIPSIS_)
 
         t = validation3.__name__
         self.test(R.name, t, t, **nl)
         # note, inside the C{RD} region only!
-        t = validation3(v_txt, R, asRD=asRD, in_out=True, _print=_p, _printest=None)
+        t = validation3(v_txt, R, in_out=True, _print=_p, _printest=None)
         self.test(R.name, self.last_line, max_diff)
         self.test(R.name, _str(*t), _str(failed))
 
 
 if __name__ == '__main__':
-
-    import os.path as os_path
 
     t =  Tests(__file__, __version__)
     s =  47754  # total tests
@@ -56,8 +56,8 @@ if __name__ == '__main__':
     if v:
         p = os_path.abspath(os_path.join(*v.split('/')))
         if os_path.exists(p):
-            t.testValidation(RDNAP2018v2(name='v2Validation'), True,  p, _v2_max_diff, 356)
-            t.testValidation(RDNAP2018v1(name='v1Validation'), False, p, _v1_max_diff, nl=1)
+            t.testValidation(RDNAP2018v2(name='v2Validation'), p, _v2_max_diff, 356)
+            t.testValidation(RDNAP2018v1(name='v1Validation'), p, _v1_max_diff, nl=1)
             s = 0
         else:
             p = repr(p)

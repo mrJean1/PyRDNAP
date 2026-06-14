@@ -1,27 +1,27 @@
 
 # -*- coding: utf-8 -*-
 
-u'''Function L{validation3} to run the C{RD NAP 2018} self-validation test set
-C{.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt} obtainable from U{NSGI.NL
-<https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
+u'''Function L{validation3} to run the C{RDNAPTRANS(tm)2018_v220627} self-validation
+test set C{.../Z001_ETRS89andRDNAP.txt} obtainable from U{NSGI.NL<https://www.NSGI.NL/
+coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
 after registration.
 
 For each test point, 3 lines are produced: the 1st showing the point C{id}, the original
 (ETRS89) C{lat}, C{lon} and C{height} and the expected C{RDx}, C{RDy} and C{NAPh} values.
 
 The 2nd line shows the C{lat}, C{lon} and C{height} and C{RDx}, C{RDy} and {NAPh} results
-from the L{RDNAP2018v1} or C{-v2} transformer's L{reverse<pyrdnap.RDNAP2018v1.reverse>}
-respectively L{forward<pyrdnap.RDNAP2018v1.forward>} method.
+from the L{RDNAP2018v1} transformer's L{reverse<pyrdnap.RDNAP2018v1.reverse>} respectively
+L{forward<pyrdnap.RDNAP2018v1.forward>} method.
 
 The 3rd line contains the (absolute value) of the differences for each result on the 2nd
 line and the corresponding, original test point value on the 1st line.
 
 The final lines of the output are the C{maximum} of all (absolute value) differences in
-2 formats and a line with the C{RD NAP 2018} requirements, C{0.000000010 degrees} or
-C{0.0010 meter} for each result.
+2 formats and a line with the C{RDNAPTRANS(tm)2018} requirements, C{0.000000010 degrees}
+or C{0.0010 meter} for each result.
 
-A test C{FAILED} if any C{reverse} or C{forward} result I{exceeds} the C{RD NAP 2018}
-requirement for that result.
+A test is considered C{FAILED} if any C{reverse} or C{forward} result I{exceeds} the
+C{RDNAPTRANS(tm)2018} requirement for that result.
 
 For points with C{NAPh} marked C{"*"}, C{NAPh} is set to C{NAN}.
 
@@ -37,7 +37,7 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.06.09'
+__version__ = '26.06.12'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[0:3]
 #        (lat   lon   height RDx   RDy   NAPh)
@@ -59,26 +59,23 @@ def _readlines(filename):  # in .__main__
             t = f.readline()
 
 
-def validation3(self_txt, R, all_=False, asRD=False, in_out=True, _print=None, _printest=None):  # MCCABE 18
-    '''Run the C{RD NAP 2018} self-validation test set.
+def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=None):  # MCCABE 18
+    '''Run the C{RDNAPTRANS(tm)2018_v220627} self-validation test set.
 
-       @arg self_txt: Name of the file containing the C{RD NAP 2018} self-validation tests
-                      (C{str}), C{.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt}.
+       @arg self_txt: Path of the file containing the self-validation test set (C{str,
+                      .../Z001_ETRS89andRDNAP.txt}).
        @arg R: An RDNAP2018v# transformer (L{RDNAP2018v1} or L{RDNAP2018v2} instance).
-       @kwarg all_: If C{True} print all tests and test results, otherwise only failing
+       @kwarg all_: If C{True} print all tests and test results, otherwise print only failing
                     tests (C{bool}).
-       @kwarg asRD: If C{True} use RD_Bessel lat- and longitudes and datum from C{reverse}
-                    results (C{bool}).
-       @kwarg in_out: If C{True} test only points C{inside} the C{RD} region, if C{False}
-                      only points C{outside} (C{bool}).
-       @kwarg _print: A Python 3+ C{print}-like callable or C{None} to not print the header
-                      and the final, summary lines.
+       @kwarg in_out: If C{True} test only points C{inside} the C{RD} region, if C{False} only
+                      points C{outside} (C{bool}).
+       @kwarg _print: A Python 3+ C{print}-like callable or C{None} to not print the header and
+                      the final, summary lines.
        @kwarg _printest: A Python 3+ C{print}-like callable or C{None} to not print B{C{all_}}
                          B{C{in_out}} tests or only the failing ones.
 
-       @return: 3-Tuple C{(failed, total, in_outside)} with the number of C{FAILED} tests,
-                the C{total} number of tests and the number of points B{C{in_out}} the C{RD}
-                region.
+       @return: 3-Tuple C{(failed, total, in_outside)} with the number of C{FAILED} tests, the
+                C{total} number of tests and the number of points B{C{in_out}} the C{RD} region.
     '''
     from pyrdnap import RDNAP2018v1, RDNAP2018v2, RDNAPError, _versions
 
@@ -86,7 +83,7 @@ def validation3(self_txt, R, all_=False, asRD=False, in_out=True, _print=None, _
     _xinstanceof(RDNAP2018v1, RDNAP2018v2, R=R)
     R_ = typename(R)
 
-    nfailed = ntotal = nin_out = 0
+    nfailed = nlines = ntotal = nin_out = 0
     if _print:
         _print('testing', repr(R))
         _print('  using', repr(self_txt))
@@ -103,7 +100,7 @@ def validation3(self_txt, R, all_=False, asRD=False, in_out=True, _print=None, _
                 lat, lon, h, RDx, RDy, NAPh = xs = map2(float, ts[1:])
                 if in_out == bool(R.isinside(lat, lon)):
                     F  = NN  # PASSED
-                    rs = R.reverse(RDx, RDy, NAPh, asRD=asRD).latlonheight + \
+                    rs = R.reverse(RDx, RDy, NAPh).latlonheight + \
                          R.forward(lat, lon, h).xyz
                     ntotal  += len(rs)
                     nin_out += 1
@@ -122,6 +119,8 @@ def validation3(self_txt, R, all_=False, asRD=False, in_out=True, _print=None, _
                         _printest('id', _SPACE_(*ts), _line(ln))
                         _printest(R_, _zfmt(rs), F)
                         _printest('     |diff|', _zfe4(ds), F, _NL_)
+                    if F:
+                        nlines += 1
             else:  # 1st line
                 if _print:
                     _print(' header', repr(t), _line(ln), _NL_)
@@ -134,10 +133,8 @@ def validation3(self_txt, R, all_=False, asRD=False, in_out=True, _print=None, _
                 t += ' -all' if all_ else ' -failed'
             t = '%s of %s points %s' % (nin_out, (ln - 1), t)
             t = '%s (%s) %s' % (t, _versions(), _secs2str(s))
-            if asRD:
-                t += ' -asRD'
             if nfailed:
-                _print(R_, nfailed, 'of', ntotal, 'tests', 'FAILED,', t)
+                _print(R_, nfailed, 'of', ntotal, 'tests', 'FAILED for', nlines, 'of', t)
             else:
                 _print(R_, 'all', ntotal, 'tests', 'PASSED,', t)
             for n, _z, fs in (('req', _zfmt, _REQ_D), ('max', _zfe4, diffs),

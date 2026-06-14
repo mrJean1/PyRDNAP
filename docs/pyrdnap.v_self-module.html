@@ -60,10 +60,9 @@
 <!-- ==================== MODULE DESCRIPTION ==================== -->
 <h1 class="epydoc">Module v_self</h1><p class="nomargin-top"></p>
 <p>Function <a href="pyrdnap.v_self-module.html#validation3" 
-  class="link">validation3</a> to run the <code>RD NAP 2018</code> 
-  self-validation test set 
-  <code>.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt</code> 
-  obtainable from <a 
+  class="link">validation3</a> to run the 
+  <code>RDNAPTRANS(tm)2018_v220627</code> self-validation test set 
+  <code>.../Z001_ETRS89andRDNAP.txt</code> obtainable from <a 
   href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
   target="_top">NSGI.NL</a> after registration.</p>
   <p>For each test point, 3 lines are produced: the 1st showing the point 
@@ -73,19 +72,19 @@
   <p>The 2nd line shows the <code>lat</code>, <code>lon</code> and 
   <code>height</code> and <code>RDx</code>, <code>RDy</code> and {NAPh} 
   results from the <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
-  class="link">RDNAP2018v1</a> or <code>-v2</code> transformer's <a 
+  class="link">RDNAP2018v1</a> transformer's <a 
   href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse" 
   class="link">reverse</a> respectively forward method.</p>
   <p>The 3rd line contains the (absolute value) of the differences for each
   result on the 2nd line and the corresponding, original test point value 
   on the 1st line.</p>
   <p>The final lines of the output are the <code>maximum</code> of all 
-  (absolute value) differences in 2 formats and a line with the <code>RD 
-  NAP 2018</code> requirements, <code>0.000000010 degrees</code> or 
-  <code>0.0010 meter</code> for each result.</p>
-  <p>A test <code>FAILED</code> if any <code>reverse</code> or 
-  <code>forward</code> result <i>exceeds</i> the <code>RD NAP 2018</code> 
-  requirement for that result.</p>
+  (absolute value) differences in 2 formats and a line with the 
+  <code>RDNAPTRANS(tm)2018</code> requirements, <code>0.000000010 
+  degrees</code> or <code>0.0010 meter</code> for each result.</p>
+  <p>A test is considered <code>FAILED</code> if any <code>reverse</code> 
+  or <code>forward</code> result <i>exceeds</i> the 
+  <code>RDNAPTRANS(tm)2018</code> requirement for that result.</p>
   <p>For points with <code>NAPh</code> marked <code>&quot;*&quot;</code>, 
   <code>NAPh</code> is set to <code>NAN</code>.</p>
 
@@ -97,7 +96,7 @@
         class="link">validation3</a>.
       </p>
       <p><strong>Version:</strong>
-        26.06.09
+        26.06.12
       </p>
 </div><!-- ==================== FUNCTIONS ==================== -->
 <a name="section-Functions"></a>
@@ -116,11 +115,11 @@
           <td><span class="summary-sig"><a href="pyrdnap.v_self-module.html#validation3" class="summary-sig-name">validation3</a>(<span class="summary-sig-arg">self_txt</span>,
         <span class="summary-sig-arg">R</span>,
         <span class="summary-sig-arg">all_</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">asRD</span>=<span class="summary-sig-default">False</span>,
         <span class="summary-sig-arg">in_out</span>=<span class="summary-sig-default">True</span>,
         <span class="summary-sig-arg">_print</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">_printest</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Run the <code>RD NAP 2018</code> self-validation test set.</td>
+      Run the <code>RDNAPTRANS(tm)2018_v220627</code> self-validation test 
+      set.</td>
           <td align="right" valign="top">
             
             
@@ -150,7 +149,6 @@
   <h3 class="epydoc"><span class="sig"><span class="sig-name">validation3</span>&nbsp;(<span class="sig-arg">self_txt</span>,
         <span class="sig-arg">R</span>,
         <span class="sig-arg">all_</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">asRD</span>=<span class="sig-default">False</span>,
         <span class="sig-arg">in_out</span>=<span class="sig-default">True</span>,
         <span class="sig-arg">_print</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">_printest</span>=<span class="sig-default">None</span>)</span>
@@ -160,22 +158,20 @@
     </td>
   </tr></table>
   
-  <p>Run the <code>RD NAP 2018</code> self-validation test set.</p>
+  <p>Run the <code>RDNAPTRANS(tm)2018_v220627</code> self-validation test 
+  set.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self_txt</code></strong> - Name of the file containing the <code>RD NAP 2018</code> 
-          self-validation tests (<code>str</code>), 
-          <code>.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt</code>.</li>
+        <li><strong class="pname"><code>self_txt</code></strong> - Path of the file containing the self-validation test set 
+          (<code>str, .../Z001_ETRS89andRDNAP.txt</code>).</li>
         <li><strong class="pname"><code>R</code></strong> - An RDNAP2018v# transformer (<a 
           href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
           class="link">RDNAP2018v1</a> or <a 
           href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" 
           class="link">RDNAP2018v2</a> instance).</li>
         <li><strong class="pname"><code>all_</code></strong> - If <code>True</code> print all tests and test results, otherwise 
-          only failing tests (<code>bool</code>).</li>
-        <li><strong class="pname"><code>asRD</code></strong> - If <code>True</code> use RD_Bessel lat- and longitudes and datum 
-          from <code>reverse</code> results (<code>bool</code>).</li>
+          print only failing tests (<code>bool</code>).</li>
         <li><strong class="pname"><code>in_out</code></strong> - If <code>True</code> test only points <code>inside</code> the 
           <code>RD</code> region, if <code>False</code> only points 
           <code>outside</code> (<code>bool</code>).</li>
@@ -225,7 +221,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jun 10 10:51:56 2026
+    Generated by Epydoc 3.0.1 on Sun Jun 14 13:03:34 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

@@ -1,24 +1,24 @@
 
 # -*- coding: utf-8 -*-
 
-u'''A pure Python implementation of the 2018 version of Netherlands' U{RD NAP<https://www.NSGI.NL/
-coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
+u'''A pure Python implementation of the 2018 v220627 version of Netherlands' U{RD NAP<https://
+www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
 specification to convert between GRS80 (ETRS89) geodetic lat-, longitudes and height and local
 I{B{R}ijksB{D}riehoeksmeeting (B{RD})} coordinates and I{B{N}ormaal B{A}msterdams B{P}eil (B{NAP})
 quasi-geoid-height}.
 
-See module L{pyrdnap.rdnap2018} for further information and usage, implementation details.
+The results of both B{C{pyrdnap}} transformer classes L{RDNAP2018v1} and L{RDNAP2018v2} have been
+formally validated and B{C{PyRDNAP}} has been certified to carry the trademark B{C{RDNAPTRANS(tm)}}.
 
-See modules L{pyrdnap.v1grid} and L{pyrdnap.v2grid} for the original C{RDNAPTRANS2018_v220627},
-unmodified C{.txt} grid files for each variant, but compressed as C{.txt.zip}.
+See module L{pyrdnap.rdnap2018} for further information, usage and implementation details.
+
+See modules L{pyrdnap.v1grid} and L{pyrdnap.v2grid} for the C{RDNAPTRANS(tm)2018_v220627} grid
+files, each the original, unmodified ASCII C{.txt} but compressed as C{.txt.zip}.
+
+See function L{pyrdnap.validation3} for C{.../Z001_ETRSandRDNAP.txt} test set details.
 
 See files C{testresults/v1_..._round_trips.txt} for "round-trip" (forward plus reverse) test
 results of the L{RDNAP2018v1} transformer, especially the final, summary lines in each file.
-
-See function L{pyrdnap.validation3} for C{.../Z001_ETRSandRDNAP.txt} "round-trip" test details.
-
-@note: C{PyRDNAP} and C{pyrdnap} have B{not been formally validated} and are B{not certified}
-       to carry the trademark C{RDNAPTRANS(tm)}.
 '''
 import os.path as os_path
 import sys
@@ -51,7 +51,7 @@ from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
 from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
 __all__ = tuple(sorted(('pyrdnap_abspath', machine.__name__) + _rd0 + _rdnap + _v_self))
-__version__ = '26.06.09'
+__version__ = '26.06.16'
 
 
 def _versions():  # in .__main__, .test/bases

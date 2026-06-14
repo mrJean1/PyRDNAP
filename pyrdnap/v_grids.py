@@ -1,11 +1,11 @@
 
 # -*- coding: utf-8 -*-
 
-u'''(INTERNAL) C{RD NAP 2018} v#grid utilities.
+u'''(INTERNAL) C{RDNAPTRANS(tm)2018_v220627} v#grid utilities.
 '''
 from pyrdnap import pyrdnap_abspath  # pyrdnap 1st
 from pyrdnap.__pygeodesy import _0_0s, import_module, _ValueError
-from pygeodesy import print_
+from pygeodesy import print_, property_RO
 
 from array import array
 import os.path as os_path
@@ -13,10 +13,10 @@ import sys
 from zipfile import ZipFile
 
 __all__ = ()
-__version__ = '26.05.29'
+__version__ = '26.06.14'
 
 _R_C = 481, 301  # shape: rows, cols
-_RxC = 144781    # total
+_RxC = 144781    # total, in .v1grid, .v2grid
 
 
 class RDNAPError(_ValueError):  # exported by rdnap2018
@@ -26,10 +26,12 @@ class RDNAPError(_ValueError):  # exported by rdnap2018
 
 
 class _V_grid(tuple):
-    '''(INTERNAL) V_grid, an R-tuple of C-arrays of C{floats}.
+    '''(INTERNAL) V_grid, a row-order matrix stored as
+       an R-tuple of C-arrays of C{floats}.
     '''
 
     def __call__(self, i, j):
+        # return item (i, j) of this grid
         # R, C = _R_C
         # assert isinstance(i, int) and 0 <= i < R
         # assert isinstance(j, int) and 0 <= j < C
@@ -39,7 +41,7 @@ class _V_grid(tuple):
         z, Z = self._assert2(*_R_C)
         _v_assert(z, _0s)
         _v_assert(Z,  197 if _0s else 0)
-        _v_assert(sum(map(len, self)), _RxC)
+        _v_assert(self._RxC, _RxC)
         return self
 
     def _assert2(self, R, C):
@@ -59,10 +61,14 @@ class _V_grid(tuple):
             raise AssertionError('row %s: %s' % (i, x))
         return z, Z
 
-    def _round(self, _op, ndigits):
-        # round(_op(f for a in self
-        #             for f in a), ndigits)
-        return round(_op(map(_op, self)), ndigits)
+    @property_RO
+    def _RxC(self):
+        return sum(map(len, self))
+
+#   def _round(self, _op, ndigits):
+#       # round(_op(f for a in self
+#       #             for f in a), ndigits)
+#       return round(_op(map(_op, self)), ndigits)
 
 
 def _d_array(floats):  # lat_/lon_corr_
@@ -72,17 +78,19 @@ def _d_array(floats):  # lat_/lon_corr_
 def _f_array(floats):  # _NAP_h, _ZEROW
     return array('f', floats)
 
-_ZEROW = _f_array(_0_0s(301))  # PYCHOK singleton
-
-
-def _v_grid(v):
-    return 'v%sgrid' % (v,)
+_ZEROW = _f_array(_0_0s(301))  # PYCHOK singleton, _R_C[1]
 
 
 def _v_assert(value, valid=_R_C):  # in .rd0
     if value != valid:
         raise AssertionError('%r not %r' % (value, valid))
     return True
+
+
+def _v_grid(v):
+    '''(INTERNAL) Return "v#grid" variant C{v} as C{str}.
+    '''
+    return 'v%sgrid' % (v,)
 
 
 def _v_grid_txt(v, name, col2or3, _array, **_0s):
@@ -94,7 +102,8 @@ def _v_grid_txt(v, name, col2or3, _array, **_0s):
 
 
 def _v_gridz3(v):  # PHYCOK no cover
-    '''(INTERNAL) Return the fully-qualified path, directory and module.
+    '''(INTERNAL) Return the fully-qualified path, directory
+       and module of C{v#grid} variant C{v}.
     '''
     m = _v_grid(v)
     d =  pyrdnap_abspath
@@ -103,7 +112,7 @@ def _v_gridz3(v):  # PHYCOK no cover
 
 
 def _v_gridz_import(v):  # PHYCOK no cover
-    '''(INTERNAL) Try "from v#gridz.zip import v#grid"
+    '''(INTERNAL) Try "from v#gridz.zip import v#grid" for variant C{v}
     '''
     v_grid  =  None
     p, _, m = _v_gridz3(v)
@@ -132,7 +141,7 @@ def _v_gridz_import(v):  # PHYCOK no cover
 
 
 def _v_gridz_unzip(v, force=False, verbose=False):  # PHYCOK no cover
-    '''(INTERNAL) Unzip a C{v#gridz.zip} file into the "pyrdnap" directory
+    '''(INTERNAL) Unzip a C{v#gridz.zip} file into the "pyrdnap" directory.
     '''
     p, d, m = _v_gridz3(v)
     t = os_path.join(d, m)
@@ -150,10 +159,9 @@ def _v_gridz_unzip(v, force=False, verbose=False):  # PHYCOK no cover
 
 
 def _v_txt_unzip(v, name, col2or3, _array):
-    '''(INTERNAL) Open grid file C{<name>2018.txt} or unzip
-       C{<name>2018.txt.zip} of variant C{v}, extract column
-       C{col2or3} and yield 481 rows, each a 301-C{_array}
-       of floats or a _ZEROW if all zeros.
+    '''(INTERNAL) Open grid file C{<name>2018.txt} or unzip C{<name>2018.txt.zip}
+       of variant C{v}, extract column C{col2or3} (0-origin) and yield 481 rows,
+       each a 301-C{_array} of floats or a _ZEROW of all zeros.
     '''
     r = []
     try:
@@ -166,7 +174,7 @@ def _v_txt_unzip(v, name, col2or3, _array):
             _r = r.append
             t  = f.readline()  # ignore 1st line
             while t:
-                for _ in range(C * 2):
+                for _ in range(C * 3):
                     t = f.readline()
                     if t:
                         _r(t.strip().split()[col2or3])

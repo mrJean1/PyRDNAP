@@ -3,7 +3,7 @@
 
 u'''(INTERNAL) C{pyrdnap} access to some private C{pygeodesy} attributes.
 '''
-_requires = '26.5.26'  # in requirements.txt, setup.py
+_requires = '26.6.12'  # in README.rst, requirements.txt, setup.py
 
 
 def _PyGeodesy_dir(requires):
@@ -58,7 +58,7 @@ from pygeodesy.named import _NamedBase, _NamedTuple, _Pass  # noqa: F401
 from pygeodesy.streprs import Fmt  # noqa: F401
 
 __all__ = ()  # machine in .__init__
-__version__ = '26.06.10'
+__version__ = '26.06.12'
 
 # **) MIT License
 #

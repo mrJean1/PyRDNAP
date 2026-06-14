@@ -5,7 +5,7 @@
 
 from bases import TestsBase, Datums, NAN, startswith
 
-from pyrdnap import LqRD, RDNAP2018v1, RDNAP2018v2, RDNAP7Tuple
+from pyrdnap import LqRD, RDNAP2018v1, RDNAP2018v2, RDNAPError, RDNAP7Tuple
 from pyrdnap.rd0 import _RD, _RD0 as A0
 
 from math import fabs
@@ -13,7 +13,7 @@ from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.06.02'
+__version__ = '26.06.12'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -58,20 +58,23 @@ class Tests(TestsBase):
     def testLqRD(self):
         R = RDNAP2018v1(name='vsLqRD')
         self.test('v1', R, "name='vsLqRD'", known=startswith)
-        S, W, N, E = r = R.region
+        S, W, N, E = r = R.region4()
         self.test('region', r, r)
+        L = LqRD()
         for llh in ((A0.LAT0, A0.LON0, A0.H0),
                     (r.latC, r.lonC, 0),
                     (N, E, 0), (N, W, 0), (S, E, 0), (S, W, 0)):
             t = R.forward(*llh)
             self.test('rdnap', t, t, nl=1)
-            r = LqRD().forward(*t.latlonheight)
+            r = L.forward(*t.latlonheight)
             self.test(' lqrd', r, r)
             z = r.diff(t)
             self.test(' diff', z, z)
+            r = L.reverse(r.RDx, r.RDy, r.NAPh)
+            self.test('-lqrd', r, r)
 
     def testRandom(self, R, **nl):
-        S, W, N, E = R.region
+        S, W, N, E = R.region4()
         E_W = E - W
         N_S = N - S
         r   = random.__name__
@@ -81,7 +84,7 @@ class Tests(TestsBase):
                                 _rnd(random() * E_W + W))
 
     def testRDs(self):
-        self.test('_RD', _RD.toStr(), '_xETRS2RD=Similarity(name=', known=startswith, nl=1)
+        self.test('_RD', _RD.toStr(), '_region4ETRS=ETRS region (latS=49.9', known=startswith, nl=1)
         self.test('_RD0', A0.toStr(), "D0=Datum(name='Bessel1841', ", known=startswith, nl=1)
 
         R = RDNAP2018v1(name='Cover')
@@ -96,7 +99,27 @@ class Tests(TestsBase):
         self.test('phi', t.phi, A0.PHI0, prec=8)
         self.test('philam', t.philam, '(0.910297, 0.094032)')
         self.test('philamheight', t.philamheight, '(0.910297, 0.094032, 0)')
-        self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith)
+        self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith, nt=1)
+
+        try:
+            r = R.rdNAPh(0, 0, raiser=True)
+            self.test('rdNAPh', r, RDNAPError)
+        except RDNAPError as r:
+            r = repr(r)
+            self.test('rdNAPh', r, r)
+
+        r = t.toETRS().toRepr()
+        self.test('toETRS', r, t.toRepr(), nl=1)
+        r = t.toRD()
+        s = r.toRepr()
+        self.test('toRD', s, s)
+        r = t.toDatum(r.datum).toRepr()
+        self.test('toDatum', r, r, nt=1)
+
+        t = R.region4(True).toRepr()
+        self.test('region', t, 'RD region (latS=50.0, lonW=2.0, latN=56.0, lonE=8.0)')
+        t = R.region4(False).toRepr()
+        self.test('region', t, 'ETRS region (latS=49.9', known=startswith)
 
     def testRD11(self, R):  # <https://NL.WikiPedia.org/wiki/Rijksdriehoekscoördinaten>
         t = repr(R)
@@ -114,10 +137,10 @@ class Tests(TestsBase):
                                (300000, 614000, "53 29 32.4N", "7 34 19.3E"),   # 05 km NE Aurich
                                (259000, 629000, "53 38 12.0N", "6 57 34.1E")):  # 05 km Z  Juist
             r = RDNAP7Tuple(x, y, NAN, lat, lon, NAN, None).toUnits()
-            t = R.forward(lat, lon, NAN)
+            t = R.forward(lat, lon, NAN).dup(datum=None)  # ignore datum
             self.test('forward', t, r, known=fabs(t.RDx - r.RDx) < 1.0 and
                                              fabs(t.RDy - r.RDy) < 1.5)
-            t = R.reverse(x, y, NAN)
+            t = R.reverse(x, y, NAN).dup(datum=None)  # ignore datum
             self.test('reverse', t, r, known=fabs(t.lat - r.lat) < 0.0005 and
                                              fabs(t.lon - r.lon) < 0.0005)
 

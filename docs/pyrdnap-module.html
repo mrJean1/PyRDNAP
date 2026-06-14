@@ -58,39 +58,42 @@
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
 <h1 class="epydoc">Package pyrdnap</h1><p class="nomargin-top"></p>
-<p>A pure Python implementation of the 2018 version of Netherlands' <a 
+<p>A pure Python implementation of the 2018 v220627 version of 
+  Netherlands' <a 
   href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
   target="_top">RD NAP</a> specification to convert between GRS80 (ETRS89) 
   geodetic lat-, longitudes and height and local 
   <i><b>R</b>ijks<b>D</b>riehoeksmeeting (<b>RD</b>)</i> coordinates and 
   <i><b>N</b>ormaal <b>A</b>msterdams <b>P</b>eil (<b>NAP</b>) 
   quasi-geoid-height</i>.</p>
+  <p>The results of both <b><code>pyrdnap</code></b> transformer classes <a
+  href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
+  class="link">RDNAP2018v1</a> and <a 
+  href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" 
+  class="link">RDNAP2018v2</a> have been formally validated and 
+  <b><code>PyRDNAP</code></b> has been certified to carry the trademark 
+  <b><code>RDNAPTRANS(tm)</code></b>.</p>
   <p>See module <a href="pyrdnap.rdnap2018-module.html" class="link" 
-  onclick="show_private();">pyrdnap.rdnap2018</a> for further information 
-  and usage, implementation details.</p>
+  onclick="show_private();">pyrdnap.rdnap2018</a> for further information, 
+  usage and implementation details.</p>
   <p>See modules <a href="pyrdnap.v1grid-module.html" 
   class="link">pyrdnap.v1grid</a> and <a href="pyrdnap.v2grid-module.html" 
-  class="link">pyrdnap.v2grid</a> for the original 
-  <code>RDNAPTRANS2018_v220627</code>, unmodified <code>.txt</code> grid 
-  files for each variant, but compressed as <code>.txt.zip</code>.</p>
+  class="link">pyrdnap.v2grid</a> for the 
+  <code>RDNAPTRANS(tm)2018_v220627</code> grid files, each the original, 
+  unmodified ASCII <code>.txt</code> but compressed as 
+  <code>.txt.zip</code>.</p>
+  <p>See function <a href="pyrdnap.v_self-module.html#validation3" 
+  class="link">pyrdnap.validation3</a> for 
+  <code>.../Z001_ETRSandRDNAP.txt</code> test set details.</p>
   <p>See files <code>testresults/v1_..._round_trips.txt</code> for 
   &quot;round-trip&quot; (forward plus reverse) test results of the <a 
   href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
   class="link">RDNAP2018v1</a> transformer, especially the final, summary 
   lines in each file.</p>
-  <p>See function <a href="pyrdnap.v_self-module.html#validation3" 
-  class="link">pyrdnap.validation3</a> for 
-  <code>.../Z001_ETRSandRDNAP.txt</code> &quot;round-trip&quot; test 
-  details.</p>
 
 <hr />
-<div class="fields">      <p><strong>Note:</strong>
-        <code>PyRDNAP</code> and <code>pyrdnap</code> have <b>not been 
-        formally validated</b> and are <b>not certified</b> to carry the 
-        trademark <code>RDNAPTRANS(tm)</code>.
-      </p>
-      <p><strong>Version:</strong>
-        26.06.09
+<div class="fields">      <p><strong>Version:</strong>
+        26.06.16
       </p>
 </div><!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -102,9 +105,10 @@
 </tr>
   <tr><td class="summary">
   <ul class="nomargin">
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.__main__-module.html">pyrdnap.__main__</a></strong>: <em class="summary">Run a <code>RD NAP 2018 forward</code> or <code>reverse</code> 
-        conversion example or run the <code>NSGI</code> or <code>RD NAP 
-        2018</code> validation test set in &quot;round-trip&quot; fashion.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.__main__-module.html">pyrdnap.__main__</a></strong>: <em class="summary">Run some <code>RD NAP 2018 forward</code> or <code>reverse</code> 
+        conversion examples or run an 
+        <code>RDNAPTRANS(tm)2018_v220627</code> or <code>NSGI</code> test 
+        set in &quot;round-trip&quot; fashion.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.__pygeodesy-module.html" onclick="show_private();">pyrdnap.__pygeodesy</a></strong>: <em class="summary">(INTERNAL) <code>pyrdnap</code> access to some private 
         <code>pygeodesy</code> attributes.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.rd0-module.html" onclick="show_private();">pyrdnap.rd0</a></strong>: <em class="summary">(INTERNAL) RijksDriehoeksmeting <code>_RD</code> and reference 
@@ -117,24 +121,26 @@
         respectively <code>variant 2</code> of the <a 
         href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
         target="_top">RDNAPTRANS(tm)2018_v220627</a> specification.</em>    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary">Extract from the original, compressed, variant 1 grid files 
-        <code>nlgeo2018.txt.zip</code> and <code>rdcorr2018.txt.zip</code> 
-        the <code>NAP_...</code>, <code>lat_corr_</code> and 
-        <code>lon_corr_</code> columns <b>only</b> and encode each in 
-        Python as a row-order matrix, a 481-tuple of 301-arrays of single- 
-        or double precision floats.</em>    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary">Extract from the original, compressed, variant 2 grid files 
-        <code>naptrans2018.txt.zip</code> and 
-        <code>rdtrans2018.txt.zip</code> the <code>NAP_...</code>, 
-        <code>lat_corr_</code> and <code>lon_corr_</code> columns 
-        <b>only</b> and encode each in Python as a row-order matrix, a 
-        481-tuple of 301-arrays of single- or double precision floats.</em>    </li>
-    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_grids-module.html" onclick="show_private();">pyrdnap.v_grids</a></strong>: <em class="summary">(INTERNAL) <code>RD NAP 2018</code> v#grid utilities.</em>    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.v1grid-module.html">pyrdnap.v1grid</a></strong>: <em class="summary">Extract from the compressed <code>RDNAPTRANS(tm)2018_v229627</code>
+        variant 1 <code>nlgeo2018.txt.zip</code> and 
+        <code>rdcorr2018.txt.zip</code> grid files <b>only</b> the 
+        <code>NAP_...</code>, <code>lat_corr_</code> and 
+        <code>lon_corr_</code> columns and encode each in Python as a 
+        row-order matrix, a 481-tuple of 301-arrays of single- or double 
+        precision floats.</em>    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.v2grid-module.html">pyrdnap.v2grid</a></strong>: <em class="summary">Extract from the compressed <code>RDNAPTRANS(tm)2018_v229627</code>
+        variant 2 <code>naptrans2018.txt.zip</code> and 
+        <code>rdtrans2018.txt.zip</code> grid files <b>only</b> the 
+        <code>NAP_...</code>, <code>lat_corr_</code> and 
+        <code>lon_corr_</code> columns and encode each in Python as a 
+        row-order matrix, a 481-tuple of 301-arrays of single- or double 
+        precision floats.</em>    </li>
+    <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_grids-module.html" onclick="show_private();">pyrdnap.v_grids</a></strong>: <em class="summary">(INTERNAL) <code>RDNAPTRANS(tm)2018_v220627</code> v#grid 
+        utilities.</em>    </li>
     <li class="private"> <strong class="uidlink"><a href="pyrdnap.v_self-module.html" onclick="show_private();">pyrdnap.v_self</a></strong>: <em class="summary">Function <a href="pyrdnap.v_self-module.html#validation3" 
-        class="link">validation3</a> to run the <code>RD NAP 2018</code> 
-        self-validation test set 
-        <code>.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt</code>
-        obtainable from <a 
+        class="link">validation3</a> to run the 
+        <code>RDNAPTRANS(tm)2018_v220627</code> self-validation test set 
+        <code>.../Z001_ETRS89andRDNAP.txt</code> obtainable from <a 
         href="https://www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans"
         target="_top">NSGI.NL</a> after registration.</em>    </li>
   </ul></td></tr>
@@ -226,9 +232,9 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" class="summary-name">RDNAP2018v1</a><br />
-      Transformer implementing <code>variant 1</code> of <a 
+      Transformer implementing <code>variant 1</code> of the <a 
         href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
-        target="_top">RD NAP 2018 v220627</a>.
+        target="_top">RDNAPTRANS(tm)2018_v220627</a> specification.
     </td>
   </tr>
 <tr>
@@ -236,9 +242,9 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" class="summary-name">RDNAP2018v2</a><br />
-      Transformer implementing <code>variant 2</code> of <a 
+      Transformer implementing <code>variant 2</code> of the <a 
         href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
-        target="_top">RD NAP 2018 v220627</a>.
+        target="_top">RDNAPTRANS(tm)2018_v220627</a> specification.
     </td>
   </tr>
 <tr>
@@ -327,11 +333,11 @@
           <td><span class="summary-sig"><a href="pyrdnap-module.html#validation3" class="summary-sig-name">validation3</a>(<span class="summary-sig-arg">self_txt</span>,
         <span class="summary-sig-arg">R</span>,
         <span class="summary-sig-arg">all_</span>=<span class="summary-sig-default">False</span>,
-        <span class="summary-sig-arg">asRD</span>=<span class="summary-sig-default">False</span>,
         <span class="summary-sig-arg">in_out</span>=<span class="summary-sig-default">True</span>,
         <span class="summary-sig-arg">_print</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">_printest</span>=<span class="summary-sig-default">None</span>)</span><br />
-      Run the <code>RD NAP 2018</code> self-validation test set.</td>
+      Run the <code>RDNAPTRANS(tm)2018_v220627</code> self-validation test 
+      set.</td>
           <td align="right" valign="top">
             
             
@@ -419,7 +425,6 @@ m=Transforms.WGS84),
   <h3 class="epydoc"><span class="sig"><span class="sig-name">validation3</span>&nbsp;(<span class="sig-arg">self_txt</span>,
         <span class="sig-arg">R</span>,
         <span class="sig-arg">all_</span>=<span class="sig-default">False</span>,
-        <span class="sig-arg">asRD</span>=<span class="sig-default">False</span>,
         <span class="sig-arg">in_out</span>=<span class="sig-default">True</span>,
         <span class="sig-arg">_print</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">_printest</span>=<span class="sig-default">None</span>)</span>
@@ -429,22 +434,20 @@ m=Transforms.WGS84),
     </td>
   </tr></table>
   
-  <p>Run the <code>RD NAP 2018</code> self-validation test set.</p>
+  <p>Run the <code>RDNAPTRANS(tm)2018_v220627</code> self-validation test 
+  set.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>self_txt</code></strong> - Name of the file containing the <code>RD NAP 2018</code> 
-          self-validation tests (<code>str</code>), 
-          <code>.../RDNAPTRANS2018_v220627/.../Z001_ETRS89andRDNAP.txt</code>.</li>
+        <li><strong class="pname"><code>self_txt</code></strong> - Path of the file containing the self-validation test set 
+          (<code>str, .../Z001_ETRS89andRDNAP.txt</code>).</li>
         <li><strong class="pname"><code>R</code></strong> - An RDNAP2018v# transformer (<a 
           href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
           class="link">RDNAP2018v1</a> or <a 
           href="pyrdnap.rdnap2018.RDNAP2018v2-class.html" 
           class="link">RDNAP2018v2</a> instance).</li>
         <li><strong class="pname"><code>all_</code></strong> - If <code>True</code> print all tests and test results, otherwise 
-          only failing tests (<code>bool</code>).</li>
-        <li><strong class="pname"><code>asRD</code></strong> - If <code>True</code> use RD_Bessel lat- and longitudes and datum 
-          from <code>reverse</code> results (<code>bool</code>).</li>
+          print only failing tests (<code>bool</code>).</li>
         <li><strong class="pname"><code>in_out</code></strong> - If <code>True</code> test only points <code>inside</code> the 
           <code>RD</code> region, if <code>False</code> only points 
           <code>outside</code> (<code>bool</code>).</li>
@@ -548,7 +551,7 @@ m=Transforms.WGS84),
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Jun 10 10:51:56 2026
+    Generated by Epydoc 3.0.1 on Sun Jun 14 13:03:34 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
