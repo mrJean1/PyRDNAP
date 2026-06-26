@@ -44,21 +44,37 @@ def _PyGeodesy_dir(requires):
 _PyGeodesy_dir = _PyGeodesy_dir(_requires)  # PYCHOK path or None
 
 from pygeodesy.basics import _xinstanceof, _xsubclassof  # noqa: F401
-from pygeodesy.constants import (_0_0, _0_0s, _0_5, _1_0, _N_1_0, _2_0,  # noqa: F401
+from pygeodesy.constants import (_0_0, _0_0s, _0_5, _1_0, _2_0,  # noqa: F401
                                  _isNAN, _isNAN0)  # noqa: F401
 from pygeodesy.datums import _earth_datum  # noqa: F401
 from pygeodesy.ellipsoidalBase import LatLonEllipsoidalBase as _LLEB  # noqa: F401
-from pygeodesy.errors import _ValueError, _xkwds, _xkwds_pop2  # noqa: F401
+from pygeodesy.errors import _ValueError, _xkwds  # noqa: F401
 from pygeodesy.internals import machine, _secs2str, _versions  # noqa: F401
-from pygeodesy.interns import (_COLONSPACE_, _COMMASPACE_, _DASH_, _datum_, _E_,  # noqa: F401
-                               _EQUAL_, _height_, _lat_, _lon_, _N_, _NAN_, _NL_,  # noqa: F401
-                               _S_, _SPACE_, _STAR_, _W_)  # noqa: F401
+from pygeodesy.interns import (_COMMASPACE_, _DASH_, _datum_,  # noqa: F401
+                               _EQUAL_, _height_, _lat_, _lon_,  # noqa: F401
+                               _NAN_, _NL_, _SPACE_, _STAR_)  # noqa: F401
 from pygeodesy.lazily import _ALL_DOCS, _ALL_OTHER, _FOR_DOCS, import_module  # noqa: F401
 from pygeodesy.named import _NamedBase, _NamedTuple, _Pass  # noqa: F401
 from pygeodesy.streprs import Fmt  # noqa: F401
 
-__all__ = ()  # machine in .__init__
-__version__ = '26.06.12'
+
+class RDNAPError(_ValueError):
+    '''Error raised for C{RD}, C{NAP}, unzip and other issues.
+    '''
+    pass
+
+
+def _all_OTHER(*objs):  # PYCHOK shared
+    # collect all __all__ lists or tuples
+    _all = _ALL_OTHER(*objs)
+    _all__all__.extend(_all)
+    return _all
+
+_all__all__ = []  # PYCHOK in .__init__
+
+__all__ = _all_OTHER(machine, RDNAPError)
+__version__ = '26.06.18'
+
 
 # **) MIT License
 #

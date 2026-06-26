@@ -7,31 +7,42 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.06.12'
+__version__ = '26.06.18'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
-from pyrdnap.__pygeodesy import _requires
 
 
-def _assert(name, streq):
-    with open(name, 'rb') as f:
-        if streq not in f.read().decode('utf-8'):
-            import sys
-            t = '*** %r not in %s ***' % (streq, name)
-            sys.exit(t)
-
-_pygeodesy_requires = 'pygeodesy>=' + _requires  # PYCHOK below
-
-_assert('requirements.txt', _pygeodesy_requires)
-_assert('README.rst', 'version %s or newer' % (_requires,))
+def _assert_version(name, streq):
+    if streq not in _read_file(name):
+        _exit_version(name, streq)
 
 
 def _c(*names):
     return ' :: '.join(names)
 
 
+def _exit_version(name, attr):
+    import sys
+    t = '*** %r not in %s ***' % (attr, name)
+    sys.exit(t)
+
+
 def _long_description():
-    with open('README.rst', 'rb') as f:
+    return _read_file('README.rst')
+
+
+def _parse_version(name, attr):
+    with open(name) as f:
+        for t in f.readlines():
+            if t.startswith(attr):
+                v = t.split('=')[-1]
+                v = v.split('#')[0]
+                return v.strip().strip('\'"')
+        _exit_version(name, attr)
+
+
+def _read_file(name):
+    with open(name, 'rb') as f:
         t = f.read()
         if isinstance(t, bytes):
             t = t.decode('utf-8')
@@ -39,16 +50,21 @@ def _long_description():
 
 
 def _version():
-    with open('pyrdnap/__init__.py') as f:
-        for t in f.readlines():
-            if t.startswith('__version__'):
-                v = t.split('=')[-1].strip().strip('\'"')
-                c = getenv('PYRDNAP_DIST_RC', '')
-                return '.'.join(map(str, map(int, v.split('.')))) + c
+    v = _parse_version('pyrdnap/__init__.py', '__version__')
+    c =  getenv('PYRDNAP_DIST_RC', '')
+    return v.replace('.0', '.') + c
 
 
 _KeyWords = ('NAP', 'Normaal-Amsterdams-Peil',
-             'RD', 'RijksDriehoeksmeting')
+             'RD', 'RijksDriehoeksmeting',
+#            'RDNAPTRANS(tm)', 'RDNAPTRANS(tm)2018',
+             'RDNAPTRANS', 'RDNAPTRANS2018',)
+
+_requires = _parse_version('pyrdnap/__pygeodesy.py', '_requires')
+_pygeodesy_requires = 'pygeodesy>=' + _requires
+
+_assert_version('requirements.txt', _pygeodesy_requires)
+_assert_version('README.rst', 'version %s or newer' % (_requires,))
 
 setup(name=_PACKAGE,
       packages=['pyrdnap', 'pyrdnap.v1grid', 'pyrdnap.v2grid'],

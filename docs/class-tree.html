@@ -78,8 +78,8 @@
       <em class="summary">(INTERNAL) Format a <code>ValueError</code> with/-out exception 
         chaining.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="pyrdnap.v_grids.RDNAPError-class.html" onclick="show_private();">pyrdnap.v_grids.RDNAPError</a></strong>:
-      <em class="summary">Error raised for <code>RD</code>, <code>NAP</code> and unzip 
+    <li> <strong class="uidlink"><a href="pyrdnap.__pygeodesy.RDNAPError-class.html">pyrdnap.__pygeodesy.RDNAPError</a></strong>:
+      <em class="summary">Error raised for <code>RD</code>, <code>NAP</code>, unzip and other
         issues.</em>
     </li>
     </ul>
@@ -186,14 +186,33 @@
       <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
         <code>degrees180</code>.</em>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLonDatum3Tuple-class.html">pygeodesy.namedTuples.LatLonDatum3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(lat, lon, datum)</code> in <code>degrees90</code>, 
-        <code>degrees180</code> and <code class="link">Datum</code>.</em>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon3Tuple-class.html">pygeodesy.namedTuples.LatLon3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(lat, lon, height)</code> in <code>degrees90</code>, 
+        <code>degrees180</code> and <code>meter</code>, conventionally.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon4Tuple-class.html">pygeodesy.namedTuples.LatLon4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(lat, lon, height, datum)</code> in 
+        <code>degrees90</code>, <code>degrees180</code>, <code>meter</code>
+        and <code class="link">Datum</code>.</em>
+    </li>
+    </ul>
     </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam2Tuple-class.html">pygeodesy.namedTuples.PhiLam2Tuple</a></strong>:
       <em class="summary">2-Tuple <code>(phi, lam)</code> with latitude <code>phi</code> in 
         <code>radians[PI_2]</code> and longitude <code>lam</code> in 
         <code>radians[PI]</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam3Tuple-class.html">pygeodesy.namedTuples.PhiLam3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(phi, lam, height)</code> with latitude 
+        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
+        <code>lam</code> in <code>radians[PI]</code> and 
+        <code>height</code> in <code>meter</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam4Tuple-class.html">pygeodesy.namedTuples.PhiLam4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(phi, lam, height, datum)</code> with latitude 
+        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
+        <code>lam</code> in <code>radians[PI]</code>, <code>height</code> 
+        in <code>meter</code> and <code class="link">Datum</code>.</em>
     </li>
     <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDNAP7Tuple-class.html">pyrdnap.rd0.RDNAP7Tuple</a></strong>:
       <em class="summary">7-Tuple <code>(RDx, RDy, NAPh, lat, lon, height, datum)</code> with
@@ -233,14 +252,33 @@
       <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
         <code>degrees180</code>.</em>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLonDatum3Tuple-class.html">pygeodesy.namedTuples.LatLonDatum3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(lat, lon, datum)</code> in <code>degrees90</code>, 
-        <code>degrees180</code> and <code class="link">Datum</code>.</em>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon3Tuple-class.html">pygeodesy.namedTuples.LatLon3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(lat, lon, height)</code> in <code>degrees90</code>, 
+        <code>degrees180</code> and <code>meter</code>, conventionally.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon4Tuple-class.html">pygeodesy.namedTuples.LatLon4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(lat, lon, height, datum)</code> in 
+        <code>degrees90</code>, <code>degrees180</code>, <code>meter</code>
+        and <code class="link">Datum</code>.</em>
+    </li>
+    </ul>
     </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam2Tuple-class.html">pygeodesy.namedTuples.PhiLam2Tuple</a></strong>:
       <em class="summary">2-Tuple <code>(phi, lam)</code> with latitude <code>phi</code> in 
         <code>radians[PI_2]</code> and longitude <code>lam</code> in 
         <code>radians[PI]</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam3Tuple-class.html">pygeodesy.namedTuples.PhiLam3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(phi, lam, height)</code> with latitude 
+        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
+        <code>lam</code> in <code>radians[PI]</code> and 
+        <code>height</code> in <code>meter</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam4Tuple-class.html">pygeodesy.namedTuples.PhiLam4Tuple</a></strong>:
+      <em class="summary">4-Tuple <code>(phi, lam, height, datum)</code> with latitude 
+        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
+        <code>lam</code> in <code>radians[PI]</code>, <code>height</code> 
+        in <code>meter</code> and <code class="link">Datum</code>.</em>
     </li>
     <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDNAP7Tuple-class.html">pyrdnap.rd0.RDNAP7Tuple</a></strong>:
       <em class="summary">7-Tuple <code>(RDx, RDy, NAPh, lat, lon, height, datum)</code> with
@@ -297,7 +335,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Jun 14 13:03:34 2026
+    Generated by Epydoc 3.0.1 on Fri Jun 26 11:47:01 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

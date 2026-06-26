@@ -81,8 +81,8 @@ pygeodesy.named._NamedBase --+
 <div class="fields">      <p><strong>Note:</strong>
         Method <a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html#reverse" 
         class="link">RDNAP2018v2.reverse</a> returns <b>by default 
-        Bessel1841 (RD-Bessel)</b> validated, geodetic lat- and longitudes 
-        and datum.
+        validated Bessel1841 (RD-Bessel)</b> geodetic lat-, longitude and 
+        datum.
       </p>
 </div><!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -147,7 +147,7 @@ pygeodesy.named._NamedBase --+
         <span class="summary-sig-arg">lat</span>,
         <span class="summary-sig-arg">lon</span>,
         <span class="summary-sig-arg">name</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">forward3</code><code class="variable-quote">'</code></span>)</span><br />
-      Datum transform <code>(<b>lat</b>, <b>lon</b>)</code> from GRS80 
+      Datum-transform <code>(<b>lat</b>, <b>lon</b>)</code> from GRS80 
       (ETRS98) to Bessel1841 (RD-Bessel) as specified by 
       <code>RDNAPTRANS(tm)2018_v220627</code>.</td>
           <td align="right" valign="top">
@@ -171,7 +171,7 @@ pygeodesy.named._NamedBase --+
         <span class="summary-sig-arg">asRD</span>=<span class="summary-sig-default">True</span>,
         <span class="summary-sig-arg">eps</span>=<span class="summary-sig-default">0</span>)</span><br />
       Is geodetic <code>(<b>lat</b>, <b>lon</b>)</code> inside the 
-      <code>RD</code> or <code>ETRS</code> region (<code>bool</code>)?</td>
+      <code>RD</code> or <code>ETRS</code> region?</td>
           <td align="right" valign="top">
             
             
@@ -191,8 +191,8 @@ pygeodesy.named._NamedBase --+
         <span class="summary-sig-arg">lat</span>,
         <span class="summary-sig-arg">lon</span>,
         <span class="summary-sig-arg">raiser</span>=<span class="summary-sig-default">False</span>)</span><br />
-      Interpolate the <code>NAPh</code> quasi-geoid-height <i>within</i> 
-      the <code>RD</code> region.</td>
+      Interpolate the <code>NAPh</code> quasi-geoid-height for a point 
+      <code>(lat, lon)</code> <i>within</i> the <code>RD</code> region.</td>
           <td align="right" valign="top">
             
             
@@ -255,7 +255,7 @@ pygeodesy.named._NamedBase --+
         <span class="summary-sig-arg">lat</span>,
         <span class="summary-sig-arg">lon</span>,
         <span class="summary-sig-arg">name</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">reverse3</code><code class="variable-quote">'</code></span>)</span><br />
-      Datum transform <code>(<b>lat</b>, <b>lon</b>)</code> from Bessel1841
+      Datum-transform <code>(<b>lat</b>, <b>lon</b>)</code> from Bessel1841
       (RD-Bessel) to GRS80 (ETRS98) as specified by 
       <code>RDNAPTRANS(tm)2018_v220627</code>.</td>
           <td align="right" valign="top">
@@ -406,14 +406,14 @@ pygeodesy.named._NamedBase --+
           <b><code>a_ellipsoid</code></b> is specified as 
           <code>scalar</code>, ignored otherwise.</li>
         <li><strong class="pname"><code>raiser</code></strong> - If <code>True</code> raise an <a 
-          href="pyrdnap.v_grids.RDNAPError-class.html" class="link" 
-          onclick="show_private();">RDNAPError</a> for lat-/longitudes 
-          outside the <code>RD</code> region (<code>bool</code>).</li>
+          href="pyrdnap.__pygeodesy.RDNAPError-class.html" 
+          class="link">RDNAPError</a> for lat-/longitudes outside the 
+          <code>RD</code> region (<code>bool</code>).</li>
         <li><strong class="pname"><code>name</code></strong> - Optional name (<code>str</code>).</li>
     </ul></dd>
     <dt>Raises:</dt>
     <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'><a href="pyrdnap.v_grids.RDNAPError-class.html" onclick="show_private();">RDNAPError</a></strong></code> - Ellipsoid (or datum) is not oblate (i.e. is spherical or prolate) 
+        <li><code><strong class='fraise'><a href="pyrdnap.__pygeodesy.RDNAPError-class.html">RDNAPError</a></strong></code> - Ellipsoid (or datum) is not oblate (i.e. is spherical or prolate) 
         or the datum's <code>transform</code> is not <code>unity</code>.</li>
     </ul></dd>
     <dt>Overrides:
@@ -452,11 +452,11 @@ pygeodesy.named._NamedBase --+
         <li><strong class="pname"><code>height</code></strong> - Height, optional (<code>meter</code> above geoid) or 
           <code>NAN</code> to ignore <code>NAPh</code> interpolation.</li>
         <li><strong class="pname"><code>raiser</code></strong> - If <code>True</code> raise an <a 
-          href="pyrdnap.v_grids.RDNAPError-class.html" class="link" 
-          onclick="show_private();">RDNAPError</a> if 
-          <b><code>lat</code></b> or <b><code>lon</code></b> is outside the
-          <code>RD</code> region (<code>bool</code>), if <code>False</code>
-          don't, overriding property <code>raiser</code>.</li>
+          href="pyrdnap.__pygeodesy.RDNAPError-class.html" 
+          class="link">RDNAPError</a> if <b><code>lat</code></b> or 
+          <b><code>lon</code></b> is outside the <code>RD</code> region 
+          (<code>bool</code>), if <code>False</code> don't, overriding 
+          property <code>raiser</code>.</li>
         <li><strong class="pname"><code>name</code></strong> - Optional name (<code>str</code>).</li>
     </ul></dd>
     <dt>Returns:</dt>
@@ -487,15 +487,14 @@ pygeodesy.named._NamedBase --+
     </td>
   </tr></table>
   
-  <p>Datum transform <code>(<b>lat</b>, <b>lon</b>)</code> from GRS80 
+  <p>Datum-transform <code>(<b>lat</b>, <b>lon</b>)</code> from GRS80 
   (ETRS98) to Bessel1841 (RD-Bessel) as specified by 
   <code>RDNAPTRANS(tm)2018_v220627</code>.</p>
   <dl class="fields">
     <dt>Returns:</dt>
-        <dd>A <a href="pygeodesy.namedTuples.LatLonDatum3Tuple-class.html" 
-          class="link">LatLonDatum3Tuple</a><code>(lat, lon, datum)</code> 
-          with <code>datum</code> and <code>lat</code> and <code>lon</code>
-          all Bessel1841 (RD-Bessel).</dd>
+        <dd>A LatLonDatum3Tuple<code>(lat, lon, datum)</code> with 
+          <code>datum</code> and <code>lat</code> and <code>lon</code> all 
+          Bessel1841 (RD-Bessel).</dd>
     <dt>Overrides:
         _RDNAPbase.forward3
     </dt>
@@ -521,7 +520,7 @@ pygeodesy.named._NamedBase --+
   </tr></table>
   
   <p>Is geodetic <code>(<b>lat</b>, <b>lon</b>)</code> inside the 
-  <code>RD</code> or <code>ETRS</code> region (<code>bool</code>)?</p>
+  <code>RD</code> or <code>ETRS</code> region?</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
@@ -531,6 +530,8 @@ pygeodesy.named._NamedBase --+
         <li><strong class="pname"><code>eps</code></strong> - Over-/undersize the <code>ETRS</code> or <code>RD</code> region 
           (<code>degrees</code>).</li>
     </ul></dd>
+    <dt>Returns:</dt>
+        <dd><code>True</code> if inside or on, <code>False</code> otherwise.</dd>
     <dt>Overrides:
         _RDNAPbase.isinside
     </dt>
@@ -554,19 +555,18 @@ pygeodesy.named._NamedBase --+
     </td>
   </tr></table>
   
-  <p>Interpolate the <code>NAPh</code> quasi-geoid-height <i>within</i> the
-  <code>RD</code> region.</p>
+  <p>Interpolate the <code>NAPh</code> quasi-geoid-height for a point 
+  <code>(lat, lon)</code> <i>within</i> the <code>RD</code> region.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>lat</code></strong> - Latitude (<code>degrees</code> geodetic).</li>
-        <li><strong class="pname"><code>lon</code></strong> - Longitude (<code>degrees</code> geodetic).</li>
+        <li><strong class="pname"><code>lat</code></strong> - Latitude (<code>degrees</code>, RD-Bessel geodetic).</li>
+        <li><strong class="pname"><code>lon</code></strong> - Longitude (<code>degrees</code>, RD-Bessel geodetic).</li>
         <li><strong class="pname"><code>raiser</code></strong> - If <code>True</code> raise an <a 
-          href="pyrdnap.v_grids.RDNAPError-class.html" class="link" 
-          onclick="show_private();">RDNAPError</a> if 
-          <b><code>lat</code></b> or <b><code>lon</code></b> is outside the
-          <code>RD</code> region (<code>bool</code>), otherwise don't and 
-          return <code>NAN</code>.</li>
+          href="pyrdnap.__pygeodesy.RDNAPError-class.html" 
+          class="link">RDNAPError</a> if <b><code>lat</code></b> or 
+          <b><code>lon</code></b> is outside the <code>RD</code> region 
+          (<code>bool</code>), otherwise don't and return <code>NAN</code>.</li>
     </ul></dd>
     <dt>Returns:</dt>
         <dd><code>NAPh</code> (<code>meter</code>) or <code>NAN</code> if 
@@ -682,14 +682,15 @@ pygeodesy.named._NamedBase --+
     </td>
   </tr></table>
   
-  <p>Datum transform <code>(<b>lat</b>, <b>lon</b>)</code> from Bessel1841 
+  <p>Datum-transform <code>(<b>lat</b>, <b>lon</b>)</code> from Bessel1841 
   (RD-Bessel) to GRS80 (ETRS98) as specified by 
   <code>RDNAPTRANS(tm)2018_v220627</code>.</p>
   <dl class="fields">
     <dt>Returns:</dt>
-        <dd>A <code class="link">LatLon3Tuple</code><code>(lat, lon, 
-          datum)</code> with <code>datum</code> and <code>lat</code> and 
-          <code>lon</code> all GRS80 (ETRS89).</dd>
+        <dd>A <a href="pygeodesy.namedTuples.LatLon3Tuple-class.html" 
+          class="link">LatLon3Tuple</a><code>(lat, lon, datum)</code> with 
+          <code>datum</code> and <code>lat</code> and <code>lon</code> all 
+          GRS80 (ETRS89).</dd>
     <dt>Overrides:
         _RDNAPbase.reverse3
     </dt>
@@ -785,7 +786,7 @@ pygeodesy.named._NamedBase --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Jun 14 13:03:34 2026
+    Generated by Epydoc 3.0.1 on Fri Jun 26 11:47:01 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

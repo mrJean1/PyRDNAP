@@ -1,5 +1,5 @@
 testing RDNAP2018v1(name='v1Test', variant=1, forwardDatum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-  using '../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt'
+  using '../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt' forward
  header point_id  latitude        longitude    height  (line 1)
 
 id 20020000  52.754767993    3.006916444  302.1601  (line 2)
@@ -50002,5 +50002,5 @@ RDNAP2018v1 forward(RDx 81222.7, RDy 1.12896e+06, NAPh NAN, lat 58.1264, lon 4.1
 RDNAP2018v1 reverse(RDx 81222.7, RDy 1.12896e+06, NAPh NAN, lat 58.1264, lon 4.13838, height NAN, ...) outside
 RDNAP2018v1 |diff| (RDx 0.0, RDy 0.0, NAPh NAN, lat 3.25307e-09, lon 9.6874e-10, height NAN, ...)
 
-RDNAP2018v1 60000 tests (pyrdnap 26.6.16 pygeodesy 26.6.12 Python 3.14.5 64bit arm64 macOS 26.5.1) 1.034 sec
-forward max |diff| (RDx 0, RDy 0, NAPh 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)
+RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.6.26 pygeodesy 26.6.24 Python 3.14.5 64bit arm64 macOS 26.5.1) 1.040 sec
+RDNAP2018v1 max |diff| (RDx 0, RDy 0, NAPh 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)

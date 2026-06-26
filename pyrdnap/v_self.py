@@ -9,12 +9,12 @@ after registration.
 For each test point, 3 lines are produced: the 1st showing the point C{id}, the original
 (ETRS89) C{lat}, C{lon} and C{height} and the expected C{RDx}, C{RDy} and C{NAPh} values.
 
-The 2nd line shows the C{lat}, C{lon} and C{height} and C{RDx}, C{RDy} and {NAPh} results
-from the L{RDNAP2018v1} transformer's L{reverse<pyrdnap.RDNAP2018v1.reverse>} respectively
-L{forward<pyrdnap.RDNAP2018v1.forward>} method.
+The 2nd line shows the C{lat}, C{lon} and C{height} and C{RDx}, C{RDy} and C{NAPh} results
+from the L{RDNAP2018v1.reverse<pyrdnap.RDNAP2018v1.reverse>} respectively L{-.forward
+<pyrdnap._RDNAPbase.forward>} method.
 
-The 3rd line contains the (absolute value) of the differences for each result on the 2nd
-line and the corresponding, original test point value on the 1st line.
+The 3rd line contains the (absolute value) of the difference between each result on the
+2nd line and the corresponding, original test point value on the 1st line.
 
 The final lines of the output are the C{maximum} of all (absolute value) differences in
 2 formats and a line with the C{RDNAPTRANS(tm)2018} requirements, C{0.000000010 degrees}
@@ -25,11 +25,12 @@ C{RDNAPTRANS(tm)2018} requirement for that result.
 
 For points with C{NAPh} marked C{"*"}, C{NAPh} is set to C{NAN}.
 
-@see: Module L{pyrdnap<pyrdnap.__main__>} for examples to invoke L{validation3}.
+See main module L{pyrdnap<pyrdnap.__main__>} for some examples invoking L{validation3}.
 '''
 from pyrdnap.rd0 import RDNAP7Tuple
-from pyrdnap.__pygeodesy import (_ALL_OTHER, _COMMASPACE_, _NAN_, _NL_,
-                                 _SPACE_, _STAR_, _secs2str, _xinstanceof)
+from pyrdnap.__pygeodesy import (_all_OTHER, _COMMASPACE_, _NAN_, _NL_,
+                                 _SPACE_, _STAR_, _secs2str,
+                                 _xinstanceof, RDNAPError)
 from pygeodesy import NAN, NN, map2, typename
 
 from math import fabs
@@ -37,7 +38,7 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.06.12'
+__version__ = '26.06.18'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[0:3]
 #        (lat   lon   height RDx   RDy   NAPh)
@@ -77,7 +78,7 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
        @return: 3-Tuple C{(failed, total, in_outside)} with the number of C{FAILED} tests, the
                 C{total} number of tests and the number of points B{C{in_out}} the C{RD} region.
     '''
-    from pyrdnap import RDNAP2018v1, RDNAP2018v2, RDNAPError, _versions
+    from pyrdnap import RDNAP2018v1, RDNAP2018v2, _versions
 
     _xinstanceof(str, bytes, self_txt=self_txt)
     _xinstanceof(RDNAP2018v1, RDNAP2018v2, R=R)
@@ -160,7 +161,8 @@ def _zfmt(floats):
     return _COMMASPACE_.join(t)
 
 
-__all__ += _ALL_OTHER(validation3)
+__all__ += _all_OTHER(validation3)
+del _all_OTHER
 
 # **) MIT License
 #

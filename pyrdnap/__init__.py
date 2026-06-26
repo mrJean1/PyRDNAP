@@ -37,8 +37,8 @@ except ImportError:  # ... if it doesn't, extend sys.path to include
     if pyrdnap_abspath not in sys.path:
         sys.path.insert(0, pyrdnap_abspath)  # XXX __path__[0]
 
-try:  # PYCHOK once
-    from pyrdnap.__pygeodesy import machine, _SPACE_, _versions as _pygeodesy_versions  # PYCHOK ...
+try:  # PYCHOK pygeodesy
+    from pyrdnap.__pygeodesy import *  # noqa: F403
 except (AttributeError, ImportError) as x:
     raise AssertionError(str(x))
 
@@ -46,22 +46,25 @@ from pyrdnap.rd0 import *  # noqa: F403
 from pyrdnap.rdnap2018 import *  # noqa: F403
 from pyrdnap.v_self import *  # noqa: F403
 
-from pyrdnap.rd0 import __all__ as _rd0  # PYCHOK ?
-from pyrdnap.rdnap2018 import __all__ as _rdnap  # PYCHOK ?
-from pyrdnap.v_self import __all__ as _v_self  # PYCHOK ?
 
-__all__ = tuple(sorted(('pyrdnap_abspath', machine.__name__) + _rd0 + _rdnap + _v_self))
-__version__ = '26.06.16'
+def _all__init__(*names):  # deleted below
+    from pyrdnap.__pygeodesy import _all__all__  # PYCHOK ...
+    _all__all__.extend(names)
+    _all__all__[:] = sorted(_all__all__)  # set(_all__all__)
+    return _all__all__
 
 
-def _versions():  # in .__main__, .test/bases
+def _versions():  # in .__main__, .v_self, .test/bases
     # Get the pyrdnap, pygeodesy, Python ... versions (C{str}).
+    from pyrdnap.__pygeodesy import _SPACE_, _versions as _pygeodesy_versions  # PYCHOK ...
     v  = __version__.replace('.0', '.')
     l_ = [_pyrdnap_, v] + _pygeodesy_versions(None)
-    return _SPACE_.join(l_)
+    return _SPACE_.join(l_)  # PYCHOK shadows?
 
 
-del _rd0, _rdnap, _v_self  # os_path, sys
+__all__ = _all__init__('pyrdnap_abspath')
+__version__ = '26.06.26'
+# del _all__init__
 
 # **) MIT License
 #

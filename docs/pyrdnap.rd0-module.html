@@ -65,7 +65,7 @@
 
 <hr />
 <div class="fields">      <p><strong>Version:</strong>
-        26.06.14
+        26.06.18
       </p>
 </div><!-- ==================== CLASSES ==================== -->
 <a name="section-Classes"></a>
@@ -79,8 +79,27 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
+        <a href="pygeodesy.datums.Datum-class.html" class="summary-name">Datum</a><br />
+      Ellipsoid and transform parameters for an earth model.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
         <a href="pygeodesy.datums.Similarity-class.html" class="summary-name">Similarity</a><br />
       Similarity transformation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pygeodesy.ellipsoids.Ellipsoid-class.html" class="summary-name">Ellipsoid</a><br />
+      Ellipsoid with <i>equatorial</i> and <i>polar</i> radii, 
+        <i>flattening</i>, <i>inverse flattening</i> and other, often used,
+        <i>cached</i> attributes, supporting <i>oblate</i> and 
+        <i>prolate</i> ellipsoidal and <i>spherical</i> earth models.
     </td>
   </tr>
 <tr>
@@ -106,10 +125,51 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
+        <a href="pygeodesy.namedTuples.LatLon3Tuple-class.html" class="summary-name">LatLon3Tuple</a><br />
+      3-Tuple <code>(lat, lon, height)</code> in <code>degrees90</code>, 
+        <code>degrees180</code> and <code>meter</code>, conventionally.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pygeodesy.namedTuples.LatLon4Tuple-class.html" class="summary-name">LatLon4Tuple</a><br />
+      4-Tuple <code>(lat, lon, height, datum)</code> in 
+        <code>degrees90</code>, <code>degrees180</code>, <code>meter</code>
+        and <code class="link">Datum</code>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
         <a href="pygeodesy.namedTuples.PhiLam2Tuple-class.html" class="summary-name">PhiLam2Tuple</a><br />
       2-Tuple <code>(phi, lam)</code> with latitude <code>phi</code> in 
         <code>radians[PI_2]</code> and longitude <code>lam</code> in 
         <code>radians[PI]</code>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pygeodesy.namedTuples.PhiLam3Tuple-class.html" class="summary-name">PhiLam3Tuple</a><br />
+      3-Tuple <code>(phi, lam, height)</code> with latitude 
+        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
+        <code>lam</code> in <code>radians[PI]</code> and 
+        <code>height</code> in <code>meter</code>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pygeodesy.namedTuples.PhiLam4Tuple-class.html" class="summary-name">PhiLam4Tuple</a><br />
+      4-Tuple <code>(phi, lam, height, datum)</code> with latitude 
+        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
+        <code>lam</code> in <code>radians[PI]</code>, <code>height</code> 
+        in <code>meter</code> and <code class="link">Datum</code>.
     </td>
   </tr>
 <tr>
@@ -183,6 +243,20 @@ m=Transforms.WGS84),
 ...">Datums.Sphere: Datum(name='Sphere', ellipsoid=Ellipso<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rd0-module.html#Ellipsoids" class="summary-name">Ellipsoids</a> = <code title="Ellipsoids.Sphere: Ellipsoid(name='Sphere', a=6371008.771415, f=0, f_=\
+0, b=6371008.771415),
+Ellipsoids.GRS80: Ellipsoid(name='GRS80', a=6378137, f=0.00335281, f_=\
+298.2572221, b=6356752.31414035),
+Ellipsoids.WGS84: Ellipsoid(name='WGS84', a=6378137, f=0.00335281, f_=\
+298.25722356, b=6356752.31424518),
+Ellipsoids.Airy1830: Ellipsoid(name='Airy1830', a=6377563.396, f=0.003\
+34085, f_=299.3249646, b=6356256.90923729)">Ellipsoids.Sphere: Ellipsoid(name='Sphere', a=637<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
 </table>
 <!-- ==================== VARIABLES DETAILS ==================== -->
 <a name="section-VariablesDetails"></a>
@@ -214,6 +288,31 @@ nsform=Transforms.OSGB36),
 Datums.WGS84: Datum(name='WGS84', ellipsoid=Ellipsoids.WGS84, transfor<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 m=Transforms.WGS84),
 <code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Ellipsoids"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">Ellipsoids</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+Ellipsoids.Sphere: Ellipsoid(name='Sphere', a=6371008.771415, f=0, f_=<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+0, b=6371008.771415),
+Ellipsoids.GRS80: Ellipsoid(name='GRS80', a=6378137, f=0.00335281, f_=<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+298.2572221, b=6356752.31414035),
+Ellipsoids.WGS84: Ellipsoid(name='WGS84', a=6378137, f=0.00335281, f_=<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+298.25722356, b=6356752.31424518),
+Ellipsoids.Airy1830: Ellipsoid(name='Airy1830', a=6377563.396, f=0.003<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+34085, f_=299.3249646, b=6356256.90923729)
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -251,7 +350,7 @@ m=Transforms.WGS84),
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Jun 14 13:03:34 2026
+    Generated by Epydoc 3.0.1 on Fri Jun 26 11:47:01 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

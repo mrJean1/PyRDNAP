@@ -71,7 +71,7 @@ All Python source code has been statically checked_ with Ruff_ using Python 3.13
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
 64-bit on macOS 26.5.1 Tahoe only.
 
-*Last updated: June 16, 2026.*
+*Last updated: June 26, 2026.*
 
 License
 =======

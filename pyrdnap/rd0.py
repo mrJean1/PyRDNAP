@@ -12,20 +12,20 @@ from pyrdnap.__pygeodesy import (_0_5, _1_0,  _2_0,  # PYCHOK used!
                                  _isNAN, _isNAN0, _xinstanceof, _xsubclassof,
                                  _LLEB, _xkwds,
                                  _COMMASPACE_, _datum_, _lat_, _lon_, _height_,
-                                 _ALL_OTHER, _FOR_DOCS, _Pass, _NamedTuple)
-from pygeodesy import (NAN, NN, map1, map2,  # basics, "consterns"
+                                 _all_OTHER, _FOR_DOCS, _Pass, _NamedTuple)
+from pygeodesy import (map1, map2, NAN, NN,  # basics, "consterns"
                        Datum, Datums, Similarity,  # datums
-                       Bounds4Tuple, LatLon2Tuple, PhiLam2Tuple,  # namedTuples
-                       Vector2Tuple, Vector3Tuple, LqRD as _LqRD,  # ltp
-                       Property_RO, property_ROnce,  # props
-                       pairs,  # streprs
-                       Height, Lamd, Lat, Lon, Meter, Phi, Phid,  # units
+                       Ellipsoid, Ellipsoids, LqRD as _LqRD,  # ellipsoids, ltp
+                       Bounds4Tuple, LatLon2Tuple, LatLon3Tuple, LatLon4Tuple,  # namedTuples
+                       PhiLam2Tuple, PhiLam3Tuple, PhiLam4Tuple, Vector2Tuple, Vector3Tuple,
+                       Property_RO, property_ROnce, pairs,  # props, streprs
+                       Height, Lam, Lamd, Lat, Lon, Meter, Phi, Phid,  # units
                        sincos2, tanPI_2_2)  # utily
 
 from math import atan2, ceil, fabs, floor, log, sin, sqrt
 
 __all__ = ()
-__version__ = '26.06.14'
+__version__ = '26.06.18'
 
 _LQRD0 = _LqRD()  # get Amersfoort, region4, etc. (deleted below)
 
@@ -64,8 +64,11 @@ class _RDbase(object):
 class _RD(_RDbase):
     '''(INTERNAL) Bounds, constants for RDNAP2018 (ASCII.txt).
     '''
-    lat_D = Lat(lat_D=80.0)  # == 1 / 0.0125  # degrees, all
-    lon_D = Lon(lon_D=50.0)  # == 1 / 0.02
+    lat_D = Lat(lat_D=80.0)  # degrees, all
+    lon_D = Lon(lon_D=50.0)
+
+#   latD  = Lat(latD=1 / lat_D)  # degrees, all
+#   lonD  = Lon(lonD=1 / lon_D)
 
     def __init__(self):
         S, W, N, E = self._region4RD
@@ -126,7 +129,7 @@ class _RD(_RDbase):
     #                                        rx=-1.9151, ry=1.6037, rz=-9.0955),
     # _xRD2ETRS=Similarity(name='_xRD2ETRS', tx=565.74, ty=50.402, tz=465.29, s=4.0724,
     #                                        rx=1.9151, ry=-1.6036, rz=9.0955),
-    # lat_D=80.0, lon_D=50.0  # 1 / DELTA
+    # lat_D=80.0, lon_D=50.0  # latD=0.0125, lonD=0.02
 
 _RD = _RD()  # PYCHOK singleton, in .test/testRndTrips
 
@@ -143,8 +146,8 @@ class _RD0(_RDbase):
     K0      = 0.9999079  # 2.4.1 scale factor
     LAT0    = Lat(LAT0=_LQRD0.Amersfoort.lat)  # '52  9 22.178N' == 52.156160555555+°
     LON0    = Lon(LON0=_LQRD0.Amersfoort.lon)  # ' 5 23 15.5E'   ==  5.387638888888+°
-    LAM0C   = \
-    LAM0    = Lamd(LAM0=LON0)  # 𝜆0, 𝛬0 = 𝜆0 on sphere 0.094032038
+    LAM0    = Lamd(LAM0=LON0)  # 𝜆0, 0.094032038
+    LAM0C   = Lam(LAM0C=LAM0)  # 𝛬0 on sphere == 𝜆0
     PHI0    = Phid(PHI0=LAT0)  # 𝜑0 0.910296727, PHI0C 𝛷0 set below
     X0      = Meter(X0=155000.0)  # false Easting  155029.784?
     Y0      = Meter(Y0=463000.0)  # false Norting  463109.889?
@@ -196,7 +199,7 @@ class _RD0(_RDbase):
         return sqrt(c**4 * E.e2 / E.e21 + _1_0)
 
     @property_ROnce
-    def PHI0C(self):  # 2.4.1 p 15 𝛷0, Amersfoort latitude on sphere
+    def PHI0C(self):  # 2.4.1 p 15 𝛷0 on sphere
         m, n = self.Rmn2
         s, c = self.sincos2PHI0
         return Phi(PHI0C=atan2(m * s, n * c))  # atan((m / n) * tan(PHI0))
@@ -276,33 +279,31 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
        and C{datum} with C{lat} and C{lon} in C{degrees} and with C{RDx}, C{RDy},
        C{NAPh} and C{height} in C{meter}, conventionally.
 
-       @note: The C{lat}, C{lon} and C{datum} are I{by default} B{GRS80 (ETRS89)}
-              geodetic when returned from L{RDNAP2018v1.reverse} but B{Bessel1841
-              (RD-Bessel)} from L{RDNAP2018v2.reverse}.
+       @note: I{By default} C{lat}, C{lon} and C{datum} are B{GRS80 (ETRS89)} when
+              returned from L{RDNAP2018v1.reverse} but B{Bessel1841 (RD-Bessel)}
+              from L{RDNAP2018v2.reverse}.
     '''
     _Names_ = ('RDx', 'RDy', 'NAPh', _lat_, _lon_, _height_, _datum_)
     _Units_ = ( Meter, Meter, Meter,  Lat,   Lon,   Height,  _Pass)
 
-    @property_ROnce
-    def _datum_index(self):
-        return self._Names_.index(_datum_)
-
     def diff(self, other, datum=None, **name):
         '''Return the difference between this and an C{other} C{RDNAP7Tuple}.
 
-           @kwarg datum: Optional difference C{B{datum}=None} (C{Latum}).
+           @kwarg datum: Datum C{diff} (C{Datum}, None or NAN).
            @kwarg name: Optional name (C{str}).
 
-           @return: An L{RDNAP7Tuple} with the C{_diff} for each item, but
-                    C{datum=B{datum}}.
+           @return: An L{RDNAP7Tuple} with the C{fabs(diff)} for each item,
+                    except C{datum} as B{C{datum}}.
         '''
         def _diff(a, b):
-            return fabs(a - b)
+            try:
+                return fabs(a - b)
+            except TypeError:
+                return datum
 
         _xinstanceof(RDNAP7Tuple, other=other)
-        d = self._datum_index
-        t = map2(_diff, self[:d], other[:d])
-        return RDNAP7Tuple(t + (datum,), **name)
+        t = map2(_diff, self, other)
+        return RDNAP7Tuple(t, **name)
 
     @Property_RO
     def lam(self):
@@ -352,7 +353,7 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
         '''
         return self.philamheight.to4Tuple(self.datum)
 
-    def toDatum(self, datum2, **name):
+    def toDatum(self, datum2, name=NN):
         '''Convert this C{lat}, C{lon} and C{height} to B{C{datum2}}.
 
            @arg datum2: Datum to convert I{to} (L{Datum}).
@@ -372,22 +373,22 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
         g = self.toLatLon(_LLEB).toDatum(datum2)
         h = NAN if _isNAN(self.height) else g.height  # PYCHOK preserve height NAN
         return self.dup(lat=g.lat, lon=g.lon, datum=g.datum, height=h,
-                                              **_xkwds(name, name=self.name))
+                                              name=name or self.name)
 
     def toETRS(self, **name):
         '''Copy this L{RDNAP7Tuple} with C{lat} and C{lon} C{reverse3} transformed
-           to ETRS89 (GRS80), provided this C{datum} is Bessel1841 (RD-Bessel).
+           to ETRS89 (GRS80), provided this C{datum} is RD-Bessel (Bessel1841).
 
            @kwarg name: Optional name (C{str}), overriding this name.
 
            @see: Methods L{RDNAP7Tuple.toRD} and L{RDNAP7Tuple.toDatum}.
         '''
-        return self._toX(_RD0.D0, _RD._RDNAPv0.reverse3, name)
+        return self._toX(_RD0.D0, _RD._RDNAPv0.reverse3, **name)
 
     def toLatLon(self, LatLon, **LatLon_kwds):
         '''Return this C{lat}, C{lon}, C{datum} and C{height} as B{C{LatLon}}.
 
-           @arg LatLon: An ellipsodial C{LatLon} class (C{pygeodesy.ellipsoidal*}).
+           @arg LatLon: An ellipsoidal C{LatLon} class (C{pygeodesy.ellipsoidal*}).
            @kwarg LatLon_kwds: Optional, additional B{C{LatLon}} keyword arguments.
 
            @return: An B{C{LatLon}} instance.
@@ -401,20 +402,19 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
 
     def toRD(self, **name):
         '''Copy this L{RDNAP7Tuple} with C{lat} and C{lon} C{forward3} transformed
-           to RD-Bessel (Bessel1841), provided this C{datum} is GRS80 (ETRS89).
+           to RD-Bessel (Bessel1841), provided this C{datum} is ETRS89 (GRS80).
 
            @kwarg name: Optional name (C{str}), overriding this name.
 
            @see: Methods L{RDNAP7Tuple.toETRS} and L{RDNAP7Tuple.toDatum}.
         '''
-        return self._toX(_RD0.D80, _RD._RDNAPv0.forward3, name)
+        return self._toX(_RD0.D80, _RD._RDNAPv0.forward3, **name)
 
-    def _toX(self, datum, _xform, name):
+    def _toX(self, datum, _xform, name=NN):
         # helper for C{toETRS} and C{toRD}
         if self.datum is datum or self.datum == datum:  # PYCHOK datum
             lat, lon, d = _xform(*self.latlon)
-            return self.dup(lat=lat, lon=lon, datum=d,
-                                           **_xkwds(name, name=self.name))
+            return self.dup(lat=lat, lon=lon, datum=d, name=name or self.name)
         return self
 
     @Property_RO
@@ -488,9 +488,12 @@ class LqRD(_LqRD):
                            t.lat, t.lon, t.height, t.ecef.datum, name=name or t.name)
 
 
-__all__ += _ALL_OTHER(LqRD, RDNAP7Tuple, Bounds4Tuple,  # passed along from PyGeodesy
-                      Datums, LatLon2Tuple, PhiLam2Tuple, Similarity, Vector2Tuple, Vector3Tuple)
-del _LQRD0
+__all__ += _all_OTHER(LqRD, RDNAP7Tuple,  # passed along from PyGeodesy
+                      Bounds4Tuple, Datum, Datums, Ellipsoid, Ellipsoids,
+                      LatLon2Tuple, LatLon3Tuple, LatLon4Tuple,
+                      PhiLam2Tuple, PhiLam3Tuple, PhiLam4Tuple,
+                      Similarity, Vector2Tuple, Vector3Tuple)
+del _all_OTHER, _LQRD0
 
 # **) MIT License
 #

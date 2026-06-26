@@ -4,7 +4,7 @@
 u'''(INTERNAL) C{RDNAPTRANS(tm)2018_v220627} v#grid utilities.
 '''
 from pyrdnap import pyrdnap_abspath  # pyrdnap 1st
-from pyrdnap.__pygeodesy import _0_0s, import_module, _ValueError
+from pyrdnap.__pygeodesy import _0_0s, import_module, RDNAPError
 from pygeodesy import print_, property_RO
 
 from array import array
@@ -13,16 +13,10 @@ import sys
 from zipfile import ZipFile
 
 __all__ = ()
-__version__ = '26.06.14'
+__version__ = '26.06.17'
 
 _R_C = 481, 301  # shape: rows, cols
 _RxC = 144781    # total, in .v1grid, .v2grid
-
-
-class RDNAPError(_ValueError):  # exported by rdnap2018
-    '''Error raised for C{RD}, C{NAP} and unzip issues.
-    '''
-    pass
 
 
 class _V_grid(tuple):
@@ -87,7 +81,7 @@ def _v_assert(value, valid=_R_C):  # in .rd0
     return True
 
 
-def _v_grid(v):
+def _v_grid(v):  # in .rdnap2018
     '''(INTERNAL) Return "v#grid" variant C{v} as C{str}.
     '''
     return 'v%sgrid' % (v,)
@@ -146,8 +140,8 @@ def _v_gridz_unzip(v, force=False, verbose=False):  # PHYCOK no cover
     p, d, m = _v_gridz3(v)
     t = os_path.join(d, m)
     if (not force) and os_path.exists(t):
-        t = '%r exists: %r' % (m, t)
-        raise RDNAPError(t)
+        t = 'exists: %r' % (t,)
+        raise RDNAPError(m, txt=t)
     try:
         with ZipFile(p) as z:
             z.extractall(d)
@@ -187,9 +181,6 @@ def _v_txt_unzip(v, name, col2or3, _array):
     except Exception as x:
         raise RDNAPError(n, cause=x)
     _v_assert(len(r), 0)
-
-
-# __all__ += _ALL_OTHER(RDNAPError)  # in .rdnap2018
 
 # **) MIT License
 #
