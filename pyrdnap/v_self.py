@@ -38,7 +38,7 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.06.18'
+__version__ = '26.07.06'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[0:3]
 #        (lat   lon   height RDx   RDy   NAPh)

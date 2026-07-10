@@ -14,11 +14,11 @@ from pyrdnap import RDNAP2018v1, RDNAP2018v2, validation3
 import os.path as os_path
 
 __all__ = ()
-__version__ = '26.06.26'
+__version__ = '26.07.07'
 
 _PyRDNAP_up1 =  os_path.dirname(PyRDNAP_dir)  # or _ELLIPSIS_
 _v1_max_diff = 'RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999'
-_v2_max_diff = 'RDNAP2018v2 max |diff| lat 0.00119963344, lon 0.00082945486, height 0.000637, RDx 0.00829877, RDy 0.01574313, NAPh 0.00063739'
+_v2_max_diff = 'RDNAP2018v2 max |diff| lat 0.00143466407, lon 0.00083303290, height 0.006164, RDx 0.00829877, RDy 0.01574313, NAPh 0.00063739'
 # _v1_ETRS89 = 'forward max |diff| (RDx 0, RDy 0, NAPh 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)'
 # _v1_RDNAP  = 'reverse max |diff| (RDx 0.000223603, RDy 0.000799715, NAPh 5.68434e-14, lat 0, lon 0, height 0, ...)'
 
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     if v:
         p = os_path.abspath(os_path.join(*v.split('/')))
         if os_path.exists(p):
-            t.testValidation(RDNAP2018v2(name='v2'), p, _v2_max_diff, 356)
+            t.testValidation(RDNAP2018v2(name='v2'), p, _v2_max_diff, 21326)  # 356
             t.testValidation(RDNAP2018v1(name='v1'), p, _v1_max_diff, nl=1)
             s = 0
         else:

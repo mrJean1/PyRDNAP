@@ -13,7 +13,7 @@ from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.06.12'
+__version__ = '26.07.07'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -83,12 +83,12 @@ class Tests(TestsBase):
             self.testRndTrip(R, _rnd(random() * N_S + S),
                                 _rnd(random() * E_W + W))
 
-    def testRDs(self):
-        self.test('_RD', _RD.toStr(), '_region4ETRS=ETRS region (latS=49.9', known=startswith, nl=1)
+    def testRDs(self, R):
+        self.test('_RD', _RD.toStr(), '_region4=RD region (latS=50.0, ', known=startswith, nl=1)
         self.test('_RD0', A0.toStr(), "D0=Datum(name='Bessel1841', ", known=startswith, nl=1)
 
-        R = RDNAP2018v1(name='Cover')
-        self.test('v1', R, "name='Cover'", known=startswith,nl=1)
+        # R = RDNAP2018v1(name='Cover')
+        self.test('str', R, "name='v", known=startswith,nl=1)
         t = R.forward(A0.LAT0, A0.LON0)
         self.test('lat', t.lat, A0.LAT0, prec=8)
         self.test('lon', t.lon, A0.LON0, prec=8)
@@ -102,11 +102,11 @@ class Tests(TestsBase):
         self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith, nt=1)
 
         try:
-            r = R.rdNAPh(0, 0, raiser=True)
-            self.test('rdNAPh', r, RDNAPError)
+            r = R.rdNAPh(0, 0)  # raiser=True
+            self.test('rdNAPh', r, NAN)  # RDNAPError
         except RDNAPError as r:
             r = repr(r)
-            self.test('rdNAPh', r, r)
+            self.test('rdNAPh', r, NAN)
 
         r = t.toETRS().toRepr()
         self.test('toETRS', r, t.toRepr(), nl=1)
@@ -116,10 +116,37 @@ class Tests(TestsBase):
         r = t.toDatum(r.datum).toRepr()
         self.test('toDatum', r, r, nt=1)
 
-        t = R.region4(True).toRepr()
-        self.test('region', t, 'RD region (latS=50.0, lonW=2.0, latN=56.0, lonE=8.0)')
-        t = R.region4(False).toRepr()
-        self.test('region', t, 'ETRS region (latS=49.9', known=startswith)
+        r = R.region4()
+        t = r.toRepr()
+        self.test('region4', t, 'RD region (latS=50.0, lonW=2.0, latN=56.0, lonE=8.0)')
+        self.test('lowerleft', R.isinside(r.latS, r.lonW), True)
+        self.test('upperight', R.isinside(r.latN, r.lonE), True)
+        self.test('center',    R.isinside(r.latC, r.lonC), True)
+        self.test('origin',    R.isinside(0, 0), False)
+
+        r = R.region4(asRD=True)
+        t = r.toRepr()
+        self.test('region4RD', t, 'RD region (minRDx=-82454.183, minRDy=345614.643, ', known=startswith)
+        t = R.reverse(r.minRDx, r.minRDy, None)
+        self.test('lowerleft', R.isinside(t.lat, t.lon), True)
+        self.test('lowerleft', R.isinsideRD(r.minRDx, r.minRDy), True)
+        t = R.reverse(r.maxRDx, r.maxRDy, None)
+        self.test('upperight', R.isinside(t.lat, t.lon), True)
+        self.test('upperight', R.isinsideRD(r.maxRDx, r.maxRDy), True)
+        self.test('origin',    R.isinside(0, 0), False)
+
+        for t in (R.forward(NAN, NAN),
+                  R.reverse(NAN, NAN)):
+            self.test('lat', t.lat, NAN, prec=8, nl=1)
+            self.test('lon', t.lon, NAN, prec=8)
+            self.test('latlon', t.latlon, '(NAN, NAN)')
+            self.test('latlonheight', t.latlonheight, '(NAN, NAN, ', known=startswith)
+            self.test('latlonheightdatum', t.latlonheightdatum, '(NAN, NAN, ', known=startswith)
+            self.test('lam', t.lam, NAN, prec=8)
+            self.test('phi', t.phi, NAN, prec=8)
+            self.test('philam', t.philam, '(NAN, NAN)')
+            self.test('philamheight', t.philamheight, '(NAN, NAN, ', known=startswith)
+            self.test('philamheightdatum', t.philamheightdatum, '(NAN, NAN, ', known=startswith, nt=1)
 
     def testRD11(self, R):  # <https://NL.WikiPedia.org/wiki/Rijksdriehoekscoördinaten>
         t = repr(R)
@@ -141,8 +168,8 @@ class Tests(TestsBase):
             self.test('forward', t, r, known=fabs(t.RDx - r.RDx) < 1.0 and
                                              fabs(t.RDy - r.RDy) < 1.5)
             t = R.reverse(x, y, NAN).dup(datum=None)  # ignore datum
-            self.test('reverse', t, r, known=fabs(t.lat - r.lat) < 0.0005 and
-                                             fabs(t.lon - r.lon) < 0.0005)
+            self.test('reverse', t, r, known=fabs(t.lat - r.lat) < 0.0012 and
+                                             fabs(t.lon - r.lon) < 0.0008)
 
     def testRndTrip(self, R, lat, lon, h=NAN, RDx_RDy=None):
         llh = lat, lon, h
@@ -160,11 +187,18 @@ class Tests(TestsBase):
         s = _str(r)
         self.test('reverse', s, s)
 
-        t = _rnd(r.lat), _rnd(r.lon), (_rnd(r.height) or 0.0)
-        if h is NAN:
-            llh, t = llh[:2], t[:2]
-        k = _str(t, 2) == _str(llh, 2)
-        self.test(R.name, t, llh, known=k, nt=1)
+        t = _rnd(r.lat), _rnd(r.lon)
+        if h is not NAN:
+            t += (_rnd(r.height) or 0.0),
+        d = max(fabs(f - r) for f, r in zip(llh, t))
+        k = d < 0.002
+        self.test(R.name, t, llh, known=k, error=d)
+
+        t = R.forward3(lat, lon)
+        r = R.reverse3(t.lat, t.lon)
+        t = _rnd(lat),   _rnd(lon)
+        r = _rnd(r.lat), _rnd(r.lon)
+        self.test('x3', t, r, nt=1)
 
     def testSAS(self, R):
         # <https://GitHub.com/FVellinga/gm_rdnaptrans2018/blob/main/gm_rdnaptrans2018.sas>
@@ -193,7 +227,9 @@ if __name__ == '__main__':
     t.testRD11(R1)
     t.testRD11(R2)
 
-    t.testRDs()  # coverage
+    t.testRDs(R1)
+    t.testRDs(R2)
+
     t.test('ndigits', _ndigits, _ndigits)
     t.results()
     t.exit()

@@ -25,7 +25,7 @@ from pygeodesy import (map1, map2, NAN, NN,  # basics, "consterns"
 from math import atan2, ceil, fabs, floor, log, sin, sqrt
 
 __all__ = ()
-__version__ = '26.06.18'
+__version__ = '26.07.07'
 
 _LQRD0 = _LqRD()  # get Amersfoort, region4, etc. (deleted below)
 
@@ -71,7 +71,7 @@ class _RD(_RDbase):
 #   lonD  = Lon(lonD=1 / lon_D)
 
     def __init__(self):
-        S, W, N, E = self._region4RD
+        S, W, N, E = self._region4
         nlat = _degN(N, S, self.lat_D) + _1_0  # 2.3.2g n-phi
         nlon = _degN(E, W, self.lon_D) + _1_0  # 2.3.2g n-lambda
         _v_assert(map1(int, nlat, nlon))
@@ -79,52 +79,35 @@ class _RD(_RDbase):
     def _c_f_N_f6(self, lat, lon):
         # return (int(ceil), int(floor), Normalized less floor) of C{lat}) + \
         #        (int(ceil), int(floor), Normalized less floor) of C{lon})
-        S, W, _, _ = self._region4RD
+        S, W, _, _ = self._region4
         return _c_f_N_f3(lat, S, self.lat_D) + \
                _c_f_N_f3(lon, W, self.lon_D)
-
-    def isinside(self, lat, lon, asRD=True, eps=0):  # eps=_TOL_D, 0 or -_TOLD_D
-        '''Is C{(lat, lon)} inside the C{RD} or C{ETRS} region, optionally
-           over-/undersized by positive respectively negative C{eps} degrees?
-
-           @return: C{True} if inside or on, otherwise C{False} (C{bool}).
-        '''
-        S, W, N, E = self._region4RD if asRD else self._region4ETRS
-        # XXX use "< N" and "< E" instead of "<="?
-        return ((S - lat) <= eps and (lat - N) <= eps and
-                (W - lon) <= eps and (lon - E) <= eps) if eps else \
-                (S <= lat <= N   and  W <= lon <= E)
 
     @property_ROnce
     def _RDNAPv0(self):
         from pyrdnap.rdnap2018 import _RDNAPbase
         return _RDNAPbase()  # singleton, instance!
 
-    @property_ROnce
-    def _region4ETRS(self):  # as ETRS L{Bounds4Tuple}
-        return self._RDNAPv0.region4(False)
-
-    _region4RD = _LQRD0.region4()  # as RD-Bessel L{Bounds4Tuple}, in .rdnap2018
+    _region4 = _LQRD0.region4()  # in .rdnap2018 Bounds4Tuple
 
     def _toDict(self):
         def _p(n):  # lambda
-            return n.endswith('D') or n.endswith('S')
+            return any(map(n.endswith, '4DS'))
 
         return self._preDict(_p)
 
     @property_ROnce
-    def _xETRS2RD(self):  # transform ETRS (GRS80) to RD-Bessel
+    def _xETRS2RD(self):  # transform ETRS to RD-Bessel
         return Similarity(tx=-565.7346, ty=-50.4058, tz=-465.2895, s=-4.07242,
                           rx=-1.91513,  ry=1.60365,  rz=-9.09546, name='_xETRS2RD')
 
     @property_ROnce
-    def _xRD2ETRS(self):  # transform RD-Bessel to ETRS (GRS80)
+    def _xRD2ETRS(self):  # transform RD-Bessel to ETRS
         return Similarity(tx=565.7381, ty=50.4018,  tz=465.2904, s=4.07244,
                           rx=1.91514,  ry=-1.60363, rz=9.09546, name='_xRD2ETRS')
 
     # % python -c "import pyrdnap; print(pyrdnap.rd0._RD.toStr())"
-    # _region4ETRS=ETRS region (latS=49.999276, lonW=2.000032, latN=55.998561, lonE=7.999158),
-    # _region4RD=RD region (latS=50.0, lonW=2.0, latN=56.0, lonE=8.0),
+    # _region4=RD region (latS=50.0, lonW=2.0, latN=56.0, lonE=8.0),
     # _xETRS2RD=Similarity(name='_xETRS2RD', tx=-565.73, ty=-50.406, tz=-465.29, s=-4.0724,
     #                                        rx=-1.9151, ry=1.6037, rz=-9.0955),
     # _xRD2ETRS=Similarity(name='_xRD2ETRS', tx=565.74, ty=50.402, tz=465.29, s=4.0724,
@@ -365,7 +348,7 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
            @note: This datum conversion is based on C{pygeodesy} which differs from
                   C{RDNAPTRANS(tm)2018_v220627}.
 
-           @see: Methods L{RDNAP7Tuple.asETRS} and L{RDNAP7Tuple.asRD}.
+           @see: Methods L{RDNAP7Tuple.toETRS} and L{RDNAP7Tuple.toRD}.
         '''
         _xinstanceof(Datum, datum2=datum2)
         if self.datum is datum2 or self.datum == datum2:  # PYCHOK datum

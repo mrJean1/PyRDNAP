@@ -38,7 +38,7 @@ before or after installation.
 Dependencies
 ============
 
-Installation of Python package pygeodesy_ is required, version 26.6.12 or newer.  Type
+Installation of Python package pygeodesy_ is required, version 26.7.7 or newer.  Type
 ``python[3] -m pip install -r requirements.txt`` to install.
 
 Documentation
@@ -52,7 +52,7 @@ Tests
 =====
 
 The tests ran with Python 3.14.5, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_
-26.5.26 and on macOS 26.5.1 Tahoe in 64-bit.  The results of those tests are included in the
+26.5.26 and on macOS 26.5.2 Tahoe in 64-bit.  The results of those tests are included in the
 distribution file.
 
 Python 3.14.5 and PyPy 7.3.17 run on Apple M4 (``arm64``), *natively*.  Python 2.7.18 runs on
@@ -69,9 +69,9 @@ Notes
 
 All Python source code has been statically checked_ with Ruff_ using Python 3.13.12 and with
 PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in
-64-bit on macOS 26.5.1 Tahoe only.
+64-bit on macOS 26.5.2 Tahoe only.
 
-*Last updated: June 26, 2026.*
+*Last updated: July 09, 2026.*
 
 License
 =======
@@ -98,7 +98,7 @@ DEALINGS IN THE SOFTWARE.
   :target: https://PyPI.org/project/pyrdnap
 .. image:: https://Img.Shields.io/appveyor/ci/mrJean1/PyRDNAP.svg?branch=master&label=AppVeyor
   :target: https://CI.AppVeyor.com/project/mrJean1/PyRDNAP/branch/master
-.. image:: https://Img.Shields.io/badge/coverage-97%25-brightgreen
+.. image:: https://Img.Shields.io/badge/coverage-96%25-brightgreen
   :target: https://GitHub.com/mrJean1/PyRDNAP/blob/master/testcoverage.pdf
 .. image:: https://Img.Shields.io/pypi/wheel/pyrdnap.svg
   :target: https://PyPI.org/project/pyrdnap/#files

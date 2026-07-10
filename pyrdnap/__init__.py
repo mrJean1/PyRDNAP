@@ -63,7 +63,7 @@ def _versions():  # in .__main__, .v_self, .test/bases
 
 
 __all__ = _all__init__('pyrdnap_abspath')
-__version__ = '26.06.26'
+__version__ = '26.07.09'
 # del _all__init__
 
 # **) MIT License
