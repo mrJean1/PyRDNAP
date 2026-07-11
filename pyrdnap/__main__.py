@@ -54,7 +54,7 @@ class _RD4Tuple(object):
 
     def __init__(self, R, ndigits):
         m = pow(10.0, -ndigits)  # centi-, milli-, ...meter
-        r = R.region4()  # start at center, degrees
+        r = R.region4()
         t = self._corner2(R, r.latS, r.lonW,  m) + \
             self._corner2(R, r.latN, r.lonE, -m)
         self._T = RD4Tuple(t, name=typename(R))

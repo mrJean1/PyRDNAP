@@ -36,10 +36,10 @@ _forward_  = 'forward'
 _outside__ = 'outside '
 _region4   = _RD._region4
 _reverse_  = 'reverse'
-_TOL_D     = 1e-9  # degrees 2.3.3f+
-_TOL_M     = 1e-6  # meter
-_TOL_R     = radians(_TOL_D)  # 2e-11
-_TRIPS     = 16    # 5..6 sufficient
+_TOL_D     =  1e-9  # degrees 2.3.3f+
+_TOL_M     =  1e-6  # meter
+_TOL_R     =  radians(_TOL_D)  # 2e-11
+_TRIPS     =  16    # 5..6 sufficient
 
 
 class _RDNAPbase(_NamedBase):
@@ -119,8 +119,7 @@ class _RDNAPbase(_NamedBase):
 
     def forward3(self, lat, lon, **name):
         '''Datum-transform C{(B{lat}, B{lon})} from GRS80 (ETRS98) to Bessel1841
-           (RD-Bessel) as specified by C{RDNAPTRANS(tm)2018_v220627} both in-
-           and outside the C{RD} region.
+           (RD-Bessel) using only C{RDNAPTRANS(tm)2018_v220627}'s similarity.
 
            @return: A L{LatLonDatum3Tuple}C{(lat, lon, datum)} with C{lat},
                     C{lon} and C{datum} all Bessel1841 (RD-Bessel).
@@ -148,7 +147,7 @@ class _RDNAPbase(_NamedBase):
         return lat, lon
 
     def isinside(self, lat, lon, eps=0):
-        '''Is geodetic C{(B{lat}, B{lon})} inside the C{RD region4}?
+        '''Is geodetic C{(B{lat}, B{lon})} inside the C{RD B{region4}}?
 
            @arg lat: Latitude (C{degrees}, geodetic).
            @arg lon: Longitude (C{degrees}, geodetic).
@@ -161,7 +160,7 @@ class _RDNAPbase(_NamedBase):
         return None if _NAN else _isinside(lat, lon, Degrees(eps=eps))
 
     def isinsideRD(self, RDx, RDy, eps=0):
-        '''Is local C{(B{RDx}, B{RDy})} inside the C{RD region4RD}?
+        '''Is local C{(B{RDx}, B{RDy})} inside the C{RD B{region4}}?
 
            @arg RDx: X coordinate (C{meter}, local).
            @arg RDy: Y coordinate (C{meter}, local).
@@ -301,8 +300,7 @@ class _RDNAPbase(_NamedBase):
 
     def reverse3(self, lat, lon, **name):
         '''Datum-transform C{(B{lat}, B{lon})} from Bessel1841 (RD-Bessel) to
-           GRS80 (ETRS98) as specified by C{RDNAPTRANS(tm)2018_v220627}, both
-           in- and outside the C{RD} region.
+           GRS80 (ETRS98) using only C{RDNAPTRANS(tm)2018_v220627}'s similarity.
 
            @return: A L{LatLonDatum3Tuple}C{(lat, lon, datum)} with C{lat},
                     C{lon} and C{datum} all GRS80 (ETRS89).
@@ -627,8 +625,10 @@ def _geodetic2cartesian(lat, lon, h, E):  # 2.2.1
 
 
 def _isinside(lat, lon, eps=0, region4=_region4):
-    # is C{(lat, lon)} inside C{region4}, optionally over-
-    # or undersized by positive respectively negative C{eps}?
+    # is C{(lat, lon)} inside C{region4}, optionally over- or
+    # undersized by positive respectively negative C{eps}?
+    # returns: C{False} if C{lat} or C{lon} outside or NAN,
+    #          C{True} otherwise.
     S, W, N, E = region4
     return ((S - lat) <= eps and (lat - N) <= eps and
             (W - lon) <= eps and (lon - E) <= eps) if eps else \
