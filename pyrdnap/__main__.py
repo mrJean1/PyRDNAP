@@ -23,20 +23,19 @@ C{  [ -v1 | -v2 ] -RD4tuple [ <ndigits> ]}
 @note: The results of C{pyrdnap} have been formally validated and C{PyRDNAP}
        has been certified to carry the trademark C{RDNAPTRANS(tm)}.
 '''
-from pyrdnap import (RDNAP2018v1, RDNAP2018v2, RDNAPError, RDNAP7Tuple, RD4Tuple,
+from pyrdnap import (RDNAP2018v1, RDNAP2018v2, RDNAP7Tuple, RD4Tuple,
                     _pyrdnap_, _versions)
-from pyrdnap.__pygeodesy import (_DASH_, _datum_, _EQUAL_, Fmt, _NAN_,
-                                 _SPACE_, _STAR_, _secs2str)
+from pyrdnap.__pygeodesy import (_DASH_, _datum_, _EQUAL_, Fmt, _isNAN,
+                                 _NAN_, _secs2str, _SPACE_, _STAR_)
 from pyrdnap.v_self import _line, _readlines, validation3
-from pygeodesy import Lat, Lon, map2, NN, print_, truncate, typename
+from pygeodesy import Lat, Lon, map2, NAN, NN, print_, truncate, typename
 
-from math import fabs
 import os
 import sys
 from time import time
 
 __all__ = ()
-__version__ = '26.07.08'
+__version__ = '26.07.09'
 
 _BOTH  = '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 _FWD   = '../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt'  # NSGI.../...
@@ -53,37 +52,29 @@ class _RD4Tuple(object):
     '''
     iters = 0
 
-    def __init__(self, R, ndigits=3):
-        m = 16384.0  # labout half the RD size, meter
-        n = pow(10.0, -ndigits)
+    def __init__(self, R, ndigits):
+        m = pow(10.0, -ndigits)  # centi-, milli-, ...meter
         r = R.region4()  # start at center, degrees
-        x, y, _ = R._forward3(True, r.latC, r.lonC, None)
-        self._R = R
-        t = self._corner2(x, y, -m, n) + \
-            self._corner2(x, y, +m, n)
+        t = self._corner2(R, r.latS, r.lonW,  m) + \
+            self._corner2(R, r.latN, r.lonE, -m)
         self._T = RD4Tuple(t, name=typename(R))
 
     def __str__(self):
         return self._T.toRepr()
 
-    def _corner2(self, x, y, m, n):
-        # move C{(x, y)} outward until NAN round-trip
-        R = self._R
-        while fabs(m) > n:
-            try:
-                x += m
-                y += m
-                lat, lon, _ = R._reverse3(True, x,   y,   None)
-                _,   _  , _ = R._forward3(True, lat, lon, None)
-                t  = x, y
-                self.iters += 1
-            except RDNAPError:
-                x -= m
-                y -= m
-                m /= 2
-        return t
+    def _corner2(self, R, lat, lon, m):
+        i = 0
+        x, y, h = R._forward3(False, lat, lon, NAN)
+        while _isNAN(h):
+            latlonh = R._reverse3(False, x, y, 0)
+            _, _, h = R._forward3(False, *latlonh)
+            x += m
+            y += m
+            i += 1
+        self.iters += i
+        return x, y
 
-    def truncate(self, ndigits=3):
+    def truncate(self, ndigits):
         s, w, n, e = self._T
         m = pow(10.0, -ndigits)
         s = truncate(s + m, ndigits)  # ceil

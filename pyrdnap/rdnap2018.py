@@ -30,7 +30,7 @@ from math import asin, atan, copysign, degrees, exp, \
                  fabs, floor, hypot, radians, sin, sqrt
 
 __all__ = ()
-__version__ = '26.07.08'
+__version__ = '26.07.09'
 
 _forward_  = 'forward'
 _outside__ = 'outside '
@@ -158,7 +158,7 @@ class _RDNAPbase(_NamedBase):
                     if outside the C{RD} region, C{True} otherwise.
         '''
         lat, lon, _NAN = _LatLon3(lat, lon)
-        return None if _NAN else _isinside(lat, lon, eps=Degrees(eps=eps))
+        return None if _NAN else _isinside(lat, lon, Degrees(eps=eps))
 
     def isinsideRD(self, RDx, RDy, eps=0):
         '''Is local C{(B{RDx}, B{RDy})} inside the C{RD region4RD}?
@@ -171,11 +171,12 @@ class _RDNAPbase(_NamedBase):
                     if outside the C{RD} region, C{True} otherwise.
         '''
         x, y, _NAN = _RDxRDy3(RDx, RDy)
-        return None if _NAN else _isinside(x, y, self._region4RD, eps=Meter(eps=eps))
+        return None if _NAN else _isinside(x, y, Meter(eps=eps), self.region4(True))
 
     def _outsidError(self, *lat_lon):
         # format an RDNAPError for C{lat_lon} outside the RD region
-        return RDNAPError(lat_lon, txt=_outside__ + _region4.toRepr())
+        E = RDNAPError(lat_lon, txt=_outside__ + _region4.toRepr())
+        return E
 
     @property
     def raiser(self):
@@ -258,12 +259,15 @@ class _RDNAPbase(_NamedBase):
                     L{RD4Tuple}C{(minRDx, minRDy, maxRDx, maxRDy)} with
                     the bounds in C{meter}, truncated to C{millimeter}.
         '''
-        return self._region4RD if asRD else _region4
+        return self._region4RD[self.variant] if asRD else _region4
 
     @property_ROnce
     def _region4RD(self):
-        # C{RD} region in C{meter}, truncated to non-NAN round-trips and millimeter
-        return RD4Tuple(-82454.183, 345614.643, 323358.061, 751426.887, name=_region4.name)
+        # C{RD} regions in C{meter}, see .__main__._RD4Tuple
+        n = _region4.name
+        d = {1: RD4Tuple(-87853.981, 228817.837, 318159.693, 894090.744, name=n),
+             2: RD4Tuple(-87776.807, 228895.002, 317993.007, 893924.047, name=n)}
+        return d
 
     def _reverse(self, RDx, RDy, NAPh, raiser=None, name=_reverse_):
         '''(INTERNAL) Convert local C{(B{RDx}, B{RDy})} and B{C{NAPh}}
@@ -622,7 +626,7 @@ def _geodetic2cartesian(lat, lon, h, E):  # 2.2.1
     return x, y, z
 
 
-def _isinside(lat, lon, region4=_region4, eps=0):
+def _isinside(lat, lon, eps=0, region4=_region4):
     # is C{(lat, lon)} inside C{region4}, optionally over-
     # or undersized by positive respectively negative C{eps}?
     S, W, N, E = region4
