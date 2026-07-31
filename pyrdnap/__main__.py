@@ -4,13 +4,13 @@
 u'''Run some C{RD NAP 2018 forward} or C{reverse} conversion examples or run an
 C{RDNAPTRANS(tm)2018_v220627} or C{NSGI} test set in "round-trip" fashion.
 
-Use C{"python -m pyrdnap -h | --help"} to get the usage options:
+Use C{"python3 -m pyrdnap -h | --help"} to get the usage options:
 
 C{usage: python3 -m pyrdnap  [ -h | -help ]  [ -v | --version ]  [ -precision <ndigits> ]}
 
 C{  [ -v1 | -v2 ] -forward  <lat> <lon> [ <height> ] | [ -all ] .../002_ETRS89.txt}
 
-C{  [ -v1 | -v2 ] -reverse  <RDx> <RDy> [ <NAPh> ]   | [ -all ] .../002_RDNAP.txt}
+C{  [ -v1 | -v2 ] -reverse  <RDx> <RDy> [ <H> ]   | [ -all ] .../002_RDNAP.txt}
 
 C{  [ -v1 | -v2 ] -inside  [ -all | -failed ] .../Z001_ETRS89andRDNAP.txt}
 
@@ -35,7 +35,7 @@ import sys
 from time import time
 
 __all__ = ()
-__version__ = '26.07.09'
+__version__ = '26.07.31'
 
 _BOTH  = '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 _FWD   = '../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt'  # NSGI.../...
@@ -88,8 +88,8 @@ class _RD4Tuple(object):
 class Run(object):
     '''(INTERNAL) C{NSGI} or C{RD NAP 2018} test set runner.
     '''
-    #        (RDx   RDy   NAPh   lat   lon   height)
-    _REQ_D = (1e-3, 1e-3, 1e-3,  1e-8, 1e-8, 1e-3)
+    #        (RDx   RDy   H     lat   lon   height)
+    _REQ_D = (1e-3, 1e-3, 1e-3, 1e-8, 1e-8, 1e-3)
 
     def __init__(self, argv, R):  # PYCHOK no cover
         '''(INTERNAL) Run a U{NSGI-validatieservice<https://www.NSGI.NL/
@@ -136,14 +136,14 @@ class Run(object):
         '''
         for lat, lon, h in self._run(self.forward):
             f = self._R.forward(lat, lon, h)
-            r = self._R.reverse(f.RDx, f.RDy, f.NAPh)
+            r = self._R.reverse(f.RDx, f.RDy, f.H)
             self.diff(f, r, self._print)
 
     def reverse(self):  # PYCHOK no cover
         '''(INTERNAL) Run the C{.../002_RDNAP.txt} test set, "round-trip".
         '''
-        for RDx, RDy, NAPh in self._run(self.reverse):
-            r = self._R.reverse(RDx, RDy, NAPh)
+        for RDx, RDy, H in self._run(self.reverse):
+            r = self._R.reverse(RDx, RDy, H)
             f = self._R.forward(r.lat, r.lon, r.height)
             self.diff(r, f, self._print)
 
@@ -188,7 +188,7 @@ class Run(object):
         def _f(f):  # format forward result as 3-tuple
             return ('%13.4f' % (f.RDx,),
                     '%13.4f' % (f.RDy,),
-                    '%8.4f'  % (f.NAPh,))
+                    '%8.4f'  % (f.H,))
 
         def _r(r):  # format reverse result as 3-tuple
             return ('%13.9f' % (r.lat,),
@@ -266,7 +266,7 @@ def _usage(x):
                                            ' [ -v | --version ]',
                                            ' [ -precision <ndigits> ]')
     print_(_t, '-forward  <lat> <lon> [ <height> ]', '| [ -all ] %s' % (_FWD,))
-    print_(_t, '-reverse  <RDx> <RDy> [ <NAPh> ]  ', '| [ -all ] %s' % (_REV,))
+    print_(_t, '-reverse  <RDx> <RDy> [ <H> ]  ', '| [ -all ] %s' % (_REV,))
     print_(_t, '-inside  [ -all | -failed ]', _BOTH)
     print_(_t, '-outside [ -all | -failed ]', _BOTH)
     print_(_t, '-testset ', _FWD, '|', _REV, '|', _BOTH)
@@ -307,7 +307,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
         if narg > 1 and argv[0] != '-all':
             f = _R.forward(*_llh(*argv[:3]))
             print_(f.toRepr(prec=_prec))
-            r = _R.reverse(f.RDx, f.RDy, f.NAPh)
+            r = _R.reverse(f.RDx, f.RDy, f.H)
             print_(r.toRepr(prec=_prec))
         else:  # PYCHOK no cover
             Run(argv, _R).forward()
@@ -344,36 +344,36 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 
 
 # % python3.14 -m pyrdnap -v
-# pyrdnap 26.7.9 pygeodesy 26.7.7 Python 3.14.6 64bit arm64 macOS 26.5.2
+# pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2
 
 
 # % python3.14 -m pyrdnap --help
 # usage: python3 -m pyrdnap  [ -h | -help ]  [ -v | --version ]  [ -precision <ndigits> ]
 # 	[ -v1 | -v2 ] -forward  <lat> <lon> [ <height> ] | [ -all ] ../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt
-# 	[ -v1 | -v2 ] -reverse  <RDx> <RDy> [ <NAPh> ]   | [ -all ] ../RDNAPTRANStm2018_NSGI_txts/002_RDNAP.txt
+# 	[ -v1 | -v2 ] -reverse  <RDx> <RDy> [ <H> ]   | [ -all ] ../RDNAPTRANStm2018_NSGI_txts/002_RDNAP.txt
 # 	[ -v1 | -v2 ] -inside  [ -all | -failed ] ../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt
 # 	[ -v1 | -v2 ] -outside [ -all | -failed ] ../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt
 # 	[ -v1 | -v2 ] -testset  ../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt | ../RDNAPTRANStm2018_NSGI_txts/002_RDNAP.txt | ../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt
 
 
 # % python3.14 -m pyrdnap -v1 -forward 52.15616 5.3876389
-# forward(RDx=155029.784672, RDy=463109.826226, NAPh=-43.275509, lat=52.15616, lon=5.387639, height=0.0, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-# reverse(RDx=155029.784672, RDy=463109.826226, NAPh=-43.275509, lat=52.15616, lon=5.387639, height=-0.0, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# forward(RDx=155029.784672, RDy=463109.826226, H=-43.275509, lat=52.15616, lon=5.387639, height=0.0, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# reverse(RDx=155029.784672, RDy=463109.826226, H=-43.275509, lat=52.15616, lon=5.387639, height=-0.0, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 
 
 # % python3.14 -m pyrdnap -v2 -forward 52.15616 5.3876389
-# forward(RDx=155029.78463, RDy=463109.826158, NAPh=-43.275528, lat=52.15616, lon=5.387639, height=0.0, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-# reverse(RDx=155029.78463, RDy=463109.826158, NAPh=-43.275528, lat=52.155172, lon=5.387204, height=0.00165, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# forward(RDx=155029.78463, RDy=463109.826158, H=-43.275528, lat=52.15616, lon=5.387639, height=0.0, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# reverse(RDx=155029.78463, RDy=463109.826158, H=-43.275528, lat=52.155172, lon=5.387204, height=0.00165, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 
 
 # % python3.14 -m pyrdnap -v1 -reverse 155000 463000
-# reverse(RDx=155000.0, RDy=463000.0, NAPh=0, lat=52.155173, lon=5.387204, height=43.277164, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-# forward(RDx=155000.0, RDy=463000.0, NAPh=0.0, lat=52.155173, lon=5.387204, height=43.277164, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# reverse(RDx=155000.0, RDy=463000.0, H=0, lat=52.155173, lon=5.387204, height=43.277164, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# forward(RDx=155000.0, RDy=463000.0, H=0.0, lat=52.155173, lon=5.387204, height=43.277164, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 
 
 # % python3.14 -m pyrdnap -v2 -reverse 155000 463000
-# reverse(RDx=155000.0, RDy=463000.0, NAPh=0, lat=52.154185, lon=5.386768, height=43.278828, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
-# forward(RDx=154970.208905, RDy=462890.059153, NAPh=-0.000001, lat=52.154185, lon=5.386768, height=43.278828, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# reverse(RDx=155000.0, RDy=463000.0, H=0, lat=52.154185, lon=5.386768, height=43.278828, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
+# forward(RDx=154970.208905, RDy=462890.059153, H=-0.000001, lat=52.154185, lon=5.386768, height=43.278828, datum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 
 
 # % python3.14 -m pyrdnap -v1 -inside ../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt
@@ -381,10 +381,10 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-# RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 points -inside (pyrdnap 26.7.9 pygeodesy 26.7.7 Python 3.14.6 64bit arm64 macOS 26.5.2) 553.572 ms
-# RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
-# RDNAP2018v1 max |diff| lat 2.4685889e-09, lon 1.8726842e-09, height 5.00e-05, RDx 8.7847e-05, RDy 2.2281e-04, NAPh 4.9993e-05
-# RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999
+# RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 points -inside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 564.784 ms
+# RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
+# RDNAP2018v1 max |diff| lat 2.4685889e-09, lon 1.8726842e-09, height 5.00e-05, RDx 8.7847e-05, RDy 2.2281e-04, H 4.9993e-05
+# RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, H 0.00004999
 
 
 # % python3.14 -m pyrdnap -v1 -outside ../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt
@@ -392,10 +392,10 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-# RDNAP2018v1 372 of 12246 tests FAILED for 244 of 2041 of 10000 points -outside (pyrdnap 26.7.9 pygeodesy 26.7.7 Python 3.14.6 64bit arm64 macOS 26.5.2) 109.649 ms
-# RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
-# RDNAP2018v1 max |diff| lat 3.5461468e-08, lon 4.2693719e-08, height 0.00e+00, RDx 3.5235e-04, RDy 7.7548e-04, NAPh 0.0000e+00
-# RDNAP2018v1 max |diff| lat 0.00000003546, lon 0.00000004269, height 0.000000, RDx 0.00035235, RDy 0.00077548, NAPh 0.00000000
+# RDNAP2018v1 372 of 12246 tests FAILED for 244 of 2041 of 10000 points -outside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 110.006 ms
+# RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
+# RDNAP2018v1 max |diff| lat 3.5461468e-08, lon 4.2693719e-08, height 0.00e+00, RDx 3.5235e-04, RDy 7.7548e-04, H 0.0000e+00
+# RDNAP2018v1 max |diff| lat 0.00000003546, lon 0.00000004269, height 0.000000, RDx 0.00035235, RDy 0.00077548, H 0.00000000
 
 
 # % python3.14 -m pyrdnap -v2 -inside ../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt
@@ -403,10 +403,10 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-# RDNAP2018v2 21326 of 47754 tests FAILED for 7959 of 7959 of 10000 points -inside (pyrdnap 26.7.9 pygeodesy 26.7.7 Python 3.14.6 64bit arm64 macOS 26.5.2) 530.502 ms
-# RDNAP2018v2 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
-# RDNAP2018v2 max |diff| lat 1.4346641e-03, lon 8.3303290e-04, height 6.16e-03, RDx 8.2988e-03, RDy 1.5743e-02, NAPh 6.3739e-04
-# RDNAP2018v2 max |diff| lat 0.00143466407, lon 0.00083303290, height 0.006164, RDx 0.00829877, RDy 0.01574313, NAPh 0.00063739
+# RDNAP2018v2 21326 of 47754 tests FAILED for 7959 of 7959 of 10000 points -inside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 524.256 ms
+# RDNAP2018v2 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
+# RDNAP2018v2 max |diff| lat 1.4346641e-03, lon 8.3303290e-04, height 6.16e-03, RDx 8.2988e-03, RDy 1.5743e-02, H 6.3739e-04
+# RDNAP2018v2 max |diff| lat 0.00143466407, lon 0.00083303290, height 0.006164, RDx 0.00829877, RDy 0.01574313, H 0.00063739
 
 
 # % python3.14 -m pyrdnap -v1 -forward ../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt
@@ -414,8 +414,8 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt' forward
 #  header point_id  latitude        longitude    height  (line 1)
 #
-# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.7.9 pygeodesy 26.7.7 Python 3.14.6 64bit arm64 macOS 26.5.2) 511.180 ms
-# RDNAP2018v1 max |diff| (RDx 0, RDy 0, NAPh 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)
+# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 515.191 ms
+# RDNAP2018v1 max |diff| (RDx 0, RDy 0, H 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)
 
 
 # % python3.14 -m pyrdnap -v1 -reverse ../RDNAPTRANStm2018_NSGI_txts/002_RDNAP.txt
@@ -423,8 +423,8 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/002_RDNAP.txt' reverse
 #  header point_id  x_coordinate  y_coordinate height  (line 1)
 #
-# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.7.9 pygeodesy 26.7.7 Python 3.14.6 64bit arm64 macOS 26.5.2) 510.527 ms
-# RDNAP2018v1 max |diff| (RDx 0.000223603, RDy 0.000799715, NAPh 5.68434e-14, lat 0, lon 0, height 0, ...)
+# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 507.284 ms
+# RDNAP2018v1 max |diff| (RDx 0.000223603, RDy 0.000799715, H 5.68434e-14, lat 0, lon 0, height 0, ...)
 
 # **) MIT License
 #

@@ -14,13 +14,13 @@ from pyrdnap import RDNAP2018v1, RDNAP2018v2, validation3
 import os.path as os_path
 
 __all__ = ()
-__version__ = '26.07.07'
+__version__ = '26.07.21'
 
 _PyRDNAP_up1 =  os_path.dirname(PyRDNAP_dir)  # or _ELLIPSIS_
-_v1_max_diff = 'RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999'
-_v2_max_diff = 'RDNAP2018v2 max |diff| lat 0.00143466407, lon 0.00083303290, height 0.006164, RDx 0.00829877, RDy 0.01574313, NAPh 0.00063739'
-# _v1_ETRS89 = 'forward max |diff| (RDx 0, RDy 0, NAPh 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)'
-# _v1_RDNAP  = 'reverse max |diff| (RDx 0.000223603, RDy 0.000799715, NAPh 5.68434e-14, lat 0, lon 0, height 0, ...)'
+_v1_max_diff = 'RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, H 0.00004999'
+_v2_max_diff = 'RDNAP2018v2 max |diff| lat 0.00143466407, lon 0.00083303290, height 0.006164, RDx 0.00829877, RDy 0.01574313, H 0.00063739'
+# _v1_ETRS89 = 'forward max |diff| (RDx 0, RDy 0, H 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)'
+# _v1_RDNAP  = 'reverse max |diff| (RDx 0.000223603, RDy 0.000799715, H 5.68434e-14, lat 0, lon 0, height 0, ...)'
 
 
 def _str(failed, total=47754, inside=7959):
@@ -71,29 +71,29 @@ if __name__ == '__main__':
     t.results()
     t.exit()
 
-# % python3.14 test/testValidation.py
+# % env PYRDNAP_SELF_VALIDATION=../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt python3.14 test/testValidation.py
 #
-#     testing testValidation.py 26.06.26
+#     testing testValidation.py 26.07.21
 #     test 1 v2: validation3
 #     test 2 v2: testing RDNAP2018v2(name='v2', variant=2, forwardDatum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 #     test 3 v2:   using '.../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #     test 4 v2:  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-#     test 5 v2: RDNAP2018v2 356 of 47754 tests FAILED for 89 of 7959 of 10000 points -inside (pyrdnap 26.6.26 pygeodesy 26.6.24 Python 3.14.5 64bit arm64 macOS 26.5.1) 485.843 ms
-#     test 6 v2: RDNAP2018v2 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
-#     test 7 v2: RDNAP2018v2 max |diff| lat 1.1996334e-03, lon 8.2945486e-04, height 6.37e-04, RDx 8.2988e-03, RDy 1.5743e-02, NAPh 6.3739e-04
-#     test 8 v2: RDNAP2018v2 max |diff| lat 0.00119963344, lon 0.00082945486, height 0.000637, RDx 0.00829877, RDy 0.01574313, NAPh 0.00063739
-#     test 9 v2: 356 failed, 47754 total, 7959 inside
+#     test 5 v2: RDNAP2018v2 21326 of 47754 tests FAILED for 7959 of 7959 of 10000 points -inside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 514.763 ms
+#     test 6 v2: RDNAP2018v2 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
+#     test 7 v2: RDNAP2018v2 max |diff| lat 1.4346641e-03, lon 8.3303290e-04, height 6.16e-03, RDx 8.2988e-03, RDy 1.5743e-02, H 6.3739e-04
+#     test 8 v2: RDNAP2018v2 max |diff| lat 0.00143466407, lon 0.00083303290, height 0.006164, RDx 0.00829877, RDy 0.01574313, H 0.00063739
+#     test 9 v2: 21326 failed, 47754 total, 7959 inside
 #
 #     test 10 v1: validation3
 #     test 11 v1: testing RDNAP2018v1(name='v1', variant=1, forwardDatum=Datum(name='GRS80', ellipsoid=Ellipsoids.GRS80, transform=Transforms.WGS84))
 #     test 12 v1:   using '.../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #     test 13 v1:  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-#     test 14 v1: RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 points -inside (pyrdnap 26.6.26 pygeodesy 26.6.24 Python 3.14.5 64bit arm64 macOS 26.5.1) 547.759 ms
-#     test 15 v1: RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, NAPh 0.00100000
-#     test 16 v1: RDNAP2018v1 max |diff| lat 2.4685889e-09, lon 1.8726842e-09, height 5.00e-05, RDx 8.7847e-05, RDy 2.2281e-04, NAPh 4.9993e-05
-#     test 17 v1: RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, NAPh 0.00004999
+#     test 14 v1: RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 points -inside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 550.341 ms
+#     test 15 v1: RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
+#     test 16 v1: RDNAP2018v1 max |diff| lat 2.4685889e-09, lon 1.8726842e-09, height 5.00e-05, RDx 8.7847e-05, RDy 2.2281e-04, H 4.9993e-05
+#     test 17 v1: RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, H 0.00004999
 #     test 18 v1: 0 failed, 47754 total, 7959 inside
 #
-#     all 18 testValidation.py tests passed (pyrdnap 26.6.26 pygeodesy 26.6.24 Python 3.14.5 64bit arm64 macOS 26.5.1) 1.034 sec
+#     all 18 testValidation.py tests passed (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 1.066 sec

@@ -77,7 +77,7 @@ named._NamedTuple --+
 
 <hr />
 <p>4-Tuple <code>(latS, lonW, latN, lonE)</code> with the bounds' 
-  lower-left <code>(LatS, LowW)</code> and upper-right <code>(latN, 
+  lower-left <code>(LatS, LonW)</code> and upper-right <code>(latN, 
   lonE)</code> corner lat- and longitudes.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
@@ -96,7 +96,8 @@ named._NamedTuple --+
         <tr>
           <td><span class="summary-sig"><a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#enclosures" class="summary-sig-name">enclosures</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">S_other</span>,
-        <span class="summary-sig-arg">*W_N_E</span>)</span><br />
+        <span class="summary-sig-arg">*W_N_E</span>,
+        <span class="summary-sig-arg">**name</span>)</span><br />
       Get the enclosures of this around an other <code 
       class="link">Bounds4Tuple</code>.</td>
           <td align="right" valign="top">
@@ -114,10 +115,70 @@ named._NamedTuple --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#isinside" class="summary-sig-name">isinside</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">lat</span>,
+        <span class="summary-sig-arg">lon</span>,
+        <span class="summary-sig-arg">eps</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Are <b><code>lat</code></b> and <b><code>lon</code></b> both inside 
+      these bounds?</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#overlap" class="summary-sig-name">overlap</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">S_other</span>,
-        <span class="summary-sig-arg">*W_N_E</span>)</span><br />
+        <span class="summary-sig-arg">*W_N_E</span>,
+        <span class="summary-sig-arg">**name</span>)</span><br />
       Intersect this with an other <code class="link">Bounds4Tuple</code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#resize" class="summary-sig-name">resize</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">eps</span>)</span><br />
+      Get these bounds, over- or undersize by <code><b>eps</b></code>.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#union" class="summary-sig-name">union</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">S_other</span>,
+        <span class="summary-sig-arg">*W_N_E</span>,
+        <span class="summary-sig-arg">**name</span>)</span><br />
+      Union of this and an other <code class="link">Bounds4Tuple</code>.</td>
           <td align="right" valign="top">
             
             
@@ -217,14 +278,32 @@ named._NamedTuple --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#latC" class="summary-name">latC</a>
+        <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#latC" class="summary-name">latC</a><br />
+      Get the center latitude (<code>degrees</code>).
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#lonC" class="summary-name">lonC</a>
+        <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#latZ" class="summary-name">latZ</a><br />
+      Get the latitudinal size (<code>degrees</code>).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#lonC" class="summary-name">lonC</a><br />
+      Get the center longitude (<code>degrees</code>).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html#lonZ" class="summary-name">lonZ</a><br />
+      Get the longitudinal size (<code>degrees</code>).
     </td>
   </tr>
   <tr>
@@ -265,7 +344,8 @@ named._NamedTuple --+
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">enclosures</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">S_other</span>,
-        <span class="sig-arg">*W_N_E</span>)</span>
+        <span class="sig-arg">*W_N_E</span>,
+        <span class="sig-arg">**name</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     >&nbsp;
@@ -291,6 +371,40 @@ named._NamedTuple --+
   </dl>
 </td></tr></table>
 </div>
+<a name="isinside"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">isinside</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">lat</span>,
+        <span class="sig-arg">lon</span>,
+        <span class="sig-arg">eps</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Are <b><code>lat</code></b> and <b><code>lon</code></b> both inside 
+  these bounds?</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>lat</code></strong> - Latitude (<code>degrees</code>, scalar or <code>str</code>).</li>
+        <li><strong class="pname"><code>lon</code></strong> - Longitude (<code>degrees</code>, scalar or <code>str</code>).</li>
+        <li><strong class="pname"><code>eps</code></strong> - Over-/undersize the <code>RD</code> bounds 
+          (<code>degrees</code>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd><code>False</code> if <b><code>lat</code></b> or 
+          <b><code>lon</code></b> is <code>NAN</code> or outside these 
+          bounds, <code>True</code> otherwise.</dd>
+  </dl>
+</td></tr></table>
+</div>
 <a name="overlap"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -300,7 +414,8 @@ named._NamedTuple --+
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">overlap</span>(<span class="sig-arg">self</span>,
         <span class="sig-arg">S_other</span>,
-        <span class="sig-arg">*W_N_E</span>)</span>
+        <span class="sig-arg">*W_N_E</span>,
+        <span class="sig-arg">**name</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     >&nbsp;
@@ -324,6 +439,65 @@ named._NamedTuple --+
   </dl>
 </td></tr></table>
 </div>
+<a name="resize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">resize</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">eps</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get these bounds, over- or undersize by <code><b>eps</b></code>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>eps</code></strong> - In- or decrease (<code>degrees</code>).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>A <code class="link">Bounds4Tuple</code><code>(latS, lonW, latN, 
+          lonE)</code> with all 4 bounds resized.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="union"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">union</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">S_other</span>,
+        <span class="sig-arg">*W_N_E</span>,
+        <span class="sig-arg">**name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Union of this and an other <code class="link">Bounds4Tuple</code>.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>S_other</code></strong> - Bottom <code>latS</code> (<code>scalar</code>) or an other <code 
+          class="link">Bounds4Tuple</code> instance.</li>
+        <li><strong class="pname"><code>W_N_E</code></strong> - Left <code>lonW</code>, top <code>latN</code> and right 
+          <code>lonE</code>, each a (<code>scalar</code>) for <code>scalar 
+          <b>S_other</b></code>.</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>The <code>union</code> a <code class="link">Bounds4Tuple</code>.</dd>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== PROPERTY DETAILS ==================== -->
 <a name="section-PropertyDetails"></a>
@@ -340,11 +514,35 @@ named._NamedTuple --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">latC</h3>
-  
+  <p>Get the center latitude (<code>degrees</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fget(<span class="summary-sig-arg">inst</span>)</span>
-        - Get and <i>cache/memoize</i> the <code>property</code> value.
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.latC(<span class="summary-sig-arg">self</span>)</span>
+        - Get the center latitude (<code>degrees</code>).
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="latZ"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">latZ</h3>
+  <p>Get the latitudinal size (<code>degrees</code>).</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.latZ(<span class="summary-sig-arg">self</span>)</span>
+        - Get the latitudinal size (<code>degrees</code>).
     </dd>
     <dt>Set Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>._fset_error(<span class="summary-sig-arg">inst</span>,
@@ -364,11 +562,35 @@ named._NamedTuple --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">lonC</h3>
-  
+  <p>Get the center longitude (<code>degrees</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fget(<span class="summary-sig-arg">inst</span>)</span>
-        - Get and <i>cache/memoize</i> the <code>property</code> value.
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.lonC(<span class="summary-sig-arg">self</span>)</span>
+        - Get the center longitude (<code>degrees</code>).
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="lonZ"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">lonZ</h3>
+  <p>Get the longitudinal size (<code>degrees</code>).</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.lonZ(<span class="summary-sig-arg">self</span>)</span>
+        - Get the longitudinal size (<code>degrees</code>).
     </dd>
     <dt>Set Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>._fset_error(<span class="summary-sig-arg">inst</span>,
@@ -414,7 +636,7 @@ named._NamedTuple --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Jul 11 10:56:59 2026
+    Generated by Epydoc 3.0.1 on Fri Jul 31 14:31:20 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

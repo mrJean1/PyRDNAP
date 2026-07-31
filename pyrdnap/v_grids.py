@@ -13,7 +13,7 @@ import sys
 from zipfile import ZipFile
 
 __all__ = ()
-__version__ = '26.06.17'
+__version__ = '26.06.22'
 
 _R_C = 481, 301  # shape: rows, cols
 _RxC = 144781    # total, in .v1grid, .v2grid
@@ -95,7 +95,7 @@ def _v_grid_txt(v, name, col2or3, _array, **_0s):
     return v._assert(**_0s)
 
 
-def _v_gridz3(v):  # PHYCOK no cover
+def _v_gridz3(v):  # PYCHOK no cover
     '''(INTERNAL) Return the fully-qualified path, directory
        and module of C{v#grid} variant C{v}.
     '''
@@ -105,7 +105,7 @@ def _v_gridz3(v):  # PHYCOK no cover
     return p, d, m
 
 
-def _v_gridz_import(v):  # PHYCOK no cover
+def _v_gridz_import(v):  # PYCHOK no cover
     '''(INTERNAL) Try "from v#gridz.zip import v#grid" for variant C{v}
     '''
     v_grid  =  None
@@ -134,7 +134,7 @@ def _v_gridz_import(v):  # PHYCOK no cover
     return v_grid
 
 
-def _v_gridz_unzip(v, force=False, verbose=False):  # PHYCOK no cover
+def _v_gridz_unzip(v, force=False, verbose=False):  # PYCHOK no cover
     '''(INTERNAL) Unzip a C{v#gridz.zip} file into the "pyrdnap" directory.
     '''
     p, d, m = _v_gridz3(v)

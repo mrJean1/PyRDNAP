@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>pyrdnap.rdnap2018.RDNAP2018v1</title>
+  <title>pyrdnap.rdnap2018._RDNAPbase</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -44,7 +44,7 @@
       <span class="breadcrumbs">
         <a href="pyrdnap-module.html">Package&nbsp;pyrdnap</a> ::
         <a href="pyrdnap.rdnap2018-module.html" onclick="show_private();">Module&nbsp;rdnap2018</a> ::
-        Class&nbsp;RDNAP2018v1
+        Class&nbsp;_RDNAPbase
       </span>
     </td>
     <td>
@@ -52,30 +52,33 @@
         <!-- hide/show private -->
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html"
+            >]&nbsp;|&nbsp;<a href="pyrdnap.rdnap2018._RDNAPbase-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class RDNAP2018v1</h1><p class="nomargin-top"></p>
+<h1 class="epydoc">Class _RDNAPbase</h1><p class="nomargin-top"></p>
 <pre class="base-tree">
-            object --+            
-                     |            
-pygeodesy.named._Named --+        
-                         |        
-pygeodesy.named._NamedBase --+    
-                             |    
-                    <a href="pyrdnap.rdnap2018._RDNAPbase-class.html">_RDNAPbase</a> --+
-                                 |
-                                <strong class="uidshort">RDNAP2018v1</strong>
+            object --+        
+                     |        
+pygeodesy.named._Named --+    
+                         |    
+pygeodesy.named._NamedBase --+
+                             |
+                            <strong class="uidshort">_RDNAPbase</strong>
 </pre>
 
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html">RDNAP2018v1</a></li><li>, <a href="pyrdnap.rdnap2018.RDNAP2018v2-class.html">RDNAP2018v2</a></li>  </ul>
+</dd></dl>
+
 <hr />
-<p>Transformer implementing <code>variant 1</code> of the <a 
-  href="https://formulieren.kadaster.nl/aanvragen_rdnaptrans" 
-  target="_top">RDNAPTRANS(tm)2018_v220627</a> specification.</p>
+<p>(INTERNAL) <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html" 
+  class="link">RDNAP2018v1</a><code>/-v2</code> base class.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -91,7 +94,7 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">a_ellipsoid</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">f</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">raiser</span>=<span class="summary-sig-default">False</span>,
@@ -112,15 +115,11 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#forward" class="summary-sig-name">forward</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">lat</span>,
-        <span class="summary-sig-arg">lon</span>,
-        <span class="summary-sig-arg">height</span>=<span class="summary-sig-default">0</span>,
-        <span class="summary-sig-arg">**raiser_name</span>)</span><br />
-      Convert GRS80 (ETRS98) geodetic <code>(<b>lat</b>, <b>lon</b>)</code>
-      and (ellipsoidal) <b><code>height</code></b> to local 
-      <code>RDx</code>, <code>RDy</code> coordinates and (orthometric) 
-      height <code>H</code>.</td>
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#bounds4" class="summary-sig-name">bounds4</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">asRD</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Get the South, West, North and East bounds of the Netherlands' <a 
+      href="http://MarineRegions.org/mrgid/5668" target="_top">EEZ</a> and 
+      <a href="https://EPSG.io/28992" target="_top">EPSG:28992</a>.</td>
           <td align="right" valign="top">
             
             
@@ -136,7 +135,7 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#forward3" class="summary-sig-name">forward3</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#forward3" class="summary-sig-name">forward3</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">lat</span>,
         <span class="summary-sig-arg">lon</span>,
         <span class="summary-sig-arg">**name</span>)</span><br />
@@ -158,7 +157,7 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#isinside" class="summary-sig-name">isinside</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#isinside" class="summary-sig-name">isinside</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">lat</span>,
         <span class="summary-sig-arg">lon</span>,
         <span class="summary-sig-arg">eps</span>=<span class="summary-sig-default">0</span>)</span><br />
@@ -179,7 +178,7 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#isinsideRD" class="summary-sig-name">isinsideRD</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#isinsideRD" class="summary-sig-name">isinsideRD</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">RDx</span>,
         <span class="summary-sig-arg">RDy</span>,
         <span class="summary-sig-arg">eps</span>=<span class="summary-sig-default">0</span>)</span><br />
@@ -200,7 +199,7 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#rdNAPh" class="summary-sig-name">rdNAPh</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#rdNAPh" class="summary-sig-name">rdNAPh</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">lat</span>,
         <span class="summary-sig-arg">lon</span>)</span><br />
       Interpolate the quasi-geoid <code>NAPh</code> height for a geodetic 
@@ -220,7 +219,27 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#region4" class="summary-sig-name">region4</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#rdNAPh3" class="summary-sig-name">rdNAPh3</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">RDx</span>,
+        <span class="summary-sig-arg">RDy</span>)</span><br />
+      Interpolate the quasi-geoid <code>NAPh</code> height for a local 
+      point.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#region4" class="summary-sig-name">region4</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">asRD</span>=<span class="summary-sig-default">False</span>)</span><br />
       Get the South, West, North and East bounds of the <code>RD</code> 
       region.</td>
@@ -239,30 +258,7 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse" class="summary-sig-name">reverse</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">RDx</span>,
-        <span class="summary-sig-arg">RDy</span>,
-        <span class="summary-sig-arg">H</span>=<span class="summary-sig-default">0</span>,
-        <span class="summary-sig-arg">**raiser_name</span>)</span><br />
-      Convert a local <code>(<b>RDx</b>, <b>RDy</b>)</code> point and 
-      (orthometric) height <b><code>H</code></b> to GRS80 (ETRS89) geodetic
-      lat-, longitude and (ellipsoidal) height.</td>
-          <td align="right" valign="top">
-            
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#reverse3" class="summary-sig-name">reverse3</a>(<span class="summary-sig-arg">self</span>,
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#reverse3" class="summary-sig-name">reverse3</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">lat</span>,
         <span class="summary-sig-arg">lon</span>,
         <span class="summary-sig-arg">**name</span>)</span><br />
@@ -284,9 +280,28 @@ pygeodesy.named._NamedBase --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#similarity" class="summary-sig-name">similarity</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">inverse</span>=<span class="summary-sig-default">False</span>)</span><br />
-      Get the similarity transform (<code>Similarity</code>).</td>
+          <td><span class="summary-sig"><a name="similarity"></a><span class="summary-sig-name">similarity</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">inverse</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#toStr" class="summary-sig-name">toStr</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prec</span>=<span class="summary-sig-default">9</span>,
+        <span class="summary-sig-arg">**unused</span>)</span><br />
+      Return this <code>RDNAP20181v1</code> or <code>-v2</code> instance as
+      a string.</td>
           <td align="right" valign="top">
             
             
@@ -298,11 +313,6 @@ pygeodesy.named._NamedBase --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html">_RDNAPbase</a></code></b>:
-      <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#bounds4">bounds4</a></code>,
-      <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#rdNAPh3">rdNAPh3</a></code>,
-      <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#toStr">toStr</a></code>
-      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.named._NamedBase</code></b>:
       <code>__repr__</code>,
       <code>__str__</code>,
@@ -349,18 +359,50 @@ pygeodesy.named._NamedBase --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pyrdnap.rdnap2018.RDNAP2018v1-class.html#variant" class="summary-name">variant</a><br />
-      Get this <code>RDNAP2018</code>'s variant (<code>int</code>).
+        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#forwardDatum" class="summary-name">forwardDatum</a><br />
+      Get the <code>forward</code> datum (<a 
+      href="pygeodesy.datums.Datum-class.html" class="link">Datum</a>, 
+      default GRS80).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#raiser" class="summary-name">raiser</a><br />
+      Do points outside the <code>RD</code> region cause an 
+      <code>RDNAPError</code>?
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#region" class="summary-name">region</a><br />
+      DEPRECATED on 2026.06.12, use method <a 
+      href="pyrdnap.rdnap2018._RDNAPbase-class.html#region4" 
+      class="link">region4()</a>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#reverseDatum" class="summary-name">reverseDatum</a><br />
+      Get the <code>reverse</code> datum (<a 
+      href="pygeodesy.datums.Datum-class.html" class="link">Datum</a>, 
+      default GRS80).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#variant" class="summary-name">variant</a>
     </td>
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html">_RDNAPbase</a></code></b>:
-      <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#forwardDatum">forwardDatum</a></code>,
-      <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#raiser">raiser</a></code>,
-      <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#region">region</a></code>,
-      <code><a href="pyrdnap.rdnap2018._RDNAPbase-class.html#reverseDatum">reverseDatum</a></code>
-      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.named._Named</code></b>:
       <code>classname</code>,
       <code>classnaming</code>,
@@ -437,59 +479,44 @@ pygeodesy.named._NamedBase --+
   </dl>
 </td></tr></table>
 </div>
-<a name="forward"></a>
+<a name="bounds4"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">forward</span>&nbsp;(<span class="sig-arg">self</span>,
-        <span class="sig-arg">lat</span>,
-        <span class="sig-arg">lon</span>,
-        <span class="sig-arg">height</span>=<span class="sig-default">0</span>,
-        <span class="sig-arg">**raiser_name</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">bounds4</span>&nbsp;(<span class="sig-arg">self</span>,
+        <span class="sig-arg">asRD</span>=<span class="sig-default">False</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     >&nbsp;
     </td>
   </tr></table>
   
-  <p>Convert GRS80 (ETRS98) geodetic <code>(<b>lat</b>, <b>lon</b>)</code> 
-  and (ellipsoidal) <b><code>height</code></b> to local <code>RDx</code>, 
-  <code>RDy</code> coordinates and (orthometric) height <code>H</code>.</p>
+  <p>Get the South, West, North and East bounds of the Netherlands' <a 
+  href="http://MarineRegions.org/mrgid/5668" target="_top">EEZ</a> and <a 
+  href="https://EPSG.io/28992" target="_top">EPSG:28992</a>.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>lat</code></strong> - Latitude (<code>degrees</code> geodetic).</li>
-        <li><strong class="pname"><code>lon</code></strong> - Longitude (<code>degrees</code> geodetic).</li>
-        <li><strong class="pname"><code>height</code></strong> - The (ellipsoidal) height (<code>meter</code>, conventionally) or 
-          <code>None</code> to ignore <code>NAPh</code> interpolation.</li>
-        <li><strong class="pname"><code>raiser_name</code></strong> - Use <code><b>raiser</b>=True</code> to raise an <a 
-          href="pyrdnap.__pygeodesy.RDNAPError-class.html" 
-          class="link">RDNAPError</a> if <b><code>lat</code></b> or 
-          <b><code>lon</code></b> is outside the <code>RD</code> region, 
-          overriding property <code>raiser</code> (<code>bool</code>) and 
-          optional <code><b>name</b>='forward'</code> (<code>str</code>).</li>
+        <li><strong class="pname"><code>asRd</code></strong> - Use <code><b>asRD</b>=True</code> for the bounds in 
+          <code>meter</code>, otherwise in <code>degrees</code> 
+          (<code>bool</code>).</li>
     </ul></dd>
     <dt>Returns:</dt>
-        <dd>An <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
-          class="link">RDNAP7Tuple</a><code>(RDx, RDy, H, lat, lon, height,
-          datum)</code> with local <code>RDx</code>, <code>RDy</code> 
-          coordinates and (orthometric) height <code>H</code> in 
-          <code>meter</code> or <code>NAN</code> if <code>lat</code> or 
-          <code>lon</code> is outside the <code>RD</code> region.</dd>
-    <dt>Raises:</dt>
-    <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'><a href="pyrdnap.__pygeodesy.RDNAPError-class.html">RDNAPError</a></strong></code> - If the point is outside the <code>RD</code> region and property 
-        <code>raiser is True</code> or keyword argument 
-        <code><b>raiser</b>=True</code>.</li>
-    </ul></dd>
+        <dd>A <a href="pygeodesy.namedTuples.Bounds4Tuple-class.html" 
+          class="link">Bounds4Tuple</a><code>(latS, lonW, latN, 
+          lonE)</code> with lat- and longitudes in <code>degrees</code> or 
+          an <a href="pygeodesy.namedTuples.RD4Tuple-class.html" 
+          class="link">RD4Tuple</a><code>(minRDx, minRDy, maxRDx, 
+          maxRDy)</code> with the <code>quasi-RD</code> bounds in 
+          <code>meter</code>.</dd>
   </dl>
-<div class="fields">      <p><strong>Note:</strong>
-        Orthometric height <code>(H = h - NAPh)</code> equals ellipsoidal 
-        height <code>h</code> less the quasi-geoid height 
-        <code>NAPh</code>.
+<div class="fields">      <p><strong>See Also:</strong>
+        <a 
+        href="https://NL.WikiPedia.org/wiki/Nederlandse_Exclusieve_Economische_Zone"
+        target="_top">EEZ</a>
       </p>
 </div></td></tr></table>
 </div>
@@ -518,9 +545,6 @@ pygeodesy.named._NamedBase --+
         <dd>A LatLonDatum3Tuple<code>(lat, lon, datum)</code> with 
           <code>lat</code>, <code>lon</code> and <code>datum</code> all 
           Bessel1841 (RD-Bessel).</dd>
-    <dt>Overrides:
-        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#forward3">_RDNAPbase.forward3</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -555,9 +579,6 @@ pygeodesy.named._NamedBase --+
         <dd><code>None</code> if <b><code>lat</code></b> or 
           <b><code>lon</code></b> is NAN, <code>False</code> if outside the
           <code>RD</code> region, <code>True</code> otherwise.</dd>
-    <dt>Overrides:
-        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#isinside">_RDNAPbase.isinside</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -591,9 +612,6 @@ pygeodesy.named._NamedBase --+
         <dd><code>None</code> if <b><code>RDx</code></b> or 
           <b><code>RDy</code></b> is NAN, <code>False</code> if outside the
           <code>RD</code> region, <code>True</code> otherwise.</dd>
-    <dt>Overrides:
-        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#isinsideRD">_RDNAPbase.isinsideRD</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
@@ -626,9 +644,39 @@ pygeodesy.named._NamedBase --+
           (<code>meter</code>) or <code>NAN</code> if 
           <b><code>lat</code></b> or <b><code>lon</code></b> is outside the
           <code>RD</code> region.</dd>
-    <dt>Overrides:
-        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#rdNAPh">_RDNAPbase.rdNAPh</a>
-    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="rdNAPh3"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rdNAPh3</span>&nbsp;(<span class="sig-arg">self</span>,
+        <span class="sig-arg">RDx</span>,
+        <span class="sig-arg">RDy</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Interpolate the quasi-geoid <code>NAPh</code> height for a local 
+  point.</p>
+  <dl class="fields">
+    <dt>Arguments:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>RDx</code></strong> - Local <code>RD</code> X (<code>meter</code>, conventionally).</li>
+        <li><strong class="pname"><code>RDy</code></strong> - Local <code>RD</code> Y (<code>meter</code>, conventionally).</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd><a href="pyrdnap.rd0.LatLonN3Tuple-class.html" 
+          class="link">LatLonN3Tuple</a><code>(lat, lon, N)</code> with the
+          quasi-geoid <code>NAPh</code> height <code>N</code> in 
+          <code>meter</code> or <code>NAN</code> if <code>lat</code> or 
+          <code>lon</code> is outside <code>RD</code> region.</dd>
   </dl>
 </td></tr></table>
 </div>
@@ -664,68 +712,8 @@ pygeodesy.named._NamedBase --+
           class="link">RD4Tuple</a><code>(minRDx, minRDy, maxRDx, 
           maxRDy)</code> with the bounds in <code>meter</code>, truncated 
           to <code>millimeter</code>.</dd>
-    <dt>Overrides:
-        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#region4">_RDNAPbase.region4</a>
-    </dt>
   </dl>
 </td></tr></table>
-</div>
-<a name="reverse"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">reverse</span>&nbsp;(<span class="sig-arg">self</span>,
-        <span class="sig-arg">RDx</span>,
-        <span class="sig-arg">RDy</span>,
-        <span class="sig-arg">H</span>=<span class="sig-default">0</span>,
-        <span class="sig-arg">**raiser_name</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    >&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Convert a local <code>(<b>RDx</b>, <b>RDy</b>)</code> point and 
-  (orthometric) height <b><code>H</code></b> to GRS80 (ETRS89) geodetic 
-  lat-, longitude and (ellipsoidal) height.</p>
-  <dl class="fields">
-    <dt>Arguments:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>RDx</code></strong> - Local <code>RD</code> X (<code>meter</code>, conventionally).</li>
-        <li><strong class="pname"><code>RDy</code></strong> - Local <code>RD</code> Y (<code>meter</code>, conventionally).</li>
-        <li><strong class="pname"><code>H</code></strong> - The (orthometric) height (<code>meter</code>, conventionally) or 
-          <code>None</code> to ignore <code>NAPh</code> interpolation.</li>
-        <li><strong class="pname"><code>raiser_name</code></strong> - Use <code><b>raiser</b>=True</code> to raise an <a 
-          href="pyrdnap.__pygeodesy.RDNAPError-class.html" 
-          class="link">RDNAPError</a> for points outside the 
-          <code>RD</code> region, overriding property <code>raiser</code> 
-          (<code>bool</code>) and an optional 
-          <code><b>name</b>='reverse'</code> (<code>str</code>).</li>
-    </ul></dd>
-    <dt>Returns:</dt>
-        <dd>An <a href="pyrdnap.rd0.RDNAP7Tuple-class.html" 
-          class="link">RDNAP7Tuple</a><code>(RDx, RDy, H, lat, lon, height,
-          datum)</code> with geodetic <code>lat</code>, <code>lon</code> 
-          and <code>datum</code> GRS80 (ETRS89) and (ellipsoidal) 
-          <code>height</code> in <code>meter</code> or <code>NAN</code> if 
-          <code>lat</code> or <code>lon</code> is outside the 
-          <code>RD</code> region.</dd>
-    <dt>Raises:</dt>
-    <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'><a href="pyrdnap.__pygeodesy.RDNAPError-class.html">RDNAPError</a></strong></code> - If the point is outside the <code>RD</code> region and property 
-        <code>raiser is True</code> or keyword argument 
-        <code><b>raiser</b>=True</code>.</li>
-    </ul></dd>
-  </dl>
-<div class="fields">      <p><strong>Note:</strong>
-        Ellipsoidal height <code>(h = H + NAPh)</code> equals orthometric 
-        height <code>H</code> plus the quasi-geoid height 
-        <code>NAPh</code>.
-      </p>
-</div></td></tr></table>
 </div>
 <a name="reverse3"></a>
 <div>
@@ -752,37 +740,37 @@ pygeodesy.named._NamedBase --+
         <dd>A LatLonDatum3Tuple<code>(lat, lon, datum)</code> with 
           <code>lat</code>, <code>lon</code> and <code>datum</code> all 
           GRS80 (ETRS89).</dd>
-    <dt>Overrides:
-        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#reverse3">_RDNAPbase.reverse3</a>
-    </dt>
   </dl>
 </td></tr></table>
 </div>
-<a name="similarity"></a>
+<a name="toStr"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">similarity</span>&nbsp;(<span class="sig-arg">self</span>,
-        <span class="sig-arg">inverse</span>=<span class="sig-default">False</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">toStr</span>&nbsp;(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prec</span>=<span class="sig-default">9</span>,
+        <span class="sig-arg">**unused</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     >&nbsp;
     </td>
   </tr></table>
   
-  <p>Get the similarity transform (<code>Similarity</code>).</p>
+  <p>Return this <code>RDNAP20181v1</code> or <code>-v2</code> instance as 
+  a string.</p>
   <dl class="fields">
     <dt>Arguments:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>inverse</code></strong> - Use <code>True</code> for the <code>reverse</code> or 
-          <code>False</code> for the <code>forward</code> transform 
-          (<code>bool</code>).</li>
+        <li><strong class="pname"><code>prec</code></strong> - Precision, number of decimal digits (<code>int</code>, 0..9).</li>
     </ul></dd>
+    <dt>Returns:</dt>
+        <dd>This <code>RDNAP2018v1</code> or <code>-v2</code> 
+          (<code>str</code>).</dd>
     <dt>Overrides:
-        <a href="pyrdnap.rdnap2018._RDNAPbase-class.html#similarity">_RDNAPbase.similarity</a>
+        pygeodesy.named._Named.toStr
     </dt>
   </dl>
 </td></tr></table>
@@ -797,20 +785,20 @@ pygeodesy.named._NamedBase --+
     <span class="table-header">Property Details</span></td>
 </tr>
 </table>
-<a name="variant"></a>
+<a name="forwardDatum"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">variant</h3>
-  <p>Get this <code>RDNAP2018</code>'s variant (<code>int</code>).</p>
+  <h3 class="epydoc">forwardDatum</h3>
+  <p>Get the <code>forward</code> datum (<a 
+  href="pygeodesy.datums.Datum-class.html" class="link">Datum</a>, default 
+  GRS80).</p>
   <dl class="fields">
     <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">_fget(<span class="summary-sig-arg">inst</span>)</span>
-        - Get the <code>property</code> value <i>once</i> and overwrite 
-<code>self</code>, this <code>property</code> instance in the (super-)class
-of <code>self</code> where this property is define as a <code 
-class="link">property_ROver</code>.
+    <dd class="value"><span class="summary-sig">forwardDatum(<span class="summary-sig-arg">self</span>)</span>
+        - Get the <code>forward</code> datum (<code class="link">Datum</code>, 
+default GRS80).
     </dd>
     <dt>Set method:</dt>
     <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
@@ -818,8 +806,107 @@ class="link">property_ROver</code>.
         - Throws an <code>AttributeError</code>, always.
     </dd>
     <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">*unused</span>)</span>
-        - Silently ignored, always.
+    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="raiser"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">raiser</h3>
+  <p>Do points outside the <code>RD</code> region cause an 
+  <code>RDNAPError</code>?</p>
+  <dl class="fields">
+    <dt>Get method:</dt>
+    <dd class="value"><span class="summary-sig">raiser(<span class="summary-sig-arg">self</span>)</span>
+        - Do points outside the <code>RD</code> region cause an 
+<code>RDNAPError</code>?
+    </dd>
+    <dt>Set method:</dt>
+    <dd class="value"><span class="summary-sig">raiser(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">raiser</span>)</span>
+        - Use <code>True</code> to throw an <code>RDNAPError</code> for points 
+outside the <code>RD</code> region.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="region"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">region</h3>
+  <p>DEPRECATED on 2026.06.12, use method <a 
+  href="pyrdnap.rdnap2018._RDNAPbase-class.html#region4" 
+  class="link">region4()</a>.</p>
+  <dl class="fields">
+    <dt>Get method:</dt>
+    <dd class="value"><span class="summary-sig">region(<span class="summary-sig-arg">self</span>)</span>
+        - DEPRECATED on 2026.06.12, use method <code class="link">region4()</code>.
+    </dd>
+    <dt>Set method:</dt>
+    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reverseDatum"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">reverseDatum</h3>
+  <p>Get the <code>reverse</code> datum (<a 
+  href="pygeodesy.datums.Datum-class.html" class="link">Datum</a>, default 
+  GRS80).</p>
+  <dl class="fields">
+    <dt>Get method:</dt>
+    <dd class="value"><span class="summary-sig">reverseDatum(<span class="summary-sig-arg">self</span>)</span>
+        - Get the <code>reverse</code> datum (<code class="link">Datum</code>, 
+default GRS80).
+    </dd>
+    <dt>Set method:</dt>
+    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="variant"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">variant</h3>
+  
+  <dl class="fields">
+    <dt>Get method:</dt>
+    <dd class="value"><span class="summary-sig">variant(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+    <dt>Set method:</dt>
+    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
     </dd>
   </dl>
 </td></tr></table>

@@ -6,14 +6,14 @@
 from bases import TestsBase, Datums, NAN, startswith
 
 from pyrdnap import LqRD, RDNAP2018v1, RDNAP2018v2, RDNAPError, RDNAP7Tuple
-from pyrdnap.rd0 import _RD, _RD0 as A0
+from pyrdnap.rd0 import _isNAN, _RD, _RD0 as A0
 
 from math import fabs
 from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.07.09'
+__version__ = '26.07.29'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -70,7 +70,7 @@ class Tests(TestsBase):
             self.test(' lqrd', r, r)
             z = r.diff(t)
             self.test(' diff', z, z)
-            r = L.reverse(r.RDx, r.RDy, r.NAPh)
+            r = L.reverse(r.RDx, r.RDy, r.NAPh)  # for backward compatibility
             self.test('-lqrd', r, r)
 
     def testRandom(self, R, **nl):
@@ -84,7 +84,7 @@ class Tests(TestsBase):
                                 _rnd(random() * E_W + W))
 
     def testRDs(self, R):
-        self.test('_RD', _RD.toStr(), '_region4=RD region (latS=50.0, ', known=startswith, nl=1)
+        self.test('_RD', _RD.toStr(), '_bounds4=RD bounds (latS=50.75, lonW=2.5', known=startswith, nl=1)
         self.test('_RD0', A0.toStr(), "D0=Datum(name='Bessel1841', ", known=startswith, nl=1)
 
         # R = RDNAP2018v1(name='Cover')
@@ -95,11 +95,13 @@ class Tests(TestsBase):
         self.test('latlon', t.latlon, '(52.156161, 5.387639)')
         self.test('latlonheight', t.latlonheight, '(52.156161, 5.387639, 0)')
         self.test('latlonheightdatum', t.latlonheightdatum, '(52.156161, 5.387639, 0, Datum', known=startswith)
+        self.test('latlonNgeoid', t.latlonNgeoid, '(52.156161, 5.387639, 43.', known=startswith)
         self.test('lam', t.lam, A0.LAM0, prec=8)
         self.test('phi', t.phi, A0.PHI0, prec=8)
         self.test('philam', t.philam, '(0.910297, 0.094032)')
         self.test('philamheight', t.philamheight, '(0.910297, 0.094032, 0)')
-        self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith, nt=1)
+        self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith)
+        self.test('N', t.N, '43.', known=startswith, nt=1)
 
         try:
             r = R.rdNAPh(0, 0)  # raiser=True
@@ -142,11 +144,13 @@ class Tests(TestsBase):
             self.test('latlon', t.latlon, '(NAN, NAN)')
             self.test('latlonheight', t.latlonheight, '(NAN, NAN, ', known=startswith)
             self.test('latlonheightdatum', t.latlonheightdatum, '(NAN, NAN, ', known=startswith)
+            self.test('latlonNgeoid', t.latlonNgeoid, '(NAN, NAN, NAN)')
             self.test('lam', t.lam, NAN, prec=8)
             self.test('phi', t.phi, NAN, prec=8)
             self.test('philam', t.philam, '(NAN, NAN)')
             self.test('philamheight', t.philamheight, '(NAN, NAN, ', known=startswith)
-            self.test('philamheightdatum', t.philamheightdatum, '(NAN, NAN, ', known=startswith, nt=1)
+            self.test('philamheightdatum', t.philamheightdatum, '(NAN, NAN, ', known=startswith)
+            self.test('N', t.N, NAN, nt=1)
 
     def testRD11(self, R):  # <https://NL.WikiPedia.org/wiki/Rijksdriehoekscoördinaten>
         t = repr(R)
@@ -167,9 +171,11 @@ class Tests(TestsBase):
             t = R.forward(lat, lon, NAN).dup(datum=None)  # ignore datum
             self.test('forward', t, r, known=fabs(t.RDx - r.RDx) < 1.0 and
                                              fabs(t.RDy - r.RDy) < 1.5)
+            self.test('rdNAPh', R.rdNAPh(lat, lon), t.N, known=_isNAN(t.N))
             t = R.reverse(x, y, NAN).dup(datum=None)  # ignore datum
             self.test('reverse', t, r, known=fabs(t.lat - r.lat) < 0.0012 and
                                              fabs(t.lon - r.lon) < 0.0008)
+            self.test('rdNAPh3', R.rdNAPh3(x, y), t.N, known=_isNAN(t.N))
 
     def testRndTrip(self, R, lat, lon, h=NAN, RDx_RDy=None):
         llh = lat, lon, h
@@ -198,7 +204,7 @@ class Tests(TestsBase):
         r = R.reverse3(t.lat, t.lon)
         t = _rnd(lat),   _rnd(lon)
         r = _rnd(r.lat), _rnd(r.lon)
-        self.test('x3', t, r, nt=1)
+        self.test('rounded', t, r, nt=1)
 
     def testSAS(self, R):
         # <https://GitHub.com/FVellinga/gm_rdnaptrans2018/blob/main/gm_rdnaptrans2018.sas>

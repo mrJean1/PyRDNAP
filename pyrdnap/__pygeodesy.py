@@ -3,7 +3,9 @@
 
 u'''(INTERNAL) C{pyrdnap} access to some private C{pygeodesy} attributes.
 '''
-_requires = '26.7.7'  # in README.rst, requirements.txt, setup.py
+
+_missing_ = 'missing'  # PYCHOK used!
+_requires = '26.7.27'  # in README.rst, requirements.txt, setup.py
 
 
 def _PyGeodesy_dir(requires):
@@ -14,7 +16,7 @@ def _PyGeodesy_dir(requires):
     except ImportError:
         import os.path as os_path
         import sys  # PYCHOK used!
-        _v = 'missing'
+        _v = _missing_
         # PYTHONPATH=.../PyRDNAP for development ONLY
         p = os_path.abspath(__file__)
         p = os_path.dirname(p)  # pyrdnap_abspath
@@ -37,7 +39,7 @@ def _PyGeodesy_dir(requires):
     def _t(v):
         return tuple(map(int, v.split('.')))  # _DOT_
 
-    if _v == 'missing' or _t(_v) < _t(requires):
+    if _v == _missing_ or _t(_v) < _t(requires):
         _v = ' %s, need %s or newer' % (_v, requires)
         raise ImportError('pygeodesy' + _v)
 
@@ -54,7 +56,7 @@ from pygeodesy.errors import _ValueError, _xkwds, _xkwds_pop2  # noqa: F401
 from pygeodesy.internals import machine, _secs2str, _versions  # noqa: F401
 from pygeodesy.interns import (_COMMASPACE_, _DASH_, _datum_,  # noqa: F401
                                _EQUAL_, _height_, _lat_, _lon_,  # noqa: F401
-                               _name_, _NAN_, _NL_, _SPACE_, _STAR_)  # noqa: F401
+                               _N_, _name_, _NAN_, _NL_, _SPACE_, _STAR_)  # noqa: F401
 from pygeodesy.lazily import _ALL_DOCS, _ALL_OTHER, _FOR_DOCS, import_module  # noqa: F401
 from pygeodesy.named import _NamedBase, _NamedTuple, _Pass  # noqa: F401
 from pygeodesy.streprs import Fmt  # noqa: F401
@@ -75,7 +77,7 @@ def _all_OTHER(*objs):  # PYCHOK shared
 _all__all__ = []  # PYCHOK in .__init__
 
 __all__ = _all_OTHER(machine, RDNAPError)
-__version__ = '26.07.07'
+__version__ = '26.07.29'
 
 
 # **) MIT License

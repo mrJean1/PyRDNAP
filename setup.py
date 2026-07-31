@@ -7,7 +7,7 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.06.18'
+__version__ = '26.06.27'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
 
@@ -55,7 +55,8 @@ def _version():
     return v.replace('.0', '.') + c
 
 
-_KeyWords = ('NAP', 'Normaal-Amsterdams-Peil',
+_KeyWords = ('Amersfoort', 'bilinear', 'Netherlands', 'NL',
+             'NAP', 'Normaal-Amsterdams-Peil',
              'RD', 'RijksDriehoeksmeting',
 #            'RDNAPTRANS(tm)', 'RDNAPTRANS(tm)2018',
              'RDNAPTRANS', 'RDNAPTRANS2018',)

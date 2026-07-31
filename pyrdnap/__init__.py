@@ -3,9 +3,9 @@
 
 u'''A pure Python implementation of the 2018 v220627 version of Netherlands' U{RD NAP<https://
 www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
-specification to convert between GRS80 (ETRS89) geodetic lat-, longitudes and height and local
-I{B{R}ijksB{D}riehoeksmeeting (B{RD})} coordinates and I{B{N}ormaal B{A}msterdams B{P}eil (B{NAP})
-quasi-geoid-height}.
+specification to convert between GRS80 (ETRS89) geodetic lat-, longitudes and (ellipsoidal) height
+C{h} and local I{B{R}ijksB{D}riehoeksmeeting (B{RD})} coordinates and (orthometric) height C{H} using
+bilinear interpolation of I{B{N}ormaal B{A}msterdams B{P}eil quasi-geoid heights (B{NAPh})}.
 
 The results of both B{C{pyrdnap}} transformer classes L{RDNAP2018v1} and L{RDNAP2018v2} have been
 formally validated and B{C{PyRDNAP}} has been certified to carry the trademark B{C{RDNAPTRANS(tm)}}.
@@ -63,7 +63,7 @@ def _versions():  # in .__main__, .v_self, .test/bases
 
 
 __all__ = _all__init__('pyrdnap_abspath')
-__version__ = '26.07.09'
+__version__ = '26.07.31'
 # del _all__init__
 
 # **) MIT License

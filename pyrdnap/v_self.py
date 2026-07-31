@@ -7,9 +7,9 @@ coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdn
 after registration.
 
 For each test point, 3 lines are produced: the 1st showing the point C{id}, the original
-(ETRS89) C{lat}, C{lon} and C{height} and the expected C{RDx}, C{RDy} and C{NAPh} values.
+(ETRS89) C{lat}, C{lon} and C{height} and the expected C{RDx}, C{RDy} and C{H} values.
 
-The 2nd line shows the C{lat}, C{lon} and C{height} and C{RDx}, C{RDy} and C{NAPh} results
+The 2nd line shows the C{lat}, C{lon} and C{height} and C{RDx}, C{RDy} and C{H} results
 from the L{RDNAP2018v1.reverse<pyrdnap.RDNAP2018v1.reverse>} respectively L{-.forward
 <pyrdnap._RDNAPbase.forward>} method.
 
@@ -23,7 +23,7 @@ or C{0.0010 meter} for each result.
 A test is considered C{FAILED} if any C{reverse} or C{forward} result I{exceeds} the
 C{RDNAPTRANS(tm)2018} requirement for that result.
 
-For points with C{NAPh} marked C{"*"}, C{NAPh} is set to C{NAN}.
+For points with C{NAPh} marked C{"*"}, C{H} is set to C{NAN}.
 
 See main module L{pyrdnap<pyrdnap.__main__>} for some examples invoking L{validation3}.
 '''
@@ -38,10 +38,10 @@ import os.path as os_path
 from time import time
 
 __all__ = ()
-__version__ = '26.07.06'
+__version__ = '26.07.21'
 
 _NAMES = RDNAP7Tuple._Names_[3:6] + RDNAP7Tuple._Names_[0:3]
-#        (lat   lon   height RDx   RDy   NAPh)
+#        (lat   lon   height RDx   RDy   H)
 _REQ_D = (1e-8, 1e-8, 1e-3,  1e-3, 1e-3, 1e-3)  # 0 == ignore
 _NDECS = (11,   11,   6,     8,    8,    8)  # fmt precision
 _NDecs = tuple((_ - 4) for _ in _NDECS)  # fe4 precision
@@ -98,10 +98,10 @@ def validation3(self_txt, R, all_=False, in_out=True, _print=None, _printest=Non
                 ts = t.split()  # list
                 if ts[6] == _STAR_:
                     ts[6] = _NAN_
-                lat, lon, h, RDx, RDy, NAPh = xs = map2(float, ts[1:])
+                lat, lon, h, RDx, RDy, H = xs = map2(float, ts[1:])
                 if in_out == bool(R.isinside(lat, lon)):
                     F  = NN  # PASSED
-                    rs = R.reverse(RDx, RDy, NAPh).latlonheight + \
+                    rs = R.reverse(RDx, RDy, H).latlonheight + \
                          R.forward(lat, lon, h).xyz
                     ntotal  += len(rs)
                     nin_out += 1

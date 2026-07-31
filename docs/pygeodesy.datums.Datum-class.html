@@ -245,49 +245,60 @@ named._NamedEnumItem --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.datums.Datum-class.html#ellipsoid" class="summary-name">ellipsoid</a>
+        <a href="pygeodesy.datums.Datum-class.html#ellipsoid" class="summary-name">ellipsoid</a><br />
+      Get this datum's ellipsoid (<code class="link">Ellipsoid</code> or 
+      <code class="link">Ellipsoid2</code>).
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.datums.Datum-class.html#exactTM" class="summary-name">exactTM</a>
+        <a href="pygeodesy.datums.Datum-class.html#exactTM" class="summary-name">exactTM</a><br />
+      Get the <code>ExactTM</code> projection (<code 
+      class="link">ExactTransverseMercator</code>).
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.datums.Datum-class.html#isEllipsoidal" class="summary-name">isEllipsoidal</a>
+        <a href="pygeodesy.datums.Datum-class.html#isEllipsoidal" class="summary-name">isEllipsoidal</a><br />
+      Check whether this datum is ellipsoidal (<code>bool</code>).
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.datums.Datum-class.html#isOblate" class="summary-name">isOblate</a>
+        <a href="pygeodesy.datums.Datum-class.html#isOblate" class="summary-name">isOblate</a><br />
+      Check whether this datum's ellipsoidal is <i>oblate</i> 
+      (<code>bool</code>).
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.datums.Datum-class.html#isProlate" class="summary-name">isProlate</a>
+        <a href="pygeodesy.datums.Datum-class.html#isProlate" class="summary-name">isProlate</a><br />
+      Check whether this datum's ellipsoidal is <i>prolate</i> 
+      (<code>bool</code>).
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.datums.Datum-class.html#isSpherical" class="summary-name">isSpherical</a>
+        <a href="pygeodesy.datums.Datum-class.html#isSpherical" class="summary-name">isSpherical</a><br />
+      Check whether this datum is (near-)spherical (<code>bool</code>).
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pygeodesy.datums.Datum-class.html#transform" class="summary-name">transform</a>
+        <a href="pygeodesy.datums.Datum-class.html#transform" class="summary-name">transform</a><br />
+      Get this datum's transform (<code class="link">Transform</code>).
     </td>
   </tr>
   <tr>
@@ -523,11 +534,13 @@ named._NamedEnumItem --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">ellipsoid</h3>
-  
+  <p>Get this datum's ellipsoid (<code class="link">Ellipsoid</code> or 
+  <code class="link">Ellipsoid2</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fget(<span class="summary-sig-arg">inst</span>)</span>
-        - Get and <i>cache/memoize</i> the <code>property</code> value.
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.ellipsoid(<span class="summary-sig-arg">self</span>)</span>
+        - Get this datum's ellipsoid (<code class="link">Ellipsoid</code> or <code 
+class="link">Ellipsoid2</code>).
     </dd>
     <dt>Set Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>._fset_error(<span class="summary-sig-arg">inst</span>,
@@ -547,11 +560,13 @@ named._NamedEnumItem --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">exactTM</h3>
-  
+  <p>Get the <code>ExactTM</code> projection (<code 
+  class="link">ExactTransverseMercator</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fget(<span class="summary-sig-arg">inst</span>)</span>
-        - Get and <i>cache/memoize</i> the <code>property</code> value.
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.exactTM(<span class="summary-sig-arg">self</span>)</span>
+        - Get the <code>ExactTM</code> projection (<code 
+class="link">ExactTransverseMercator</code>).
     </dd>
     <dt>Set Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>._fset_error(<span class="summary-sig-arg">inst</span>,
@@ -571,7 +586,7 @@ named._NamedEnumItem --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">isEllipsoidal</h3>
-  
+  <p>Check whether this datum is ellipsoidal (<code>bool</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.isEllipsoidal(<span class="summary-sig-arg">self</span>)</span>
@@ -595,7 +610,8 @@ named._NamedEnumItem --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">isOblate</h3>
-  
+  <p>Check whether this datum's ellipsoidal is <i>oblate</i> 
+  (<code>bool</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.isOblate(<span class="summary-sig-arg">self</span>)</span>
@@ -620,7 +636,8 @@ named._NamedEnumItem --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">isProlate</h3>
-  
+  <p>Check whether this datum's ellipsoidal is <i>prolate</i> 
+  (<code>bool</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.isProlate(<span class="summary-sig-arg">self</span>)</span>
@@ -645,7 +662,7 @@ named._NamedEnumItem --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">isSpherical</h3>
-  
+  <p>Check whether this datum is (near-)spherical (<code>bool</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.isSpherical(<span class="summary-sig-arg">self</span>)</span>
@@ -669,11 +686,11 @@ named._NamedEnumItem --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">transform</h3>
-  
+  <p>Get this datum's transform (<code class="link">Transform</code>).</p>
   <dl class="fields">
     <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>._fget(<span class="summary-sig-arg">inst</span>)</span>
-        - Get and <i>cache/memoize</i> the <code>property</code> value.
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.transform(<span class="summary-sig-arg">self</span>)</span>
+        - Get this datum's transform (<code class="link">Transform</code>).
     </dd>
     <dt>Set Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>._fset_error(<span class="summary-sig-arg">inst</span>,
@@ -719,7 +736,7 @@ named._NamedEnumItem --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Jul 11 10:56:59 2026
+    Generated by Epydoc 3.0.1 on Fri Jul 31 14:31:20 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
