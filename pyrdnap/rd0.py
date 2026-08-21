@@ -11,21 +11,21 @@ from pyrdnap.v_grids import _v_assert
 from pyrdnap.__pygeodesy import (_0_5, _1_0,  _2_0,  # PYCHOK used!
                                  _isNAN, _isNAN0, _xinstanceof, _xsubclassof,
                                  _LLEB, _xkwds,
-                                 _COMMASPACE_, _datum_, _lat_, _lon_, _height_, _N_,
-                                 _all_OTHER, _FOR_DOCS, _Pass, _NamedTuple)
+                                 _COMMASPACE_, _datum_, _h_, _N_,
+                                 _ALL_OTHER, _FOR_DOCS,
+                                 _H_lat_lon_height4Tuple, _NamedTuple, _Pass)
 from pygeodesy import (map1, map2, NAN, NN,  # basics, "consterns"
                        Datum, Datums, Similarity,  # datums
                        Ellipsoid, Ellipsoids, LqRD as _LqRD,  # ellipsoids, ltp
-                       Bounds4Tuple, LatLon2Tuple, LatLon3Tuple, LatLon4Tuple,  # namedTuples
-                       PhiLam2Tuple, PhiLam3Tuple, PhiLam4Tuple, Vector2Tuple, Vector3Tuple,
-                       deprecated_property_RO, Property_RO, property_ROver, pairs,  # props, streprs
-                       Height, Lam, Lamd, Lat, Lon, Meter, Phi, Phid,  # units
+                       deprecated_property_RO, Property_RO,  # props
+                       property_RO, property_ROver, pairs,  # props, streprs
+                       Lam, Lamd, Lat, Lon, Meter, Phi, Phid,  # units
                        sincos2, tanPI_2_2)  # utily
 
 from math import atan2, ceil, fabs, floor, log, sin, sqrt
 
 __all__ = ()
-__version__ = '26.07.31'
+__version__ = '26.08.18'
 
 _LQRD0 = _LqRD()  # get Amersfoort, region4, etc. (deleted below)
 
@@ -259,14 +259,7 @@ class _RD0(_RDbase):
 _RD0 = _RD0()  # PYCHOK singleton, in .test/testRndTrips
 
 
-class LatLonN3Tuple(_NamedTuple):  # XXX move to pygeodesy
-    '''3-tuple C{(lat, lon, N)} with geoid height C{N} in C{meter}, conventionally.
-    '''
-    _Names_ = (_lat_, _lon_, _N_)
-    _Units_ = ( Lat,   Lon,   Height)
-
-
-class RDNAP7Tuple(_NamedTuple):  # in .v_self
+class RDNAP7Tuple(_H_lat_lon_height4Tuple):  # in .v_self
     '''7-Tuple C{(RDx, RDy, H, lat, lon, height, datum)} with I{local} C{RDx}, C{RDy}
        and (orthometric) height C{H}, geodetic C{lat}, C{lon}, (ellipsoidal) C{height}
        and C{datum} with C{lat} and C{lon} in C{degrees} and with C{RDx}, C{RDy}, C{H}
@@ -276,8 +269,8 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
               returned from L{RDNAP2018v1.reverse} but B{Bessel1841 (RD-Bessel)}
               from L{RDNAP2018v2.reverse}.
     '''
-    _Names_ = ('RDx', 'RDy', 'H',    _lat_, _lon_, _height_, _datum_)
-    _Units_ = ( Meter, Meter, Meter,  Lat,   Lon,   Height,  _Pass)
+    _Names_ = ('RDx', 'RDy')  + _H_lat_lon_height4Tuple._Names_ + (_datum_,)
+    _Units_ = ( Meter, Meter) + _H_lat_lon_height4Tuple._Units_ + (_Pass,)
 
     def diff(self, other, datum=None, **name):
         '''Return the difference between this and an C{other} C{RDNAP7Tuple}.
@@ -299,64 +292,15 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
         return RDNAP7Tuple(t, **name)
 
     @Property_RO
-    def lam(self):
-        '''Get the longitude (B{C{radians}}).
-        '''
-        return Lamd(self.lon)  # PYCHOK lon
-
-    @Property_RO
-    def latlon(self):
-        '''Get the lat-, longitude in C{degrees} (L{LatLon2Tuple}C{(lat, lon)}).
-        '''
-        return LatLon2Tuple(self.lat, self.lon, name=self.name)
-
-    @Property_RO
-    def latlonheight(self):
-        '''Get the lat-, longitude in C{degrees} and height (L{LatLon3Tuple}C{(lat, lon, height)}).
-        '''
-        return self.latlon.to3Tuple(self.height)
-
-    @Property_RO
     def latlonheightdatum(self):
         '''Get the lat-, longitude in C{degrees} with height and datum (L{LatLon4Tuple}C{(lat, lon, height, datum)}).
         '''
         return self.latlonheight.to4Tuple(self.datum)
 
-    @Property_RO
-    def latlonNgeoid(self):
-        '''Get the lat-, longitude in C{degrees} and geoid height (L{LatLonN3Tuple}C{(lat, lon, N)}).
-        '''
-        return LatLonN3Tuple(self.lat, self.lon, self.N, name=self.name)
-
-    @Property_RO
-    def N(self):
-        '''Get the geoid height C{N} (C{meter}, conventionally).
-        '''
-        N = self.height - self.H
-        return NAN if _isNAN(N) else Height(N=N)
-
     @deprecated_property_RO
     def NAPh(self):
         '''DEPRECATED on 2026.07.21, use attribute C{H}.'''
         return self.H  # PYCHOK H
-
-    @Property_RO
-    def phi(self):
-        '''Get the latitude (B{C{radians}}).
-        '''
-        return Phid(self.lat)  # PYCHOK lat
-
-    @Property_RO
-    def philam(self):
-        '''Get the lat- and longitude in C{radians} (L{PhiLam2Tuple}C{(phi, lam)}).
-        '''
-        return PhiLam2Tuple(self.phi, self.lam, name=self.name)  # PYCHOK lam, phi
-
-    @Property_RO
-    def philamheight(self):
-        '''Get the lat-, longitude in C{radians} and height (L{PhiLam3Tuple}C{(phi, lam, height)}).
-        '''
-        return self.philam.to3Tuple(self.height)  # PYCHOK height
 
     @Property_RO
     def philamheightdatum(self):
@@ -428,17 +372,35 @@ class RDNAP7Tuple(_NamedTuple):  # in .v_self
             return self.dup(lat=lat, lon=lon, datum=d, name=name or self.name)
         return self
 
-    @Property_RO
+    @deprecated_property_RO
     def xy(self):
-        '''Get the I{local} RDx, RDy coordinates (L{Vector2Tuple}C{(x, y)}).
-        '''
-        return Vector2Tuple(self.RDx, self.RDy, name=self.name)
+        '''DEPRECATED on 2026.08.14, use attribute C{xyh}, C{xyH} or C{xyN}.'''
+        from pygeodesy import Vector2Tuple
+        return Vector2Tuple(self.RDx, self.RDy, name=self.name)  # PYCHOK RDx, RDy
 
     @Property_RO
-    def xyz(self):
-        '''Get the I{local} RDx, RDy coordinates and (orthometric) height (L{Vector3Tuple}C{(x, y, z)}).
+    def xyh(self):
+        '''Get the I{local} coordinates and ellipsoidal height (L{RDxyheight3Tuple}C{(RDx, RDy, h)}).
         '''
-        return Vector3Tuple(self.RDx, self.RDy, self.H, name=self.name)
+        return RDxyheight3Tuple(self.RDx, self.RDy, self.height, name=self.name)
+
+    @Property_RO
+    def xyH(self):
+        '''Get the I{local} coordinates and orthometric height (L{RDxyHeight3Tuple}C{(RDx, RDy, H)}).
+        '''
+        return RDxyHeight3Tuple(self.RDx, self.RDy, self.H, name=self.name)
+
+    @Property_RO
+    def xyN(self):
+        '''Get the I{local} coordinates and geoid height (L{RDxyNgeoid3Tuple}C{(RDx, RDy, N)}).
+        '''
+        return RDxyNgeoid3Tuple(self.RDx, self.RDy, self.N, name=self.name)
+
+    @deprecated_property_RO
+    def xyz(self):
+        '''DEPRECATED on 2026.08.14, use attribute C{xyH}.'''
+        from pygeodesy import Vector3Tuple
+        return Vector3Tuple(self.RDx, self.RDy, self.H, name=self.name)  # PYCHOK RDx, RDy
 
 
 class LqRD(_LqRD):
@@ -499,12 +461,52 @@ class LqRD(_LqRD):
                            t.lat, t.lon, t.height, t.ecef.datum, name=name or t.name)
 
 
-__all__ += _all_OTHER(LqRD, LatLonN3Tuple, RDNAP7Tuple,  # passed along from PyGeodesy
-                      Bounds4Tuple, Datum, Datums, Ellipsoid, Ellipsoids,
-                      LatLon2Tuple, LatLon3Tuple, LatLon4Tuple,
-                      PhiLam2Tuple, PhiLam3Tuple, PhiLam4Tuple,
-                      Similarity, Vector2Tuple, Vector3Tuple)
-del _all_OTHER, _LQRD0
+class _RDxy3Tuple(_NamedTuple):  # provides .x, .y and .z
+
+    @property_RO
+    def x(self):
+        '''Get I{local} C{RDx} (C{Meter}).
+        '''
+        return self[0]  # PYCHOK RDx
+
+    @property_RO
+    def y(self):
+        '''Get I{local} C{RDy} (C{Meter}).
+        '''
+        return self[1]  # PYCHOK RDy
+
+    @property_RO
+    def z(self):
+        '''Get the ellipsoidal, geoid I{or} orthometric height (C{Meter}).
+        '''
+        return self[2]  # PYCHOK height, H or N
+
+
+class RDxyHeight3Tuple(_RDxy3Tuple):
+    '''3-tuple C{(RDx, RDy, H)} with orthometric height C{H}, all in C{meter}.
+    '''
+    _Names_ = RDNAP7Tuple._Names_[:3]
+    _Units_ = RDNAP7Tuple._Units_[:3]
+
+
+class RDxyheight3Tuple(_RDxy3Tuple):
+    '''3-tuple C{(RDx, RDy, h)} with ellipsoidal height C{h}, all in C{meter}.
+    '''
+    _Names_ = RDxyHeight3Tuple._Names_[:2] + (_h_,)
+    _Units_ = RDxyHeight3Tuple._Units_
+
+
+class RDxyNgeoid3Tuple(_RDxy3Tuple):
+    '''3-tuple C{(RDx, RDy, N)} with geoid height C{N}, all in C{meter}.
+    '''
+    _Names_ = RDxyHeight3Tuple._Names_[:2] + (_N_,)
+    _Units_ = RDxyHeight3Tuple._Units_
+
+
+__all__ += _ALL_OTHER(RDNAP7Tuple, RDxyheight3Tuple, RDxyHeight3Tuple,
+                      RDxyNgeoid3Tuple, LqRD,  # passed along from PyGeodesy
+                      Datum, Datums, Ellipsoid, Ellipsoids, Similarity)
+del _ALL_OTHER, _LQRD0
 
 # **) MIT License
 #

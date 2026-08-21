@@ -3,9 +3,10 @@
 
 u'''(INTERNAL) C{pyrdnap} access to some private C{pygeodesy} attributes.
 '''
+import sys
 
 _missing_ = 'missing'  # PYCHOK used!
-_requires = '26.7.27'  # in README.rst, requirements.txt, setup.py
+_requires = '26.8.18'  # in README.rst, requirements.txt, setup.py
 
 
 def _PyGeodesy_dir(requires):
@@ -15,7 +16,6 @@ def _PyGeodesy_dir(requires):
         from pygeodesy import version as _v
     except ImportError:
         import os.path as os_path
-        import sys  # PYCHOK used!
         _v = _missing_
         # PYTHONPATH=.../PyRDNAP for development ONLY
         p = os_path.abspath(__file__)
@@ -54,11 +54,11 @@ from pygeodesy.datums import _earth_datum  # noqa: F401
 from pygeodesy.ellipsoidalBase import LatLonEllipsoidalBase as _LLEB  # noqa: F401
 from pygeodesy.errors import _ValueError, _xkwds, _xkwds_pop2  # noqa: F401
 from pygeodesy.internals import machine, _secs2str, _versions  # noqa: F401
-from pygeodesy.interns import (_COMMASPACE_, _DASH_, _datum_,  # noqa: F401
-                               _EQUAL_, _height_, _lat_, _lon_,  # noqa: F401
-                               _N_, _name_, _NAN_, _NL_, _SPACE_, _STAR_)  # noqa: F401
-from pygeodesy.lazily import _ALL_DOCS, _ALL_OTHER, _FOR_DOCS, import_module  # noqa: F401
+from pygeodesy.interns import (_COMMASPACE_, _DASH_, _DOT_, _datum_, _EQUAL_,  # noqa: F401
+                               _h_, _N_, _name_, _NAN_, _NL_, _SPACE_, _STAR_)  # noqa: F401
+from pygeodesy.lazily import _ALL_DOCS, _ALL_OTHER, _ALL_STAR, _FOR_DOCS, import_module  # noqa: F401
 from pygeodesy.named import _NamedBase, _NamedTuple, _Pass  # noqa: F401
+from pygeodesy.namedTuples import _H_lat_lon_height4Tuple  # noqa: F401
 from pygeodesy.streprs import Fmt  # noqa: F401
 
 
@@ -68,16 +68,8 @@ class RDNAPError(_ValueError):
     pass
 
 
-def _all_OTHER(*objs):  # PYCHOK shared
-    # collect all __all__ lists or tuples
-    _all = _ALL_OTHER(*objs)
-    _all__all__.extend(_all)
-    return _all
-
-_all__all__ = []  # PYCHOK in .__init__
-
-__all__ = _all_OTHER(machine, RDNAPError)
-__version__ = '26.07.29'
+__all__ = _ALL_OTHER(RDNAPError, machine)
+__version__ = '26.08.18'
 
 
 # **) MIT License

@@ -35,7 +35,7 @@ import sys
 from time import time
 
 __all__ = ()
-__version__ = '26.07.31'
+__version__ = '26.08.16'
 
 _BOTH  = '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 _FWD   = '../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt'  # NSGI.../...
@@ -344,7 +344,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 
 
 # % python3.14 -m pyrdnap -v
-# pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2
+# pyrdnap 26.8.18 pygeodesy 26.8.18 Python 3.14.7 64bit arm64 macOS 26.5.2
 
 
 # % python3.14 -m pyrdnap --help
@@ -381,7 +381,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-# RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 points -inside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 564.784 ms
+# RDNAP2018v1 all 47754 tests PASSED, 7959 of 10000 points -inside (pyrdnap 26.8.18 pygeodesy 26.8.18 Python 3.14.7 64bit arm64 macOS 26.5.2) 564.446 ms
 # RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
 # RDNAP2018v1 max |diff| lat 2.4685889e-09, lon 1.8726842e-09, height 5.00e-05, RDx 8.7847e-05, RDy 2.2281e-04, H 4.9993e-05
 # RDNAP2018v1 max |diff| lat 0.00000000247, lon 0.00000000187, height 0.000050, RDx 0.00008785, RDy 0.00022281, H 0.00004999
@@ -392,7 +392,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-# RDNAP2018v1 372 of 12246 tests FAILED for 244 of 2041 of 10000 points -outside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 110.006 ms
+# RDNAP2018v1 372 of 12246 tests FAILED for 244 of 2041 of 10000 points -outside (pyrdnap 26.8.18 pygeodesy 26.8.18 Python 3.14.7 64bit arm64 macOS 26.5.2) 110.487 ms
 # RDNAP2018v1 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
 # RDNAP2018v1 max |diff| lat 3.5461468e-08, lon 4.2693719e-08, height 0.00e+00, RDx 3.5235e-04, RDy 7.7548e-04, H 0.0000e+00
 # RDNAP2018v1 max |diff| lat 0.00000003546, lon 0.00000004269, height 0.000000, RDx 0.00035235, RDy 0.00077548, H 0.00000000
@@ -403,7 +403,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/Z001_ETRS89andRDNAP.txt'
 #  header 'point_id\tETRS89_lat. \tETRS89_lon.\tETRS89_h  \tRD_x       \tRD_y       \tNAP_H'  (line 1)
 #
-# RDNAP2018v2 21326 of 47754 tests FAILED for 7959 of 7959 of 10000 points -inside (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 524.256 ms
+# RDNAP2018v2 21326 of 47754 tests FAILED for 7959 of 7959 of 10000 points -inside (pyrdnap 26.8.18 pygeodesy 26.8.18 Python 3.14.7 64bit arm64 macOS 26.5.2) 562.064 ms
 # RDNAP2018v2 req |diff| lat 0.00000001000, lon 0.00000001000, height 0.001000, RDx 0.00100000, RDy 0.00100000, H 0.00100000
 # RDNAP2018v2 max |diff| lat 1.4346641e-03, lon 8.3303290e-04, height 6.16e-03, RDx 8.2988e-03, RDy 1.5743e-02, H 6.3739e-04
 # RDNAP2018v2 max |diff| lat 0.00143466407, lon 0.00083303290, height 0.006164, RDx 0.00829877, RDy 0.01574313, H 0.00063739
@@ -414,7 +414,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/002_ETRS89.txt' forward
 #  header point_id  latitude        longitude    height  (line 1)
 #
-# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 515.191 ms
+# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.8.18 pygeodesy 26.8.18 Python 3.14.7 64bit arm64 macOS 26.5.2) 525.323 ms
 # RDNAP2018v1 max |diff| (RDx 0, RDy 0, H 0, lat 6.99816e-09, lon 4.75236e-09, height 4.12274e-09, ...)
 
 
@@ -423,7 +423,7 @@ while argv and argv[0].startswith(_DASH_):  # MCCABE 13
 #   using '../RDNAPTRANStm2018_NSGI_txts/002_RDNAP.txt' reverse
 #  header point_id  x_coordinate  y_coordinate height  (line 1)
 #
-# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.7.31 pygeodesy 26.7.27 Python 3.14.6 64bit arm64 macOS 26.5.2) 507.284 ms
+# RDNAP2018v1 all 60000 tests PASSED (pyrdnap 26.8.18 pygeodesy 26.8.18 Python 3.14.7 64bit arm64 macOS 26.5.2) 516.080 ms
 # RDNAP2018v1 max |diff| (RDx 0.000223603, RDy 0.000799715, H 5.68434e-14, lat 0, lon 0, height 0, ...)
 
 # **) MIT License

@@ -61,17 +61,19 @@
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class RDNAP7Tuple</h1><p class="nomargin-top"></p>
 <pre class="base-tree">
-             object --+        
-                      |        
-                  tuple --+    
-                          |    
-             object --+   |    
-                      |   |    
- pygeodesy.named._Named --+    
-                          |    
-pygeodesy.named._NamedTuple --+
-                              |
-                             <strong class="uidshort">RDNAP7Tuple</strong>
+                           object --+            
+                                    |            
+                                tuple --+        
+                                        |        
+                           object --+   |        
+                                    |   |        
+               pygeodesy.named._Named --+        
+                                        |        
+              pygeodesy.named._NamedTuple --+    
+                                            |    
+pygeodesy.namedTuples._H_lat_lon_height4Tuple --+
+                                                |
+                                               <strong class="uidshort">RDNAP7Tuple</strong>
 </pre>
 
 <hr />
@@ -294,57 +296,10 @@ pygeodesy.named._NamedTuple --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#lam" class="summary-name">lam</a><br />
-      Get the longitude (<b><code>radians</code></b>).
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#latlon" class="summary-name">latlon</a><br />
-      Get the lat-, longitude in <code>degrees</code> (<a 
-      href="pygeodesy.namedTuples.LatLon2Tuple-class.html" 
-      class="link">LatLon2Tuple</a><code>(lat, lon)</code>).
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#latlonheight" class="summary-name">latlonheight</a><br />
-      Get the lat-, longitude in <code>degrees</code> and height (<a 
-      href="pygeodesy.namedTuples.LatLon3Tuple-class.html" 
-      class="link">LatLon3Tuple</a><code>(lat, lon, height)</code>).
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
         <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#latlonheightdatum" class="summary-name">latlonheightdatum</a><br />
       Get the lat-, longitude in <code>degrees</code> with height and datum
-      (<a href="pygeodesy.namedTuples.LatLon4Tuple-class.html" 
-      class="link">LatLon4Tuple</a><code>(lat, lon, height, datum)</code>).
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#latlonNgeoid" class="summary-name">latlonNgeoid</a><br />
-      Get the lat-, longitude in <code>degrees</code> and geoid height (<a 
-      href="pyrdnap.rd0.LatLonN3Tuple-class.html" 
-      class="link">LatLonN3Tuple</a><code>(lat, lon, N)</code>).
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#N" class="summary-name">N</a><br />
-      Get the geoid height <code>N</code> (<code>meter</code>, 
-      conventionally).
+      (<code class="link">LatLon4Tuple</code><code>(lat, lon, height, 
+      datum)</code>).
     </td>
   </tr>
 <tr>
@@ -353,34 +308,6 @@ pygeodesy.named._NamedTuple --+
     </td><td class="summary">
         <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#NAPh" class="summary-name">NAPh</a><br />
       DEPRECATED on 2026.07.21, use attribute <code>H</code>.
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#phi" class="summary-name">phi</a><br />
-      Get the latitude (<b><code>radians</code></b>).
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#philam" class="summary-name">philam</a><br />
-      Get the lat- and longitude in <code>radians</code> (<a 
-      href="pygeodesy.namedTuples.PhiLam2Tuple-class.html" 
-      class="link">PhiLam2Tuple</a><code>(phi, lam)</code>).
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#philamheight" class="summary-name">philamheight</a><br />
-      Get the lat-, longitude in <code>radians</code> and height (<a 
-      href="pygeodesy.namedTuples.PhiLam3Tuple-class.html" 
-      class="link">PhiLam3Tuple</a><code>(phi, lam, height)</code>).
     </td>
   </tr>
 <tr>
@@ -398,9 +325,38 @@ pygeodesy.named._NamedTuple --+
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#xy" class="summary-name">xy</a><br />
-      Get the <i>local</i> RDx, RDy coordinates (<a 
-      href="pygeodesy.namedTuples.Vector2Tuple-class.html" 
-      class="link">Vector2Tuple</a><code>(x, y)</code>).
+      DEPRECATED on 2026.08.14, use attribute <code>xyh</code>, 
+      <code>xyH</code> or <code>xyN</code>.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#xyh" class="summary-name">xyh</a><br />
+      Get the <i>local</i> coordinates and ellipsoidal height (<a 
+      href="pyrdnap.rd0.RDxyheight3Tuple-class.html" 
+      class="link">RDxyheight3Tuple</a><code>(RDx, RDy, h)</code>).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#xyH" class="summary-name">xyH</a><br />
+      Get the <i>local</i> coordinates and orthometric height (<a 
+      href="pyrdnap.rd0.RDxyHeight3Tuple-class.html" 
+      class="link">RDxyHeight3Tuple</a><code>(RDx, RDy, H)</code>).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#xyN" class="summary-name">xyN</a><br />
+      Get the <i>local</i> coordinates and geoid height (<a 
+      href="pyrdnap.rd0.RDxyNgeoid3Tuple-class.html" 
+      class="link">RDxyNgeoid3Tuple</a><code>(RDx, RDy, N)</code>).
     </td>
   </tr>
 <tr>
@@ -408,13 +364,25 @@ pygeodesy.named._NamedTuple --+
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="pyrdnap.rd0.RDNAP7Tuple-class.html#xyz" class="summary-name">xyz</a><br />
-      Get the <i>local</i> RDx, RDy coordinates and (orthometric) height 
-      (<a href="pygeodesy.namedTuples.Vector3Tuple-class.html" 
-      class="link">Vector3Tuple</a><code>(x, y, z)</code>).
+      DEPRECATED on 2026.08.14, use attribute <code>xyH</code>.
     </td>
   </tr>
   <tr>
     <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.namedTuples._H_lat_lon_height4Tuple</code></b>:
+      <code>N</code>,
+      <code>h</code>,
+      <code>lam</code>,
+      <code>latlon</code>,
+      <code>latlonHeight</code>,
+      <code>latlonNgeoid</code>,
+      <code>latlonheight</code>,
+      <code>phi</code>,
+      <code>philam</code>,
+      <code>philamHeight</code>,
+      <code>philamNgeoid</code>,
+      <code>philamheight</code>
+      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>pygeodesy.named._Named</code></b>:
       <code>classname</code>,
       <code>classnaming</code>,
@@ -631,84 +599,6 @@ pygeodesy.named._NamedTuple --+
     <span class="table-header">Property Details</span></td>
 </tr>
 </table>
-<a name="lam"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">lam</h3>
-  <p>Get the longitude (<b><code>radians</code></b>).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">lam(<span class="summary-sig-arg">self</span>)</span>
-        - Get the longitude (<b><code>radians</code></b>).
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="latlon"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">latlon</h3>
-  <p>Get the lat-, longitude in <code>degrees</code> (<a 
-  href="pygeodesy.namedTuples.LatLon2Tuple-class.html" 
-  class="link">LatLon2Tuple</a><code>(lat, lon)</code>).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">latlon(<span class="summary-sig-arg">self</span>)</span>
-        - Get the lat-, longitude in <code>degrees</code> (<code 
-class="link">LatLon2Tuple</code><code>(lat, lon)</code>).
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="latlonheight"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">latlonheight</h3>
-  <p>Get the lat-, longitude in <code>degrees</code> and height (<a 
-  href="pygeodesy.namedTuples.LatLon3Tuple-class.html" 
-  class="link">LatLon3Tuple</a><code>(lat, lon, height)</code>).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">latlonheight(<span class="summary-sig-arg">self</span>)</span>
-        - Get the lat-, longitude in <code>degrees</code> and height (<code 
-class="link">LatLon3Tuple</code><code>(lat, lon, height)</code>).
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
 <a name="latlonheightdatum"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -716,67 +606,14 @@ class="link">LatLon3Tuple</code><code>(lat, lon, height)</code>).
 <tr><td>
   <h3 class="epydoc">latlonheightdatum</h3>
   <p>Get the lat-, longitude in <code>degrees</code> with height and datum 
-  (<a href="pygeodesy.namedTuples.LatLon4Tuple-class.html" 
-  class="link">LatLon4Tuple</a><code>(lat, lon, height, datum)</code>).</p>
+  (<code class="link">LatLon4Tuple</code><code>(lat, lon, height, 
+  datum)</code>).</p>
   <dl class="fields">
     <dt>Get method:</dt>
     <dd class="value"><span class="summary-sig">latlonheightdatum(<span class="summary-sig-arg">self</span>)</span>
         - Get the lat-, longitude in <code>degrees</code> with height and datum 
 (<code class="link">LatLon4Tuple</code><code>(lat, lon, height, 
 datum)</code>).
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="latlonNgeoid"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">latlonNgeoid</h3>
-  <p>Get the lat-, longitude in <code>degrees</code> and geoid height (<a 
-  href="pyrdnap.rd0.LatLonN3Tuple-class.html" 
-  class="link">LatLonN3Tuple</a><code>(lat, lon, N)</code>).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">latlonNgeoid(<span class="summary-sig-arg">self</span>)</span>
-        - Get the lat-, longitude in <code>degrees</code> and geoid height (<a 
-href="pyrdnap.rd0.LatLonN3Tuple-class.html" 
-class="link">LatLonN3Tuple</a><code>(lat, lon, N)</code>).
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="N"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">N</h3>
-  <p>Get the geoid height <code>N</code> (<code>meter</code>, 
-  conventionally).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">N(<span class="summary-sig-arg">self</span>)</span>
-        - Get the geoid height <code>N</code> (<code>meter</code>, conventionally).
     </dd>
     <dt>Set method:</dt>
     <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
@@ -801,84 +638,6 @@ class="link">LatLonN3Tuple</a><code>(lat, lon, N)</code>).
     <dt>Get method:</dt>
     <dd class="value"><span class="summary-sig">NAPh(<span class="summary-sig-arg">self</span>)</span>
         - DEPRECATED on 2026.07.21, use attribute <code>H</code>.
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="phi"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">phi</h3>
-  <p>Get the latitude (<b><code>radians</code></b>).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">phi(<span class="summary-sig-arg">self</span>)</span>
-        - Get the latitude (<b><code>radians</code></b>).
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="philam"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">philam</h3>
-  <p>Get the lat- and longitude in <code>radians</code> (<a 
-  href="pygeodesy.namedTuples.PhiLam2Tuple-class.html" 
-  class="link">PhiLam2Tuple</a><code>(phi, lam)</code>).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">philam(<span class="summary-sig-arg">self</span>)</span>
-        - Get the lat- and longitude in <code>radians</code> (<code 
-class="link">PhiLam2Tuple</code><code>(phi, lam)</code>).
-    </dd>
-    <dt>Set method:</dt>
-    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
-        <span class="summary-sig-arg">val</span>)</span>
-        - Throws an <code>AttributeError</code>, always.
-    </dd>
-    <dt>Delete Method:</dt>
-    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
-        - Zap the <i>cached/memoized</i> <code>property</code> value.
-    </dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="philamheight"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <h3 class="epydoc">philamheight</h3>
-  <p>Get the lat-, longitude in <code>radians</code> and height (<a 
-  href="pygeodesy.namedTuples.PhiLam3Tuple-class.html" 
-  class="link">PhiLam3Tuple</a><code>(phi, lam, height)</code>).</p>
-  <dl class="fields">
-    <dt>Get method:</dt>
-    <dd class="value"><span class="summary-sig">philamheight(<span class="summary-sig-arg">self</span>)</span>
-        - Get the lat-, longitude in <code>radians</code> and height (<code 
-class="link">PhiLam3Tuple</code><code>(phi, lam, height)</code>).
     </dd>
     <dt>Set method:</dt>
     <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
@@ -926,14 +685,97 @@ datum)</code>).
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">xy</h3>
-  <p>Get the <i>local</i> RDx, RDy coordinates (<a 
-  href="pygeodesy.namedTuples.Vector2Tuple-class.html" 
-  class="link">Vector2Tuple</a><code>(x, y)</code>).</p>
+  <p>DEPRECATED on 2026.08.14, use attribute <code>xyh</code>, 
+  <code>xyH</code> or <code>xyN</code>.</p>
   <dl class="fields">
     <dt>Get method:</dt>
     <dd class="value"><span class="summary-sig">xy(<span class="summary-sig-arg">self</span>)</span>
-        - Get the <i>local</i> RDx, RDy coordinates (<code 
-class="link">Vector2Tuple</code><code>(x, y)</code>).
+        - DEPRECATED on 2026.08.14, use attribute <code>xyh</code>, <code>xyH</code> 
+or <code>xyN</code>.
+    </dd>
+    <dt>Set method:</dt>
+    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="xyh"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">xyh</h3>
+  <p>Get the <i>local</i> coordinates and ellipsoidal height (<a 
+  href="pyrdnap.rd0.RDxyheight3Tuple-class.html" 
+  class="link">RDxyheight3Tuple</a><code>(RDx, RDy, h)</code>).</p>
+  <dl class="fields">
+    <dt>Get method:</dt>
+    <dd class="value"><span class="summary-sig">xyh(<span class="summary-sig-arg">self</span>)</span>
+        - Get the <i>local</i> coordinates and ellipsoidal height (<a 
+href="pyrdnap.rd0.RDxyheight3Tuple-class.html" 
+class="link">RDxyheight3Tuple</a><code>(RDx, RDy, h)</code>).
+    </dd>
+    <dt>Set method:</dt>
+    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="xyH"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">xyH</h3>
+  <p>Get the <i>local</i> coordinates and orthometric height (<a 
+  href="pyrdnap.rd0.RDxyHeight3Tuple-class.html" 
+  class="link">RDxyHeight3Tuple</a><code>(RDx, RDy, H)</code>).</p>
+  <dl class="fields">
+    <dt>Get method:</dt>
+    <dd class="value"><span class="summary-sig">xyH(<span class="summary-sig-arg">self</span>)</span>
+        - Get the <i>local</i> coordinates and orthometric height (<a 
+href="pyrdnap.rd0.RDxyHeight3Tuple-class.html" 
+class="link">RDxyHeight3Tuple</a><code>(RDx, RDy, H)</code>).
+    </dd>
+    <dt>Set method:</dt>
+    <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
+        <span class="summary-sig-arg">val</span>)</span>
+        - Throws an <code>AttributeError</code>, always.
+    </dd>
+    <dt>Delete Method:</dt>
+    <dd class="value"><span class="summary-sig">_fdel(<span class="summary-sig-arg">inst</span>)</span>
+        - Zap the <i>cached/memoized</i> <code>property</code> value.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="xyN"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">xyN</h3>
+  <p>Get the <i>local</i> coordinates and geoid height (<a 
+  href="pyrdnap.rd0.RDxyNgeoid3Tuple-class.html" 
+  class="link">RDxyNgeoid3Tuple</a><code>(RDx, RDy, N)</code>).</p>
+  <dl class="fields">
+    <dt>Get method:</dt>
+    <dd class="value"><span class="summary-sig">xyN(<span class="summary-sig-arg">self</span>)</span>
+        - Get the <i>local</i> coordinates and geoid height (<a 
+href="pyrdnap.rd0.RDxyNgeoid3Tuple-class.html" 
+class="link">RDxyNgeoid3Tuple</a><code>(RDx, RDy, N)</code>).
     </dd>
     <dt>Set method:</dt>
     <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
@@ -953,14 +795,11 @@ class="link">Vector2Tuple</code><code>(x, y)</code>).
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">xyz</h3>
-  <p>Get the <i>local</i> RDx, RDy coordinates and (orthometric) height (<a
-  href="pygeodesy.namedTuples.Vector3Tuple-class.html" 
-  class="link">Vector3Tuple</a><code>(x, y, z)</code>).</p>
+  <p>DEPRECATED on 2026.08.14, use attribute <code>xyH</code>.</p>
   <dl class="fields">
     <dt>Get method:</dt>
     <dd class="value"><span class="summary-sig">xyz(<span class="summary-sig-arg">self</span>)</span>
-        - Get the <i>local</i> RDx, RDy coordinates and (orthometric) height (<code 
-class="link">Vector3Tuple</code><code>(x, y, z)</code>).
+        - DEPRECATED on 2026.08.14, use attribute <code>xyH</code>.
     </dd>
     <dt>Set method:</dt>
     <dd class="value"><span class="summary-sig">_fset_error(<span class="summary-sig-arg">inst</span>,
@@ -1006,7 +845,7 @@ class="link">Vector3Tuple</code><code>(x, y, z)</code>).
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Jul 31 14:31:20 2026
+    Generated by Epydoc 3.0.1 on Fri Aug 21 15:30:15 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

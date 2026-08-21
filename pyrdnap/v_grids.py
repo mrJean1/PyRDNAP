@@ -4,16 +4,16 @@
 u'''(INTERNAL) C{RDNAPTRANS(tm)2018_v220627} v#grid utilities.
 '''
 from pyrdnap import pyrdnap_abspath  # pyrdnap 1st
-from pyrdnap.__pygeodesy import _0_0s, import_module, RDNAPError
+from pyrdnap.__pygeodesy import _0_0s, RDNAPError  # import_module
 from pygeodesy import print_, property_RO
 
 from array import array
 import os.path as os_path
-import sys
+# import sys
 from zipfile import ZipFile
 
 __all__ = ()
-__version__ = '26.06.22'
+__version__ = '26.08.08'
 
 _R_C = 481, 301  # shape: rows, cols
 _RxC = 144781    # total, in .v1grid, .v2grid
@@ -105,33 +105,33 @@ def _v_gridz3(v):  # PYCHOK no cover
     return p, d, m
 
 
-def _v_gridz_import(v):  # PYCHOK no cover
-    '''(INTERNAL) Try "from v#gridz.zip import v#grid" for variant C{v}
-    '''
-    v_grid  =  None
-    p, _, m = _v_gridz3(v)
-    try:  # Py 3.4+
-        # <https://RealPython.com/python-zip-import/
-        # #explore-pythons-zipimport-the-tool-behind-zip-imports>
-        from zipimport import zipimporter as Z  # ZipImportError
-        # get an importer for zip file p and load module m
-        v_grid = Z(p).load_module(m)  # Py3.14-
-        # XXX should use .exec_module but that fails and/or
-        # XXX needs .create_module, .find_spec, etc???
-    except (AttributeError, ImportError):
-        try:  # trusted old-fashion way
-            sys.path.insert(0, p)
-            v_grid = import_module(m)
-#       except ImportError:
-#           v_grid = None
-        finally:
-            try:
-                sys.path.remove(p)
-            except ValueError:
-                pass  # AssertionError
-#   if v_grid:
-#       sys.modules[m] = v_grid
-    return v_grid
+# def _v_gridz_import(v):  # PYCHOK no cover
+#     '''(INTERNAL) Try "from v#gridz.zip import v#grid" for variant C{v}
+#     '''
+#     v_grid  =  None
+#     p, _, m = _v_gridz3(v)
+#     try:  # Py 3.4+
+#         # <https://RealPython.com/python-zip-import/
+#         # #explore-pythons-zipimport-the-tool-behind-zip-imports>
+#         from zipimport import zipimporter as Z  # ZipImportError
+#         # get an importer for zip file p and load module m
+#         v_grid = Z(p).load_module(m)  # Py3.14-
+#         # XXX should use .exec_module but that fails and/or
+#         # XXX needs .create_module, .find_spec, etc???
+#     except (AttributeError, ImportError):
+#         try:  # trusted old-fashion way
+#             sys.path.insert(0, p)
+#             v_grid = import_module(m)
+# #       except ImportError:
+# #           v_grid = None
+#         finally:
+#             try:
+#                 sys.path.remove(p)
+#             except ValueError:
+#                 pass  # AssertionError
+# #   if v_grid:
+# #       sys.modules[m] = v_grid
+#     return v_grid
 
 
 def _v_gridz_unzip(v, force=False, verbose=False):  # PYCHOK no cover

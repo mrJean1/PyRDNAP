@@ -3,11 +3,11 @@
 PyRDNAP
 =======
 
-A pure Python implementation of the 2018 v220627 version of the Netherlands\' RD_ (**R**\ ijks\ **D**\ riehoeksmeting) and NAP_ (**N**\ ormaal **A**\ msterdams **P**\ eil) systems to convert between GRS80 (ETRS89) geodetic lat-, longitudes and (ellipsoidal) height ``h`` and local RD coordinates and (orthometric) height ``H`` using bilinear interpolation of quasi-geoid ``NAPh`` heights.
+A pure Python implementation of the 2018 v220627 version of the Netherlands\' RD_ (**R**\ ijks\ **D**\ riehoeksmeting) and NAP_ (**N**\ ormaal **A**\ msterdams **P**\ eil) systems to convert between GRS80 (ETRS89) geodetic lat-, longitudes and ellipsoidal height and local RD coordinates and orthometric height using bilinear interpolation of quasi-geoid ``NAPh`` heights.
 
-``PyRDNAP`` includes two transformer classes ``RDNAP2018v1`` and ``RDNAP2018v2`` implementing *variant 1* respectively *variant 2* of the ``RDNAPTRANS(tm)2018 v220627`` specification.  Each class provides a ``forward`` method to convert a geodetic lat-, longitude and height ``h`` to local RDx, RDy and ``H`` and a ``reverse`` method to convert local RDx, RDy and height ``H`` to geodetic lat-, longitude and ``h``.
+``PyRDNAP`` includes two transformer classes ``RDNAP2018v1`` and ``RDNAP2018v2`` implementing *variant 1* respectively *variant 2* of the ``RDNAPTRANS(tm)2018 v220627`` specification.  Each class provides a ``forward`` method to convert a geodetic lat-, longitude and ellipsoidal height to local RDx, RDy and orthometric height and a ``reverse`` method to convert local to geodetic coordinates and orthometric to ellipsoidal height.
 
-Quasi-geoid ``NAPh`` height is interpolated only for locations within the ``RD region``.  Outside that region ``NAN`` is returned for heights ``H`` and ``h`` unless raising an ``RDNAPError`` is specified.
+Quasi-geoid ``NAPh`` height is interpolated only for locations within the ``RD region``.  Heights outside that region are ``NAN`` unless raising an ``RDNAPError`` is specified.
 
 For further details see the documentation_ and the main_ module.
 
@@ -28,7 +28,7 @@ To run the ``pyrdnap`` tests, type ``python[3] test/run.py`` or type ``python[3]
 Dependencies
 ============
 
-Installation of Python package pygeodesy_ is required, version 26.7.27 or newer.  Type
+Installation of Python package pygeodesy_ is required, version 26.8.18 or newer.  Type
 ``python[3] -m pip install -r requirements.txt`` to install.
 
 Documentation
@@ -40,20 +40,20 @@ In addition to the ``pyrdnap`` package, the pyrdnap_ `distribution file`_ contai
 Tests
 =====
 
-The tests ran with Python 3.14.6, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_ 26.5.26 and on macOS 26.5.2 Tahoe in 64-bit.  The results of those tests are included in the distribution file.
+The tests ran with Python 3.14.7, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_ 26.5.26 and on macOS 26.5.2 Tahoe in 64-bit.  The results of those tests are included in the distribution file.
 
-Python 3.14.6 and PyPy 7.3.17 run on Apple M4 (``arm64``), *natively*.  Python 2.7.18 runs on Intel (``x86_64``) or Intel *emulation* (\"``arm64_x86_64``\", see function `pyrdnap.machine`_).
+Python 3.14.7 and PyPy 7.3.17 run on Apple M4 (``arm64``), *natively*.  Python 2.7.18 runs on Intel (``x86_64``) or Intel *emulation* (\"``arm64_x86_64``\", see function `pyrdnap.machine`_).
 
-Test coverage has been measured with coverage_ 7.14.0 using Python 3.14.6.  The complete coverage report in HTML and a PDF summary are included in the distribution file.
+Test coverage has been measured with coverage_ 7.14.0 using Python 3.14.7.  The complete coverage report in HTML and a PDF summary are included in the distribution file.
 
-The tests also ran with Python 3.14.6 on `Windows 2019Server`_ and with Python 3.13.3 on Windows 11, both in 64-bit only.
+The tests also ran with Python 3.14.7 on `Windows 2019Server`_ and with Python 3.13.3 on Windows 11, both in 64-bit only.
 
 Notes
 =====
 
 All Python source code has been statically checked_ with Ruff_ using Python 3.13.12 and with PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in 64-bit on macOS 26.5.2 Tahoe only.
 
-*Last updated: July 31, 2026.*
+*Last updated: Aug 18, 2026.*
 
 License
 =======

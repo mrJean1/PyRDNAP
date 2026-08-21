@@ -13,7 +13,7 @@ from random import random, seed
 from time import localtime
 
 __all__ = ()
-__version__ = '26.07.29'
+__version__ = '26.08.15'
 
 # random repeatable all day
 seed(localtime().tm_yday)
@@ -77,7 +77,7 @@ class Tests(TestsBase):
         S, W, N, E = R.region4()
         E_W = E - W
         N_S = N - S
-        r   = random.__name__
+        r   = random.__name__  # typename
         self.test(R.name, r, r, **nl)
         for _ in range(_nrandom):
             self.testRndTrip(R, _rnd(random() * N_S + S),
@@ -101,7 +101,18 @@ class Tests(TestsBase):
         self.test('philam', t.philam, '(0.910297, 0.094032)')
         self.test('philamheight', t.philamheight, '(0.910297, 0.094032, 0)')
         self.test('philamheightdatum', t.philamheightdatum, '(0.910297, 0.094032, 0, Datum', known=startswith)
-        self.test('N', t.N, '43.', known=startswith, nt=1)
+
+        self.test('height', t.height, '0', known=startswith, nl=1)
+        self.test('H',   t.H,  '-43.', known=startswith)
+        self.test('N',   t.N,   '43.', known=startswith)
+        self.test('xy',  t.xy,  '(155029.', known=startswith)
+        self.test('xyH', t.xyH, '(155029.', known=startswith)
+        self.test('xyz', t.xyz,   t.xyH,    known=startswith)
+        self.test('xyh', t.xyh, '(155029.', known=startswith)
+        self.test('xyN', t.xyN, '(155029.', known=startswith)
+        self.test('t.x', t.xyz.x, t.RDx, prec=6)
+        self.test('t.y', t.xyz.y, t.RDy, prec=6)
+        self.test('t.z', t.xyz.z, t.H,   prec=6, nt=1)
 
         try:
             r = R.rdNAPh(0, 0)  # raiser=True
@@ -136,6 +147,13 @@ class Tests(TestsBase):
         self.test('upperight', R.isinside(t.lat, t.lon), True)
         self.test('upperight', R.isinsideRD(r.maxRDx, r.maxRDy), True)
         self.test('origin',    R.isinside(0, 0), False)
+
+        r = R.bounds4()
+        t = r.toRepr()
+        self.test('bounds4', t, 'RD bounds (latS=50.75, lonW=2.', known=startswith, nl=1)
+        r = R.bounds4(asRD=True)
+        t = r.toRepr()
+        self.test('bounds4', t, 'RD bounds (minRDx=', known=startswith)
 
         for t in (R.forward(NAN, NAN),
                   R.reverse(NAN, NAN)):

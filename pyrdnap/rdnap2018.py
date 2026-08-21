@@ -16,14 +16,14 @@ of L{RDNAP2018v2.forward} and L{.reverse<RDNAP2018v2.reverse>}.
 # make sure int/int division yields float quotient in Py2
 from __future__ import division as _; del _  # noqa: E702 ;
 
-from pyrdnap.rd0 import _RD, _RD0 as A0, LatLonN3Tuple, RDNAP7Tuple
+from pyrdnap.rd0 import _RD, _RD0 as A0, RDNAP7Tuple
 from pyrdnap.v_grids import _v_grid  # _V_grid
 from pyrdnap.__pygeodesy import (_0_0, _0_5, _1_0, _2_0, _xinstanceof,
                                  _isNAN, _isNAN0, _earth_datum, _xkwds_pop2,
-                                 _name_, _ALL_DOCS, _all_OTHER, _FOR_DOCS,
+                                 _name_, _ALL_DOCS, _ALL_OTHER, _FOR_DOCS,
                                  _NamedBase, RDNAPError)
-from pygeodesy import (map1, EPS0, EPS1, NAN, PI_2, PI, PI2,  # basics, "consterns"
-                       typename, Bounds4Tuple, LatLonDatum3Tuple, RD4Tuple,  # namedTuples
+from pygeodesy import (map1, EPS0, EPS1, NAN, PI_2, PI, PI2, typename,  # basics, "consterns"
+                       Bounds4Tuple, LatLonDatum3Tuple, LatLonNgeoid3Tuple, RD4Tuple,  # namedTuples
                        deprecated_property_RO, property_RO, property_ROver,  # props
                        Degrees, Lamd, Lat, Lon, Meter, Phid,  # units
                        sincos2, sincos2d)  # utily
@@ -32,7 +32,7 @@ from math import asin, atan, copysign, degrees, exp, \
                  fabs, floor, hypot, radians, sin, sqrt
 
 __all__ = ()
-__version__ = '26.07.31'
+__version__ = '26.08.18'
 
 _forward_  = 'forward'
 _outside__ = 'outside '
@@ -252,12 +252,11 @@ class _RDNAPbase(_NamedBase):
            @arg RDx: Local C{RD} X (C{meter}, conventionally).
            @arg RDy: Local C{RD} Y (C{meter}, conventionally).
 
-           @return: L{LatLonN3Tuple}C{(lat, lon, N)} with the quasi-geoid
+           @return: L{LatLonNgeoid3Tuple}C{(lat, lon, N)} with quasi-geoid
                     C{NAPh} height C{N} in C{meter} or C{NAN} if C{lat} or
                     C{lon} is outside C{RD} region.
         '''
-        r = self._reverse(RDx, RDy, 0, raiser=False)
-        return LatLonN3Tuple(r.lat, r.lon, r.height, name=self.name)
+        return self._reverse(RDx, RDy, 0, raiser=False).latlonNgeoid
 
     def _rdNAPh(self, lat, lon):
         # return C{NAPh} at C{(lat, lon)} or C{NAN} if
@@ -609,6 +608,8 @@ def _bilinear(v_grid, c_latI, f_latI, latN_f,  # 2.3.1f and g
     # interpolate a lat_corr_, lon_corr_ or NAP_h...
     # assert isinstance(v_grid, _V_grid), v_grid
     ne = v_grid(c_latI, c_lonI)
+#   if c_latI == f_latI and c_lonI == f_lonI:
+#       return ne
     nw = v_grid(c_latI, f_lonI)
     se = v_grid(f_latI, c_lonI)
     sw = v_grid(f_latI, f_lonI)
@@ -776,8 +777,9 @@ def _spherical2oblique(phiC, lamC):  # 2.4.2
 
 
 __all__ += _ALL_DOCS(_RDNAPbase)
-__all__ += _all_OTHER(RDNAP2018v1, RDNAP2018v2, RD4Tuple)
-del _ALL_DOCS, _all_OTHER
+__all__ += _ALL_OTHER(RDNAP2018v1, RDNAP2018v2,  # passed along from PyGeodesy
+                      Bounds4Tuple, LatLonNgeoid3Tuple, RD4Tuple)
+del _ALL_DOCS, _ALL_OTHER
 
 # **) MIT License
 #

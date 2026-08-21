@@ -3,8 +3,8 @@
 
 u'''A pure Python implementation of the 2018 v220627 version of Netherlands' U{RD NAP<https://
 www.NSGI.NL/coordinatenstelsels-en-transformaties/coordinatentransformaties/rdnap-etrs89-rdnaptrans>}
-specification to convert between GRS80 (ETRS89) geodetic lat-, longitudes and (ellipsoidal) height
-C{h} and local I{B{R}ijksB{D}riehoeksmeeting (B{RD})} coordinates and (orthometric) height C{H} using
+specification to convert between GRS80 (ETRS89) geodetic lat-, longitudes and ellipsoidal height
+C{h} and local I{B{R}ijksB{D}riehoeksmeeting (B{RD})} coordinates and orthometric height C{H} using
 bilinear interpolation of I{B{N}ormaal B{A}msterdams B{P}eil quasi-geoid heights (B{NAPh})}.
 
 The results of both B{C{pyrdnap}} transformer classes L{RDNAP2018v1} and L{RDNAP2018v2} have been
@@ -30,41 +30,25 @@ _pyrdnap_       = __package__ or  os_path.basename(pyrdnap_abspath)
 # setting __path__ should ...
 __path__ = [pyrdnap_abspath]
 try:  # ... make this import work, ...
-    import pyrdnap.__pygeodesy as _  # noqa: F401
-except ImportError:  # ... if it doesn't, extend sys.path to include
-    # this very directory such that all public and private sub-modules
-    # can be imported (by epydoc, checked by PyChecker, etc.)
+    import pyrdnap.__pygeodesy as __pygeodesy  # noqa: F401
+except ImportError:  # ... if not, extend sys.path
     if pyrdnap_abspath not in sys.path:
-        sys.path.insert(0, pyrdnap_abspath)  # XXX __path__[0]
+        sys.path.insert(0, pyrdnap_abspath)
+    import pyrdnap.__pygeodesy as __pygeodesy  # noqa: F401
 
-try:  # PYCHOK pygeodesy
-    from pyrdnap.__pygeodesy import *  # noqa: F403
-except (AttributeError, ImportError) as x:
-    raise AssertionError(str(x))
+import pyrdnap.rd0  as _rd0  # noqa: F401
+import pyrdnap.rdnap2018 as _rdnap2018  # noqa: F401
+import pyrdnap.v_self as _v_self  # noqa: F401
 
-from pyrdnap.rd0 import *  # noqa: F403
-from pyrdnap.rdnap2018 import *  # noqa: F403
-from pyrdnap.v_self import *  # noqa: F403
+__all__ = __pygeodesy._ALL_STAR(_pyrdnap_, _rd0, _rdnap2018, _v_self, __pygeodesy)
+__version__ = '26.08.18'
 
-
-def _all__init__(*names):  # deleted below
-    from pyrdnap.__pygeodesy import _all__all__  # PYCHOK ...
-    _all__all__.extend(names)
-    _all__all__[:] = sorted(_all__all__)  # set(_all__all__)
-    return _all__all__
+del _rd0, _rdnap2018, _v_self, os_path, sys
 
 
-def _versions():  # in .__main__, .v_self, .test/bases
+def _versions(**sep):  # in .__main__, .v_self, .test/bases
     # Get the pyrdnap, pygeodesy, Python ... versions (C{str}).
-    from pyrdnap.__pygeodesy import _SPACE_, _versions as _pygeodesy_versions  # PYCHOK ...
-    v  = __version__.replace('.0', '.')
-    l_ = [_pyrdnap_, v] + _pygeodesy_versions(None)
-    return _SPACE_.join(l_)  # PYCHOK shadows?
-
-
-__all__ = _all__init__('pyrdnap_abspath')
-__version__ = '26.07.31'
-# del _all__init__
+    return __pygeodesy._versions(pyrdnap=__version__, **sep)
 
 # **) MIT License
 #

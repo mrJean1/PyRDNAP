@@ -182,41 +182,9 @@
         lower-left <code>(LatS, LonW)</code> and upper-right <code>(latN, 
         lonE)</code> corner lat- and longitudes.</em>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon2Tuple-class.html">pygeodesy.namedTuples.LatLon2Tuple</a></strong>:
-      <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
-        <code>degrees180</code>.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon3Tuple-class.html">pygeodesy.namedTuples.LatLon3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(lat, lon, height)</code> in <code>degrees90</code>, 
-        <code>degrees180</code> and <code>meter</code>, conventionally.</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon4Tuple-class.html">pygeodesy.namedTuples.LatLon4Tuple</a></strong>:
-      <em class="summary">4-Tuple <code>(lat, lon, height, datum)</code> in 
-        <code>degrees90</code>, <code>degrees180</code>, <code>meter</code>
-        and <code class="link">Datum</code>.</em>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.rd0.LatLonN3Tuple-class.html">pyrdnap.rd0.LatLonN3Tuple</a></strong>:
-      <em class="summary">3-tuple <code>(lat, lon, N)</code> with geoid height <code>N</code>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLonNgeoid3Tuple-class.html">pygeodesy.namedTuples.LatLonNgeoid3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(lat, lon, N)</code> with geoid height <code>N</code>
         in <code>meter</code>, conventionally.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam2Tuple-class.html">pygeodesy.namedTuples.PhiLam2Tuple</a></strong>:
-      <em class="summary">2-Tuple <code>(phi, lam)</code> with latitude <code>phi</code> in 
-        <code>radians[PI_2]</code> and longitude <code>lam</code> in 
-        <code>radians[PI]</code>.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam3Tuple-class.html">pygeodesy.namedTuples.PhiLam3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(phi, lam, height)</code> with latitude 
-        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
-        <code>lam</code> in <code>radians[PI]</code> and 
-        <code>height</code> in <code>meter</code>.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam4Tuple-class.html">pygeodesy.namedTuples.PhiLam4Tuple</a></strong>:
-      <em class="summary">4-Tuple <code>(phi, lam, height, datum)</code> with latitude 
-        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
-        <code>lam</code> in <code>radians[PI]</code>, <code>height</code> 
-        in <code>meter</code> and <code class="link">Datum</code>.</em>
     </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.RD4Tuple-class.html">pygeodesy.namedTuples.RD4Tuple</a></strong>:
       <em class="summary">4-Tuple <code>(minRDx, minRDy, maxRDx, maxRDy)</code> with the 
@@ -224,6 +192,12 @@
         upper-right <code>(maxRDx, maxRDy)</code> corner in 
         <code>meter</code>, conventionaly.</em>
     </li>
+    <li> <strong class="uidlink">pygeodesy.namedTuples._H_lat_lon_height4Tuple</strong>:
+      <em class="summary">4-Tuple <code>(H, lat, lon, height)</code> (INTERNAL) Base and 
+        &quot;middle&quot; tuple for <code>pyaxqg.AxQG8Tuple</code>, 
+        <code>pybelbg.BeLBG7Tuple</code> and 
+        <code>pyrdnap.RDNAP7Tuple</code>.</em>
+    <ul>
     <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDNAP7Tuple-class.html">pyrdnap.rd0.RDNAP7Tuple</a></strong>:
       <em class="summary">7-Tuple <code>(RDx, RDy, H, lat, lon, height, datum)</code> with 
         <i>local</i> <code>RDx</code>, <code>RDy</code> and (orthometric) 
@@ -233,13 +207,23 @@
         with <code>RDx</code>, <code>RDy</code>, <code>H</code> and 
         <code>height</code> in <code>meter</code>, conventionally.</em>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector2Tuple-class.html">pygeodesy.namedTuples.Vector2Tuple</a></strong>:
-      <em class="summary">2-Tuple <code>(x, y)</code> of (geocentric) components, each in 
-        <code>meter</code> or the same <code>units</code>.</em>
+    </ul>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector3Tuple-class.html">pygeodesy.namedTuples.Vector3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(x, y, z)</code> of (geocentric) components, all in 
-        <code>meter</code> or the same <code>units</code>.</em>
+    <li> <strong class="uidlink">pyrdnap.rd0._RDxy3Tuple</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDxyHeight3Tuple-class.html">pyrdnap.rd0.RDxyHeight3Tuple</a></strong>:
+      <em class="summary">3-tuple <code>(RDx, RDy, H)</code> with orthometric height 
+        <code>H</code>, all in <code>meter</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDxyNgeoid3Tuple-class.html">pyrdnap.rd0.RDxyNgeoid3Tuple</a></strong>:
+      <em class="summary">3-tuple <code>(RDx, RDy, N)</code> with geoid height 
+        <code>N</code>, all in <code>meter</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDxyheight3Tuple-class.html">pyrdnap.rd0.RDxyheight3Tuple</a></strong>:
+      <em class="summary">3-tuple <code>(RDx, RDy, h)</code> with ellipsoidal height 
+        <code>h</code>, all in <code>meter</code>.</em>
+    </li>
+    </ul>
     </li>
     </ul>
     </li>
@@ -258,41 +242,9 @@
         lower-left <code>(LatS, LonW)</code> and upper-right <code>(latN, 
         lonE)</code> corner lat- and longitudes.</em>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon2Tuple-class.html">pygeodesy.namedTuples.LatLon2Tuple</a></strong>:
-      <em class="summary">2-Tuple <code>(lat, lon)</code> in <code>degrees90</code> and 
-        <code>degrees180</code>.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon3Tuple-class.html">pygeodesy.namedTuples.LatLon3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(lat, lon, height)</code> in <code>degrees90</code>, 
-        <code>degrees180</code> and <code>meter</code>, conventionally.</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLon4Tuple-class.html">pygeodesy.namedTuples.LatLon4Tuple</a></strong>:
-      <em class="summary">4-Tuple <code>(lat, lon, height, datum)</code> in 
-        <code>degrees90</code>, <code>degrees180</code>, <code>meter</code>
-        and <code class="link">Datum</code>.</em>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="pyrdnap.rd0.LatLonN3Tuple-class.html">pyrdnap.rd0.LatLonN3Tuple</a></strong>:
-      <em class="summary">3-tuple <code>(lat, lon, N)</code> with geoid height <code>N</code>
+    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.LatLonNgeoid3Tuple-class.html">pygeodesy.namedTuples.LatLonNgeoid3Tuple</a></strong>:
+      <em class="summary">3-Tuple <code>(lat, lon, N)</code> with geoid height <code>N</code>
         in <code>meter</code>, conventionally.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam2Tuple-class.html">pygeodesy.namedTuples.PhiLam2Tuple</a></strong>:
-      <em class="summary">2-Tuple <code>(phi, lam)</code> with latitude <code>phi</code> in 
-        <code>radians[PI_2]</code> and longitude <code>lam</code> in 
-        <code>radians[PI]</code>.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam3Tuple-class.html">pygeodesy.namedTuples.PhiLam3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(phi, lam, height)</code> with latitude 
-        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
-        <code>lam</code> in <code>radians[PI]</code> and 
-        <code>height</code> in <code>meter</code>.</em>
-    </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.PhiLam4Tuple-class.html">pygeodesy.namedTuples.PhiLam4Tuple</a></strong>:
-      <em class="summary">4-Tuple <code>(phi, lam, height, datum)</code> with latitude 
-        <code>phi</code> in <code>radians[PI_2]</code>, longitude 
-        <code>lam</code> in <code>radians[PI]</code>, <code>height</code> 
-        in <code>meter</code> and <code class="link">Datum</code>.</em>
     </li>
     <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.RD4Tuple-class.html">pygeodesy.namedTuples.RD4Tuple</a></strong>:
       <em class="summary">4-Tuple <code>(minRDx, minRDy, maxRDx, maxRDy)</code> with the 
@@ -300,6 +252,12 @@
         upper-right <code>(maxRDx, maxRDy)</code> corner in 
         <code>meter</code>, conventionaly.</em>
     </li>
+    <li> <strong class="uidlink">pygeodesy.namedTuples._H_lat_lon_height4Tuple</strong>:
+      <em class="summary">4-Tuple <code>(H, lat, lon, height)</code> (INTERNAL) Base and 
+        &quot;middle&quot; tuple for <code>pyaxqg.AxQG8Tuple</code>, 
+        <code>pybelbg.BeLBG7Tuple</code> and 
+        <code>pyrdnap.RDNAP7Tuple</code>.</em>
+    <ul>
     <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDNAP7Tuple-class.html">pyrdnap.rd0.RDNAP7Tuple</a></strong>:
       <em class="summary">7-Tuple <code>(RDx, RDy, H, lat, lon, height, datum)</code> with 
         <i>local</i> <code>RDx</code>, <code>RDy</code> and (orthometric) 
@@ -309,13 +267,23 @@
         with <code>RDx</code>, <code>RDy</code>, <code>H</code> and 
         <code>height</code> in <code>meter</code>, conventionally.</em>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector2Tuple-class.html">pygeodesy.namedTuples.Vector2Tuple</a></strong>:
-      <em class="summary">2-Tuple <code>(x, y)</code> of (geocentric) components, each in 
-        <code>meter</code> or the same <code>units</code>.</em>
+    </ul>
     </li>
-    <li> <strong class="uidlink"><a href="pygeodesy.namedTuples.Vector3Tuple-class.html">pygeodesy.namedTuples.Vector3Tuple</a></strong>:
-      <em class="summary">3-Tuple <code>(x, y, z)</code> of (geocentric) components, all in 
-        <code>meter</code> or the same <code>units</code>.</em>
+    <li> <strong class="uidlink">pyrdnap.rd0._RDxy3Tuple</strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDxyHeight3Tuple-class.html">pyrdnap.rd0.RDxyHeight3Tuple</a></strong>:
+      <em class="summary">3-tuple <code>(RDx, RDy, H)</code> with orthometric height 
+        <code>H</code>, all in <code>meter</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDxyNgeoid3Tuple-class.html">pyrdnap.rd0.RDxyNgeoid3Tuple</a></strong>:
+      <em class="summary">3-tuple <code>(RDx, RDy, N)</code> with geoid height 
+        <code>N</code>, all in <code>meter</code>.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="pyrdnap.rd0.RDxyheight3Tuple-class.html">pyrdnap.rd0.RDxyheight3Tuple</a></strong>:
+      <em class="summary">3-tuple <code>(RDx, RDy, h)</code> with ellipsoidal height 
+        <code>h</code>, all in <code>meter</code>.</em>
+    </li>
+    </ul>
     </li>
     </ul>
     </li>
@@ -355,7 +323,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Jul 31 14:31:20 2026
+    Generated by Epydoc 3.0.1 on Fri Aug 21 15:30:15 2026
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
