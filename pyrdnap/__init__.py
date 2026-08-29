@@ -41,7 +41,7 @@ import pyrdnap.rdnap2018 as _rdnap2018  # noqa: F401
 import pyrdnap.v_self as _v_self  # noqa: F401
 
 __all__ = __pygeodesy._ALL_STAR(_pyrdnap_, _rd0, _rdnap2018, _v_self, __pygeodesy)
-__version__ = '26.08.18'
+__version__ = '26.08.28'
 
 del _rd0, _rdnap2018, _v_self, os_path, sys
 

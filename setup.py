@@ -7,7 +7,7 @@ from os import getenv
 from setuptools import setup
 
 __all__ = ()
-__version__ = '26.06.27'
+__version__ = '26.08.28'
 
 _PACKAGE = 'pyrdnap'  # 'PyRDNAP'
 
@@ -66,6 +66,7 @@ _pygeodesy_requires = 'pygeodesy>=' + _requires
 
 _assert_version('requirements.txt', _pygeodesy_requires)
 _assert_version('README.rst', 'version %s or newer' % (_requires,))
+_assert_version('README.rst', 'all with pygeodesy_ %s' % (_requires,))
 
 setup(name=_PACKAGE,
       packages=['pyrdnap', 'pyrdnap.v1grid', 'pyrdnap.v2grid'],

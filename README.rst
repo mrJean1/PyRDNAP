@@ -40,7 +40,7 @@ In addition to the ``pyrdnap`` package, the pyrdnap_ `distribution file`_ contai
 Tests
 =====
 
-The tests ran with Python 3.14.7, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_ 26.5.26 and on macOS 26.5.2 Tahoe in 64-bit.  The results of those tests are included in the distribution file.
+The tests ran with Python 3.14.7, 2.7.18 and with PyPy 7.3.17 (Python 3.10.14), all with pygeodesy_ 26.8.18 and on macOS 26.5.2 Tahoe in 64-bit.  The results of those tests are included in the distribution file.
 
 Python 3.14.7 and PyPy 7.3.17 run on Apple M4 (``arm64``), *natively*.  Python 2.7.18 runs on Intel (``x86_64``) or Intel *emulation* (\"``arm64_x86_64``\", see function `pyrdnap.machine`_).
 
@@ -53,7 +53,7 @@ Notes
 
 All Python source code has been statically checked_ with Ruff_ using Python 3.13.12 and with PyChecker_, PyFlakes_, PyCodeStyle_ (formerly Pep8) and McCabe_ using Python 2.7.18, both in 64-bit on macOS 26.5.2 Tahoe only.
 
-*Last updated: Aug 18, 2026.*
+*Last updated: Aug 28, 2026.*
 
 License
 =======
